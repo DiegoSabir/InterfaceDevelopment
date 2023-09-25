@@ -41,17 +41,17 @@ def menu():
         print("4. Lotería Nacional")
         print("5. Salir")
 
-        opcion = input("Selecciona una de las opciones anteriores: ")
+        opcion = int(input("Selecciona una de las opciones anteriores: "))
 
-        if opcion == '1':
+        if opcion == 1:
             primitiva()
-        elif opcion == '2':
+        elif opcion == 2:
             euromillones()
-        elif opcion == '3':
+        elif opcion == 3:
             quiniela()
-        elif opcion == '4':
+        elif opcion == 4:
             loteriaNacional()
-        elif opcion == '5':
+        elif opcion == 5:
             break
         else:
             print("ERROR. Elija una de las opciones disponibles")
