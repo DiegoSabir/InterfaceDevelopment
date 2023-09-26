@@ -1,26 +1,27 @@
 """
-Crear dos clases, Libro y Autor, que estén relacionadas. 
-La clase Libro debe tener un atributo autor, que sea una instancia de la clase Autor, titulo y precio.
-El autor tendra la clase nombre y nacionalidad.
-Imprimir los atributos del titulo
+Create two classes, Book and Author, that are related.
+The Book class should have an author attribute, which is an instance of the Author class, as well as title and price attributes.
+The author will have name and nationality attributes.
+Print the title attribute.
 """
 
-class Autor:
-    def __init__(self, nombre, nacionalidad):
-        self.nombre = nombre
-        self.nacionalidad = nacionalidad
-    
-class Libro:
-    def __init__(self, titulo, autor, precio):
-        self.titulo = titulo
-        self.autor = autor
-        self.precio = precio
+class Author:
+    def __init__(self, name, nationality):
+        self.name = name
+        self.nationality = nationality
+
+class Book:
+    def __init__(self, title, author, price):
+        self.title = title
+        self.author = author
+        self.price = price
 
 def main():
-    autor = Autor("Cervantes", "española")
-    libro = Libro("El Quijote", autor.nombre, "30.99")
+    author = Author("Cervantes", "Spanish")
+    book = Book("Don Quixote", author, 30.99)
 
-    print("El ", libro.titulo, " lo escribio ", autor.nombre, " y cuesta ", libro.precio)
+    print("The book ", book.title, " was written by ", book.author.name, " of nationality ", book.author.nationality)
+    print("The price of the book is €", book.price)
 
 if __name__ == "__main__":
-    main()
+    main()  
