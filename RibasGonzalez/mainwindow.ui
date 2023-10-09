@@ -40,7 +40,7 @@
     <item row="1" column="0">
      <widget class="QFrame" name="gridFrame">
       <layout class="QGridLayout" name="gridLayout">
-       <item row="0" column="0">
+       <item row="0" column="1">
         <widget class="QTabWidget" name="tabDrivers">
          <property name="minimumSize">
           <size>
@@ -66,8 +66,8 @@
             <rect>
              <x>30</x>
              <y>30</y>
-             <width>781</width>
-             <height>111</height>
+             <width>901</width>
+             <height>171</height>
             </rect>
            </property>
            <property name="frameShape">
@@ -79,7 +79,7 @@
            <property name="lineWidth">
             <number>1</number>
            </property>
-           <widget class="QLabel" name="label">
+           <widget class="QLabel" name="lblCod">
             <property name="geometry">
              <rect>
               <x>20</x>
@@ -246,7 +246,7 @@
              </size>
             </property>
            </widget>
-           <widget class="QLabel" name="label_2">
+           <widget class="QLabel" name="lblFecha">
             <property name="geometry">
              <rect>
               <x>460</x>
@@ -271,7 +271,7 @@
              <string>Fecha Alta</string>
             </property>
            </widget>
-           <widget class="QLineEdit" name="lineEdit">
+           <widget class="QLineEdit" name="txtFecha">
             <property name="geometry">
              <rect>
               <x>530</x>
@@ -311,6 +311,215 @@
             </property>
             <property name="flat">
              <bool>true</bool>
+            </property>
+           </widget>
+           <widget class="QLabel" name="lblValidarDni">
+            <property name="geometry">
+             <rect>
+              <x>380</x>
+              <y>20</y>
+              <width>60</width>
+              <height>30</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>60</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>60</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="font">
+             <font>
+              <family>MV Boli</family>
+              <pointsize>14</pointsize>
+             </font>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+           <widget class="QLabel" name="lblDir">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>100</y>
+              <width>50</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Direccion:</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="txtDir">
+            <property name="geometry">
+             <rect>
+              <x>70</x>
+              <y>100</y>
+              <width>301</width>
+              <height>20</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="lblMovil">
+            <property name="geometry">
+             <rect>
+              <x>20</x>
+              <y>140</y>
+              <width>50</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Movil:</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="lblLoc">
+            <property name="geometry">
+             <rect>
+              <x>640</x>
+              <y>100</y>
+              <width>50</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Localidad:</string>
+            </property>
+           </widget>
+           <widget class="QComboBox" name="comboBox">
+            <property name="geometry">
+             <rect>
+              <x>460</x>
+              <y>100</y>
+              <width>161</width>
+              <height>22</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QComboBox" name="comboBox_2">
+            <property name="geometry">
+             <rect>
+              <x>700</x>
+              <y>100</y>
+              <width>171</width>
+              <height>22</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLabel" name="lblPro">
+            <property name="geometry">
+             <rect>
+              <x>400</x>
+              <y>100</y>
+              <width>50</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Provincia:</string>
+            </property>
+           </widget>
+           <widget class="QLabel" name="lblSal">
+            <property name="geometry">
+             <rect>
+              <x>210</x>
+              <y>140</y>
+              <width>50</width>
+              <height>20</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>50</width>
+              <height>20</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Salario:</string>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="lineEdit">
+            <property name="geometry">
+             <rect>
+              <x>70</x>
+              <y>140</y>
+              <width>131</width>
+              <height>20</height>
+             </rect>
+            </property>
+           </widget>
+           <widget class="QLineEdit" name="lineEdit_2">
+            <property name="geometry">
+             <rect>
+              <x>252</x>
+              <y>140</y>
+              <width>121</width>
+              <height>20</height>
+             </rect>
             </property>
            </widget>
           </widget>

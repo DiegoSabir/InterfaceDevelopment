@@ -1,4 +1,6 @@
 import sys, var, eventos
+
+import drivers
 from mainwindow import *
 from calendar import *
 from datetime import datetime
@@ -18,7 +20,7 @@ class Main (QtWidgets.QMainWindow):
         var.ui = Ui_MainWindow()
         var.ui.setupUi(self) #encargado la interfaz
         var.calendar = Calendar()
-
+        var.driver = drivers.Drivers()
         """
         zona de eventos
         """
@@ -29,8 +31,13 @@ class Main (QtWidgets.QMainWindow):
         """
         var.ui.actionSalir.triggered.connect(eventos.Eventos.salir)
 
+        """
+        zona de eventos de caja de texto
+        """
+        var.ui.txtDni.editingFinished.connect(drivers.Drivers.validarDNI)
+
 if __name__ == '__main__':
         app = QtWidgets.QApplication([])
         window = Main()
-        window.showMaximized()
+        window.show()
         sys.exit(app.exec())
