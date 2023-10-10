@@ -1,5 +1,26 @@
 import var
+from datetime import datetime
 class Drivers():
+
+    def limpiarPanel(self):
+        try:
+            listawidgets = [var.ui.txtDni, var.ui.txtFecha, var.ui.txtApel, var.ui.txtNom,
+                            var.ui.txtDir, var.ui.txtMovil, var.ui.txtSalario, var.ui.lblValidarDni]
+
+            for i in listawidgets:
+                i.setText(None)
+
+        except Exception as error:
+            print("error en limpiar panel driver: ", error)
+
+    def cargaFecha(qDate):
+        try:
+            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
+            var.ui.txtFecha.setText(str(data))
+            var.calendar.hide()
+        except Exception as error:
+            print("error en cargar fecha:", error)
+
     def validarDNI(self = None):
         try:
             dni = var.ui.txtDni.text()
@@ -21,9 +42,13 @@ class Drivers():
                 else:
                     var.ui.lblValidarDni.setStyleSheet('color:red;')
                     var.ui.lblValidarDni.setText('X')
+                    var.ui.txtDni.setText(None)
+                    var.ui.txtDni.setFocus()
             else:
                 var.ui.lblValidarDni.setStyleSheet('color:red;')
                 var.ui.lblValidarDni.setText('X')
+                var.ui.txtDni.setText(None)
+                var.ui.txtDni.setFocus()
 
         except Exception as error:
             print("error en validar dni ", error)

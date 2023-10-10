@@ -13,6 +13,8 @@ class Calendar(QtWidgets.QDialog):
         dia = datetime.now().day
         mes = datetime.now().month
         year = datetime.now().year
+        var.calendar.Calendar.setSelectedDate((QtCore.QDate(year,mes,dia)))
+        var.calendar.Calendar.clicked.connect(drivers.Drivers.cargaFecha)
 
 class Main (QtWidgets.QMainWindow):
     def __init__(self):
@@ -35,6 +37,12 @@ class Main (QtWidgets.QMainWindow):
         zona de eventos de caja de texto
         """
         var.ui.txtDni.editingFinished.connect(drivers.Drivers.validarDNI)
+
+        """
+        zona de eventos del tool bar
+        """
+        #var.ui.actionbarSalir.triggered.connect(eventos.Eventos.cerrarSalir())
+        var.ui.actionLimpiarPanel.triggered.connect(drivers.Drivers.limpiarPanel)
 
 if __name__ == '__main__':
         app = QtWidgets.QApplication([])
