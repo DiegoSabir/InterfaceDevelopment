@@ -1,34 +1,26 @@
-import eventos, var, drivers
-from calendar import *
-from salir import *
-from acercade import *
+from CalendarWindow import *
+from dlgAcerca import *
+from dlgSalir import *
 from datetime import datetime
+import var, drivers, eventos
 
 
-class AcercaDe(QtWidgets.QDialog):
+class DlgSalir(QtWidgets.QDialog):
     def __init__(self):
-        super(AcercaDe,self).__init__()
-        var.acercaDe = Ui_dlgAcercaDe()
-        var.acercaDe.setupUi(self)
-
-        """ 
-         Zona de eventos de botones
-        """
-        var.acercaDe.BtnAceptar.clicked.connect(eventos.Eventos.cerrarAcercaDe)
+        super(DlgSalir, self).__init__()
+        var.dlgsalir = Ui_dlgSalir()
+        var.dlgsalir.setupUi(self)
+        var.dlgsalir.btnSalir.clicked.connect(eventos.Eventos.salir)
+        var.dlgsalir.btnCancelar.clicked.connect(eventos.Eventos.cerrarsalir)
 
 
-class Salir(QtWidgets.QDialog):
+class DlgAcerca(QtWidgets.QDialog):
     def __init__(self):
-        super(Salir,self).__init__()
-        var.salir = Ui_dlgSalir()
-        var.salir.setupUi(self)
-
-        """ 
-         Zona de eventos de botones
-        """
-
-        var.salir.BtnAccept.clicked.connect(eventos.Eventos.salir)
-        var.salir.BtnCancel.clicked.connect(eventos.Eventos.cerrarAcercaDe)
+        super(DlgAcerca, self).__init__()
+        var.dlgacerca = Ui_dlgAbout()
+        var.dlgacerca.setupUi(self)
+        var.dlgacerca.btnCerrar.clicked.connect(eventos.Eventos.cerraracercade)
+        var.dlgacerca.lblVersion.setText("Versión: " + var.version)
 
 
 class Calendar(QtWidgets.QDialog):
@@ -38,6 +30,6 @@ class Calendar(QtWidgets.QDialog):
         var.calendar.setupUi(self)
         dia = datetime.now().day
         mes = datetime.now().month
-        year = datetime.now().year
-        var.calendar.calendar.setSelectedDate((QtCore.QDate(year,mes,dia)))
-        var.calendar.calendar.clicked.connect(drivers.Drivers.cargaFecha)
+        ano = datetime.now().year
+        var.calendar.Calendar.setSelectedDate((QtCore.QDate(ano,mes,dia)))
+        var.calendar.Calendar.clicked.connect(drivers.Drivers.cargaFecha)

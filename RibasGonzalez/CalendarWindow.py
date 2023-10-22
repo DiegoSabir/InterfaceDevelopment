@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file 'calendar.ui'
+# Form implementation generated from reading ui file 'CalendarWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.5.2
 #
@@ -14,28 +14,30 @@ class Ui_dlgCalendar(object):
         dlgCalendar.setObjectName("dlgCalendar")
         dlgCalendar.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
         dlgCalendar.resize(400, 300)
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(dlgCalendar.sizePolicy().hasHeightForWidth())
-        dlgCalendar.setSizePolicy(sizePolicy)
         dlgCalendar.setMinimumSize(QtCore.QSize(400, 300))
         dlgCalendar.setMaximumSize(QtCore.QSize(400, 300))
+        icon = QtGui.QIcon()
+        icon.addPixmap(QtGui.QPixmap("img/logo.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        dlgCalendar.setWindowIcon(icon)
         dlgCalendar.setModal(True)
+        self.gridLayout = QtWidgets.QGridLayout(dlgCalendar)
+        self.gridLayout.setContentsMargins(0, 0, 0, 0)
+        self.gridLayout.setSpacing(0)
+        self.gridLayout.setObjectName("gridLayout")
         self.Calendar = QtWidgets.QCalendarWidget(parent=dlgCalendar)
-        self.Calendar.setGeometry(QtCore.QRect(1, 2, 400, 300))
-        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Fixed, QtWidgets.QSizePolicy.Policy.Fixed)
+        sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Policy.Preferred, QtWidgets.QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.Calendar.sizePolicy().hasHeightForWidth())
         self.Calendar.setSizePolicy(sizePolicy)
-        self.Calendar.setMinimumSize(QtCore.QSize(400, 300))
-        self.Calendar.setMaximumSize(QtCore.QSize(400, 300))
+        self.Calendar.setMinimumSize(QtCore.QSize(0, 0))
+        self.Calendar.setMaximumSize(QtCore.QSize(1024, 768))
         self.Calendar.setObjectName("Calendar")
+        self.gridLayout.addWidget(self.Calendar, 0, 0, 1, 1)
 
         self.retranslateUi(dlgCalendar)
         QtCore.QMetaObject.connectSlotsByName(dlgCalendar)
 
     def retranslateUi(self, dlgCalendar):
         _translate = QtCore.QCoreApplication.translate
-        dlgCalendar.setWindowTitle(_translate("dlgCalendar", "Dialog"))
+        dlgCalendar.setWindowTitle(_translate("dlgCalendar", "Fecha de Alta"))
