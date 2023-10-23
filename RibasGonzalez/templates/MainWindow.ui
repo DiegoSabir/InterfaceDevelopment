@@ -33,8 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>img/logo.ico</normaloff>
-    <normalon>img/logo.ico</normalon>img/logo.ico</iconset>
+    <normaloff>../img/logo.ico</normaloff>../img/logo.ico</iconset>
   </property>
   <property name="iconSize">
    <size>
@@ -1008,7 +1007,7 @@
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
