@@ -39,6 +39,7 @@ class Main(QtWidgets.QMainWindow):
         zona eventos cajas de texto
         '''
         var.ui.txtDni.editingFinished.connect(Drivers.validarDNI)
+        var.ui.txtMovil.editingFinished.connect(Drivers.validarMovil)
         var.ui.txtNome.editingFinished.connect(eventos.Eventos.formatCajatexto)
         var.ui.txtApel.editingFinished.connect(eventos.Eventos.formatCajatexto)
         var.ui.txtSalario.editingFinished.connect(eventos.Eventos.formatCajatexto)
@@ -73,7 +74,6 @@ class Main(QtWidgets.QMainWindow):
             app.quit()
         if mbox == QtWidgets.QMessageBox.StandardButton.No:
             event.ignore()
-
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

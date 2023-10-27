@@ -1,3 +1,4 @@
+import locale
 import var, eventos
 from PyQt6 import QtWidgets, QtCore
 
@@ -5,12 +6,12 @@ from PyQt6 import QtWidgets, QtCore
 class Drivers():
     def limpiapanel(self):
         try:
-            listawidgets = [var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
-                            var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario, var.ui.lblValidardni ]
-
+            listawidgets = [var.ui.txtNombre, var.ui.txtApel, var.ui.txtDir, var.ui.txtSalario,
+                            var.ui.txtTlf, var.ui.txtDni, var.ui.txtFecha, var.ui.txtNombre,
+                            var.ui.txtApel, var.ui.txtDir, var.ui.txtSalario, var.ui.txtTlf,
+                            var.ui.lblValidarDni]
             for i in listawidgets:
                 i.setText(None)
-
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
                i.setChecked(False)
@@ -48,7 +49,7 @@ class Drivers():
                     var.ui.lblValidardni.setStyleSheet('color:green;') # si es válido se pone una V en color verde
                     var.ui.lblValidardni.setText('V')
                 else:
-                    var.ui.lblValidardni.setStyleSheet('color:red;') #y si no un aspa en color rojo
+                    var.ui.lblValidardni.setStyleSheet('color:red;')
                     var.ui.lblValidardni.setText('X')
                     var.ui.txtDni.setText(None)
                     var.ui.txtDni.setFocus()
@@ -88,3 +89,49 @@ class Drivers():
 
         except Exception as error:
             print("error alta cliente", error)
+
+    @staticmethod
+    def validarMovil(self = None):
+        try:
+            movil = var.ui.txtMovil.text()
+            numeros = "1234567890"
+            for n in movil:
+                if n in numeros and len(movil) == 9:
+                    pass
+                else:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setWindowTitle('Aviso: numero movil incorrecto')
+                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                    msg.setText('Escriba un número de móvil correcto')
+                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                    msg.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.exec()
+                    var.ui.txtMovil.setText("")
+                    break
+        except Exception as error:
+            print("error en validar movil ", error)
+
+    def formatCajatexto(self = None):
+        try:
+            var.ui.txtApel.setText(var.ui.txtApel.text().title())
+            var.ui.txtNome.setText(var.ui.txtNome.text().title())
+            salario = var.ui.txtSalario.text()
+            valores = "1234567890."
+            for n in salario:
+                if n in valores:
+                    pass
+                else:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setWindowTitle('Aviso')
+                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                    msg.setText('Valor de Salario Incorrecto (00000000.00)')
+                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                    msg.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.exec()
+                    var.ui.txtSalario.setText("")
+                    break
+            var.ui.txtSalario.setText(str(locale.currency(round(float(var.ui.txtSalario.text()),2),grouping=True)))
+        except Exception as error:
+            print('error poner letra capital cajas text', error)
