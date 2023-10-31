@@ -56,6 +56,11 @@ class Main(QtWidgets.QMainWindow):
         eventos.Eventos.resizeTabdrivers(self)
 
         '''
+        eventos combobox
+        '''
+        var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.selMuni)
+
+        '''
         ejecución de diferentes funciones al lanzar la aplicación
         '''
         eventos.Eventos.cargastatusbar(self)

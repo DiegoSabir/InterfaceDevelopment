@@ -1094,6 +1094,17 @@
   <tabstop>cmbMuni</tabstop>
   <tabstop>txtMovil</tabstop>
   <tabstop>txtSalario</tabstop>
+  <tabstop>chkA</tabstop>
+  <tabstop>chkB</tabstop>
+  <tabstop>chkC</tabstop>
+  <tabstop>chkD</tabstop>
+  <tabstop>btnAltaDriver</tabstop>
+  <tabstop>btnModifDriver</tabstop>
+  <tabstop>btnBajaDriver</tabstop>
+  <tabstop>rbtTodos</tabstop>
+  <tabstop>rbtAlta</tabstop>
+  <tabstop>rbtBaja</tabstop>
+  <tabstop>tabDrivers</tabstop>
  </tabstops>
  <resources/>
  <connections/>

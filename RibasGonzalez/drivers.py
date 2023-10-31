@@ -1,14 +1,14 @@
 import locale
-import var, eventos
+import var, eventos, conexion
 from PyQt6 import QtWidgets, QtCore
 
 
 class Drivers():
     def limpiapanel(self):
         try:
-            listawidgets = [var.ui.txtNombre, var.ui.txtApel, var.ui.txtDir, var.ui.txtSalario,
+            listawidgets = [var.ui.txtNombre, var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario,
                             var.ui.txtTlf, var.ui.txtDni, var.ui.txtFecha, var.ui.txtNombre,
-                            var.ui.txtApel, var.ui.txtDir, var.ui.txtSalario, var.ui.txtTlf,
+                            var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario, var.ui.txtTlf,
                             var.ui.lblValidarDni]
             for i in listawidgets:
                 i.setText(None)
@@ -65,17 +65,24 @@ class Drivers():
 
     def altadriver(self):
         try:
-            driver = [var.ui.txtApel, var.ui.txtNome, var.ui.txtMovil]
+            driver = [var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
+                      var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario]
             newdriver = []
-            newdriver.append(1)
             for i in driver:
                 newdriver.append(i.text().title())
+            prov = var.ui.cmbProv.currentText()
+            newdriver.insert(5,prov)
+            muni = var.ui.cmbMuni.currentText()
+            newdriver.insert(6,muni)
             licencias = []
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
                 if i.isChecked():
                     licencias.append(i.text())
             newdriver.append('-'.join(licencias))
+            conexion.Conexion.guardardri(newdriver)
+
+            """
             index = 0
             var.ui.tabDrivers.setRowCount(index+1) #crea una fila
             var.ui.tabDrivers.setItem(index,0,QtWidgets.QTableWidgetItem(str(newdriver[0])))
@@ -86,7 +93,7 @@ class Drivers():
             var.ui.tabDrivers.item(index,0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             var.ui.tabDrivers.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
             var.ui.tabDrivers.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-
+            """
         except Exception as error:
             print("error alta cliente", error)
 
