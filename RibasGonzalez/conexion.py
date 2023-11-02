@@ -85,8 +85,7 @@ class Conexion():
         try:
             registros = []
             query1 = QtSql.QSqlQuery()
-            query1.prepare('select codigo, apeldri, nombredri, movildri, '
-                           ' carnet, bajadri from drivers')
+            query1.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
             if query1.exec():
                 while query1.next():
                     row = [query1.value(i) for i in range(query1.record().count())]
