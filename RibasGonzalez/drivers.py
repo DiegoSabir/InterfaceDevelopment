@@ -68,8 +68,18 @@ class Drivers():
             driver = [var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
                       var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario]
             newdriver = []
+
             for i in driver:
-                newdriver.append(i.text().title())
+                if i.text().strip():
+                    newdriver.append(i.text().title())
+                else:
+                    mbox = QtWidgets.QMessageBox()
+                    mbox.setWindowTitle("Aviso")
+                    mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                    mbox.setText("Tods los campos deben ser rellenados: \n DNI, Nombre, Fecha de alta y Movil")
+                    mbox.exec()
+                    return
+
             prov = var.ui.cmbProv.currentText()
             newdriver.insert(5,prov)
             muni = var.ui.cmbMuni.currentText()
@@ -82,18 +92,6 @@ class Drivers():
             newdriver.append('-'.join(licencias))
             conexion.Conexion.guardardri(newdriver)
 
-            """
-            index = 0
-            var.ui.tabDrivers.setRowCount(index+1) #crea una fila
-            var.ui.tabDrivers.setItem(index,0,QtWidgets.QTableWidgetItem(str(newdriver[0])))
-            var.ui.tabDrivers.setItem(index, 1, QtWidgets.QTableWidgetItem(str(newdriver[1])))
-            var.ui.tabDrivers.setItem(index, 2, QtWidgets.QTableWidgetItem(str(newdriver[2])))
-            var.ui.tabDrivers.setItem(index, 3, QtWidgets.QTableWidgetItem(str(newdriver[3])))
-            var.ui.tabDrivers.setItem(index, 4, QtWidgets.QTableWidgetItem(str(newdriver[4])))
-            var.ui.tabDrivers.item(index,0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-            var.ui.tabDrivers.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-            var.ui.tabDrivers.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-            """
         except Exception as error:
             print("error alta cliente", error)
 
@@ -142,3 +140,21 @@ class Drivers():
             var.ui.txtSalario.setText(str(locale.currency(round(float(var.ui.txtSalario.text()),2),grouping=True)))
         except Exception as error:
             print('error poner letra capital cajas text', error)
+
+    def cargartabladri(registros):
+        try:
+            index = 0
+            for registro in registros:
+                var.ui.tabDrivers.setRowCount(index+1) #crea una fila
+                var.ui.tabDrivers.setItem(index,0,QtWidgets.QTableWidgetItem(str(registro[0])))
+                var.ui.tabDrivers.setItem(index, 1, QtWidgets.QTableWidgetItem(str(registro[1])))
+                var.ui.tabDrivers.setItem(index, 2, QtWidgets.QTableWidgetItem(str(registro[2])))
+                var.ui.tabDrivers.setItem(index, 3, QtWidgets.QTableWidgetItem(str(registro[3])))
+                var.ui.tabDrivers.setItem(index, 4, QtWidgets.QTableWidgetItem(str(registro[4])))
+                var.ui.tabDrivers.item(index,0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabDrivers.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabDrivers.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                index += 1
+
+        except Exception as error:
+            print("error alta cliente", error)
