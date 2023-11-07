@@ -1,6 +1,7 @@
 from PyQt6 import QtWidgets, QtSql, QtCore
 import var, drivers
 
+
 class Conexion():
     def conexion(self = None):
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
@@ -11,6 +12,7 @@ class Conexion():
         else:
             print("base de datos conectada")
             return True
+
 
     def cargaprov(self = None):
         try:
@@ -23,6 +25,7 @@ class Conexion():
                     var.ui.cmbProv.addItem(query.value(0))
         except Exception as error:
             print('error en la carga del combo prov', error)
+
 
     def selMuni(self=None):
         try:
@@ -45,6 +48,7 @@ class Conexion():
 
         except Exception as error:
             print("error seleccion municipio: ", error)
+
 
     @staticmethod
     def guardardri(newdriver):
@@ -81,6 +85,7 @@ class Conexion():
         except Exception as error:
             print("error en alta conductor", error)
 
+
     def mostrardrivers(self):
         try:
             registros = []
@@ -95,11 +100,13 @@ class Conexion():
         except Exception as error:
             print("error mostrar resultados", error)
 
+
     def onedriver(codigo):
         try:
+            print(codigo)
             registro = []
-            query = QtSql.QSqlQuery
-            query.prepare('select * from where codigo = :codigo')
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from drivers where codigo = :codigo')
             query.bindValue(':codigo', int(codigo))
             if query.exec():
                 while query.next():

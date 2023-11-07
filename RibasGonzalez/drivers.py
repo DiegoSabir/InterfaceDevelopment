@@ -2,19 +2,18 @@ import locale
 import var, eventos, conexion
 from PyQt6 import QtWidgets, QtCore
 
-
 class Drivers():
     def limpiapanel(self):
         try:
-            listawidgets = [var.ui.txtNombre, var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario,
-                            var.ui.txtTlf, var.ui.txtDni, var.ui.txtFecha, var.ui.txtNombre,
+            listawidgets = [var.ui.txtNome, var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario,
+                            var.ui.txtTlf, var.ui.txtDni, var.ui.txtFecha, var.ui.txtNome,
                             var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario, var.ui.txtTlf,
                             var.ui.lblValidarDni]
             for i in listawidgets:
                 i.setText(None)
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
-               i.setChecked(False)
+                i.setChecked(False)
             var.ui.cmbProv.setCurrentText('')
             var.ui.cmbMuni.setCurrentText('')
         except Exception as error:
@@ -95,6 +94,7 @@ class Drivers():
         except Exception as error:
             print("error alta cliente", error)
 
+
     @staticmethod
     def validarMovil(self = None):
         try:
@@ -116,6 +116,7 @@ class Drivers():
                     break
         except Exception as error:
             print("error en validar movil ", error)
+
 
     def formatCajatexto(self = None):
         try:
@@ -141,6 +142,7 @@ class Drivers():
         except Exception as error:
             print('error poner letra capital cajas text', error)
 
+
     def cargartabladri(registros):
         try:
             index = 0
@@ -163,20 +165,27 @@ class Drivers():
         try:
             Drivers.limpiapanel(self)
             row = var.ui.tabDrivers.selectedItems()
-            fila = [ dato.text() for dato in row]
+            fila = [dato.text() for dato in row]
             registro = conexion.Conexion.onedriver(fila[0])
             print(registro)
-            datos = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtApel, var.ui.txtNome,
+            datos = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
                      var.ui.txtDirdriver, var.ui.cmbProv, var.ui.cmbMuni, var.ui.txtMovil, var.ui.txtSalario]
             
-            for i in datos:
-                i.setText(str(registro[i]))
-                if i == 5:
-                    i.setCurrentText(registro[i])
-                if i == 6:
-                    i.setCurrentText(registro[i])
+            for i, dato in enumerate(datos):
+                if i == 6 or i == 7:
+                    dato.setCurrentText(str(registro[i]))
+                else:
+                    dato.setText(str(registro[i]))
 
+            if 'A' in registro[10]:
+                var.ui.chkA.setChecked(True)
+            if 'B' in registro[10]:
+                var.ui.chkA.setChecked(True)
+            if 'C' in registro[10]:
+                var.ui.chkA.setChecked(True)
+            if 'D' in registro[10]:
+                var.ui.chkA.setChecked(True)
 
         except Exception as error:
-            print("error cargar datos de 1 cliente marcando en la tabla", error)
+            print("error cargar datos de un cliente marcando en la tabla", error)
 

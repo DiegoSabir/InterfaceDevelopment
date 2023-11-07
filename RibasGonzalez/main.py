@@ -55,7 +55,7 @@ class Main(QtWidgets.QMainWindow):
         eventos de tablas        
         '''
         eventos.Eventos.resizeTabdrivers(self)
-
+        var.ui.tabDrivers.clicked.connect(drivers.Drivers.cargadriver)
         '''
         eventos combobox
         '''
@@ -80,6 +80,7 @@ class Main(QtWidgets.QMainWindow):
             app.quit()
         if mbox == QtWidgets.QMessageBox.StandardButton.No:
             event.ignore()
+
 
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])
