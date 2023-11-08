@@ -77,11 +77,12 @@ class Conexion():
             else:
                 mbox = QtWidgets.QMessageBox()
                 mbox.setWindowTitle('Aviso')
+                mbox.setW
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
                 mbox.setText(query.lastError().text())
+                mbox.setText("Asegurese de que el conductor no existe")
                 mbox.exec()
-            #select de los datos de conductores de la base de datos
-            #drivers.Drivers.cargartabla(datosdri)
+
         except Exception as error:
             print("error en alta conductor", error)
 
@@ -116,3 +117,17 @@ class Conexion():
 
         except Exception as error:
             print("error en fichero conexion", error)
+
+    def codDri(dni):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo from drivers where dnidri = :dni')
+            query.bindValue(':dni', str(dni))
+            if query.exec():
+                while query.next():
+                    codigo = query.value(0)
+            registro = Conexion.onedriver(codigo)
+            return registro
+        
+        except Exception as error:
+                print(error, " en busca de codigo de un conductor")

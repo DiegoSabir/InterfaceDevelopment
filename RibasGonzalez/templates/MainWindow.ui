@@ -132,8 +132,8 @@
            <widget class="QLabel" name="lblValidardni">
             <property name="geometry">
              <rect>
-              <x>423</x>
-              <y>11</y>
+              <x>450</x>
+              <y>10</y>
               <width>60</width>
               <height>30</height>
              </rect>
@@ -923,6 +923,35 @@
               </widget>
              </item>
             </layout>
+           </widget>
+           <widget class="QPushButton" name="pushButton">
+            <property name="geometry">
+             <rect>
+              <x>520</x>
+              <y>10</y>
+              <width>30</width>
+              <height>30</height>
+             </rect>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>30</width>
+              <height>30</height>
+             </size>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset>
+              <normaloff>../img/buscar.ico</normaloff>../img/buscar.ico</iconset>
+            </property>
            </widget>
           </widget>
           <widget class="QSplitter" name="splitter">

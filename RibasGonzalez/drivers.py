@@ -6,9 +6,9 @@ class Drivers():
     def limpiapanel(self):
         try:
             listawidgets = [var.ui.txtNome, var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario,
-                            var.ui.txtTlf, var.ui.txtDni, var.ui.txtFecha, var.ui.txtNome,
-                            var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario, var.ui.txtTlf,
-                            var.ui.lblValidarDni]
+                            var.ui.txtMovil, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtNome,
+                            var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario, var.ui.txtMovil,
+                            var.ui.lblValidardni]
             for i in listawidgets:
                 i.setText(None)
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
@@ -167,10 +167,24 @@ class Drivers():
             row = var.ui.tabDrivers.selectedItems()
             fila = [dato.text() for dato in row]
             registro = conexion.Conexion.onedriver(fila[0])
-            print(registro)
+
+        except Exception as error:
+            print("error cargar datos de un cliente marcando en la tabla", error)
+
+    def buscaDri(self):
+        try:
+            dni = var.ui.txtDni.text()
+            registro = conexion.Conexion.codDri(dni)
+            Drivers.cargadatos(registro)
+
+        except Exception as error:
+            print(error, "en busca de datos de un conductor")
+
+    def cargadatos(registro):
+        try:
             datos = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
                      var.ui.txtDirdriver, var.ui.cmbProv, var.ui.cmbMuni, var.ui.txtMovil, var.ui.txtSalario]
-            
+
             for i, dato in enumerate(datos):
                 if i == 6 or i == 7:
                     dato.setCurrentText(str(registro[i]))
@@ -185,7 +199,5 @@ class Drivers():
                 var.ui.chkA.setChecked(True)
             if 'D' in registro[10]:
                 var.ui.chkA.setChecked(True)
-
         except Exception as error:
-            print("error cargar datos de un cliente marcando en la tabla", error)
-
+            print(error)
