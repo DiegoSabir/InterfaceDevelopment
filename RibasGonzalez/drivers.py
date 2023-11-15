@@ -1,6 +1,6 @@
 import locale
 import var, eventos, conexion
-from PyQt6 import QtWidgets, QtCore
+from PyQt6 import QtWidgets, QtCore, QtGui
 
 class Drivers():
     def limpiapanel(self):
@@ -177,6 +177,29 @@ class Drivers():
             registro = conexion.Conexion.codDri(dni)
             Drivers.cargadatos(registro)
 
+            registros = conexion.Conexion.mostrardrivers(self = None)
+            Drivers.cargartabladri(registros)
+            codigo = var.ui.lblcodbd.text()
+            for fila in range(var.ui.tabDrivers.rowCount()):
+                if var.ui.tabDrivers.item(fila, 0).text() == str(codigo):
+                    var.ui.tabDrivers.scrollToItem(var.ui.tabDrivers.item(fila, 0))
+                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[0])))
+                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[3])))
+                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[4])))
+                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[8])))
+                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[10])))
+                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[11])))
+                    var.ui.tabDrivers.item(fila, 0).setTextAligment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                    var.ui.tabDrivers.item(fila, 3).setTextAligment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                    var.ui.tabDrivers.item(fila, 4).setTextAligment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                    var.ui.tabDrivers.item(fila, 0).setBackground(QtGui.QColor(255, 241, 150))
+                    var.ui.tabDrivers.item(fila, 1).setBackground(QtGui.QColor(255, 241, 150))
+                    var.ui.tabDrivers.item(fila, 2).setBackground(QtGui.QColor(255, 241, 150))
+                    var.ui.tabDrivers.item(fila, 3).setBackground(QtGui.QColor(255, 241, 150))
+                    var.ui.tabDrivers.item(fila, 4).setBackground(QtGui.QColor(255, 241, 150))
+                    var.ui.tabDrivers.item(fila, 5).setBackground(QtGui.QColor(255, 241, 150))
+                    break
+
         except Exception as error:
             print(error, "en busca de datos de un conductor")
 
@@ -201,3 +224,26 @@ class Drivers():
                 var.ui.chkA.setChecked(True)
         except Exception as error:
             print(error)
+
+    def modiDri(self):
+        try:
+            driver = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
+                      var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario]
+            modifdriver = []
+
+            for i in driver:
+                modifdriver.append(i.text().title())
+
+            prov = var.ui.cmbProv.currentText()
+            modifdriver.insert(5,prov)
+            muni = var.ui.cmbMuni.currentText()
+            modifdriver.insert(6,muni)
+            licencias = []
+            chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
+            for i in chklicencia:
+                if i.isChecked():
+                    licencias.append(i.text())
+            modifdriver.append('-'.join(licencias))
+            conexion.Conexion.modifDriver(modifdriver)
+        except Exception as error:
+            print("error en modif drivaer en Drivers", error)

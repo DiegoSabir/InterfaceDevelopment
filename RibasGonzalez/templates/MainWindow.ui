@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../img/logo.ico</normaloff>../img/logo.ico</iconset>
+    <normaloff>../../../../../.designer/img/logo.ico</normaloff>../../../../../.designer/img/logo.ico</iconset>
   </property>
   <property name="iconSize">
    <size>
@@ -529,7 +529,7 @@
              </size>
             </property>
            </widget>
-           <widget class="QLabel" name="lblPRov">
+           <widget class="QLabel" name="lblProv">
             <property name="geometry">
              <rect>
               <x>450</x>
@@ -924,7 +924,7 @@
              </item>
             </layout>
            </widget>
-           <widget class="QPushButton" name="pushButton">
+           <widget class="QPushButton" name="btnBuscadri">
             <property name="geometry">
              <rect>
               <x>520</x>
