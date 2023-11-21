@@ -5,17 +5,23 @@ from PyQt6 import QtWidgets, QtCore, QtGui
 class Drivers():
     def limpiapanel(self):
         try:
-            listawidgets = [var.ui.txtNome, var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario,
-                            var.ui.txtMovil, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtNome,
-                            var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario, var.ui.txtMovil,
-                            var.ui.lblValidardni]
+            listawidgets = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtNome, var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario,
+                            var.ui.txtMovil, var.ui.lblValidardni]
             for i in listawidgets:
                 i.setText(None)
+
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
                 i.setChecked(False)
             var.ui.cmbProv.setCurrentText('')
             var.ui.cmbMuni.setCurrentText('')
+            if var.ui.rbtAlta.isChecked():
+                estado = 1
+                conexion.Conexion.selectDrivers(estado)
+            else:
+                registros = conexion.Conexion.mostrardrivers(self)
+                Drivers.cargartabladri(registros)
+
         except Exception as error:
             print('error limpia panel driver: ', error)
 
@@ -138,7 +144,7 @@ class Drivers():
                     msg.exec()
                     var.ui.txtSalario.setText("")
                     break
-            var.ui.txtSalario.setText(str(locale.currency(round(float(var.ui.txtSalario.text()),2),grouping=True)))
+            var.ui.txtSalario.setText(str(locale.currency(round(float(var.ui.txtSalario.text()),2), grouping=True)))
         except Exception as error:
             print('error poner letra capital cajas text', error)
 
@@ -161,44 +167,38 @@ class Drivers():
         except Exception as error:
             print("error alta cliente", error)
 
-    def cargadriver(self):
+    def cargadriver(self = None):
         try:
-            Drivers.limpiapanel(self)
-            row = var.ui.tabDrivers.selectedItems()
-            fila = [dato.text() for dato in row]
-            registro = conexion.Conexion.onedriver(fila[0])
+            fila = var.ui.tabDrivers.selectedItems()
+            row = [dato.text() for dato in fila]
+            registro = conexion.Conexion.onedriver(row[0])
+            Drivers.cargardatos(registro)
 
         except Exception as error:
-            print("error cargar datos de un cliente marcando en la tabla", error)
+            print("error cargar datos de 1 cliente marcando en la tabla:", error)
 
     def buscaDri(self):
         try:
             dni = var.ui.txtDni.text()
             registro = conexion.Conexion.codDri(dni)
-            Drivers.cargadatos(registro)
+            Drivers.cargardatos(registro)
+            if var.ui.rbtTodos.isChecked():
+                estado = 0
+                conexion.Conexion.selectDrivers(estado)
+            elif var.ui.rbtAlta.isChecked():
+                estado = 1
+                conexion.Conexion.selectDrivers(estado)
+            elif var.ui.rbtBaja.isChecked():
+                estado = 2
+                conexion.Conexion.selectDrivers(estado)
 
-            registros = conexion.Conexion.mostrardrivers(self = None)
-            Drivers.cargartabladri(registros)
             codigo = var.ui.lblcodbd.text()
             for fila in range(var.ui.tabDrivers.rowCount()):
                 if var.ui.tabDrivers.item(fila, 0).text() == str(codigo):
-                    var.ui.tabDrivers.scrollToItem(var.ui.tabDrivers.item(fila, 0))
-                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[0])))
-                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[3])))
-                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[4])))
-                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[8])))
-                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[10])))
-                    var.ui.tabDrivers.setItem(fila, 0, QtWidgets.QTableWidgetItem(str(registro[11])))
-                    var.ui.tabDrivers.item(fila, 0).setTextAligment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                    var.ui.tabDrivers.item(fila, 3).setTextAligment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                    var.ui.tabDrivers.item(fila, 4).setTextAligment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                    var.ui.tabDrivers.item(fila, 0).setBackground(QtGui.QColor(255, 241, 150))
-                    var.ui.tabDrivers.item(fila, 1).setBackground(QtGui.QColor(255, 241, 150))
-                    var.ui.tabDrivers.item(fila, 2).setBackground(QtGui.QColor(255, 241, 150))
-                    var.ui.tabDrivers.item(fila, 3).setBackground(QtGui.QColor(255, 241, 150))
-                    var.ui.tabDrivers.item(fila, 4).setBackground(QtGui.QColor(255, 241, 150))
-                    var.ui.tabDrivers.item(fila, 5).setBackground(QtGui.QColor(255, 241, 150))
-                    break
+                    for columna in range(var.ui.tabDrivers.columnCount()):
+                        item = var.ui.tabDrivers.item(fila, columna)
+                        if item is not None:
+                            item.setBackground(QtGui.QColor(255, 241, 150))
 
         except Exception as error:
             print(error, "en busca de datos de un conductor")
@@ -213,31 +213,37 @@ class Drivers():
                     dato.setCurrentText(str(registro[i]))
                 else:
                     dato.setText(str(registro[i]))
-
             if 'A' in registro[10]:
                 var.ui.chkA.setChecked(True)
+            else:
+                var.ui.chkA.setChecked(False)
             if 'B' in registro[10]:
-                var.ui.chkA.setChecked(True)
+                var.ui.chkB.setChecked(True)
+            else:
+                var.ui.chkB.setChecked(False)
             if 'C' in registro[10]:
-                var.ui.chkA.setChecked(True)
+                var.ui.chkC.setChecked(True)
+            else:
+                var.ui.chkC.setChecked(False)
             if 'D' in registro[10]:
-                var.ui.chkA.setChecked(True)
+                var.ui.chkD.setChecked(True)
+            else:
+                var.ui.chkD.setChecked(False)
         except Exception as error:
-            print(error)
+            print("cargar datos en panel gestión", error)
 
-    def modiDri(self):
+    def modifDri(self):
         try:
-            driver = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
-                      var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario]
+            driver = [var.ui. lblcodbd, var.ui.txtDni, var.ui.txtDatadriver,
+                      var.ui.txtApel, var.ui.txtNome, var.ui.txtDirdriver,
+                      var.ui.txtMovil, var.ui.txtSalario]
             modifdriver = []
-
             for i in driver:
                 modifdriver.append(i.text().title())
-
             prov = var.ui.cmbProv.currentText()
-            modifdriver.insert(5,prov)
+            modifdriver.insert(6, prov)
             muni = var.ui.cmbMuni.currentText()
-            modifdriver.insert(6,muni)
+            modifdriver.insert(7, muni)
             licencias = []
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
@@ -247,3 +253,26 @@ class Drivers():
             conexion.Conexion.modifDriver(modifdriver)
         except Exception as error:
             print("error en modif drivaer en Drivers", error)
+
+    def borrarDri(self):
+        try:
+            dni = var.ui.txtDni.text()
+            conexion.Conexion.borrarDri(dni)
+            conexion.Conexion.mostrardrivers(self)
+        except Exception as error:
+            mbox = QtWidgets.QMessageBox()
+            mbox.setWindowTitle('Aviso')
+            mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+            mbox.setText("El conductor no existe o no se puede borrar")
+            mbox.exec()
+
+    def selEstado(self):
+        if var.ui.rbtTodos.isChecked():
+            estado = 0
+            conexion.Conexion.selectDrivers(estado)
+        elif var.ui.rbtAlta.isChecked():
+            estado = 1
+            conexion.Conexion.selectDrivers(estado)
+        elif var.ui.rbtBaja.isChecked():
+            estado = 2
+            conexion.Conexion.selectDrivers(estado)

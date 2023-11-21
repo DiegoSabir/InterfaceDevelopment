@@ -33,3 +33,7 @@ class Calendar(QtWidgets.QDialog):
         ano = datetime.now().year
         var.calendar.Calendar.setSelectedDate((QtCore.QDate(ano,mes,dia)))
         var.calendar.Calendar.clicked.connect(drivers.Drivers.cargaFecha)
+
+class FileDialogAbrir(QtWidgets.QFileDialog):
+    def __int__(self):
+        super(FileDialogAbrir, self).__int__()

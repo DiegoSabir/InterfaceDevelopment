@@ -1,11 +1,13 @@
+from datetime import datetime
 from PyQt6 import QtWidgets, QtSql, QtCore
 import var, drivers
 
 
 class Conexion():
     def conexion(self = None):
+        var.bbdd = 'bbdd.sqlite'
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
-        db.setDatabaseName('bbdd.sqlite')
+        db.setDatabaseName(var.bbdd)
         if not db.open():
             print("error de conexion")
             return False
@@ -89,14 +91,19 @@ class Conexion():
     def mostrardrivers(self):
         try:
             registros = []
-            query1 = QtSql.QSqlQuery()
-            query1.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
 
-            if query1.exec():
-                while query1.next():
-                    row = [query1.value(i) for i in range(query1.record().count())]
-                    registros.append(row)
-            drivers.Drivers.cargartabladri(registros)
+            if var.ui.rbtAlta.isChecked():
+                estado = 1
+                Conexion.selectDrivers(estado)
+            else:
+                query1 = QtSql.QSqlQuery()
+                query1.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
+
+                if query1.exec():
+                    while query1.next():
+                        row = [query1.value(i) for i in range(query1.record().count())]
+                        registros.append(row)
+                drivers.Drivers.cargartabladri(registros)
             return registros
 
         except Exception as error:
@@ -171,3 +178,88 @@ class Conexion():
 
         except Exception as error:
             print("error en modificar driver en conexion", error)
+
+
+    def borrarDri(dni):
+        try:
+            query1=QtSql.QSqlQuery()
+            query1.prepare('Select bajadri from drivers')
+            fecha = datetime.today()
+            fecha = fecha.strftime('%d/%m/%y')
+            query = QtSql.QSqlQuery()
+            query.prepare(' Update drivers set bajadri = :fechabaja where dnidri = :dni ')
+            query.bindValue(':fechabaja', str(fecha))
+            query.bindValue(':dni', str(dni))
+
+            if query.exec():
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle('Aviso')
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                mbox.setText('Todo bien')
+                mbox.exec()
+            else:
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle('Aviso')
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                mbox.setText(query.lastError().text()+'Error baja Driver')
+                mbox.exec()
+        except Exception as error:
+            print('Error al borrar Driver', error)
+
+        def selectDrivers(estado):
+            try:
+                registros = []
+                if int(estado) == 0:
+                    query = QtSql.QSqlQuery()
+                    query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
+                    if query.exec():
+                        while query.next():
+                            row = [query.value(i) for i in range(query.record().count())]
+                            registros.append(row)
+                        drivers.Drivers.cargartabladri(registros)
+                elif int(estado) == 1:
+                    query = QtSql.QSqlQuery()
+                    query.prepare(
+                        'select codigo, apeldri, nombredri, movildri, carnet, '
+                        'bajadri from drivers where bajadri is null')
+                    if query.exec():
+                        while query.next():
+                            row = [query.value(i) for i in range(query.record().count())]
+                            registros.append(row)
+                        drivers.Drivers.cargartabladri(registros)
+                elif int(estado) == 2:
+                    query = QtSql.QSqlQuery()
+                    query.prepare(
+                        'select codigo, apeldri, nombredri, movildri, carnet, bajadri '
+                        'from drivers where bajadri is not null')
+                    if query.exec():
+                        while query.next():
+                            row = [query.value(i) for i in range(query.record().count())]
+                            registros.append(row)
+                        drivers.Drivers.cargartabladri(registros)
+            except Exception as error:
+                print("Error SelectDrivers ", error)
+
+    @staticmethod
+    def consulta_drivers(fechaBaja):
+        try:
+            registros = []
+            query1 = QtSql.QSqlQuery()
+
+            if fechaBaja == 2:
+                query1.prepare("select codigo, apellidos, nombre, telefono, carnet, fechaBaja from drivers")
+            elif fechaBaja == 1:
+                query1.prepare(
+                    "select codigo, apellidos, nombre, telefono, carnet, fechaBaja from drivers where fechaBaja is null")
+            elif fechaBaja == 0:
+                query1.prepare(
+                    "select codigo, apellidos, nombre, telefono, carnet, fechaBaja from drivers where fechaBaja is not null")
+
+            if query1.exec():
+                while query1.next():
+                    row = [query1.value(i) for i in range(query1.record().count())]
+                    registros.append(row)
+            return registros
+
+        except Exception as error:
+            print('Erros mostrar Resultados', error)

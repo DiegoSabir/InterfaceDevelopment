@@ -2,8 +2,7 @@ from drivers import *
 from MainWindow import *
 from windowaux import *
 from dlgSalir import *
-import var, drivers, sys, eventos
-import conexion
+import var, drivers, sys, eventos, conexion, locale
 
 # Establecer la configuración regional en español
 import locale
@@ -19,10 +18,11 @@ class Main(QtWidgets.QMainWindow):
         var.calendar = Calendar()
         var.dlgacerca = DlgAcerca()
         var.dlgsalir = DlgSalir()
+        var.dlgAbrir = FileDialogAbrir()
         self.driver = Drivers()
         conexion.Conexion.conexion()
         conexion.Conexion.cargaprov()
-        conexion.Conexion.mostrardrivers(self)
+        drivers.Drivers.cargartabladri(registros=conexion.Conexion.mostrardrivers(self))
 
         '''
         zona de eventos de botones
@@ -30,25 +30,28 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnCalendar.clicked.connect(eventos.Eventos.abrirCalendar)
         var.ui.btnAltaDriver.clicked.connect(drivers.Drivers.altadriver)
         var.ui.btnBuscadri.clicked.connect(drivers.Drivers.buscaDri)
-        var.ui.btnModifDriver.clicked.connect(drivers.Drivers.modiDri)
+        var.ui.btnModifDriver.clicked.connect(drivers.Drivers.modifDri)
+        var.ui.btnBajaDriver.clicked.connect(drivers.Drivers.borrarDri)
 
         """
         zona de eventos del menubar
         """
         var.ui.actionSalir.triggered.connect(eventos.Eventos.mostrarsalir)
         var.ui.actionAcerca_de.triggered.connect(eventos.Eventos.acercade)
+        var.ui.actionCrear_Copia_Seguridad.triggered.connect(eventos.Eventos.crearbackup)
+        var.ui.actionRestaurar_Copia_Seguridad.triggered.connect(eventos.Eventos.restaurarbackup)
 
         '''
         zona eventos cajas de texto
         '''
         var.ui.txtDni.editingFinished.connect(Drivers.validarDNI)
-        var.ui.txtMovil.editingFinished.connect(Drivers.validarMovil)
         var.ui.txtNome.editingFinished.connect(eventos.Eventos.formatCajatexto)
         var.ui.txtApel.editingFinished.connect(eventos.Eventos.formatCajatexto)
         var.ui.txtSalario.editingFinished.connect(eventos.Eventos.formatCajatexto)
+        var.ui.txtMovil.editingFinished.connect(Drivers.validarMovil)
 
         '''
-         eventos del toolbar
+        eventos del toolbar
         '''
         var.ui.actionbarSalir.triggered.connect(eventos.Eventos.mostrarsalir)
         var.ui.actionlimpiaPaneldriver.triggered.connect(drivers.Drivers.limpiapanel)
@@ -58,6 +61,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         eventos.Eventos.resizeTabdrivers(self)
         var.ui.tabDrivers.clicked.connect(drivers.Drivers.cargadriver)
+
         '''
         eventos combobox
         '''

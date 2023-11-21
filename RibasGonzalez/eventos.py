@@ -1,6 +1,10 @@
+import os.path
+
 from PyQt6 import QtWidgets,QtCore
 from datetime import datetime
-import var, sys, locale
+
+import conexion
+import var, sys, locale, zipfile, shutil
 
 # Establecer la configuración regional en español
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
@@ -102,3 +106,49 @@ class Eventos():
             var.ui.txtSalario.setText(str(locale.currency(float(var.ui.txtSalario.text()))))
         except Exception as error:
             print('error poner letra capital cajas text', error)
+
+    #def formatCajaMovil():
+
+    def crearbackup(self):
+        try:
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
+            copia = str(fecha) + '_backup.zip'
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar Copia Seugirdad', copia, '.zip')
+            if var.dlgabrir.accept and filename != '':
+                fichzip = zipfile.ZipFile(copia, 'w')
+                fichzip.write(var.bbdd, os.path.basename(var.bbdd), zipfile.ZIP_DEFLATED)
+                fichzip.close()
+                shutil.move(str(copia),str(directorio))
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText("Copia de seguridad Creada")
+                msg.exec()
+
+        except Exception as error:
+            print(error)
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+            msg.setText("Error en Copia de seguridad", error)
+            msg.exec()
+
+    def restaurarbackup(self):
+        try:
+            filename = var.dlgabrir.getOpenFileName(None, 'Restaurar Copia de Seguridad',
+                                                    '','*.zip;;All files(*)')
+            file = filename[0]
+            if var.dlgabrir.accept and filename != '':
+                file = filename[0]
+                with zipfile.ZipFile(str(file), 'r') as bbdd:
+                    bbdd.extractall(pwd = None)
+                bbdd.close()
+
+
+        except Exception as error:
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+            msg.setText("Error restauracion en Copia de seguridad", error)
+            msg.exec()

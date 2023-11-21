@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../../.designer/img/logo.ico</normaloff>../../../../../.designer/img/logo.ico</iconset>
+    <normaloff>../../../../../../../.designer/img/logo.ico</normaloff>../../../../../../../.designer/img/logo.ico</iconset>
   </property>
   <property name="iconSize">
    <size>
@@ -1075,7 +1075,15 @@ background-color:rgb(100,100,100);
     </property>
     <addaction name="actionAcerca_de"/>
    </widget>
+   <widget class="QMenu" name="menuHerramientas">
+    <property name="title">
+     <string>Herramientas</string>
+    </property>
+    <addaction name="actionCrear_Copia_Seguridad"/>
+    <addaction name="actionRestaurar_Copia_Seguridad"/>
+   </widget>
    <addaction name="menuArchivo"/>
+   <addaction name="menuHerramientas"/>
    <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar">
@@ -1102,9 +1110,14 @@ background-color:rgb(100,100,100);
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionCrear_Copia_Seguridad"/>
+   <addaction name="separator"/>
+   <addaction name="actionRestaurar_Copia_Seguridad"/>
+   <addaction name="separator"/>
    <addaction name="actionlimpiaPaneldriver"/>
    <addaction name="separator"/>
    <addaction name="actionbarSalir"/>
+   <addaction name="separator"/>
   </widget>
   <action name="actionSalir">
    <property name="text">
@@ -1132,6 +1145,30 @@ background-color:rgb(100,100,100);
    </property>
    <property name="text">
     <string>limpiaPaneldriver</string>
+   </property>
+  </action>
+  <action name="actionCrear_Copia_Seguridad">
+   <property name="icon">
+    <iconset>
+     <normaloff>../img/crear.ico</normaloff>../img/crear.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Crear Copia Seguridad</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+S</string>
+   </property>
+  </action>
+  <action name="actionRestaurar_Copia_Seguridad">
+   <property name="icon">
+    <iconset>
+     <normaloff>../img/restaurar.ico</normaloff>../img/restaurar.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Restaurar Copia Seguridad</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+R</string>
    </property>
   </action>
  </widget>
