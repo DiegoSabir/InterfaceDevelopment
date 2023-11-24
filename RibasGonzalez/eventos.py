@@ -4,7 +4,7 @@ from PyQt6 import QtWidgets,QtCore
 from datetime import datetime
 
 import conexion
-import var, sys, locale, zipfile, shutil
+import var, sys, locale, zipfile, shutil, xlwt, xlrd
 
 # Establecer la configuración regional en español
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
@@ -114,7 +114,7 @@ class Eventos():
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
             copia = str(fecha) + '_backup.zip'
-            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar Copia Seugirdad', copia, '.zip')
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar Copia Seguridad', copia, '.zip')
             if var.dlgabrir.accept and filename != '':
                 fichzip = zipfile.ZipFile(copia, 'w')
                 fichzip.write(var.bbdd, os.path.basename(var.bbdd), zipfile.ZIP_DEFLATED)
@@ -145,10 +145,50 @@ class Eventos():
                     bbdd.extractall(pwd = None)
                 bbdd.close()
 
-
         except Exception as error:
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('Aviso')
             msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
             msg.setText("Error restauracion en Copia de seguridad", error)
+            msg.exec()
+
+    def exportardatosxls(self):
+        try:
+            fecha = datetime.today()
+            fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
+            file = (str(fecha) + '_Datos.xls')
+            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Exportar Datos en XLS', file, '.xls')
+            if var.dlgabrir.accept and filename:
+                wb = xlwt.Workbook()
+                sheet1 = wb.add_sheet('Conductores')
+                sheet1.write(0, 0, 'ID')
+                sheet1.write(0, 1, 'DNI')
+                sheet1.write(0, 2, 'Fecha Alta')
+                sheet1.write(0, 3, 'Apellidos')
+                sheet1.write(0, 4, 'Nombre')
+                sheet1.write(0, 5, 'Direccion')
+                sheet1.write(0, 6, 'Provincia')
+                sheet1.write(0, 7, 'Municipio')
+                sheet1.write(0, 8, 'Movil')
+                sheet1.write(0, 9, 'Salario')
+                sheet1.write(0, 10, 'Carnet')
+
+                registros = conexion.Conexion.selectDriversTodos(self)
+
+                for fila, registro in (registros, 1):
+                    for i, valor in enumerate(registro[:-1]):
+                        sheet1.write(fila, i, str(valor))
+                wb.save(directorio)
+
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText("Datos exportados")
+                msg.exec()
+
+        except Exception as error:
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+            msg.setText("Error al exportar datos a hoja de calculo", error)
             msg.exec()
