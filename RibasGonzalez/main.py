@@ -5,7 +5,6 @@ from dlgSalir import *
 import var, drivers, sys, eventos, conexion, locale
 
 # Establecer la configuración regional en español
-import locale
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
@@ -22,7 +21,10 @@ class Main(QtWidgets.QMainWindow):
         self.driver = Drivers()
         conexion.Conexion.conexion()
         conexion.Conexion.cargaprov()
+
+        """
         drivers.Drivers.cargartabladri(registros=conexion.Conexion.mostrardrivers(self))
+        """
 
         '''
         zona de eventos de botones
@@ -56,12 +58,12 @@ class Main(QtWidgets.QMainWindow):
         '''
         var.ui.actionbarSalir.triggered.connect(eventos.Eventos.mostrarsalir)
         var.ui.actionlimpiaPaneldriver.triggered.connect(drivers.Drivers.limpiapanel)
+        var.ui.tabDrivers.clicked.connect(drivers.Drivers.cargadriver)
 
         '''
         eventos de tablas        
         '''
         eventos.Eventos.resizeTabdrivers(self)
-        var.ui.tabDrivers.clicked.connect(drivers.Drivers.cargadriver)
 
         '''
         eventos combobox
@@ -72,6 +74,7 @@ class Main(QtWidgets.QMainWindow):
         ejecución de diferentes funciones al lanzar la aplicación
         '''
         eventos.Eventos.cargastatusbar(self)
+        conexion.Conexion.cargaprov(self)
         rbtDriver = [var.ui.rbtTodos, var.ui.rbtAlta, var.ui.rbtBaja]
         for i in rbtDriver:
             i.toggled.connect(eventos.Eventos.selEstado)

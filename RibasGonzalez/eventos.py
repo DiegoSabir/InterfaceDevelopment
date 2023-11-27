@@ -77,13 +77,7 @@ class Eventos():
 
 
     def selEstado(self):
-        if var.ui.rbtTodos.isChecked():
-            print('pulsaste todos')
-        elif var.ui.rbtAlta.isChecked():
-            print('pulsaste alta')
-        elif var.ui.rbtBaja.isChecked():
-            print('pulsaste baja')
-
+        conexion.Conexion.mostrardrivers()
 
     def resizeTabdrivers(self):
         try:
@@ -99,15 +93,15 @@ class Eventos():
 
 
     @staticmethod
-    def formatCajatexto(self = None):
+    def formatCajatexto(self=None):
         try:
             var.ui.txtApel.setText(var.ui.txtApel.text().title())
             var.ui.txtNome.setText(var.ui.txtNome.text().title())
-            var.ui.txtSalario.setText(str(locale.currency(float(var.ui.txtSalario.text()))))
+            #var.ui.txtSalario.setText(str(locale.currency(float(var.ui.txtSalario.text()))))
+
         except Exception as error:
             print('error poner letra capital cajas text', error)
 
-    #def formatCajaMovil():
 
     def crearbackup(self):
         try:
@@ -115,11 +109,12 @@ class Eventos():
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
             copia = str(fecha) + '_backup.zip'
             directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar Copia Seguridad', copia, '.zip')
+
             if var.dlgabrir.accept and filename != '':
                 fichzip = zipfile.ZipFile(copia, 'w')
                 fichzip.write(var.bbdd, os.path.basename(var.bbdd), zipfile.ZIP_DEFLATED)
                 fichzip.close()
-                shutil.move(str(copia),str(directorio))
+                shutil.move(str(copia), str(directorio))
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
@@ -127,7 +122,6 @@ class Eventos():
                 msg.exec()
 
         except Exception as error:
-            print(error)
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('Aviso')
             msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
@@ -136,14 +130,17 @@ class Eventos():
 
     def restaurarbackup(self):
         try:
-            filename = var.dlgabrir.getOpenFileName(None, 'Restaurar Copia de Seguridad',
-                                                    '','*.zip;;All files(*)')
+            filename = var.dlgabrir.getOpenFileName(None, 'Restaurar Copia de Seguridad', '', '*.zip;;All files(*)')
             file = filename[0]
             if var.dlgabrir.accept and filename != '':
-                file = filename[0]
                 with zipfile.ZipFile(str(file), 'r') as bbdd:
-                    bbdd.extractall(pwd = None)
+                    bbdd.extractall(pwd=None)
                 bbdd.close()
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                msg.setText("Copia de seguridad restaurada")
+                msg.exec()
 
         except Exception as error:
             msg = QtWidgets.QMessageBox()
@@ -173,7 +170,7 @@ class Eventos():
                 sheet1.write(0, 9, 'Salario')
                 sheet1.write(0, 10, 'Carnet')
 
-                registros = conexion.Conexion.selectDriversTodos(self)
+                registros = conexion.Conexion.selectDriversTodos()
 
                 for fila, registro in (registros, 1):
                     for i, valor in enumerate(registro[:-1]):

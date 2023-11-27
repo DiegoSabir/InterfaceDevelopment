@@ -134,7 +134,7 @@
              <rect>
               <x>410</x>
               <y>10</y>
-              <width>40</width>
+              <width>35</width>
               <height>20</height>
              </rect>
             </property>
@@ -1173,7 +1173,7 @@ background-color:rgb(100,100,100);
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">

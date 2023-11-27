@@ -1,5 +1,3 @@
-from datetime import datetime
-
 import locale
 import var, eventos, conexion
 from PyQt6 import QtWidgets, QtCore, QtGui
@@ -7,8 +5,8 @@ from PyQt6 import QtWidgets, QtCore, QtGui
 class Drivers():
     def limpiapanel(self):
         try:
-            listawidgets = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtNome, var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario,
-                            var.ui.txtMovil, var.ui.lblValidardni]
+            listawidgets = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtNome,
+                            var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario, var.ui.txtMovil, var.ui.lblValidardni]
             for i in listawidgets:
                 i.clear()
 
@@ -18,26 +16,29 @@ class Drivers():
 
             var.ui.cmbProv.setCurrentText('')
             var.ui.cmbMuni.setCurrentText('')
+            var.ui.lblcodbd.setText('')
 
+            """
             if var.ui.rbtAlta.isChecked():
                 estado = 1
                 conexion.Conexion.selectDrivers(estado)
             else:
                 registros = conexion.Conexion.mostrardrivers(self)
                 Drivers.cargartabladri(registros)
+            """
 
         except Exception as error:
-            print('error limpia panel driver: ', error)
+            print('Error al limpiar el panel driver: ', error)
 
 
     def cargaFecha(qDate):
         try:
             data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
-            var.ui.txtDatadriver.setText(data)
+            var.ui.txtDatadriver.setText(str(data))
             var.calendar.hide()
 
         except Exception as error:
-            print("error en cargar fecha: ", error)
+            print("Error al cargar fecha: ", error)
 
 
     @staticmethod
@@ -92,40 +93,48 @@ class Drivers():
                     var.ui.txtMovil.setText("")
                     break
         except Exception as error:
-            print("error en validar movil ", error)
+            print("Error en la validacion del movil", error)
 
     def altadriver(self):
         try:
+            if not all([var.ui.txtDni.text(), var.ui.txtApel.text(),
+                        var.ui.txtNome.text(), var.ui.txtMovil.text()]):
+
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle("Aviso")
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                mbox.setText("Tods los campos deben ser rellenados")
+
+                mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                mbox.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                mbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+
+                mbox.exec()
+                var.ui.txtMovil.setText("")
+                return
+
             driver = [var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
                       var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario]
             newdriver = []
 
             for i in driver:
-                if i.text().strip():
-                    newdriver.append(i.text().title())
-                else:
-                    mbox = QtWidgets.QMessageBox()
-                    mbox.setWindowTitle("Aviso")
-                    mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                    mbox.setText("Tods los campos deben ser rellenados: \n DNI, Nombre, Fecha de alta y Movil")
-                    mbox.exec()
-
+                newdriver.append(i.text().title())
             prov = var.ui.cmbProv.currentText()
             newdriver.insert(5,prov)
             muni = var.ui.cmbMuni.currentText()
             newdriver.insert(6,muni)
+
             licencias = []
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
                 if i.isChecked():
                     licencias.append(i.text())
             newdriver.append('-'.join(licencias))
-
             print(newdriver)
             conexion.Conexion.guardardri(newdriver)
 
         except Exception as error:
-            print("error alta cliente", error)
+            print("Error al dar de alta", error)
 
     def formatCajatexto(self = None):
         try:
@@ -148,6 +157,7 @@ class Drivers():
                     var.ui.txtSalario.setText("")
                     break
             var.ui.txtSalario.setText(str(locale.currency(round(float(var.ui.txtSalario.text()),2), grouping=True)))
+
         except Exception as error:
             print('error poner letra capital cajas text', error)
 
@@ -170,7 +180,7 @@ class Drivers():
                 index += 1
 
         except Exception as error:
-            print("error alta cliente", error)
+            print("Error al cargar la dri", error)
 
     def cargadriver(self):
         try:
@@ -181,7 +191,7 @@ class Drivers():
             Drivers.cargadatos(registro)
 
         except Exception as error:
-            print("error al cargar el cliente marcando la tabla: ", error)
+            print("error al cargar datos de un cliente en tabla: ", error)
 
     def buscaDri(self):
         try:
@@ -189,7 +199,7 @@ class Drivers():
             registro = conexion.Conexion.codDri(dni)
             Drivers.cargadatos(registro)
 
-            registros = Drivers.selEstado(self=None)
+            registros = conexion.Conexion.mostrardrivers(self=None)
             Drivers.cargartabladri(registros)
             codigo = var.ui.lblcodbd.text()
             Drivers.colorearFila(codigo)
@@ -218,23 +228,17 @@ class Drivers():
                     dato.setText(str(registro[i]))
             if 'A' in registro[10]:
                 var.ui.chkA.setChecked(True)
-            else:
-                var.ui.chkA.setChecked(False)
             if 'B' in registro[10]:
                 var.ui.chkB.setChecked(True)
-            else:
-                var.ui.chkB.setChecked(False)
             if 'C' in registro[10]:
                 var.ui.chkC.setChecked(True)
-            else:
-                var.ui.chkC.setChecked(False)
             if 'D' in registro[10]:
                 var.ui.chkD.setChecked(True)
-            else:
-                var.ui.chkD.setChecked(False)
-        except Exception as error:
-            print("cargar datos en panel gestión", error)
 
+        except Exception as error:
+            print("error al cargar datos en panel gestión", error)
+
+    """
     def buscarDriverTabla(codigo):
         try:
             tabla = var.ui.tabDrivers
@@ -247,6 +251,7 @@ class Drivers():
 
         except Exception as error:
             print('No se ha podido seleccionar al driver en la tabla', error)
+    """
 
     def modifDri(self):
         try:
@@ -261,6 +266,7 @@ class Drivers():
             modifdriver.insert(6, prov)
             muni = var.ui.cmbMuni.currentText()
             modifdriver.insert(7, muni)
+
             licencias = []
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
@@ -271,16 +277,17 @@ class Drivers():
             conexion.Conexion.modifDriver(modifdriver)
 
         except Exception as error:
-            print("error en modif drivaer en Drivers", error)
+            print("error al modificar driver", error)
 
     def borrarDri(self):
         try:
             dni = var.ui.txtDni.text()
             conexion.Conexion.borrarDri(dni)
-
-            #conexion.Conexion.mostrardrivers(self)
+            conexion.Conexion.mostrardrivers(self)
+            """
             registros = Drivers.selEstado(self=None)
-            Drivers.cargartabladri(registros)
+            Drivers.cargartabladri(registros)   
+            """
 
         except Exception as error:
             mbox = QtWidgets.QMessageBox()
@@ -289,6 +296,7 @@ class Drivers():
             mbox.setText("El conductor no existe o no se puede borrar")
             mbox.exec()
 
+    """
     def selEstado(self):
         try:
             if var.ui.rbtTodos.isChecked():
@@ -308,3 +316,4 @@ class Drivers():
 
         except Exception as error:
             print("Error al cargar alta los drivers", error)
+    """
