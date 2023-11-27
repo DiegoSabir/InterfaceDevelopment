@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ejemplo intent-filter"/>
+
+    <EditText
+        android:id="@+id/etUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="introduce URL"/>
+
+    <Button
+        android:id="@+id/btnExplicito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cargar URL explicitamente"
+        android:onClick="onClickBtn"/>
+
+    <Button
+        android:id="@+id/btnImplicito"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cargar URL implicitamente"
+        android:onClick="onClickBtn"/>
+
+
+
+</LinearLayout>

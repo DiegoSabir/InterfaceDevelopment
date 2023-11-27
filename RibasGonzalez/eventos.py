@@ -92,15 +92,53 @@ class Eventos():
             print('error resize en tab drivers', error)
 
 
-    @staticmethod
     def formatCajatexto(self=None):
         try:
             var.ui.txtApel.setText(var.ui.txtApel.text().title())
             var.ui.txtNome.setText(var.ui.txtNome.text().title())
-            #var.ui.txtSalario.setText(str(locale.currency(float(var.ui.txtSalario.text()))))
+            salario = var.ui.txtSalario.text()
+            valores = "1234567890."
+            for n in salario:
+                if n in valores:
+                    pass
+                else:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setWindowTitle('Aviso')
+                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                    msg.setText('Valor de Salario Incorrecto (00000000.00)')
+                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                    msg.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.exec()
+                    var.ui.txtSalario.setText("")
+                    break
+            var.ui.txtSalario.setText(str(locale.currency(round(float(var.ui.txtSalario.text()),2), grouping=True)))
 
         except Exception as error:
             print('error poner letra capital cajas text', error)
+
+    @staticmethod
+    def validarMovil(self = None):
+        try:
+            movil = var.ui.txtMovil.text()
+            numeros = "1234567890"
+            for n in movil:
+                if n in numeros and len(movil) == 9:
+                    pass
+                else:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setWindowTitle('Aviso: numero movil incorrecto')
+                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                    msg.setText('Escriba un número de móvil correcto')
+                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                    msg.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.exec()
+                    var.ui.txtMovil.setText("")
+                    break
+
+        except Exception as error:
+            print("Error en la validacion del movil", error)
 
 
     def crearbackup(self):

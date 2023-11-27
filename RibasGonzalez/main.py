@@ -20,11 +20,7 @@ class Main(QtWidgets.QMainWindow):
         var.dlgAbrir = FileDialogAbrir()
         self.driver = Drivers()
         conexion.Conexion.conexion()
-        conexion.Conexion.cargaprov()
-
-        """
-        drivers.Drivers.cargartabladri(registros=conexion.Conexion.mostrardrivers(self))
-        """
+        conexion.Conexion.mostrardrivers()
 
         '''
         zona de eventos de botones
@@ -51,7 +47,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtNome.editingFinished.connect(eventos.Eventos.formatCajatexto)
         var.ui.txtApel.editingFinished.connect(eventos.Eventos.formatCajatexto)
         var.ui.txtSalario.editingFinished.connect(eventos.Eventos.formatCajatexto)
-        var.ui.txtMovil.editingFinished.connect(Drivers.validarMovil)
+        var.ui.txtMovil.editingFinished.connect(eventos.Eventos.validarMovil)
 
         '''
         eventos del toolbar

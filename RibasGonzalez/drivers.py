@@ -1,5 +1,4 @@
-import locale
-import var, eventos, conexion
+import var, eventos, conexion, locale
 from PyQt6 import QtWidgets, QtCore, QtGui
 
 class Drivers():
@@ -7,6 +6,7 @@ class Drivers():
         try:
             listawidgets = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtNome,
                             var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario, var.ui.txtMovil, var.ui.lblValidardni]
+
             for i in listawidgets:
                 i.clear()
 
@@ -17,15 +17,6 @@ class Drivers():
             var.ui.cmbProv.setCurrentText('')
             var.ui.cmbMuni.setCurrentText('')
             var.ui.lblcodbd.setText('')
-
-            """
-            if var.ui.rbtAlta.isChecked():
-                estado = 1
-                conexion.Conexion.selectDrivers(estado)
-            else:
-                registros = conexion.Conexion.mostrardrivers(self)
-                Drivers.cargartabladri(registros)
-            """
 
         except Exception as error:
             print('Error al limpiar el panel driver: ', error)
@@ -42,7 +33,7 @@ class Drivers():
 
 
     @staticmethod
-    def validarDNI(self = None):
+    def validarDNI(self=None):
         try:
             dni = var.ui.txtDni.text()
             dni = dni.upper() #poner mayúscula
@@ -73,27 +64,7 @@ class Drivers():
         except Exception as error:
             print("error en validar dni ", error)
 
-    @staticmethod
-    def validarMovil(self = None):
-        try:
-            movil = var.ui.txtMovil.text()
-            numeros = "1234567890"
-            for n in movil:
-                if n in numeros and len(movil) == 9:
-                    pass
-                else:
-                    msg = QtWidgets.QMessageBox()
-                    msg.setWindowTitle('Aviso: numero movil incorrecto')
-                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                    msg.setText('Escriba un número de móvil correcto')
-                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
-                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
-                    msg.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
-                    msg.exec()
-                    var.ui.txtMovil.setText("")
-                    break
-        except Exception as error:
-            print("Error en la validacion del movil", error)
+
 
     def altadriver(self):
         try:
@@ -115,8 +86,8 @@ class Drivers():
 
             driver = [var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
                       var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario]
-            newdriver = []
 
+            newdriver = []
             for i in driver:
                 newdriver.append(i.text().title())
             prov = var.ui.cmbProv.currentText()
@@ -136,38 +107,12 @@ class Drivers():
         except Exception as error:
             print("Error al dar de alta", error)
 
-    def formatCajatexto(self = None):
-        try:
-            var.ui.txtApel.setText(var.ui.txtApel.text().title())
-            var.ui.txtNome.setText(var.ui.txtNome.text().title())
-            salario = var.ui.txtSalario.text()
-            valores = "1234567890."
-            for n in salario:
-                if n in valores:
-                    pass
-                else:
-                    msg = QtWidgets.QMessageBox()
-                    msg.setWindowTitle('Aviso')
-                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                    msg.setText('Valor de Salario Incorrecto (00000000.00)')
-                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
-                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
-                    msg.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Ok)
-                    msg.exec()
-                    var.ui.txtSalario.setText("")
-                    break
-            var.ui.txtSalario.setText(str(locale.currency(round(float(var.ui.txtSalario.text()),2), grouping=True)))
-
-        except Exception as error:
-            print('error poner letra capital cajas text', error)
-
-
     def cargartabladri(registros):
         try:
             index = 0
             for registro in registros:
                 var.ui.tabDrivers.setRowCount(index+1) #crea una fila
-                var.ui.tabDrivers.setItem(index,0,QtWidgets.QTableWidgetItem(str(registro[0])))
+                var.ui.tabDrivers.setItem(index, 0, QtWidgets.QTableWidgetItem(str(registro[0])))
                 var.ui.tabDrivers.setItem(index, 1, QtWidgets.QTableWidgetItem(str(registro[1])))
                 var.ui.tabDrivers.setItem(index, 2, QtWidgets.QTableWidgetItem(str(registro[2])))
                 var.ui.tabDrivers.setItem(index, 3, QtWidgets.QTableWidgetItem(str(registro[3])))
@@ -197,6 +142,7 @@ class Drivers():
         try:
             dni = var.ui.txtDni.text()
             registro = conexion.Conexion.codDri(dni)
+
             Drivers.cargadatos(registro)
 
             registros = conexion.Conexion.mostrardrivers(self=None)
@@ -238,7 +184,7 @@ class Drivers():
         except Exception as error:
             print("error al cargar datos en panel gestión", error)
 
-    """
+
     def buscarDriverTabla(codigo):
         try:
             tabla = var.ui.tabDrivers
@@ -251,7 +197,7 @@ class Drivers():
 
         except Exception as error:
             print('No se ha podido seleccionar al driver en la tabla', error)
-    """
+
 
     def modifDri(self):
         try:
@@ -296,7 +242,7 @@ class Drivers():
             mbox.setText("El conductor no existe o no se puede borrar")
             mbox.exec()
 
-    """
+
     def selEstado(self):
         try:
             if var.ui.rbtTodos.isChecked():
@@ -316,4 +262,3 @@ class Drivers():
 
         except Exception as error:
             print("Error al cargar alta los drivers", error)
-    """

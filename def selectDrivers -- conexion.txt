@@ -1,0 +1,33 @@
+    def selectDrivers(estado):
+        try:
+            registros = []
+            if int(estado) == 0:
+                query = QtSql.QSqlQuery()
+                query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
+                if query.exec():
+                    while query.next():
+                        row = [query.value(i) for i in range(query.record().count())]
+                        registros.append(row)
+                    drivers.Drivers.cargartabladri(registros)
+            elif int(estado) == 1:
+                query = QtSql.QSqlQuery()
+                query.prepare(
+                    'select codigo, apeldri, nombredri, movildri, carnet, '
+                    'bajadri from drivers where bajadri is null')
+                if query.exec():
+                    while query.next():
+                        row = [query.value(i) for i in range(query.record().count())]
+                        registros.append(row)
+                    drivers.Drivers.cargartabladri(registros)
+            elif int(estado) == 2:
+                query = QtSql.QSqlQuery()
+                query.prepare(
+                    'select codigo, apeldri, nombredri, movildri, carnet, bajadri '
+                    'from drivers where bajadri is not null')
+                if query.exec():
+                    while query.next():
+                        row = [query.value(i) for i in range(query.record().count())]
+                        registros.append(row)
+                    drivers.Drivers.cargartabladri(registros)
+        except Exception as error:
+            print("Error SelectDrivers ", error)
