@@ -1173,7 +1173,7 @@ background-color:rgb(100,100,100);
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">
@@ -1193,7 +1193,7 @@ background-color:rgb(100,100,100);
      <string>Herramientas</string>
     </property>
     <addaction name="actionCrear_Copia_Seguridad"/>
-    <addaction name="actionRestaurar_Copia_Seguridad"/>
+    <addaction name="actionrestaurarbackup"/>
     <addaction name="separator"/>
     <addaction name="actionExportar_Datos_Excel"/>
    </widget>
@@ -1227,7 +1227,9 @@ background-color:rgb(100,100,100);
    </attribute>
    <addaction name="actionCrear_Copia_Seguridad"/>
    <addaction name="separator"/>
-   <addaction name="actionRestaurar_Copia_Seguridad"/>
+   <addaction name="actionrestaurarbackup"/>
+   <addaction name="separator"/>
+   <addaction name="actionExportar_Datos_Excel"/>
    <addaction name="separator"/>
    <addaction name="actionlimpiaPaneldriver"/>
    <addaction name="separator"/>
@@ -1274,7 +1276,7 @@ background-color:rgb(100,100,100);
     <string>Alt+S</string>
    </property>
   </action>
-  <action name="actionRestaurar_Copia_Seguridad">
+  <action name="actionrestaurarbackup">
    <property name="icon">
     <iconset>
      <normaloff>../img/restaurar.ico</normaloff>../img/restaurar.ico</iconset>
@@ -1287,6 +1289,10 @@ background-color:rgb(100,100,100);
    </property>
   </action>
   <action name="actionExportar_Datos_Excel">
+   <property name="icon">
+    <iconset>
+     <normaloff>../img/excel.ico</normaloff>../img/excel.ico</iconset>
+   </property>
    <property name="text">
     <string>Exportar Datos .xls</string>
    </property>
