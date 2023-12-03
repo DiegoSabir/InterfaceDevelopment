@@ -5,22 +5,13 @@ from datetime import datetime
 import var, drivers, eventos
 
 
-class DlgSalir(QtWidgets.QDialog):
-    def __init__(self):
-        super(DlgSalir, self).__init__()
-        var.dlgsalir = Ui_dlgSalir()
-        var.dlgsalir.setupUi(self)
-        var.dlgsalir.btnSalir.clicked.connect(eventos.Eventos.salir)
-        var.dlgsalir.btnCancelar.clicked.connect(eventos.Eventos.cerrarsalir)
-
-
 class DlgAcerca(QtWidgets.QDialog):
     def __init__(self):
         super(DlgAcerca, self).__init__()
         var.dlgacerca = Ui_dlgAbout()
         var.dlgacerca.setupUi(self)
         var.dlgacerca.btnCerrar.clicked.connect(eventos.Eventos.cerraracercade)
-        var.dlgacerca.lblVersion.setText("Versión: " + var.version)
+        var.dlgacerca.lblVersion.setText("Version: " + var.version)
 
 
 class Calendar(QtWidgets.QDialog):

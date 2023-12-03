@@ -1,8 +1,13 @@
 from drivers import *
 from MainWindow import *
 from windowaux import *
-from dlgSalir import *
-import var, drivers, sys, eventos, conexion, locale
+import var
+import drivers
+import sys
+import eventos
+import locale
+import conexion
+
 
 # Establecer la configuración regional en español
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
@@ -10,17 +15,22 @@ locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
 
 class Main(QtWidgets.QMainWindow):
+
+
     def __init__(self):
         super(Main, self).__init__()
         var.ui = Ui_MainWindow()
         var.ui.setupUi(self)
         var.calendar = Calendar()
         var.dlgacerca = DlgAcerca()
-        var.dlgsalir = DlgSalir()
         var.dlgAbrir = FileDialogAbrir()
-        self.driver = Drivers()
+        #self.driver = Drivers()
         conexion.Conexion.conexion()
-        conexion.Conexion.mostrardrivers()
+        conexion.Conexion.cargaprov()
+        estado = 1
+        conexion.Conexion.selectDrivers(estado)
+
+
 
         '''
         zona de eventos de botones
@@ -29,7 +39,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnAltaDriver.clicked.connect(drivers.Drivers.altadriver)
         var.ui.btnBuscadri.clicked.connect(drivers.Drivers.buscaDri)
         var.ui.btnModifDriver.clicked.connect(drivers.Drivers.modifDri)
-        var.ui.btnBajaDriver.clicked.connect(drivers.Drivers.borrarDri)
+        var.ui.btnBajaDriver.clicked.connect(drivers.Drivers.borrarDriv)
+
 
         """
         zona de eventos del menubar
@@ -39,41 +50,44 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionCrear_Copia_Seguridad.triggered.connect(eventos.Eventos.crearbackup)
         var.ui.actionRestaurar_Copia_Seguridad.triggered.connect(eventos.Eventos.restaurarbackup)
         var.ui.actionExportar_Datos_Excel.triggered.connect(eventos.Eventos.exportardatosxls)
+        var.ui.actionImportar_Datos_XLS.triggered.connect(eventos.Eventos.importardatosxls)
+
 
         '''
         zona eventos cajas de texto
         '''
-        var.ui.txtDni.editingFinished.connect(Drivers.validarDNI)
+        var.ui.txtDni.editingFinished.connect(lambda: drivers.Drivers.validarDNI(var.ui.txtDni.text()))
+        #var.ui.txtDni.editingFinished.connect(lambda: drivers.Drivers.validarDNI(var.ui.txtDni.displayText()))
+
         var.ui.txtNome.editingFinished.connect(eventos.Eventos.formatCajatexto)
         var.ui.txtApel.editingFinished.connect(eventos.Eventos.formatCajatexto)
         var.ui.txtSalario.editingFinished.connect(eventos.Eventos.formatCajatexto)
-        var.ui.txtMovil.editingFinished.connect(eventos.Eventos.validarMovil)
+        var.ui.txtMovil.editingFinished.connect(eventos.Eventos.formatCajamovil)
+
 
         '''
         eventos del toolbar
         '''
         var.ui.actionbarSalir.triggered.connect(eventos.Eventos.mostrarsalir)
         var.ui.actionlimpiaPaneldriver.triggered.connect(drivers.Drivers.limpiapanel)
-        var.ui.tabDrivers.clicked.connect(drivers.Drivers.cargadriver)
+        var.ui.actioncrearbackup.triggered.connect(eventos.Eventos.crearbackup)
+        var.ui.actionrestaurarbackup.triggered.connect(eventos.Eventos.restaurarbackup)
+
 
         '''
         eventos de tablas        
         '''
         eventos.Eventos.resizeTabdrivers(self)
+        var.ui.tabDrivers.clicked.connect(drivers.Drivers.cargadriver)
+
 
         '''
         eventos combobox
         '''
         var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.selMuni)
+        var.ui.rtbGroup.buttonClicked.connect(drivers.Drivers.selEstado)
 
-        '''
-        ejecución de diferentes funciones al lanzar la aplicación
-        '''
-        eventos.Eventos.cargastatusbar(self)
-        conexion.Conexion.cargaprov(self)
-        rbtDriver = [var.ui.rbtTodos, var.ui.rbtAlta, var.ui.rbtBaja]
-        for i in rbtDriver:
-            i.toggled.connect(eventos.Eventos.selEstado)
+
 
 
     def closeEvent(self, event):
@@ -83,13 +97,18 @@ class Main(QtWidgets.QMainWindow):
                                                  QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
 
         if mbox == QtWidgets.QMessageBox.StandardButton.Yes:
-            app.quit()
+            event.accept()
         if mbox == QtWidgets.QMessageBox.StandardButton.No:
             event.ignore()
 
 
+
 if __name__ == '__main__':
-    app = QtWidgets.QApplication([])
-    window = Main()
-    window.show()
-    sys.exit(app.exec())
+    try:
+        app = QtWidgets.QApplication([])
+        window = Main()
+        window.showMaximized()
+        sys.exit(app.exec())
+
+    except Exception as error:
+        print(error)
