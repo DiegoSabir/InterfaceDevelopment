@@ -14,6 +14,7 @@ class DlgAcerca(QtWidgets.QDialog):
         var.dlgacerca.lblVersion.setText("Version: " + var.version)
 
 
+
 class Calendar(QtWidgets.QDialog):
     def __init__(self):
         super(Calendar, self).__init__()
@@ -24,6 +25,8 @@ class Calendar(QtWidgets.QDialog):
         ano = datetime.now().year
         var.calendar.Calendar.setSelectedDate((QtCore.QDate(ano,mes,dia)))
         var.calendar.Calendar.clicked.connect(drivers.Drivers.cargaFecha)
+
+
 
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __int__(self):

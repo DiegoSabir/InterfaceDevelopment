@@ -8,7 +8,12 @@ import var
 
 class Conexion():
 
-
+    """
+    * Establecer la conexión a la base de datos SQLite.
+    * Define la ubicación de la base de datos (bbdd.sqlite).
+    * Utiliza QSqlDatabase para establecer la conexión con la base de datos SQLite.
+    * Si la conexión tiene éxito, imprime "base de datos conectada"; de lo contrario, muestra "error de conexión".
+    """
     def conexion(self=None):
         var.bbdd = 'bbdd.sqlite'
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
@@ -22,6 +27,11 @@ class Conexion():
 
 
 
+    """
+    * Cargar datos en un combo box relacionado con provincias.
+    * Realiza una consulta para obtener las provincias desde la base de datos y carga los resultados 
+      en un combo box (cmbProv) en la interfaz gráfica.
+    """
     def cargaprov(self=None):
         try:
             var.ui.cmbProv.clear()
@@ -36,6 +46,13 @@ class Conexion():
             print('Error en la carga del combo prov', error)
 
 
+
+    """
+    * Cargar datos en un combo box relacionado con municipios según la provincia seleccionada.
+    * Obtiene la provincia seleccionada por el usuario.
+    * Realiza una consulta para obtener los municipios relacionados con esa provincia y los carga 
+      en el combo box (cmbMuni) en la interfaz.
+    """
     def selMuni(self=None):
         try:
             id = 0
@@ -63,6 +80,12 @@ class Conexion():
 
 
 
+    """
+    * Guardar los datos de un nuevo conductor en la base de datos.
+    * Verifica que se ingresen los datos mínimos necesarios para un conductor (DNI, apellidos, nombre, 
+      fecha de alta y móvil).
+    * Realiza una inserción en la tabla de conductores con la información proporcionada.
+    """
     @staticmethod
     def guardardri(newdriver):
         try:
@@ -105,6 +128,11 @@ class Conexion():
 
 
 
+    """
+    * Mostrar los conductores en la interfaz gráfica según ciertos criterios.
+    * Recupera datos de conductores desde la base de datos según si están dados de alta o no.
+    * Carga estos datos en una tabla en la interfaz gráfica.
+    """
     def mostrardrivers(self=None):
         try:
             registros = []
@@ -133,6 +161,10 @@ class Conexion():
 
 
 
+    """
+    * Obtener los datos de un conductor específico.
+    * Realiza una consulta para obtener todos los datos relacionados con un conductor específico y los devuelve.
+    """
     def onedriver(codigo):
         try:
             registro = []
@@ -151,6 +183,14 @@ class Conexion():
 
 
 
+    """
+    * Encontrar un conductor por su número de DNI.
+    * Realiza una consulta en la base de datos para encontrar al conductor con el DNI proporcionado.
+    * Si encuentra un conductor con ese DNI, llama al método onedriver(codigo) para obtener todos 
+      los datos del conductor y los devuelve.
+    * Si no encuentra un conductor con el DNI especificado, muestra un mensaje de advertencia indicando que 
+      el conductor no existe o que hubo un error en la búsqueda.
+    """
     def codDri(dni):
         try:
             query = QtSql.QSqlQuery()
@@ -172,6 +212,11 @@ class Conexion():
             mbox.exec()
 
 
+    """
+    * Modificar los datos de un conductor en la base de datos.
+    * Compara los datos modificados con los datos originales del conductor.
+    * Realiza una actualización en la base de datos si los datos son diferentes.
+    """
     def modifDriver(modifdriver):
         try:
             registro = Conexion.onedriver(int(modifdriver[0]))
@@ -283,6 +328,11 @@ class Conexion():
 
 
 
+    """
+    * Marcar a un conductor como dado de baja.
+    * Verifica si un conductor ya está marcado como dado de baja.
+    * Si no lo está, establece la fecha de baja en la base de datos.
+    """
     def borraDriv(dni):
         try:
             query1 = QtSql.QSqlQuery()
@@ -319,6 +369,10 @@ class Conexion():
 
 
 
+    """
+    * Seleccionar conductores según su estado (de alta, de baja, etc.).
+    * Selecciona conductores según su estado y los muestra en una tabla en la interfaz gráfica.
+    """
     def selectDrivers(estado):
         try:
             registros = []
@@ -372,7 +426,10 @@ class Conexion():
             msg.exec()
 
 
-
+    """
+    * Obtener todos los conductores.
+    * Realiza una consulta para obtener todos los conductores de la base de datos y devuelve esos datos.
+    """
     @staticmethod
     def selectDriverstodos():
         try:
