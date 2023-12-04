@@ -198,13 +198,14 @@ class Eventos():
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
             copia = str(fecha) + '_backup.zip'
-            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Guardar Copia Seguridad', copia, '.zip')
+            directorio, filename = var.dlgAbrir.getSaveFileName(None, 'Guardar Copia Seguridad', copia, '.zip')
 
-            if var.dlgabrir.accept and filename:
+            if var.dlgAbrir.accept and filename:
                 fichzip = zipfile.ZipFile(copia, 'w')
                 fichzip.write(var.bbdd, os.path.basename(var.bbdd), zipfile.ZIP_DEFLATED)
                 fichzip.close()
                 shutil.move(str(copia), str(directorio))
+
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
@@ -228,7 +229,7 @@ class Eventos():
     """
     def restaurarbackup(self):
         try:
-            filename = var.dlgabrir.getOpenFileName(None,'Restaurar Copia de Seguridad',
+            filename = var.dlgAbrir.getOpenFileName(None,'Restaurar Copia de Seguridad',
                                                     '','*.zip;;All Files(*)')
             file = filename[0]
             if file:
@@ -264,7 +265,7 @@ class Eventos():
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
             file = (str(fecha) + '_Datos.xls')
-            directorio, filename = var.dlgabrir.getSaveFileName(None, 'Exportar Datos en XLS', file, '.xls')
+            directorio, filename = var.dlgAbrir.getSaveFileName(None, 'Exportar Datos en XLS', file, '.xls')
             if file:
                 wb = xlwt.Workbook()
                 sheet1 = wb.add_sheet('Conductores')
@@ -315,8 +316,7 @@ class Eventos():
         try:
             estado = 0
             drivers.Drivers.limpiapanel(self)
-            filename, _ = var.dlgabrir.getOpenFileName(None, 'Importar datos',
-                                                    '', '*.xls;;All Files (*)')
+            filename, _ = var.dlgAbrir.getOpenFileName(None, 'Importar datos', '', '*.xls;;All Files (*)')
             if filename:
                 file = filename
                 documento = xlrd.open_workbook(file)
@@ -326,19 +326,12 @@ class Eventos():
                 for i in range(filas):
                     if i == 0:
                         pass
-
                     else:
                         new = []
                         for j in range(columnas):
-                            if j == 1:
-                                dato = xlrd.xldate_as_datetime(datos.cell_value(i, j), documento.datemode)
-                                dato = dato.strftime('%d/%m/%Y')
-                                new.append(str(dato))
+                            new.append(str(datos.cell_value(i, j)))
 
-                            else:
-                                new.append(str(datos.cell_value(i, j)))
-
-                        if drivers.Drivers.validarDNI(str(new[0])):
+                        if drivers.Drivers.validarDNI(str(new[1])):
                             conexion.Conexion.guardardri(new)
 
                         elif estado == 0:
@@ -350,14 +343,13 @@ class Eventos():
                             msg.setText('Hay DNI incorrectos')
                             msg.exec()
 
-                var.ui.lblValidardni.setText('')
                 var.ui.txtDni.setText('')
                 msg = QtWidgets.QMessageBox()
                 msg.setModal(True)
                 msg.setWindowTitle('Aviso')
                 msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
                 msg.setText('Importación de Datos Realizada')
-                var.ui.lblValidardni.setText('')
+                var.ui.lblValidardni.clear()
                 msg.exec()
             conexion.Conexion.selectDrivers(1)
 

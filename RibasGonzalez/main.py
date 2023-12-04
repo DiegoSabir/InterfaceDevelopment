@@ -1,6 +1,6 @@
-from drivers import *
 from MainWindow import *
 from windowaux import *
+
 import var
 import drivers
 import sys

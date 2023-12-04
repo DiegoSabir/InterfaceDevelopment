@@ -102,19 +102,19 @@ class Conexion():
 
             else:
                 query = QtSql.QSqlQuery()
-                query.prepare('insert into drivers (dnidri, altadri, apeldri, nombredri, direcciondri, prodri, '
-                              ' mundri, movildri, salario, carnet) VALUES (:dni, :alta, :apel, :nombre, :direccion, '
+                query.prepare('insert into drivers (codigo, dnidri, altadri, apeldri, nombredri, direcciondri, prodri, '
+                              ' mundri, movildri, salario, carnet) VALUES (null, :dni, :alta, :apel, :nombre, :direccion, '
                               ' :provincia, :municipio, :movil, :salario, :carnet)')
-                query.bindValue(':dni', str(newdriver[0]))
-                query.bindValue(':alta', str(newdriver[1]))
-                query.bindValue(':apel', str(newdriver[2]))
-                query.bindValue(':nombre', str(newdriver[3]))
-                query.bindValue(':direccion', str(newdriver[4]))
-                query.bindValue(':provincia', str(newdriver[5]))
-                query.bindValue(':municipio', str(newdriver[6]))
-                query.bindValue(':movil', str(newdriver[7]))
-                query.bindValue(':salario', str(newdriver[8]))
-                query.bindValue(':carnet', str(newdriver[9]))
+                query.bindValue(':dni', str(newdriver[1]))
+                query.bindValue(':alta', str(newdriver[2]))
+                query.bindValue(':apel', str(newdriver[3]))
+                query.bindValue(':nombre', str(newdriver[4]))
+                query.bindValue(':direccion', str(newdriver[5]))
+                query.bindValue(':provincia', str(newdriver[6]))
+                query.bindValue(':municipio', str(newdriver[7]))
+                query.bindValue(':movil', str(newdriver[8]))
+                query.bindValue(':salario', str(newdriver[9]))
+                query.bindValue(':carnet', str(newdriver[10]))
 
                 if query.exec():
                     return True
@@ -235,8 +235,7 @@ class Conexion():
                 if opcion == QtWidgets.QMessageBox.StandardButton.Yes:
                     if registro[11] != '':
                         query1 = QtSql.QSqlQuery()
-                        query1.prepare('update drivers set bajadri = NULL where '
-                                       ' dnidri = :dni')
+                        query1.prepare('update drivers set bajadri = NULL where dnidri = :dni')
                         query1.bindValue(':dni', str(modifdriver[1]))
 
                         if query1.exec():
@@ -267,8 +266,7 @@ class Conexion():
 
                     if registro[11] != '':
                         query1 = QtSql.QSqlQuery()
-                        query1.prepare('update drivers set bajadri = :data where '
-                                       ' dnidri = :dni')
+                        query1.prepare('update drivers set bajadri = :data where dnidri = :dni')
                         query1.bindValue(':data', str(data))
                         query1.bindValue(':dni', str(modifdriver[1]))
 

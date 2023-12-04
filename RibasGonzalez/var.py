@@ -2,6 +2,6 @@ global ui
 global calendar
 global salir
 global acercade
-global dlgabrir
+global dlgAbrir
 global bbdd
 version = "0.0.1"
