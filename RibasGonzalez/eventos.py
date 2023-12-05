@@ -120,6 +120,19 @@ class Eventos():
             print('error resize en tab drivers', error)
 
 
+    def resizeTabclientes(self):
+        try:
+            header = var.ui.tabClientes.horizontalHeader()
+            for i in range(5):
+                if i == 0 or i == 4 or i == 3:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+                elif i == 1 or i == 2:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
+
+        except Exception as error:
+            print('error resize en tab drivers', error)
+
+
 
     """
     * Realizan formatos específicos en los campos de texto (txtApel, txtNome, txtSalario, txtMovil) de la interfaz.

@@ -2,7 +2,9 @@ from PyQt6 import QtWidgets, QtSql, QtGui, QtCore
 from windowaux import *
 from datetime import date, datetime
 
+
 import drivers
+import clientes
 import var
 
 
@@ -35,15 +37,22 @@ class Conexion():
     def cargaprov(self=None):
         try:
             var.ui.cmbProv.clear()
+            var.ui.cmbProvCli.clear()
+
             query = QtSql.QSqlQuery()
             query.prepare('select provincia from provincias')
+
             if query.exec():
                 var.ui.cmbProv.addItem('')
+                var.ui.cmbProvCli.addItem('')
+
                 while query.next():
                     var.ui.cmbProv.addItem(query.value(0))
+                    var.ui.cmbProvCli.addItem(query.value(0))
 
         except Exception as error:
             print('Error en la carga del combo prov', error)
+
 
 
 
@@ -57,10 +66,12 @@ class Conexion():
         try:
             id = 0
             var.ui.cmbMuni.clear()
+
             prov = var.ui.cmbProv.currentText()
 
             query = QtSql.QSqlQuery()
             query.prepare('select idprov from provincias where provincia = :prov')
+
             query.bindValue(':prov', prov)
 
             if query.exec():
@@ -70,13 +81,46 @@ class Conexion():
             query1 = QtSql.QSqlQuery()
             query1.prepare('select municipio from municipios where idprov = :id')
             query1.bindValue(':id', int(id))
+
             if query1.exec():
                 var.ui.cmbMuni.addItem('')
+
                 while query1.next():
                     var.ui.cmbMuni.addItem(query1.value(0))
 
         except Exception as error:
             print("Error en la seleccion de municipio: ", error)
+
+
+    def selMuniCli(self=None):
+        try:
+            id = 0
+            var.ui.cmbMuniCli.clear()
+
+            prov = var.ui.cmbProvCli.currentText()
+
+            query = QtSql.QSqlQuery()
+            query.prepare('select idprov from provincias where provincia = :prov')
+
+            query.bindValue(':prov', prov)
+
+            if query.exec():
+                while query.next():
+                    id = query.value(0)
+
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select municipio from municipios where idprov = :id')
+            query1.bindValue(':id', int(id))
+
+            if query1.exec():
+                var.ui.cmbMuniCli.addItem('')
+
+                while query1.next():
+                    var.ui.cmbMuniCli.addItem(query1.value(0))
+
+        except Exception as error:
+            print("Error en la seleccion de municipio: ", error)
+
 
 
 
@@ -128,6 +172,38 @@ class Conexion():
 
 
 
+
+
+    @staticmethod
+    def guardarcli(newcliente):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into drivers (codigo, dnicli, altacli, razoncli, direccioncli, procli, '
+                                  ' mundri, movilcli) VALUES (null, :dni, :alta, :razon :direccion, '
+                                  ' :provincia, :municipio, :movil)')
+
+            query.bindValue(':dni', str(newcliente[1]))
+            query.bindValue(':alta', str(newcliente[2]))
+            query.bindValue(':razon', str(newcliente[3]))
+            query.bindValue(':direccion', str(newcliente[4]))
+            query.bindValue(':provincia', str(newcliente[5]))
+            query.bindValue(':municipio', str(newcliente[6]))
+            query.bindValue(':movil', str(newcliente[7]))
+
+            if query.exec():
+                return True
+            else:
+                return False
+
+            Conexion.mostrarclientes(self=None)
+
+        except Exception as error:
+            print("Error al guardar cliente", error)
+
+
+
+
+
     """
     * Mostrar los conductores en la interfaz gráfica según ciertos criterios.
     * Recupera datos de conductores desde la base de datos según si están dados de alta o no.
@@ -161,6 +237,36 @@ class Conexion():
 
 
 
+
+    def mostrarclientes(self=None):
+        try:
+            registros = []
+
+            if var.ui.rbtAltaCli.isChecked():
+                estado = 1
+                Conexion.selectClientes(estado)
+
+            else:
+                query1=QtSql.QSqlQuery()
+                query1.prepare('select codigo, razoncli, movildri, bajacli from clientes')
+
+                if query1.exec():
+                    while query1.next():
+                        row = [query1.value(i) for i in range(query1.record().count())] # función lambda
+                        registros.append(row)
+
+            if registros:
+                clientes.Clientes.cargartablacli(registros)
+                return registros
+            else:
+                var.ui.tabClientes.setRowCount(0)
+
+        except Exception as error:
+            print("Error al mostrar clientes", error)
+
+
+
+
     """
     * Obtener los datos de un conductor específico.
     * Realiza una consulta para obtener todos los datos relacionados con un conductor específico y los devuelve.
@@ -180,6 +286,29 @@ class Conexion():
 
         except Exception as error:
             print("Error en fichero conexion datos de un driver", error)
+
+
+
+
+
+
+    def onecliente(codigo):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from clientes where codigo = :codigo')
+            query.bindValue(':codigo', int(codigo))
+
+            if query.exec():
+                while query.next():
+                    for i in range(12):
+                        registro.append(str(query.value(i)))
+            return registro
+
+        except Exception as error:
+            print("Error en fichero conexion datos de un driver", error)
+
+
 
 
 
@@ -210,6 +339,34 @@ class Conexion():
             mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
             mbox.setText("El conductor no existe o error en busqueda")
             mbox.exec()
+
+
+
+
+
+    def codCli(dni):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from clientes where dnicli = :dnicli')
+            query.bindValue(':dnicli', str(dni))
+
+            if query.exec():
+                while query.next():
+                    codigo = query.value(0)
+                if codigo is not None:
+                    registro = Conexion.onecliente(codigo)
+                    return registro
+
+        except Exception as error:
+            mbox = QtWidgets.QMessageBox()
+            mbox.setWindowTitle('Aviso')
+            mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+            mbox.setText("El cliente no existe o error en busqueda")
+            mbox.exec()
+
+
+
+
 
 
     """
@@ -367,6 +524,49 @@ class Conexion():
 
 
 
+
+    def borrarCli(dni):
+        try:
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select bajacli from clientes where dnicli = :dni')
+            query1.bindValue(':dni', str(dni))
+
+            if query1.exec():
+                while query1.next():
+                    valor = query1.value(0)
+
+            if str(valor) == '':
+                fecha = datetime.today()
+                fecha = fecha.strftime('%d/%m/%Y')
+                query = QtSql.QSqlQuery()
+                query.prepare('update clientes set bajacli = :fechabaja where dnicli = :dni')
+                query.bindValue(':fechabaja', str(fecha))
+                query.bindValue(':dni', str(dni))
+
+                if query.exec():
+                    msg = QtWidgets.QMessageBox()
+                    msg.setWindowTitle('Aviso')
+                    msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                    msg.setText('Cliente con dado de Baja')
+                    msg.exec()
+            else:
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText('No existe cliente o cliente dado de baja anteriormente')
+                msg.exec()
+
+        except Exception as error:
+            print("Error en baja driver en conexion ", error)
+
+
+
+
+
+
+
+
+
     """
     * Seleccionar conductores según su estado (de alta, de baja, etc.).
     * Selecciona conductores según su estado y los muestra en una tabla en la interfaz gráfica.
@@ -422,6 +622,65 @@ class Conexion():
             msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
             msg.setText('Error en cargar tabla o selección de datos')
             msg.exec()
+
+
+
+
+
+    def selectClientes(estado):
+        try:
+            registros = []
+            if int(estado) == 0:
+                query = QtSql.QSqlQuery()
+                query.prepare('select codigocli, razoncli, movilcli, bajacli from clientes')
+                if query.exec():
+                    while query.next():
+                        row = [query.value(i) for i in range(query.record().count())]   # función lambda
+                        registros.append(row)
+
+                if registros:
+                    clientes.Clientes.cargartablacli(registros)
+
+                else:
+                    var.ui.tabClientes.setRowCount(0)
+
+            elif int(estado) == 1:
+                query = QtSql.QSqlQuery()
+                query.prepare('select codigocli, razoncli, movilcli, bajacli from clientes where bajacli is null')
+                if query.exec():
+                    while query.next():
+                        row = [query.value(i) for i in range(query.record().count())]  # función lambda
+                        registros.append(row)
+
+                if registros:
+                    clientes.Clientes.cargartablacli(registros)
+
+                else:
+                    var.ui.tabClientes.setRowCount(0)
+
+            elif int(estado) == 2:
+                query = QtSql.QSqlQuery()
+                query.prepare('select codigocli, razoncli, movilcli, bajacli from drivers where bajacli is not null')
+                if query.exec():
+                    while query.next():
+                        row = [query.value(i) for i in range(query.record().count())]  # función lambda
+                        registros.append(row)
+
+                if registros:
+                    clientes.Clientes.cargartablacli(registros)
+
+                else:
+                    var.ui.tabClientes.setRowCount(0)
+
+        except Exception as error:
+            msg = QtWidgets.QMessageBox()
+            msg.setWindowTitle('Aviso')
+            msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+            msg.setText('Error en cargar tabla o selección de datos')
+            msg.exec()
+
+
+
 
 
     """

@@ -7,6 +7,7 @@ import sys
 import eventos
 import locale
 import conexion
+import clientes
 
 
 # Establecer la configuración regional en español
@@ -27,9 +28,10 @@ class Main(QtWidgets.QMainWindow):
         #self.driver = Drivers()
         conexion.Conexion.conexion()
         conexion.Conexion.cargaprov()
+
         estado = 1
         conexion.Conexion.selectDrivers(estado)
-
+        conexion.Conexion.selectClientes(estado)
 
 
         '''
@@ -40,6 +42,12 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBuscadri.clicked.connect(drivers.Drivers.buscaDri)
         var.ui.btnModifDriver.clicked.connect(drivers.Drivers.modifDri)
         var.ui.btnBajaDriver.clicked.connect(drivers.Drivers.borrarDriv)
+
+
+        var.ui.btnCalendarCli.clicked.connect(eventos.Eventos.abrirCalendar)
+        var.ui.btnAltaCli.clicked.connect(clientes.Clientes.altacliente)
+        var.ui.btnBuscaCli.clicked.connect(clientes.Clientes.buscaCli)
+        var.ui.btnBajaCli.clicked.connect(clientes.Clientes.borrarCliente)
 
 
         """
@@ -65,6 +73,11 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtMovil.editingFinished.connect(eventos.Eventos.formatCajamovil)
 
 
+        var.ui.txtDniCli.editingFinished.connect(lambda: clientes.Clientes.validarDNI(var.ui.txtDni.text()))
+
+
+
+
         '''
         eventos del toolbar
         '''
@@ -72,6 +85,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionlimpiaPaneldriver.triggered.connect(drivers.Drivers.limpiapanel)
         var.ui.actioncrearbackup.triggered.connect(eventos.Eventos.crearbackup)
         var.ui.actionrestaurarbackup.triggered.connect(eventos.Eventos.restaurarbackup)
+
+        var.ui.actionlimpiaPaneldriver.triggered.connect(clientes.Clientes.limpiapanel)
 
 
         '''
@@ -81,13 +96,16 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabDrivers.clicked.connect(drivers.Drivers.cargadriver)
 
 
+        #eventos.Eventos.resizeTabclientes(self)
+        var.ui.tabClientes.clicked.connect(clientes.Clientes.cargacliente)
+
         '''
         eventos combobox
         '''
         var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.selMuni)
         var.ui.rtbGroup.buttonClicked.connect(drivers.Drivers.selEstado)
 
-
+        var.ui.cmbProvCli.currentIndexChanged.connect(conexion.Conexion.selMuniCli)
 
 
     def closeEvent(self, event):
