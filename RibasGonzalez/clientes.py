@@ -195,29 +195,6 @@ class Clientes():
             print("Error al cargar los datos en el panel de gestión", error)
 
 
-    """
-        def modifCli(self):
-        try:
-            cliente = [var.ui.lblcodbdCli, var.ui.txtDniCli, var.ui.txtDataCli, var.ui.txtRazonCli,
-                      var.ui.txtDirCli, var.ui.txtMovilCli]
-
-            modifcliente = []
-            for i in cliente:
-                modifcliente.append(i.text().title())
-
-            prov = var.ui.cmbProvCli.currentText()
-            modifcliente.insert(6, prov)
-            muni = var.ui.cmbMuniCli.currentText()
-            modifcliente.insert(7, muni)
-
-            conexion.Conexion.modifCliente(modifcliente)
-
-        except Exception as error:
-            print("Error al modificar cliente", error)
-    """
-
-
-
 
     def borrarCliente(self):
         try:
