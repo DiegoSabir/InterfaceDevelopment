@@ -1,703 +1,620 @@
-from PyQt6 import QtWidgets, QtSql, QtGui, QtCore
-from windowaux import *
+from PyQt6 import QtWidgets, QtSql, QtGui
 from datetime import date, datetime
 
-
-import drivers
 import clientes
+import conexion
+import eventos
+import drivers
 import var
+import facturas
 
 
 class Conexion():
-
-    """
-    * Establecer la conexión a la base de datos SQLite.
-    * Define la ubicación de la base de datos (bbdd.sqlite).
-    * Utiliza QSqlDatabase para establecer la conexión con la base de datos SQLite.
-    * Si la conexión tiene éxito, imprime "base de datos conectada"; de lo contrario, muestra "error de conexión".
-    """
     def conexion(self=None):
         var.bbdd = 'bbdd.sqlite'
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName(var.bbdd)
         if not db.open():
-            print("error de conexion")
+            print('error conexion')
             return False
         else:
-            print("base de datos conectada")
+            print('base datos encontrada')
             return True
 
-
-
-    """
-    * Cargar datos en un combo box relacionado con provincias.
-    * Realiza una consulta para obtener las provincias desde la base de datos y carga los resultados 
-      en un combo box (cmbProv) en la interfaz gráfica.
-    """
-    def cargaprov(self=None):
+    def cargarprov(self=None):
         try:
             var.ui.cmbProv.clear()
-            var.ui.cmbProvCli.clear()
-
             query = QtSql.QSqlQuery()
             query.prepare('select provincia from provincias')
-
             if query.exec():
                 var.ui.cmbProv.addItem('')
-                var.ui.cmbProvCli.addItem('')
-
                 while query.next():
                     var.ui.cmbProv.addItem(query.value(0))
-                    var.ui.cmbProvCli.addItem(query.value(0))
-
         except Exception as error:
-            print('Error en la carga del combo prov', error)
+            print(error, " en cargarprov")
 
-
-
-
-    """
-    * Cargar datos en un combo box relacionado con municipios según la provincia seleccionada.
-    * Obtiene la provincia seleccionada por el usuario.
-    * Realiza una consulta para obtener los municipios relacionados con esa provincia y los carga 
-      en el combo box (cmbMuni) en la interfaz.
-    """
     def selMuni(self=None):
         try:
-            id = 0
+            id = 0;
             var.ui.cmbMuni.clear()
-
             prov = var.ui.cmbProv.currentText()
-
             query = QtSql.QSqlQuery()
             query.prepare('select idprov from provincias where provincia = :prov')
-
             query.bindValue(':prov', prov)
-
             if query.exec():
                 while query.next():
                     id = query.value(0)
-
             query1 = QtSql.QSqlQuery()
             query1.prepare('select municipio from municipios where idprov = :id')
             query1.bindValue(':id', int(id))
-
             if query1.exec():
                 var.ui.cmbMuni.addItem('')
-
                 while query1.next():
                     var.ui.cmbMuni.addItem(query1.value(0))
 
         except Exception as error:
-            print("Error en la seleccion de municipio: ", error)
-
-
-    def selMuniCli(self=None):
-        try:
-            id = 0
-            var.ui.cmbMuniCli.clear()
-
-            prov = var.ui.cmbProvCli.currentText()
-
-            query = QtSql.QSqlQuery()
-            query.prepare('select idprov from provincias where provincia = :prov')
-
-            query.bindValue(':prov', prov)
-
-            if query.exec():
-                while query.next():
-                    id = query.value(0)
-
-            query1 = QtSql.QSqlQuery()
-            query1.prepare('select municipio from municipios where idprov = :id')
-            query1.bindValue(':id', int(id))
-
-            if query1.exec():
-                var.ui.cmbMuniCli.addItem('')
-
-                while query1.next():
-                    var.ui.cmbMuniCli.addItem(query1.value(0))
-
-        except Exception as error:
-            print("Error en la seleccion de municipio: ", error)
-
-
-
-
-    """
-    * Guardar los datos de un nuevo conductor en la base de datos.
-    * Verifica que se ingresen los datos mínimos necesarios para un conductor (DNI, apellidos, nombre, 
-      fecha de alta y móvil).
-    * Realiza una inserción en la tabla de conductores con la información proporcionada.
-    """
-    @staticmethod
-    def guardardri(newdriver):
-        try:
-            if (newdriver[0].strip() == "" or newdriver[1].strip() == "" or newdriver[2].strip() == ""
-                    or newdriver[3].strip() == "" or newdriver[7].strip() == ""):
-
-                mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle('Aviso')
-                mbox.setWindowIcon(QtGui.QIcon('./img/logo.ico'))
-                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                mensaje = 'Faltan Datos. Debe introducir al menos:\n\nDNI, Apellidos, Nombre, Fecha de alta y Móvil'
-                mbox.setText(mensaje)
-                mbox.exec()
-
-            else:
-                query = QtSql.QSqlQuery()
-                query.prepare('insert into drivers (codigo, dnidri, altadri, apeldri, nombredri, direcciondri, prodri, '
-                              ' mundri, movildri, salario, carnet) VALUES (null, :dni, :alta, :apel, :nombre, :direccion, '
-                              ' :provincia, :municipio, :movil, :salario, :carnet)')
-                query.bindValue(':dni', str(newdriver[1]))
-                query.bindValue(':alta', str(newdriver[2]))
-                query.bindValue(':apel', str(newdriver[3]))
-                query.bindValue(':nombre', str(newdriver[4]))
-                query.bindValue(':direccion', str(newdriver[5]))
-                query.bindValue(':provincia', str(newdriver[6]))
-                query.bindValue(':municipio', str(newdriver[7]))
-                query.bindValue(':movil', str(newdriver[8]))
-                query.bindValue(':salario', str(newdriver[9]))
-                query.bindValue(':carnet', str(newdriver[10]))
-
-                if query.exec():
-                    return True
-                else:
-                    return False
-
-                Conexion.mostrardrivers(self=None)
-
-        except Exception as error:
-            print("Error al guardar driver", error)
-
-
-
-
+            print(error, " en selMuni")
 
     @staticmethod
-    def guardarcli(newcliente):
+    def guardardri(newDriver):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('insert into drivers (codigo, dnicli, altacli, razoncli, direccioncli, procli, '
-                                  ' mundri, movilcli) VALUES (null, :dni, :alta, :razon :direccion, '
-                                  ' :provincia, :municipio, :movil)')
-
-            query.bindValue(':dni', str(newcliente[1]))
-            query.bindValue(':alta', str(newcliente[2]))
-            query.bindValue(':razon', str(newcliente[3]))
-            query.bindValue(':direccion', str(newcliente[4]))
-            query.bindValue(':provincia', str(newcliente[5]))
-            query.bindValue(':municipio', str(newcliente[6]))
-            query.bindValue(':movil', str(newcliente[7]))
-
+            query.prepare('insert into drivers (dnidri, altadri, apeldri, nombredri, direcciondri, provdri, '
+                          'munidri, movildri, salario, carnet) VALUES(:dni, :alta, :apel, :nombre, :direccion, '
+                          ':provincia, :municipio, :movil, :salario, :carnet)')
+            query.bindValue(':dni', str(newDriver[0]))
+            query.bindValue(':alta', str(newDriver[1]))
+            query.bindValue(':apel', str(newDriver[2]))
+            query.bindValue(':nombre', str(newDriver[3]))
+            query.bindValue(':direccion', str(newDriver[4]))
+            query.bindValue(':provincia', str(newDriver[5]))
+            query.bindValue(':municipio', str(newDriver[6]))
+            query.bindValue(':movil', str(newDriver[7]))
+            query.bindValue(':salario', str(newDriver[8]))
+            query.bindValue(':carnet', str(newDriver[9]))
             if query.exec():
                 return True
             else:
                 return False
 
-            Conexion.mostrarclientes(self=None)
-
         except Exception as error:
-            print("Error al guardar cliente", error)
+            print(error, " en guardardri")
 
-
-
-
-
-    """
-    * Mostrar los conductores en la interfaz gráfica según ciertos criterios.
-    * Recupera datos de conductores desde la base de datos según si están dados de alta o no.
-    * Carga estos datos en una tabla en la interfaz gráfica.
-    """
-    def mostrardrivers(self=None):
+    def mostrardriver(self=None):
         try:
             registros = []
-
-            if var.ui.rbtAlta.isChecked():
-                estado = 1
-                Conexion.selectDrivers(estado)
-
-            else:
-                query1=QtSql.QSqlQuery()
-                query1.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
-
-                if query1.exec():
-                    while query1.next():
-                        row = [query1.value(i) for i in range(query1.record().count())] # función lambda
-                        registros.append(row)
-
-            if registros:
-                drivers.Drivers.cargartabladri(registros)
-                return registros
-            else:
-                var.ui.tabDrivers.setRowCount(0)
-
-        except Exception as error:
-            print("Error al mostrar drivers", error)
-
-
-
-
-    def mostrarclientes(self=None):
-        try:
-            registros = []
-
-            if var.ui.rbtAltaCli.isChecked():
-                estado = 1
-                Conexion.selectClientes(estado)
-
-            else:
-                query1=QtSql.QSqlQuery()
-                query1.prepare('select codigo, razoncli, movildri, bajacli from clientes')
-
-                if query1.exec():
-                    while query1.next():
-                        row = [query1.value(i) for i in range(query1.record().count())] # función lambda
-                        registros.append(row)
-
-            if registros:
-                clientes.Clientes.cargartablacli(registros)
-                return registros
-            else:
-                var.ui.tabClientes.setRowCount(0)
-
-        except Exception as error:
-            print("Error al mostrar clientes", error)
-
-
-
-
-    """
-    * Obtener los datos de un conductor específico.
-    * Realiza una consulta para obtener todos los datos relacionados con un conductor específico y los devuelve.
-    """
-    def onedriver(codigo):
-        try:
-            registro = []
             query = QtSql.QSqlQuery()
-            query.prepare('select * from drivers where codigo = :codigo')
-            query.bindValue(':codigo', int(codigo))
-
-            if query.exec():
-                while query.next():
-                    for i in range(12):
-                        registro.append(str(query.value(i)))
-            return registro
-
-        except Exception as error:
-            print("Error en fichero conexion datos de un driver", error)
-
-
-
-
-
-
-    def onecliente(codigo):
-        try:
-            registro = []
-            query = QtSql.QSqlQuery()
-            query.prepare('select * from clientes where codigo = :codigo')
-            query.bindValue(':codigo', int(codigo))
-
-            if query.exec():
-                while query.next():
-                    for i in range(12):
-                        registro.append(str(query.value(i)))
-            return registro
-
-        except Exception as error:
-            print("Error en fichero conexion datos de un driver", error)
-
-
-
-
-
-    """
-    * Encontrar un conductor por su número de DNI.
-    * Realiza una consulta en la base de datos para encontrar al conductor con el DNI proporcionado.
-    * Si encuentra un conductor con ese DNI, llama al método onedriver(codigo) para obtener todos 
-      los datos del conductor y los devuelve.
-    * Si no encuentra un conductor con el DNI especificado, muestra un mensaje de advertencia indicando que 
-      el conductor no existe o que hubo un error en la búsqueda.
-    """
-    def codDri(dni):
-        try:
-            query = QtSql.QSqlQuery()
-            query.prepare('select * from drivers where dnidri = :dnidri')
-            query.bindValue(':dnidri', str(dni))
-
-            if query.exec():
-                while query.next():
-                    codigo = query.value(0)
-                if codigo is not None:
-                    registro = Conexion.onedriver(codigo)
-                    return registro
-
-        except Exception as error:
-            mbox = QtWidgets.QMessageBox()
-            mbox.setWindowTitle('Aviso')
-            mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-            mbox.setText("El conductor no existe o error en busqueda")
-            mbox.exec()
-
-
-
-
-
-    def codCli(dni):
-        try:
-            query = QtSql.QSqlQuery()
-            query.prepare('select * from clientes where dnicli = :dnicli')
-            query.bindValue(':dnicli', str(dni))
-
-            if query.exec():
-                while query.next():
-                    codigo = query.value(0)
-                if codigo is not None:
-                    registro = Conexion.onecliente(codigo)
-                    return registro
-
-        except Exception as error:
-            mbox = QtWidgets.QMessageBox()
-            mbox.setWindowTitle('Aviso')
-            mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-            mbox.setText("El cliente no existe o error en busqueda")
-            mbox.exec()
-
-
-
-
-
-
-    """
-    * Modificar los datos de un conductor en la base de datos.
-    * Compara los datos modificados con los datos originales del conductor.
-    * Realiza una actualización en la base de datos si los datos son diferentes.
-    """
-    def modifDriver(modifdriver):
-        try:
-            registro = Conexion.onedriver(int(modifdriver[0]))
-            if modifdriver == registro[:-1]:
-                msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('Aviso')
-                msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                msg.setText('No hay datos que modificar. Desea cambiar la fecha o eliminar fecha de baja?')
-                msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No |
-                                          QtWidgets.QMessageBox.StandardButton.Cancel)
-                msg.button(QtWidgets.QMessageBox.StandardButton.Yes).setText("Alta")
-                msg.button(QtWidgets.QMessageBox.StandardButton.No).setText("Modificar")
-                msg.button(QtWidgets.QMessageBox.StandardButton.Cancel).setText('Cancelar')
-                opcion = msg.exec()
-
-                if opcion == QtWidgets.QMessageBox.StandardButton.Yes:
-                    if registro[11] != '':
-                        query1 = QtSql.QSqlQuery()
-                        query1.prepare('update drivers set bajadri = NULL where dnidri = :dni')
-                        query1.bindValue(':dni', str(modifdriver[1]))
-
-                        if query1.exec():
-                            msg = QtWidgets.QMessageBox()
-                            msg.setWindowTitle('Aviso')
-                            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                            msg.setText('Datos Conductor Modificados')
-                            msg.exec()
-                            Conexion.selectDrivers(1)
-
-                    else:
-                        msg = QtWidgets.QMessageBox()
-                        msg.setWindowTitle('Aviso')
-                        msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                        msg.setText('El conductor está en alta. Nada que modificar')
-                        msg.exec()
-                        Conexion.selectDrivers(1)
-
-                elif opcion == QtWidgets.QMessageBox.StandardButton.No:
-                    var.calendar = Calendar()
-                    var.calendar.show()
-                    dia = datetime.now().day
-                    mes = datetime.now().month
-                    ano = datetime.now().year
-                    data = var.calendar.selectionChanged.connect(drivers.Drivers.cargaFecha(QtCore.QDate))
-                    data = drivers.Drivers.cargaFecha(QtCore.QDate)
-                    print(data)
-
-                    if registro[11] != '':
-                        query1 = QtSql.QSqlQuery()
-                        query1.prepare('update drivers set bajadri = :data where dnidri = :dni')
-                        query1.bindValue(':data', str(data))
-                        query1.bindValue(':dni', str(modifdriver[1]))
-
-                        if query1.exec():
-                            msg = QtWidgets.QMessageBox()
-                            msg.setWindowTitle('Aviso')
-                            msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                            msg.setText('Baja Modificada. Nueva Fecha Baja:', str(data))
-                            msg.exec()
-                            Conexion.selectDrivers(2)
-
-                    else:
-                        msg = QtWidgets.QMessageBox()
-                        msg.setWindowTitle('Aviso')
-                        msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                        msg.setText('El conductor está en alta. Nada que modificar')
-                        msg.exec()
-                        Conexion.selectDrivers(1)
-
-                elif opcion == QtWidgets.QMessageBox.StandardButton.Cancel:
-                    pass
-
-            else:
-                query = QtSql.QSqlQuery()
-                query.prepare('update drivers set dnidri = :dni, altadri = :alta, apeldri = :apel, nombredri = :nombre, '
-                              'direcciondri = :direccion, prodri = :provincia, mundri = :municipio, movildri = :movil, '
-                              'salario = :salario, carnet = :carnet where codigo = :codigo')
-
-                query.bindValue(':codigo', int(modifdriver[0]))
-                query.bindValue(':dni', str(modifdriver[1]))
-                query.bindValue(':alta', str(modifdriver[2]))
-                query.bindValue(':apel', str(modifdriver[3]))
-                query.bindValue(':nombre', str(modifdriver[4]))
-                query.bindValue(':direccion', str(modifdriver[5]))
-                query.bindValue(':provincia', str(modifdriver[6]))
-                query.bindValue(':municipio', str(modifdriver[7]))
-                query.bindValue(':movil', str(modifdriver[8]))
-                query.bindValue(':salario', str(modifdriver[9]))
-                query.bindValue(':carnet', str(modifdriver[10]))
-
-                if query.exec():
-                    mbox = QtWidgets.QMessageBox()
-                    mbox.setWindowTitle('Aviso')
-                    mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                    mbox.setText("Datos del Conductor Modificados")
-                    mbox.exec()
-
-                else:
-                    mbox = QtWidgets.QMessageBox()
-                    mbox.setWindowTitle('Aviso')
-                    mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                    mbox.setText(query.lastError().text())
-                    mbox.exec()
-
-        except Exception as error:
-            print("Error en modificar driver en conexion", error)
-
-
-
-    """
-    * Marcar a un conductor como dado de baja.
-    * Verifica si un conductor ya está marcado como dado de baja.
-    * Si no lo está, establece la fecha de baja en la base de datos.
-    """
-    def borraDriv(dni):
-        try:
-            query1 = QtSql.QSqlQuery()
-            query1.prepare('select bajadri from drivers where dnidri = :dni')
-            query1.bindValue(':dni', str(dni))
-
-            if query1.exec():
-                while query1.next():
-                    valor = query1.value(0)
-
-            if str(valor) == '':
-                fecha = datetime.today()
-                fecha = fecha.strftime('%d/%m/%Y')
-                query = QtSql.QSqlQuery()
-                query.prepare('update drivers set bajadri = :fechabaja where dnidri = :dni')
-                query.bindValue(':fechabaja', str(fecha))
-                query.bindValue(':dni', str(dni))
-
-                if query.exec():
-                    msg = QtWidgets.QMessageBox()
-                    msg.setWindowTitle('Aviso')
-                    msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                    msg.setText('Conductor con dado de Baja')
-                    msg.exec()
-            else:
-                msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('Aviso')
-                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                msg.setText('No existe conductor o conductor dado de baja anteriormente')
-                msg.exec()
-
-        except Exception as error:
-            print("Error en baja driver en conexion ", error)
-
-
-
-
-    def borrarCli(dni):
-        try:
-            query1 = QtSql.QSqlQuery()
-            query1.prepare('select bajacli from clientes where dnicli = :dni')
-            query1.bindValue(':dni', str(dni))
-
-            if query1.exec():
-                while query1.next():
-                    valor = query1.value(0)
-
-            if str(valor) == '':
-                fecha = datetime.today()
-                fecha = fecha.strftime('%d/%m/%Y')
-                query = QtSql.QSqlQuery()
-                query.prepare('update clientes set bajacli = :fechabaja where dnicli = :dni')
-                query.bindValue(':fechabaja', str(fecha))
-                query.bindValue(':dni', str(dni))
-
-                if query.exec():
-                    msg = QtWidgets.QMessageBox()
-                    msg.setWindowTitle('Aviso')
-                    msg.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                    msg.setText('Cliente con dado de Baja')
-                    msg.exec()
-            else:
-                msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('Aviso')
-                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                msg.setText('No existe cliente o cliente dado de baja anteriormente')
-                msg.exec()
-
-        except Exception as error:
-            print("Error en baja driver en conexion ", error)
-
-
-
-
-
-
-
-
-
-    """
-    * Seleccionar conductores según su estado (de alta, de baja, etc.).
-    * Selecciona conductores según su estado y los muestra en una tabla en la interfaz gráfica.
-    """
-    def selectDrivers(estado):
-        try:
-            registros = []
-            if int(estado) == 0:
-                query = QtSql.QSqlQuery()
+            if var.ui.rbtTodos.isChecked():
                 query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
-                if query.exec():
-                    while query.next():
-                        row = [query.value(i) for i in range(query.record().count())]   # función lambda
-                        registros.append(row)
+            if var.ui.rbtAlta.isChecked():
+                query.prepare(
+                    'select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is null')
+            if var.ui.rbtBaja.isChecked():
+                query.prepare(
+                    'select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is not null')
 
-                if registros:
-                    drivers.Drivers.cargartabladri(registros)
-
-                else:
-                    var.ui.tabDrivers.setRowCount(0)
-
-            elif int(estado) == 1:
-                query = QtSql.QSqlQuery()
-                query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is null')
-                if query.exec():
-                    while query.next():
-                        row = [query.value(i) for i in range(query.record().count())]  # función lambda
-                        registros.append(row)
-
-                if registros:
-                    drivers.Drivers.cargartabladri(registros)
-
-                else:
-                    var.ui.tabDrivers.setRowCount(0)
-
-            elif int(estado) == 2:
-                query = QtSql.QSqlQuery()
-                query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is not null')
-                if query.exec():
-                    while query.next():
-                        row = [query.value(i) for i in range(query.record().count())]  # función lambda
-                        registros.append(row)
-
-                if registros:
-                    drivers.Drivers.cargartabladri(registros)
-
-                else:
-                    var.ui.tabDrivers.setRowCount(0)
-
-        except Exception as error:
-            msg = QtWidgets.QMessageBox()
-            msg.setWindowTitle('Aviso')
-            msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-            msg.setText('Error en cargar tabla o selección de datos')
-            msg.exec()
-
-
-
-
-
-    def selectClientes(estado):
-        try:
-            registros = []
-            if int(estado) == 0:
-                query = QtSql.QSqlQuery()
-                query.prepare('select codigocli, razoncli, movilcli, bajacli from clientes')
-                if query.exec():
-                    while query.next():
-                        row = [query.value(i) for i in range(query.record().count())]   # función lambda
-                        registros.append(row)
-
-                if registros:
-                    clientes.Clientes.cargartablacli(registros)
-
-                else:
-                    var.ui.tabClientes.setRowCount(0)
-
-            elif int(estado) == 1:
-                query = QtSql.QSqlQuery()
-                query.prepare('select codigocli, razoncli, movilcli, bajacli from clientes where bajacli is null')
-                if query.exec():
-                    while query.next():
-                        row = [query.value(i) for i in range(query.record().count())]  # función lambda
-                        registros.append(row)
-
-                if registros:
-                    clientes.Clientes.cargartablacli(registros)
-
-                else:
-                    var.ui.tabClientes.setRowCount(0)
-
-            elif int(estado) == 2:
-                query = QtSql.QSqlQuery()
-                query.prepare('select codigocli, razoncli, movilcli, bajacli from drivers where bajacli is not null')
-                if query.exec():
-                    while query.next():
-                        row = [query.value(i) for i in range(query.record().count())]  # función lambda
-                        registros.append(row)
-
-                if registros:
-                    clientes.Clientes.cargartablacli(registros)
-
-                else:
-                    var.ui.tabClientes.setRowCount(0)
-
-        except Exception as error:
-            msg = QtWidgets.QMessageBox()
-            msg.setWindowTitle('Aviso')
-            msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-            msg.setText('Error en cargar tabla o selección de datos')
-            msg.exec()
-
-
-
-
-
-    """
-    * Obtener todos los conductores.
-    * Realiza una consulta para obtener todos los conductores de la base de datos y devuelve esos datos.
-    """
-    @staticmethod
-    def selectDriverstodos():
-        try:
-            registros = []
-            query = QtSql.QSqlQuery()
-            query.prepare('select * from drivers order by apeldri')
             if query.exec():
                 while query.next():
                     row = [query.value(i) for i in range(query.record().count())]
                     registros.append(row)
-                return registros
+
+            if registros:
+                drivers.Drivers.cargarTabladri(registros)
+            else:
+                var.ui.tabDrivers.setRowCount(0)
+            return registros
+
 
         except Exception as error:
-            print("Error al devolver todos los drivers", error)
+            print('error mostrardricver', error)
+
+    def oneDriver(codigo):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from drivers where codigo=:codigo')
+            query.bindValue(':codigo', int(codigo))
+            if query.exec():
+                while query.next():
+                    for i in range(12):
+                        registro.append(str(query.value(i)))
+
+            return registro
+        except Exception as error:
+            print('error oneDriver', error)
+
+    def codDri(dni):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from drivers where dnidri=:dnidri')
+            query.bindValue(':dnidri', str(dni))
+            if query.exec():
+                while query.next():
+                    for i in range(12):
+                        registro.append(str(query.value(i)))
+            return registro
+
+        except Exception as error:
+            print('error codDri', error)
+
+    def modifDriver(modifDriver):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('update drivers set dnidri= :dni, altadri= :alta, apeldri= :apel, nombredri= :nombre, '
+                          ' direcciondri= :direccion, provdri= :provincia, munidri= :municipio, '
+                          ' movildri= :movil, salario= :salario, carnet= :carnet where codigo= :codigo')
+            query.bindValue(':codigo', int(modifDriver[0]))
+            query.bindValue(':dni', str(modifDriver[1]))
+            query.bindValue(':alta', str(modifDriver[2]))
+            query.bindValue(':apel', str(modifDriver[3]))
+            query.bindValue(':nombre', str(modifDriver[4]))
+            query.bindValue(':direccion', str(modifDriver[5]))
+            query.bindValue(':provincia', str(modifDriver[6]))
+            query.bindValue(':municipio', str(modifDriver[7]))
+            query.bindValue(':movil', str(modifDriver[8]))
+            query.bindValue(':salario', str(modifDriver[9]))
+            query.bindValue(':carnet', str(modifDriver[10]))
+            if query.exec():
+                eventos.Eventos.mensaje("Aviso", "Conductor modificado con exito")
+                Conexion.mostrardriver()
+            else:
+                eventos.Eventos.error("Aviso", query.lastError().text())
+
+        except Exception as error:
+            print('error modifdriver', error)
+
+    def borrarDri(dni, fecha):
+        try:
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select bajadri from drivers where '
+                           ' dnidri=:dni')
+            query1.bindValue(':dni', str(dni))
+            if query1.exec():
+                while query1.next():
+                    valor = query1.value(0)
+                query = QtSql.QSqlQuery()
+                query.prepare('update drivers set bajadri= :fechabaja where '
+                              ' dnidri=:dni')
+                query.bindValue(':fechabaja', str(fecha))
+                query.bindValue(':dni', str(dni))
+                if query.exec():
+                    Conexion.mostrardriver()
+                    var.Baja.hide()
+                    eventos.Eventos.mensaje("Aviso", "Conductor dado de baja")
+        except Exception as error:
+            print('error modifdriver', error)
+
+    @staticmethod
+    def selectDriverstodos():
+        try:
+            registros = []
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select * from drivers order by apeldri')
+            if query1.exec():
+                while query1.next():
+                    row = [query1.value(i) for i in range(query1.record().count())]
+                    registros.append(row)
+            return registros
+
+
+        except Exception as error:
+
+            print('error selectDrivertodos', error)
+
+    @staticmethod
+    def verificarDri(dni):
+        try:
+            query = QtSql.QSqlQuery()
+            consulta = "SELECT COUNT(*) FROM drivers WHERE dnidri = :dni"
+            query.prepare(consulta)
+            query.bindValue(':dni', dni)
+
+            if query.exec():
+                query.next()
+                cantidad = query.value(0)
+                return cantidad > 0
+
+        except Exception as error:
+            print("Error:", str(error))
+
+    def volverDarAlta(dni):
+        try:
+            mbox = QtWidgets.QMessageBox()
+            mbox.setWindowTitle("Dar Alta")
+            mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+            mbox.setIcon(QtWidgets.QMessageBox.Icon.Question)
+            mbox.setText("El conductor está dado de baja.\n¿Desea darlo de alta de nuevo?")
+            mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+            mbox.button(QtWidgets.QMessageBox.StandardButton.Yes).setText('Si')
+            mbox.button(QtWidgets.QMessageBox.StandardButton.No).setText('No')
+            mbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Yes)
+            mbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.No)
+
+            if mbox.exec() == QtWidgets.QMessageBox.StandardButton.Yes:
+                query = QtSql.QSqlQuery()
+                query.prepare("update drivers set bajadri = :baja where dnidri = :dni")
+                query.bindValue(":dni", dni)
+                query.bindValue(":baja", None)
+                if query.exec():
+                    eventos.Eventos.mensaje("Aviso", "Conductor dado de alta")
+                    conexion.Conexion.cargarconductor()
+                else:
+                    eventos.Eventos.error("Aviso", "El conductor no se pudo dar de alta")
+            else:
+                eventos.Eventos.error("Aviso", "Conductor no dado de alta")
+
+        except Exception as error:
+            print("Error al dar alta de nuevo conductor en BD", error)
+
+    def oneCliente(codigo):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare("select * from clientes where codigo = :codigo")
+            query.bindValue(":codigo", int(codigo))
+            if query.exec():
+                while query.next():
+                    for i in range(8):
+                        registro.append(str(query.value(i)))
+            return registro
+        except Exception as error:
+            print("error en oneCliente", error)
+
+    def mostrarClientes(self=None):
+        try:
+            registros = []
+            query = QtSql.QSqlQuery()
+            if var.ui.rbtTodos2.isChecked():
+                query.prepare('select codigo, social, movilcli, provcli from clientes')
+            if var.ui.rbtAlta2.isChecked():
+                query.prepare(
+                    'select codigo, social, movilcli, provcli from clientes where bajacli is null')
+            if var.ui.rbtBaja2.isChecked():
+                query.prepare(
+                    'select codigo, social, movilcli, provcli from clientes where bajacli is not null')
+            if query.exec():
+                while query.next():
+                    row = [query.value(i) for i in range(query.record().count())]
+                    registros.append(row)
+            if registros:
+                clientes.Clientes.cargarTablaClientes(registros)
+            else:
+                var.ui.tabClientes.setRowCount(0)
+        except Exception as error:
+            print("error en mostrarclientes", error)
+
+    def selMuni2(self=None):
+        try:
+            id = 0;
+            var.ui.cmbMuni2.clear()
+            prov = var.ui.cmbProv2.currentText()
+            query = QtSql.QSqlQuery()
+            query.prepare('select idprov from provincias where provincia = :prov')
+            query.bindValue(':prov', prov)
+            if query.exec():
+                while query.next():
+                    id = query.value(0)
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select municipio from municipios where idprov = :id')
+            query1.bindValue(':id', int(id))
+            if query1.exec():
+                var.ui.cmbMuni2.addItem('')
+                while query1.next():
+                    var.ui.cmbMuni2.addItem(query1.value(0))
+
+        except Exception as error:
+            print(error, " en selMuni2")
+
+    def cargarprov2(self=None):
+        try:
+            var.ui.cmbProv2.clear()
+            query = QtSql.QSqlQuery()
+            query.prepare('select provincia from provincias')
+            if query.exec():
+                var.ui.cmbProv2.addItem('')
+                while query.next():
+                    var.ui.cmbProv2.addItem(query.value(0))
+        except Exception as error:
+            print(error, " en cargarprov")
+
+    def verificarCli(dni):
+        try:
+            query = QtSql.QSqlQuery()
+            consulta = "SELECT COUNT(*) FROM clientes WHERE dnicli = :dni"
+            query.prepare(consulta)
+            query.bindValue(':dni', dni)
+
+            if query.exec():
+                query.next()
+                cantidad = query.value(0)
+                return cantidad > 0
+
+        except Exception as error:
+            print("Error:", str(error))
+
+    @staticmethod
+    def guardarcli(newCliente):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into clientes (dnicli, social, direccioncli, provcli, '
+                          'municli, movilcli) VALUES(:dni, :social, :direccion, '
+                          ':provincia, :municipio, :movil)')
+            query.bindValue(':dni', str(newCliente[0]))
+            query.bindValue(':social', str(newCliente[1]))
+            query.bindValue(':direccion', str(newCliente[2]))
+            query.bindValue(':provincia', str(newCliente[3]))
+            query.bindValue(':municipio', str(newCliente[4]))
+            query.bindValue(':movil', str(newCliente[5]))
+            if query.exec():
+                return True
+            else:
+                return False
+
+        except Exception as error:
+            print(error, " en guardarcli")
+
+    def volverDarAlta2(dni):
+        try:
+            mbox = QtWidgets.QMessageBox()
+            mbox.setWindowTitle("Dar Alta")
+            mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+            mbox.setIcon(QtWidgets.QMessageBox.Icon.Question)
+            mbox.setText("El cliente está dado de baja.\n¿Desea darlo de alta de nuevo?")
+            mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+            mbox.button(QtWidgets.QMessageBox.StandardButton.Yes).setText('Si')
+            mbox.button(QtWidgets.QMessageBox.StandardButton.No).setText('No')
+            mbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.Yes)
+            mbox.setDefaultButton(QtWidgets.QMessageBox.StandardButton.No)
+
+            if mbox.exec() == QtWidgets.QMessageBox.StandardButton.Yes:
+                query = QtSql.QSqlQuery()
+                query.prepare("update clientes set bajacli = :baja where dnicli = :dni")
+                query.bindValue(":dni", dni)
+                query.bindValue(":baja", None)
+                if query.exec():
+                    eventos.Eventos.mensaje("Aviso", "Cliente dado de alta")
+                else:
+                    eventos.Eventos.error("Aviso", "El cliente no se pudo dar de alta")
+            else:
+                eventos.Eventos.error("Aviso", "Cliente no dado de alta")
+
+        except Exception as error:
+            print("Error al dar alta de nuevo cliente en BD", error)
+
+    def modifCliente(modifCliente):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('update clientes set dnicli= :dni, social= :social, '
+                          ' direccioncli= :direccion, provcli= :provincia, municli= :municipio, '
+                          ' movilcli= :movil where codigo= :codigo')
+            query.bindValue(':codigo', int(modifCliente[0]))
+            query.bindValue(':dni', str(modifCliente[1]))
+            query.bindValue(':social', str(modifCliente[2]))
+            query.bindValue(':direccion', str(modifCliente[3]))
+            query.bindValue(':provincia', str(modifCliente[4]))
+            query.bindValue(':municipio', str(modifCliente[5]))
+            query.bindValue(':movil', str(modifCliente[6]))
+            if query.exec():
+                eventos.Eventos.mensaje("Aviso", "Cliente modificado con exito")
+            else:
+                eventos.Eventos.error("Aviso", query.lastError().text())
+
+        except Exception as error:
+            print('error modifclienter', error)
+
+    def borrarCli(dni, fecha):
+        try:
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select bajacli from clientes where '
+                           ' dnicli=:dni')
+            query1.bindValue(':dni', str(dni))
+            if query1.exec():
+                while query1.next():
+                    valor = query1.value(0)
+                query = QtSql.QSqlQuery()
+                query.prepare('update clientes set bajacli= :fechabaja where '
+                              ' dnicli=:dni')
+                query.bindValue(':fechabaja', str(fecha))
+                query.bindValue(':dni', str(dni))
+                if query.exec():
+                    Conexion.mostrarClientes()
+                    var.Bajacli.hide()
+                    eventos.Eventos.mensaje("Aviso", "Cliente dado de baja")
+        except Exception as error:
+            print('error borrarcvli', error)
+
+    @staticmethod
+    def selectClientesstodos():
+        try:
+            registros = []
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select * from clientes order by social')
+            if query1.exec():
+                while query1.next():
+                    row = [query1.value(i) for i in range(query1.record().count())]
+                    registros.append(row)
+            return registros
+
+
+        except Exception as error:
+
+            print('error selectDrivertodos', error)
+
+    def codCli(dni):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from clientes where dnicli=:dnicli')
+            query.bindValue(':dnicli', str(dni))
+            if query.exec():
+                while query.next():
+                    for i in range(12):
+                        registro.append(str(query.value(i)))
+            return registro
+
+        except Exception as error:
+            print('error codcli', error)
+
+    def cargarconductor(self=None):
+        try:
+            var.ui.cmbCond.clear()
+            query = QtSql.QSqlQuery()
+            query.prepare('select codigo, apeldri from drivers where bajadri is null order by codigo')
+            if query.exec():
+                var.ui.cmbCond.addItem('')
+                while query.next():
+                    var.ui.cmbCond.addItem(str(query.value(0)) + "." + str(query.value(1)))
+        except Exception as error:
+            print(error, " cargar cond")
+
+    def verificarClibaja(dni):
+        try:
+            query = QtSql.QSqlQuery()
+            consulta = "SELECT COUNT(*) FROM clientes WHERE dnicli = :dni and bajacli is null"
+            query.prepare(consulta)
+            query.bindValue(':dni', dni)
+
+            if query.exec():
+                query.next()
+                cantidad = query.value(0)
+                return cantidad > 0
+
+        except Exception as error:
+            print("Error:", str(error))
+
+    def altafacturacion(registro):
+        try:
+            if not all(
+                    [var.ui.txtcifcli.text(), var.ui.txtfechafact.text(), var.ui.cmbCond.currentText().split('.')[0]]):
+                eventos.Eventos.error("Aviso", "Faltan datos obligatorios")
+            else:
+                dni = var.ui.txtcifcli.text()
+                if Conexion.verificarClibaja(dni):
+                    query = QtSql.QSqlQuery()
+                    query.prepare('insert into facturas(dnicli, fecha, driver) values(:dni, :fecha, :driver)')
+                    query.bindValue(":dni", str(registro[0]))
+                    query.bindValue(":fecha", str(registro[1]))
+                    query.bindValue(":driver", str(registro[2]))
+                    if query.exec():
+                        eventos.Eventos.mensaje("Aviso", "Factura guardada")
+                        Conexion.cargarfacturas()
+                else:
+                    eventos.Eventos.error("Aviso", "Cliente no existente o dado de baja")
+        except Exception as error:
+            print(error, " cargar cond")
+
+    @staticmethod
+    def cargarfacturas():
+        try:
+            registros = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select numfac, dnicli from facturas')
+            if query.exec():
+                while query.next():
+                    row = [query.value(i) for i in range(query.record().count())]
+                    registros.append(row)
+            facturas.Facturas.cargarTablaFacturas(registros)
+
+        except Exception as error:
+            print(error, "cargarfacturas")
+
+    def oneFactura(codigo):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare("select * from facturas where numfac = :codigo")
+            query.bindValue(":codigo", int(codigo))
+            if query.exec():
+                while query.next():
+                    for i in range(4):
+                        registro.append(str(query.value(i)))
+            return registro
+        except Exception as error:
+            print("error en onefactura", error)
+
+    def selMuni3(self=None):
+        try:
+            id = 0;
+            var.ui.cmbMuniVentas.clear()
+            prov = var.ui.cmbProbVentas.currentText()
+            query = QtSql.QSqlQuery()
+            query.prepare('select idprov from provincias where provincia = :prov')
+            query.bindValue(':prov', prov)
+            if query.exec():
+                while query.next():
+                    id = query.value(0)
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select municipio from municipios where idprov = :id')
+            query1.bindValue(':id', int(id))
+            if query1.exec():
+                var.ui.cmbMuniVentas.addItem('')
+                while query1.next():
+                    var.ui.cmbMuniVentas.addItem(query1.value(0))
+
+        except Exception as error:
+            print(error, " en selMuni2")
+
+    def cargarprov3(self=None):
+        try:
+            var.ui.cmbProbVentas.clear()
+            query = QtSql.QSqlQuery()
+            query.prepare('select provincia from provincias')
+            if query.exec():
+                var.ui.cmbProbVentas.addItem('')
+                while query.next():
+                    var.ui.cmbProbVentas.addItem(query.value(0))
+        except Exception as error:
+            print(error, " en cargarprov")
+
+    def selMuni4(self=None):
+        try:
+            id = 0;
+            var.ui.cmbMuniVentas2.clear()
+            prov = var.ui.cmbProbVentas2.currentText()
+            query = QtSql.QSqlQuery()
+            query.prepare('select idprov from provincias where provincia = :prov')
+            query.bindValue(':prov', prov)
+            if query.exec():
+                while query.next():
+                    id = query.value(0)
+            query1 = QtSql.QSqlQuery()
+            query1.prepare('select municipio from municipios where idprov = :id')
+            query1.bindValue(':id', int(id))
+            if query1.exec():
+                var.ui.cmbMuniVentas2.addItem('')
+                while query1.next():
+                    var.ui.cmbMuniVentas2.addItem(query1.value(0))
+
+        except Exception as error:
+            print(error, " en selMuni2")
+
+    def cargarprov4(self=None):
+        try:
+            var.ui.cmbProbVentas2.clear()
+            query = QtSql.QSqlQuery()
+            query.prepare('select provincia from provincias')
+            if query.exec():
+                var.ui.cmbProbVentas2.addItem('')
+                while query.next():
+                    var.ui.cmbProbVentas2.addItem(query.value(0))
+        except Exception as error:
+            print(error, " en cargarprov")
+
+"""
+    def comprobarcliente(dato):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare("select baja from clientes where dni = :dni")
+            query.bindValue(":dni", str(dato))
+            if query.exec():
+                while query.next():
+                    valor = query.value(0)
+            if valor is None:
+                return True
+            else:
+                return False
+
+        except Exception as error:
+            print("comprobar cliente baja", error)
+"""

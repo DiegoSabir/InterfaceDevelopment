@@ -1,159 +1,160 @@
-from PyQt6 import QtWidgets, QtCore, QtGui
+from datetime import datetime
+from PyQt6.QtGui import QPixmap
+from PyQt6 import QtWidgets,QtCore, QtGui
 
-import conexion
+
+import eventos
 import var
+import locale, conexion
 
+
+locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 class Drivers():
-
-
-    """
-    * Limpia varios elementos de la interfaz gráfica relacionados con los datos del conductor.
-    * Verifica el estado de un botón de radio (var.ui.rbtAlta) y llama a métodos de conexion para seleccionar
-      los conductores basándose en ese estado.
-    """
-    @staticmethod
-    def limpiapanel(self):
+    def limpiarPanel(self):
         try:
-            listawidgets = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtNome,
-                            var.ui.txtApel, var.ui.txtDirdriver, var.ui.txtSalario, var.ui.txtMovil,
-                            var.ui.lblValidardni]
-
+            listawidgets=[var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
+                          var.ui.txtdir, var.ui.txtmovil, var.ui.txtsalario, var.ui.lblValidarDNI ]
             for i in listawidgets:
                 i.setText(None)
-
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
                 i.setChecked(False)
-
             var.ui.cmbProv.setCurrentText('')
             var.ui.cmbMuni.setCurrentText('')
 
-            if var.ui.rbtAlta.isChecked():
-                estado = 1
-                conexion.Conexion.selectDrivers(estado)
-            else:
-                registros = conexion.Conexion.mostrardrivers(self)
-                Drivers.cargartabladri(registros)
-
         except Exception as error:
-            print('Error al limpiar el panel driver: ', error)
+            print(str(error) + " en validar drivers")
 
 
 
-    """
-    * Recibe una fecha (qDate) y la formatea para mostrarla en un campo de texto de la 
-      interfaz gráfica (var.ui.txtDatadriver)
-    """
     def cargaFecha(qDate):
         try:
-            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
-            var.ui.txtDatadriver.setText(str(data))
-            return data
+            data=('{:02d}/{:02d}/{:4d}'.format(qDate.day(),qDate.month(),qDate.year()))
+            var.ui.txtfecha.setText(str(data))
             var.calendar.hide()
 
         except Exception as error:
-            print("Error al cargar fecha: ", error)
+            print(str(error) + " en validar drivers")
 
 
 
-    """
-    * Valida un número de identificación nacional (DNI).
-    * Verifica si el DNI es válido siguiendo una serie de reglas y condiciones.
-    * Actualiza elementos de la interfaz gráfica (var.ui.lblValidardni, var.ui.txtDni) para reflejar el 
-      estado de validez del DNI.
-    """
     def validarDNI(dni):
         try:
-            dni = str(dni).upper() #poner mayúscula
-            var.ui.txtDni.setText(str(dni))
-            tabla = "TRWAGMYFPDXBNJZSQVHLCKE"
-            dig_ext = "XYZ"
-            reemp_dig_ext = {'X': '0', 'Y': '1', 'Z': '2'}
+            var.ui.txtDNI.setText(dni)  # Corrección aquí
+            tabla = "TRWAGMYFPDXBNJZSKVHLCKE"
+            digExt = "XYZ"
+            reempDigExt = {"X": '0', "Y": '1', "Z": '2'}
             numeros = "1234567890"
-            if len(dni) == 9:           #comprueba que son nueve
-                dig_control = dni[8]    #tomo la letra del dni
-                dni = dni[:8]           #tomo los números del dni
-                if dni[0] in dig_ext:
-                    dni = dni.replace(dni[0], reemp_dig_ext[dni[0]])
-                if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control:
-                    var.ui.lblValidardni.setStyleSheet('color:green;')  # si es válido se pone una V en color verde
-                    var.ui.lblValidardni.setText('V')
+            imgCorrecto = QPixmap('img/tickcirclehd_106142.ico')
+            imgIncorrecto = QPixmap('img/crosscircleregular_106260.ico')
+
+            if len(dni) == 9:
+                digControl = dni[8]
+                dni = dni[:8]
+                if dni[0] in digExt:
+                    dni = dni.replace(dni[0], reempDigExt[dni[0]])
+                if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == digControl:
+                    var.ui.lblValidarDNI.setPixmap(imgCorrecto)
+                    var.ui.txtfecha.setFocus()
                     return True
                 else:
-                    var.ui.lblValidardni.setStyleSheet('color:red;')    #y si no una X en color rojo
-                    var.ui.lblValidardni.setText('X')
-                    var.ui.txtDni.clear()
-                    var.ui.txtDni.setFocus()
+                    var.ui.lblValidarDNI.setPixmap(imgIncorrecto)
+                    var.ui.txtDNI.setText(None)
+                    var.ui.txtDNI.setFocus()
                     return False
             else:
-                var.ui.lblValidardni.setStyleSheet('color:red;')
-                var.ui.lblValidardni.setText('X')
-                var.ui.txtDni.clear()
-                var.ui.txtDni.setFocus()
+                var.ui.lblValidarDNI.setPixmap(imgIncorrecto)
+                var.ui.txtDNI.setText(None)
+                var.ui.txtDNI.setFocus()
                 return False
 
         except Exception as error:
-            print("Error en la validacion del dni", error)
+            print(str(error) + " en validar drivers")
 
 
 
-    """
-    * Registra un nuevo conductor utilizando datos proporcionados en la interfaz gráfica (var.ui) y almacenados en newdriver.
-    * Convierte los datos en formato legible y los almacena en la base de datos a través de métodos de conexion.
-    * Muestra un cuadro de diálogo (QtWidgets.QMessageBox) dependiendo del resultado de la operación.
-    """
-    def altadriver(self):
+    def altaDriver(self):
         try:
-            driver = [var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
-                      var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario]
+            dni = var.ui.txtDNI.text()
+            if conexion.Conexion.verificarDri(dni):
+                conexion.Conexion.volverDarAlta(dni)
+                Drivers.limpiarPanel(self)
+                conexion.Conexion.mostrardriver()
+            else:
+                if not all([var.ui.txtDNI.text(), var.ui.txtnombre.text(), var.ui.txtapellidos.text(),
+                            var.ui.txtmovil.text()]):
+                    eventos.Eventos.mensaje("Aviso", "Faltan datos obligatorios")
+                    return
+                driver = [
+                    var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
+                    var.ui.txtdir, var.ui.txtmovil, var.ui.txtsalario
+                ]
+                newDriver = []
+                for i in driver:
+                    newDriver.append(i.text().title())
 
-            newdriver = []
-            for i in driver:
-                newdriver.append(i.text().title())
+                prov = var.ui.cmbProv.currentText()
+                newDriver.insert(5, prov)
+                muni = var.ui.cmbMuni.currentText()
+                newDriver.insert(6, muni)
 
-            prov = var.ui.cmbProv.currentText()
-            newdriver.insert(5,prov)
-            muni = var.ui.cmbMuni.currentText()
-            newdriver.insert(6,muni)
-
-            licencias = []
-            chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
-            for i in chklicencia:
-                if i.isChecked():
-                    licencias.append(i.text())
-            newdriver.append('-'.join(licencias))
-            valor = conexion.Conexion.guardardri(newdriver)
-
-            if valor == True:
-                mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle('Aviso')
-                mbox.setWindowIcon(QtGui.QIcon('./img/logo.ico'))
-                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                mbox.setText("Empleado dado de alta")
-                mbox.exec()
-            elif valor == False:
-                mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle('Aviso')
-                mbox.setWindowIcon(QtGui.QIcon('./img/logo.ico'))
-                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                mbox.setText("Asegúrese de que el conductor no existe")
-                mbox.exec()
+                licencias = []
+                chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
+                for i in chklicencia:
+                    if i.isChecked():
+                        licencias.append(i.text())
+                newDriver.append('-'.join(licencias))
+                valor=conexion.Conexion.guardardri(newDriver)
+                if valor==True:
+                    eventos.Eventos.mensaje("Aviso", "El conductor fue añadido con exito")
+                    conexion.Conexion.mostrardriver()
+                elif valor == False:
+                    eventos.Eventos.error("Aviso", "No se ha podido dar de alta")
 
         except Exception as error:
-            print("Error al dar de alta", error)
+            print(str(error) + " en altadriver drivers")
 
 
 
-    """
-    * Actualiza la tabla de conductores (var.ui.tabDrivers) con datos obtenidos de la base de datos y 
-      proporcionados en registros.
-    """
-    def cargartabladri(registros):
+    def validarMovil(self=None):
         try:
-            var.ui.tabDrivers.clearContents()
+            movil = var.ui.txtmovil.text()
+            numeros = "1234567890"
+            var.ui.txtmovil.setText(movil)  # Corrección aquí
+            if len(movil) == 9:
+                digControl = movil[:9]
+                if len(movil) != len([n for n in movil if n in numeros])== digControl:
+                    raise Exception
+            else:
+                raise Exception
+
+        except Exception as error:
+            eventos.Eventos.error("Aviso", "El telefono debe ser una cadena de 9 numeros enteros")
+            var.ui.txtmovil.setText("")
+
+
+
+    def validarSalario(self=None):
+            try:
+                sal = var.ui.txtmovil.text()
+                numeros = "1234567890"
+                var.ui.txtmovil.setText(sal)# Corrección aquí
+                if len(sal) == len([n for n in sal if n in numeros]):
+                    var.ui.txtsalario.setText(str(locale.currency(float(var.ui.txtsalario.text()),grouping=True)))
+                else:
+                    raise Exception
+            except Exception as error:
+                eventos.Eventos.error("Aviso", "Valor de Salario Incorrecto (00000000.00)")
+                var.ui.txtsalario.setText("")
+
+
+
+    def cargarTabladri(registros):
+        try:
             index = 0
+
             for registro in registros:
-                var.ui.tabDrivers.setRowCount(index+1) #crea una fila
+                var.ui.tabDrivers.setRowCount(index + 1)
                 var.ui.tabDrivers.setItem(index, 0, QtWidgets.QTableWidgetItem(str(registro[0])))
                 var.ui.tabDrivers.setItem(index, 1, QtWidgets.QTableWidgetItem(str(registro[1])))
                 var.ui.tabDrivers.setItem(index, 2, QtWidgets.QTableWidgetItem(str(registro[2])))
@@ -163,174 +164,106 @@ class Drivers():
                 var.ui.tabDrivers.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabDrivers.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabDrivers.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                var.ui.tabDrivers.item(index, 5).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 index += 1
 
         except Exception as error:
-            print("Error al cargar los datos en la tabla", error)
+            print(str(error) + " en cargartabladri drivers")
 
 
 
-    """
-    * Este método se encarga de cargar los datos de un conductor seleccionado en la tabla de conductores (var.ui.tabDrivers).
-    * Obtiene la fila seleccionada, extrae los datos y llama a conexion.Conexion.onedriver() para obtener los detalles 
-      del conductor seleccionado.
-    * Finalmente, llama a Drivers.cargadatos() para mostrar estos datos en la interfaz gráfica.
-    """
-    def cargadriver(self):
+    def cargarDriver(self):
         try:
-            fila = var.ui.tabDrivers.selectedItems()
-            row = [dato.text() for dato in fila]
-            registro = conexion.Conexion.onedriver(row[0])
-            Drivers.cargadatos(registro)
-
+            Drivers.limpiarPanel(self)
+            row = var.ui.tabDrivers.selectedItems()
+            fila =[dato.text() for dato in row]
+            registro = conexion.Conexion.oneDriver(fila[0])
+            Drivers.auxiliar(registro)
+            conexion.Conexion.mostrardriver()
+            Drivers.colorearFila(registro[0])
         except Exception as error:
-            print("Error al cargar los datos de un cliente marcando en la tabla: ", error)
+            print(str(error) + " en cargarDriver drivers")
 
 
 
-    """
-    * Busca un conductor en la base de datos basándose en el DNI proporcionado en var.ui.txtDni.
-    * Llama a métodos de conexion para obtener los detalles del conductor y luego carga estos datos en la interfaz 
-      gráfica utilizando Drivers.cargadatos().
-    * Dependiendo de la opción seleccionada en la interfaz (var.ui.rbtTodos, var.ui.rbtAlta, var.ui.rbtBaja), realiza 
-      una búsqueda específica de conductores y actualiza la visualización en la tabla de conductores.
-    """
-    def buscaDri(self):
+    def auxiliar(registro):
         try:
-            dni = var.ui.txtDni.text()
-            registro = conexion.Conexion.codDri(dni)
-            Drivers.cargadatos(registro)
-
-            if var.ui.rbtTodos.isChecked():
-                estado = 0
-                conexion.Conexion.selectDrivers(estado)
-            elif var.ui.rbtAlta.isChecked():
-                estado = 1
-                conexion.Conexion.selectDrivers(estado)
-            elif var.ui.rbtBaja.isChecked():
-                estado = 2
-                conexion.Conexion.selectDrivers(estado)
-
-            codigo = var.ui.lblcodbd.text()
-            for fila in range(var.ui.tabDrivers.rowCount()):
-                if var.ui.tabDrivers.item(fila, 0).text() == str(codigo):
-                    for columna in range(var.ui.tabDrivers.columnCount()):
-                        item = var.ui.tabDrivers.item(fila, columna)
-                        if item is not None:
-                            item.setBackground(QtGui.QColor(255, 241, 150))
-
-        except Exception as error:
-            print(error, "al buscar datos de un conductor")
-
-
-
-    """
-    * Carga los datos de un conductor en los diferentes elementos de la interfaz gráfica.
-    * Recibe registro, que es una lista con los detalles del conductor.
-    * Actualiza los campos de texto, cuadros de selección y casillas de verificación de la interfaz gráfica (var.ui) 
-      con la información del conductor.
-    * Verifica las licencias almacenadas en registro y establece el estado de las casillas de verificación 
-      (chkA, chkB, chkC, chkD) en consecuencia.
-    """
-    def cargadatos(registro):
-        try:
-            datos = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver, var.ui.txtApel, var.ui.txtNome,
-                     var.ui.txtDirdriver, var.ui.cmbProv, var.ui.cmbMuni, var.ui.txtMovil, var.ui.txtSalario]
-
-            for i, dato in enumerate(datos):
-                if i == 6 or i == 7:
+            datos=[var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
+                   var.ui.txtdir, var.ui.cmbProv, var.ui.cmbMuni, var.ui.txtmovil, var.ui.txtsalario]
+            for i,dato in enumerate(datos):
+                if i == 6 or i == 7 :
                     dato.setCurrentText(str(registro[i]))
                 else:
                     dato.setText(str(registro[i]))
-            if 'A' in registro[10]:
+            if 'A' in registro [10]:
                 var.ui.chkA.setChecked(True)
-            else:
-                var.ui.chkA.setChecked(False)
-            if 'B' in registro[10]:
-                var.ui.chkB.setChecked(True)
-            else:
-                var.ui.chkB.setChecked(False)
-            if 'C' in registro[10]:
-                var.ui.chkC.setChecked(True)
-            else:
-                var.ui.chkC.setChecked(False)
-            if 'D' in registro[10]:
-                var.ui.chkD.setChecked(True)
-            else:
-                var.ui.chkD.setChecked(False)
+            if 'B' in registro [10]:
+                var.ui.chkA.setChecked(True)
+            if 'C' in registro [10]:
+                var.ui.chkA.setChecked(True)
+            if 'D' in registro [10]:
+                var.ui.chkA.setChecked(True)
 
         except Exception as error:
-            print("Error al cargar los datos en el panel de gestión", error)
+            eventos.Eventos.error("Aviso", "No existe en la base de datos")
 
 
-    """
-    * Se encarga de modificar los detalles de un conductor en la base de datos.
-    * Obtiene los nuevos detalles de conductor desde los campos de la interfaz gráfica (var.ui).
-    * Llama a conexion.Conexion.modifDriver() para aplicar estos cambios en la base de datos.
-    """
+
+    def buscaDri(self):
+        try:
+            dni = var.ui.txtDNI.text()
+            registro = conexion.Conexion.codDri(dni)
+            Drivers.auxiliar(registro)
+            codigo = var.ui.lblcodbd.text()
+            var.ui.rbtTodos.setChecked(True)
+            conexion.Conexion.mostrardriver()
+            Drivers.colorearFila(codigo)
+
+        except Exception as error:
+            print(error, "en busca de buscadri")
+
+
+
+    def colorearFila(codigo):
+        for fila in range(var.ui.tabDrivers.rowCount()):
+            if var.ui.tabDrivers.item(fila, 0).text() == str(codigo):
+                for columna in range(var.ui.tabDrivers.columnCount()):
+                    item = var.ui.tabDrivers.item(fila, columna)
+                    if item is not None:
+                        item.setBackground(QtGui.QColor(255, 241, 150))
+
+
+
     def modifDri(self):
         try:
-            driver = [var.ui.lblcodbd, var.ui.txtDni, var.ui.txtDatadriver,var.ui.txtApel,
-                      var.ui.txtNome, var.ui.txtDirdriver, var.ui.txtMovil, var.ui.txtSalario]
-
-            modifdriver = []
+            driver=[var.ui.lblcodbd,var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
+                    var.ui.txtdir, var.ui.txtmovil, var.ui.txtsalario]
+            modifDriver=[]
             for i in driver:
-                modifdriver.append(i.text().title())
-
+                modifDriver.append(i.text().title())
             prov = var.ui.cmbProv.currentText()
-            modifdriver.insert(6, prov)
+            modifDriver.insert(6,prov)
             muni = var.ui.cmbMuni.currentText()
-            modifdriver.insert(7, muni)
-
-            licencias = []
+            modifDriver.insert(7,muni)
+            licencias=[]
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
                 if i.isChecked():
                     licencias.append(i.text())
-
-            modifdriver.append('-'.join(licencias))
-            conexion.Conexion.modifDriver(modifdriver)
+            modifDriver.append('-'.join(licencias))
+            conexion.Conexion.modifDriver(modifDriver)
 
         except Exception as error:
-            print("Error al modificar driver", error)
+            print(error, " en modifdri")
 
 
 
-    """
-    * Elimina un conductor de la base de datos utilizando el DNI proporcionado en var.ui.txtDni.
-    * Invoca a conexion.Conexion.borraDriv() y actualiza la tabla de conductores después de borrar el conductor. 
-    """
-    def borrarDriv(self):
+    def borraDri(qDate):
         try:
-            dni = var.ui.txtDni.text()
-            conexion.Conexion.borraDriv(dni)
-            conexion.Conexion.selectDrivers(1)
+            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
+            var.Baja.hide()
+            dni = var.ui.txtDNI.text()
+            conexion.Conexion.borrarDri(dni, str(data))
+            conexion.Conexion.mostrardriver()
 
         except Exception as error:
-            mbox = QtWidgets.QMessageBox()
-            mbox.setWindowTitle('Aviso')
-            mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-            mbox.setText("El conductor no existe o no se puede borrar")
-            mbox.exec()
-
-
-
-    """
-    * Según la opción seleccionada en la interfaz gráfica (var.ui.rbtTodos, var.ui.rbtAlta, var.ui.rbtBaja), 
-      selecciona conductores basados en su estado.
-    * Llama a conexion.Conexion.selectDrivers() con el estado correspondiente para actualizar la visualización 
-      de la tabla de conductores.
-    """
-    def selEstado(self):
-        if var.ui.rbtTodos.isChecked():
-            estado = 0
-            conexion.Conexion.selectDrivers(estado)
-
-        elif var.ui.rbtAlta.isChecked():
-            estado = 1
-            conexion.Conexion.selectDrivers(estado)
-
-        elif var.ui.rbtBaja.isChecked():
-            estado = 2
-            conexion.Conexion.selectDrivers(estado)
+            eventos.Eventos.error("Aviso", "El conductor no existe o no se puede borrar")

@@ -1,7 +1,10 @@
 global ui
 global calendar
 global salir
-global acercade
-global dlgAbrir
+global acercaDe
+global dlgabrir
 global bbdd
-version = "0.0.1"
+global Baja
+global Bajacli
+global report
+global Altafact

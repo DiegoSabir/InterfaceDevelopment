@@ -8,14 +8,14 @@ import conexion
 import facturas
 import informes
 import locale
+import sys, var, eventos, drivers
 
 
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
-import sys, var, eventos, drivers
-class Main(QtWidgets.QMainWindow):
 
+class Main(QtWidgets.QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
         var.ui = Ui_MainWindow()
@@ -31,8 +31,6 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.cargarprov()
         conexion.Conexion.mostrardriver()
         conexion.Conexion.cargarprov2()
-        conexion.Conexion.cargarprov3()
-        conexion.Conexion.cargarprov4()
         conexion.Conexion.cargarconductor()
         conexion.Conexion.mostrarClientes()
         conexion.Conexion.cargarfacturas()
@@ -70,8 +68,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnFactura.clicked.connect(facturas.Facturas.altafactura)
 
 
+
         '''
-        zona eventos menu bar
+        Eventos menu bar
         '''
         var.ui.actionSalir.triggered.connect(eventos.Eventos.abrirSalir)
         var.ui.actionAcercaDe.triggered.connect(eventos.Eventos.abrirAcercaDe)
@@ -84,13 +83,14 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionCrear_informe_pdf.triggered.connect(informes.Informes.reportclientes)
         var.ui.actionCrear_informe_conductores.triggered.connect(informes.Informes.reportdrivers)
         var.ui.actionCrear_informe.triggered.connect(informes.Informes.checkboxinforme)
+
+
+
         '''
         combobox
         '''
         var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.selMuni)
         var.ui.cmbProv2.currentIndexChanged.connect(conexion.Conexion.selMuni2)
-        var.ui.cmbProbVentas.currentIndexChanged.connect(conexion.Conexion.selMuni3)
-        var.ui.cmbProbVentas2.currentIndexChanged.connect(conexion.Conexion.selMuni4)
 
 
 
@@ -114,10 +114,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionvarsalir.triggered.connect(eventos.Eventos.abrirSalir)
         var.ui.actionlimpiarPanel.triggered.connect(drivers.Drivers.limpiarPanel)
         var.ui.actionlimpiarPanel.triggered.connect(clientes.Clientes.limpiarPanel2)
-        var.ui.actionlimpiarPanel.triggered.connect(facturas.Facturas.limpiarPanel3)
         var.ui.tabDrivers.clicked.connect(drivers.Drivers.cargarDriver)
         var.ui.tabClientes.clicked.connect(clientes.Clientes.cargarCliente)
-        var.ui.tablaFacturas.clicked.connect(facturas.Facturas.cargarFactura)
 
 
 
@@ -126,8 +124,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         eventos.Eventos.resizeTabdrivers(self)
         eventos.Eventos.resizeTabclientes(self)
-        eventos.Eventos.resizeTabfacturas()
-        eventos.Eventos.resizeTabCuentas()
+        eventos.Eventos.resizeTabfacturas(self)
 
 
 
@@ -165,4 +162,5 @@ if __name__ == '__main__':
     window = Main()
     window.show()
     sys.exit(app.exec())
+
 # See PyCharm help at https://www.jetbrains.com/help/pycharm/

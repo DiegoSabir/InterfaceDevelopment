@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dlgCalendar</class>
- <widget class="QDialog" name="dlgCalendar">
+ <class>calendar</class>
+ <widget class="QWidget" name="calendar">
   <property name="windowModality">
    <enum>Qt::ApplicationModal</enum>
   </property>
@@ -13,67 +13,35 @@
     <height>300</height>
    </rect>
   </property>
-  <property name="minimumSize">
-   <size>
-    <width>400</width>
-    <height>300</height>
-   </size>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>400</width>
-    <height>300</height>
-   </size>
-  </property>
   <property name="windowTitle">
-   <string>Fecha de Alta</string>
+   <string>Calendario</string>
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>img/logo.ico</normaloff>img/logo.ico</iconset>
+    <normaloff>../img/calendarday_January_month_calendari_1584.ico</normaloff>../img/calendarday_January_month_calendari_1584.ico</iconset>
   </property>
-  <property name="modal">
-   <bool>true</bool>
-  </property>
-  <layout class="QGridLayout" name="gridLayout">
-   <property name="leftMargin">
-    <number>0</number>
+  <widget class="QCalendarWidget" name="calendari">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>400</width>
+     <height>300</height>
+    </rect>
    </property>
-   <property name="topMargin">
-    <number>0</number>
+   <property name="minimumSize">
+    <size>
+     <width>400</width>
+     <height>300</height>
+    </size>
    </property>
-   <property name="rightMargin">
-    <number>0</number>
+   <property name="maximumSize">
+    <size>
+     <width>400</width>
+     <height>300</height>
+    </size>
    </property>
-   <property name="bottomMargin">
-    <number>0</number>
-   </property>
-   <property name="spacing">
-    <number>0</number>
-   </property>
-   <item row="0" column="0">
-    <widget class="QCalendarWidget" name="Calendar">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>0</width>
-       <height>0</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>1024</width>
-       <height>768</height>
-      </size>
-     </property>
-    </widget>
-   </item>
-  </layout>
+  </widget>
  </widget>
  <resources/>
  <connections/>

@@ -1,225 +1,213 @@
+from PyQt6.QtGui import QPixmap
 from PyQt6 import QtWidgets, QtCore, QtGui
+from PyQt6.QtCore import Qt
+
 
 import conexion
 import var
+import eventos
+
 
 class Clientes():
-
-    @staticmethod
-    def limpiapanel(self):
+    def limpiarPanel2(self=None):
         try:
-            listawidgets = [var.ui.lblcodbdCli, var.ui.txtDniCli, var.ui.txtDataCli, var.ui.txtRazonCli,
-                            var.ui.txtDirCli, var.ui.txtMovil, var.ui.lblValidardniCli]
-
+            listawidgets=[var.ui.lblcodbd2, var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2,
+                          var.ui.txtmovil2, var.ui.lblValidarDNI2 ]
             for i in listawidgets:
                 i.setText(None)
-
-            var.ui.cmbProvCli.setCurrentText('')
-            var.ui.cmbMuniCli.setCurrentText('')
-
-            if var.ui.rbtAltaCli.isChecked():
-                estado = 1
-                conexion.Conexion.selectClientes(estado)
-            else:
-                registros = conexion.Conexion.mostrarclientes(self)
-                Clientes.cargartablacli(registros)
+            var.ui.cmbProv2.setCurrentText('')
+            var.ui.cmbMuni2.setCurrentText('')
 
         except Exception as error:
-            print('Error al limpiar el panel cliente: ', error)
+            print(str(error) + " en validar drivers")
 
 
 
-    def cargaFecha(qDate):
+    def buscarCliente(self):
         try:
-            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
-            var.ui.txtDataCli.setText(str(data))
-            return data
-            var.calendar.hide()
-
-        except Exception as error:
-            print("Error al cargar fecha: ", error)
-
-
-
-    def validarDNI(dni):
-        try:
-            dni = str(dni).upper() #poner mayúscula
-            var.ui.txtDniCli.setText(str(dni))
-            tabla = "TRWAGMYFPDXBNJZSQVHLCKE"
-            dig_ext = "XYZ"
-            reemp_dig_ext = {'X': '0', 'Y': '1', 'Z': '2'}
-            numeros = "1234567890"
-            if len(dni) == 9:           #comprueba que son nueve
-                dig_control = dni[8]    #tomo la letra del dni
-                dni = dni[:8]           #tomo los números del dni
-                if dni[0] in dig_ext:
-                    dni = dni.replace(dni[0], reemp_dig_ext[dni[0]])
-                if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == dig_control:
-                    var.ui.lblValidardniCli.setStyleSheet('color:green;')  # si es válido se pone una V en color verde
-                    var.ui.lblValidardniCli.setText('V')
-                    return True
-                else:
-                    var.ui.lblValidardniCli.setStyleSheet('color:red;')    #y si no una X en color rojo
-                    var.ui.lblValidardniCli.setText('X')
-                    var.ui.txtDniCli.clear()
-                    var.ui.txtDniCli.setFocus()
-                    return False
-            else:
-                var.ui.lblValidardniCli.setStyleSheet('color:red;')
-                var.ui.lblValidardniCli.setText('X')
-                var.ui.txtDniCli.clear()
-                var.ui.txtDniCli.setFocus()
-                return False
-
-        except Exception as error:
-            print("Error en la validacion del dni", error)
-
-
-
-    def altacliente(self):
-        try:
-            cliente = [var.ui.txtDniCli, var.ui.txtDataCli, var.ui.txtRazonCli,
-                      var.ui.txtDirCli, var.ui.txtMovilCli]
-
-            newcliente = []
-            for i in cliente:
-                newcliente.append(i.text().title())
-
-            prov = var.ui.cmbProvCli.currentText()
-            newcliente.insert(5, prov)
-            muni = var.ui.cmbMuniCli.currentText()
-            newcliente.insert(6, muni)
-
-
-
-            valor = conexion.Conexion.guardarcli(newcliente)
-
-            if valor == True:
-                mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle('Aviso')
-                mbox.setWindowIcon(QtGui.QIcon('./img/logo.ico'))
-                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                mbox.setText("Empleado dado de alta")
-                mbox.exec()
-
-            elif valor == False:
-                mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle('Aviso')
-                mbox.setWindowIcon(QtGui.QIcon('./img/logo.ico'))
-                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                mbox.setText("Asegúrese de que el conductor no existe")
-                mbox.exec()
-
-        except Exception as error:
-            print("Error al dar de alta", error)
-
-
-
-    def cargartablacli(registros):
-        try:
-            var.ui.tabClientes.clearContents()
-            index = 0
-            for registro in registros:
-                var.ui.tabClientes.setRowCount(index+1) #crea una fila
-                var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(str(registro[0])))
-                var.ui.tabClientes.setItem(index, 1, QtWidgets.QTableWidgetItem(str(registro[1])))
-                var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(str(registro[2])))
-                var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(str(registro[3])))
-                var.ui.tabClientes.setItem(index, 4, QtWidgets.QTableWidgetItem(str(registro[4])))
-                var.ui.tabClientes.setItem(index, 5, QtWidgets.QTableWidgetItem(str(registro[5])))
-                var.ui.tabClientes.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                var.ui.tabClientes.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                var.ui.tabClientes.item(index, 5).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                index += 1
-
-        except Exception as error:
-            print("Error al cargar los datos en la tabla", error)
-
-
-
-    def cargacliente(self):
-        try:
-            fila = var.ui.tabDrivers.selectedItems()
-            row = [dato.text() for dato in fila]
-            registro = conexion.Conexion.onecliente(row[0])
-            Clientes.cargadatos(registro)
-
-        except Exception as error:
-            print("Error al cargar los datos de un cliente marcando en la tabla: ", error)
-
-
-
-    def buscaCli(self):
-        try:
-            dni = var.ui.txtDni.text()
+            dni = var.ui.txtDNI2.text()
             registro = conexion.Conexion.codCli(dni)
-            Clientes.cargadatos(registro)
-
-            if var.ui.rbtTodosCli.isChecked():
-                estado = 0
-                conexion.Conexion.selectClientes(estado)
-            elif var.ui.rbtAltaCli.isChecked():
-                estado = 1
-                conexion.Conexion.selectClientes(estado)
-            elif var.ui.rbtBajaCli.isChecked():
-                estado = 2
-                conexion.Conexion.selectClientes(estado)
-
-            codigo = var.ui.lblcodbdCli.text()
-            for fila in range(var.ui.tabClientes.rowCount()):
-                if var.ui.tabClientes.item(fila, 0).text() == str(codigo):
-                    for columna in range(var.ui.tabClientes.columnCount()):
-                        item = var.ui.tabClientes.item(fila, columna)
-                        if item is not None:
-                            item.setBackground(QtGui.QColor(255, 241, 150))
+            Clientes.auxiliar(registro)
+            codigo = var.ui.lblcodbd2.text()
+            var.ui.rbtTodos2.setChecked(True)
+            conexion.Conexion.mostrarClientes()
+            Clientes.colorearFila(codigo)
 
         except Exception as error:
-            print(error, "al buscar datos de un cliente")
+            print(str(error) + " en cargarcliente clientes")
 
 
 
-    def cargadatos(registro):
+    def cargarCliente(self):
         try:
-            datos = [var.ui.lblcodbdCli, var.ui.txtDniCli, var.ui.txtDataCli, var.ui.txtRazonCli,
-                     var.ui.txtDirCli, var.ui.cmbProvCli, var.ui.cmbMuniCli, var.ui.txtMovilCli]
+            Clientes.limpiarPanel2()
+            row = var.ui.tabClientes.selectedItems()
+            fila = [dato.text() for dato in row]
+            registro = conexion.Conexion.oneCliente(fila[0])
+            Clientes.auxiliar(registro)
+            conexion.Conexion.mostrarClientes()
+            Clientes.colorearFila(registro[0])
 
+        except Exception as error:
+            print(str(error) + " en cargar clientes clientes")
+
+
+
+    def auxiliar(registro):
+        try:
+            datos = [var.ui.lblcodbd2, var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2,
+                     var.ui.cmbProv2, var.ui.cmbMuni2]
             for i, dato in enumerate(datos):
-                if i == 6 or i == 7:
+                if i == 5 or i == 6:
                     dato.setCurrentText(str(registro[i]))
                 else:
                     dato.setText(str(registro[i]))
 
-
         except Exception as error:
-            print("Error al cargar los datos en el panel de gestión", error)
+            eventos.Eventos.error("Aviso", "No existe en la base de datos")
 
 
 
-    def borrarCliente(self):
+    def colorearFila(codigo):
+        for fila in range(var.ui.tabClientes.rowCount()):
+            if var.ui.tabClientes.item(fila, 0).text() == str(codigo):
+                for columna in range(var.ui.tabClientes.columnCount()):
+                    item = var.ui.tabClientes.item(fila, columna)
+                    if item is not None:
+                        item.setBackground(QtGui.QColor(255, 241, 150))
+
+
+
+    def cargarTablaClientes(registros):
         try:
-            dni = var.ui.txtDniCli.text()
-            conexion.Conexion.borrarCli(dni)
-            conexion.Conexion.selectClientes(1)
+            index = 0
+            for registro in registros:
+                var.ui.tabClientes.setRowCount(index + 1)
+                var.ui.tabClientes.setItem(index, 0, QtWidgets.QTableWidgetItem(str(registro[0])))
+                var.ui.tabClientes.setItem(index, 1, QtWidgets.QTableWidgetItem(str(registro[1])))
+                var.ui.tabClientes.setItem(index, 2, QtWidgets.QTableWidgetItem(str(registro[2])))
+                var.ui.tabClientes.setItem(index, 3, QtWidgets.QTableWidgetItem(str(registro[3])))
+                var.ui.tabClientes.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabClientes.item(index, 2).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabClientes.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                index += 1
 
         except Exception as error:
-            mbox = QtWidgets.QMessageBox()
-            mbox.setWindowTitle('Aviso')
-            mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-            mbox.setText("El cliente no existe o no se puede borrar")
-            mbox.exec()
+            print("error en cargarTablaclientes", error)
 
 
 
-    def selEstado(self):
-        if var.ui.rbtTodosCli.isChecked():
-            estado = 0
-            conexion.Conexion.selectClientes(estado)
+    def validarDNI2(dni):
+        try:
+            var.ui.txtDNI2.setText(dni)  # Corrección aquí
+            tabla = "TRWAGMYFPDXBNJZSKVHLCKE"
+            digExt = "XYZ"
+            reempDigExt = {"X": '0', "Y": '1', "Z": '2'}
+            numeros = "1234567890"
+            imgCorrecto = QPixmap('img/tickcirclehd_106142.ico')
+            imgIncorrecto = QPixmap('img/crosscircleregular_106260.ico')
 
-        elif var.ui.rbtAltaCli.isChecked():
-            estado = 1
-            conexion.Conexion.selectClientes(estado)
+            if len(dni) == 9:
+                digControl = dni[8]
+                dni = dni[:8]
+                if dni[0] in digExt:
+                    dni = dni.replace(dni[0], reempDigExt[dni[0]])
+                if len(dni) == len([n for n in dni if n in numeros]) and tabla[int(dni) % 23] == digControl:
+                    var.ui.lblValidarDNI2.setPixmap(imgCorrecto)
+                    var.ui.txtfecha.setFocus()
+                    return True
+                else:
+                    var.ui.lblValidarDNI2.setPixmap(imgIncorrecto)
+                    var.ui.txtDNI2.setText(None)
+                    var.ui.txtDNI2.setFocus()
+                    return False
+            else:
+                var.ui.lblValidarDNI2.setPixmap(imgIncorrecto)
+                var.ui.txtDNI2.setText(None)
+                var.ui.txtDNI2.setFocus()
+                return False
 
-        elif var.ui.rbtBajaCli.isChecked():
-            estado = 2
-            conexion.Conexion.selectClientes(estado)
+        except Exception as error:
+            print(str(error) + " en validar drivers")
+
+
+
+    def validarMovil2(self=None):
+        try:
+            movil = var.ui.txtmovil2.text()
+            numeros = "1234567890"
+            var.ui.txtmovil2.setText(movil)  # Corrección aquí
+            if len(movil) == 9:
+                digControl = movil[:9]
+                if len(movil) != len([n for n in movil if n in numeros]) == digControl:
+                    raise Exception
+            else:
+                raise Exception
+
+        except Exception as error:
+            eventos.Eventos.error("Aviso", "El telefono debe ser una cadena de 9 numeros enteros")
+            var.ui.txtmovil2.setText("")
+
+
+
+    def altaCliente(self):
+        try:
+            dni = var.ui.txtDNI2.text()
+            if conexion.Conexion.verificarCli(dni):
+                conexion.Conexion.volverDarAlta2(dni)
+                Clientes.limpiarPanel2(self)
+                conexion.Conexion.mostrarClientes()
+            else:
+                if not all([var.ui.txtDNI2.text(), var.ui.txtsocial.text(), var.ui.txtmovil2.text()]):
+                    eventos.Eventos.mensaje("Aviso", "Faltan datos obligatorios")
+                    return
+                cliente = [
+                    var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2
+                ]
+                newCliente = []
+                for i in cliente:
+                    newCliente.append(i.text().title())
+
+                prov = var.ui.cmbProv2.currentText()
+                newCliente.insert(3, prov)
+                muni = var.ui.cmbMuni2.currentText()
+                newCliente.insert(4, muni)
+                valor=conexion.Conexion.guardarcli(newCliente)
+                if valor==True:
+                    eventos.Eventos.mensaje("Aviso", "El cliente fue añadido con exito")
+                    conexion.Conexion.mostrardriver()
+                elif valor == False:
+                    eventos.Eventos.error("Aviso", "No se ha podido dar de alta")
+
+        except Exception as error:
+            print(str(error) + " en altacliente clientes")
+
+
+
+    def modifCli(self):
+        try:
+            driver=[var.ui.lblcodbd2,var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2]
+            modifCliente=[]
+            for i in driver:
+                modifCliente.append(i.text().title())
+            prov = var.ui.cmbProv2.currentText()
+            modifCliente.insert(4,prov)
+            muni = var.ui.cmbMuni2.currentText()
+            modifCliente.insert(5,muni)
+            conexion.Conexion.modifCliente(modifCliente)
+
+        except Exception as error:
+            print(error, " en modifcli")
+
+
+
+    def borraCli(qDate):
+        try:
+            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
+            var.Bajacli.hide()
+            dni = var.ui.txtDNI2.text()
+            conexion.Conexion.borrarCli(dni, str(data))
+            conexion.Conexion.mostrarClientes()
+
+        except Exception as error:
+            eventos.Eventos.error("Aviso", "El cliente no existe o no se puede borrar")
