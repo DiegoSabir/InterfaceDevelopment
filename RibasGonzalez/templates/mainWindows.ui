@@ -49,7 +49,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="panelDrivers">
        <property name="sizePolicy">
@@ -71,7 +71,8 @@
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">background-color: 
+rgb(255, 247, 229)</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::Box</enum>
@@ -80,6 +81,19 @@
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_2">
+           <item row="0" column="9" colspan="2">
+            <widget class="QLineEdit" name="txtfecha">
+             <property name="minimumSize">
+              <size>
+               <width>120</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="0">
             <widget class="QLabel" name="lblapellidos">
              <property name="minimumSize">
@@ -93,8 +107,8 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="9" colspan="2">
-            <widget class="QLineEdit" name="txtfecha">
+           <item row="0" column="4" colspan="2">
+            <widget class="QLineEdit" name="txtDNI">
              <property name="minimumSize">
               <size>
                <width>120</width>
@@ -113,16 +127,30 @@
              </property>
             </widget>
            </item>
-           <item row="0" column="4" colspan="2">
-            <widget class="QLineEdit" name="txtDNI">
+           <item row="2" column="11">
+            <widget class="QComboBox" name="cmbMuni">
              <property name="minimumSize">
               <size>
-               <width>120</width>
+               <width>150</width>
                <height>20</height>
               </size>
              </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:
+rgb(199, 255, 139)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="10">
+            <widget class="QLabel" name="lbllocalidad">
+             <property name="text">
+              <string>Localidad</string>
              </property>
             </widget>
            </item>
@@ -140,42 +168,25 @@
                <height>20</height>
               </size>
              </property>
-            </widget>
-           </item>
-           <item row="2" column="10">
-            <widget class="QLabel" name="lbllocalidad">
-             <property name="text">
-              <string>Localidad</string>
+             <property name="styleSheet">
+              <string notr="true">background-color:
+rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="11">
-            <widget class="QComboBox" name="cmbMuni">
+           <item row="1" column="1" colspan="4">
+            <widget class="QLineEdit" name="txtapellidos">
              <property name="minimumSize">
               <size>
-               <width>150</width>
+               <width>300</width>
                <height>20</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>150</width>
+               <width>300</width>
                <height>20</height>
               </size>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="0">
-            <widget class="QLabel" name="lblmovil">
-             <property name="text">
-              <string>Movil</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="lbldir">
-             <property name="text">
-              <string>Direccion: </string>
              </property>
             </widget>
            </item>
@@ -192,8 +203,22 @@
              </property>
             </widget>
            </item>
-           <item row="1" column="1" colspan="4">
-            <widget class="QLineEdit" name="txtapellidos">
+           <item row="3" column="0">
+            <widget class="QLabel" name="lblmovil">
+             <property name="text">
+              <string>Movil</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="0">
+            <widget class="QLabel" name="lbldir">
+             <property name="text">
+              <string>Direccion </string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="1" colspan="4">
+            <widget class="QLineEdit" name="txtdir">
              <property name="minimumSize">
               <size>
                <width>300</width>
@@ -226,22 +251,6 @@
              <property name="minimumSize">
               <size>
                <width>0</width>
-               <height>20</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="1" colspan="4">
-            <widget class="QLineEdit" name="txtdir">
-             <property name="minimumSize">
-              <size>
-               <width>300</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>300</width>
                <height>20</height>
               </size>
              </property>
@@ -338,13 +347,6 @@
                </property>
               </spacer>
              </item>
-             <item row="0" column="0">
-              <widget class="QPushButton" name="btnAltaDriver">
-               <property name="text">
-                <string>Alta</string>
-               </property>
-              </widget>
-             </item>
              <item row="0" column="4">
               <widget class="QPushButton" name="btnBajaDriver">
                <property name="text">
@@ -356,6 +358,13 @@
               <widget class="QPushButton" name="btnModificarDriver">
                <property name="text">
                 <string>Modificar</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QPushButton" name="btnAltaDriver">
+               <property name="text">
+                <string>Alta</string>
                </property>
               </widget>
              </item>
@@ -374,13 +383,6 @@
              </property>
             </widget>
            </item>
-           <item row="3" column="5" colspan="2">
-            <widget class="QLabel" name="lblsal">
-             <property name="text">
-              <string>000.00</string>
-             </property>
-            </widget>
-           </item>
            <item row="3" column="3" colspan="2">
             <widget class="QLineEdit" name="txtsalario">
              <property name="minimumSize">
@@ -391,6 +393,13 @@
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="3" column="5" colspan="2">
+            <widget class="QLabel" name="lblsal">
+             <property name="text">
+              <string>000.00</string>
              </property>
             </widget>
            </item>
@@ -474,7 +483,7 @@
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background:  rgb(255, 254, 196)</string>
+              <string notr="true">background-color:rgb(183, 255, 249)</string>
              </property>
              <property name="text">
               <string/>
@@ -631,7 +640,7 @@ rgb(255, 247, 229)</string>
         <widget class="QLabel" name="lblClientes">
          <property name="geometry">
           <rect>
-           <x>220</x>
+           <x>200</x>
            <y>20</y>
            <width>47</width>
            <height>13</height>
@@ -644,7 +653,7 @@ rgb(255, 247, 229)</string>
         <widget class="QLineEdit" name="txtcifcli">
          <property name="geometry">
           <rect>
-           <x>270</x>
+           <x>250</x>
            <y>20</y>
            <width>131</width>
            <height>20</height>
@@ -663,7 +672,7 @@ rgb(255, 247, 229)</string>
         <widget class="QPushButton" name="btnBuscar3">
          <property name="geometry">
           <rect>
-           <x>410</x>
+           <x>390</x>
            <y>20</y>
            <width>27</width>
            <height>23</height>
@@ -701,9 +710,21 @@ rgb(255, 247, 229)</string>
           <rect>
            <x>90</x>
            <y>20</y>
-           <width>81</width>
+           <width>90</width>
            <height>20</height>
           </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>90</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
+           <height>20</height>
+          </size>
          </property>
          <property name="styleSheet">
           <string notr="true">background-color:rgb(183, 255, 249)</string>
@@ -717,13 +738,19 @@ rgb(255, 247, 229)</string>
           <rect>
            <x>88</x>
            <y>62</y>
-           <width>120</width>
+           <width>90</width>
            <height>20</height>
           </rect>
          </property>
          <property name="minimumSize">
           <size>
-           <width>120</width>
+           <width>90</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>90</width>
            <height>20</height>
           </size>
          </property>
@@ -734,7 +761,7 @@ rgb(255, 247, 229)</string>
         <widget class="QPushButton" name="btnCalendariofact">
          <property name="geometry">
           <rect>
-           <x>220</x>
+           <x>200</x>
            <y>60</y>
            <width>32</width>
            <height>23</height>
@@ -776,7 +803,7 @@ rgb(255, 247, 229)</string>
         <widget class="QComboBox" name="cmbCond">
          <property name="geometry">
           <rect>
-           <x>350</x>
+           <x>310</x>
            <y>60</y>
            <width>150</width>
            <height>20</height>
@@ -802,7 +829,7 @@ rgb(199, 255, 139)</string>
         <widget class="QLabel" name="lblcond">
          <property name="geometry">
           <rect>
-           <x>273</x>
+           <x>250</x>
            <y>60</y>
            <width>71</width>
            <height>20</height>
@@ -828,7 +855,7 @@ rgb(199, 255, 139)</string>
         <widget class="Line" name="line">
          <property name="geometry">
           <rect>
-           <x>503</x>
+           <x>460</x>
            <y>10</y>
            <width>21</width>
            <height>131</height>
@@ -838,36 +865,36 @@ rgb(199, 255, 139)</string>
           <enum>Qt::Vertical</enum>
          </property>
         </widget>
-        <widget class="QLabel" name="label">
+        <widget class="QLabel" name="lblOrigen">
          <property name="geometry">
           <rect>
-           <x>530</x>
+           <x>480</x>
            <y>20</y>
            <width>55</width>
            <height>16</height>
           </rect>
          </property>
          <property name="text">
-          <string>Origen:</string>
+          <string>Origen</string>
          </property>
         </widget>
-        <widget class="QLabel" name="label_2">
+        <widget class="QLabel" name="lblDestino">
          <property name="geometry">
           <rect>
-           <x>530</x>
+           <x>480</x>
            <y>60</y>
            <width>55</width>
            <height>16</height>
           </rect>
          </property>
          <property name="text">
-          <string>Destino:</string>
+          <string>Destino</string>
          </property>
         </widget>
         <widget class="QComboBox" name="cmbProbVentas2">
          <property name="geometry">
           <rect>
-           <x>590</x>
+           <x>525</x>
            <y>60</y>
            <width>150</width>
            <height>20</height>
@@ -885,27 +912,35 @@ rgb(199, 255, 139)</string>
            <height>20</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:
+rgb(199, 255, 139)</string>
+         </property>
         </widget>
         <widget class="QComboBox" name="cmbProbVentas">
          <property name="geometry">
           <rect>
-           <x>590</x>
+           <x>525</x>
            <y>20</y>
            <width>150</width>
-           <height>22</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="minimumSize">
           <size>
            <width>150</width>
-           <height>0</height>
+           <height>20</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>150</width>
-           <height>16777215</height>
+           <height>20</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:
+rgb(199, 255, 139)</string>
          </property>
         </widget>
         <widget class="QPushButton" name="btngrabar">
@@ -924,7 +959,7 @@ rgb(199, 255, 139)</string>
         <widget class="QComboBox" name="cmbMuniVentas2">
          <property name="geometry">
           <rect>
-           <x>790</x>
+           <x>680</x>
            <y>60</y>
            <width>150</width>
            <height>20</height>
@@ -942,27 +977,35 @@ rgb(199, 255, 139)</string>
            <height>20</height>
           </size>
          </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:
+rgb(199, 255, 139)</string>
+         </property>
         </widget>
         <widget class="QComboBox" name="cmbMuniVentas">
          <property name="geometry">
           <rect>
-           <x>790</x>
+           <x>680</x>
            <y>20</y>
            <width>150</width>
-           <height>22</height>
+           <height>20</height>
           </rect>
          </property>
          <property name="minimumSize">
           <size>
            <width>150</width>
-           <height>0</height>
+           <height>20</height>
           </size>
          </property>
          <property name="maximumSize">
           <size>
            <width>150</width>
-           <height>16777215</height>
+           <height>20</height>
           </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">background-color:
+rgb(199, 255, 139)</string>
          </property>
         </widget>
         <widget class="QWidget" name="horizontalLayoutWidget">
@@ -1005,6 +1048,53 @@ rgb(199, 255, 139)</string>
           </item>
          </layout>
         </widget>
+        <widget class="QLineEdit" name="txtkm">
+         <property name="geometry">
+          <rect>
+           <x>865</x>
+           <y>45</y>
+           <width>75</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>75</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>75</width>
+           <height>20</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lblKm">
+         <property name="geometry">
+          <rect>
+           <x>840</x>
+           <y>45</y>
+           <width>25</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>25</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>25</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Km</string>
+         </property>
+        </widget>
        </widget>
        <widget class="QTableWidget" name="tabFacturas">
         <property name="geometry">
@@ -1012,19 +1102,19 @@ rgb(199, 255, 139)</string>
           <x>10</x>
           <y>190</y>
           <width>205</width>
-          <height>425</height>
+          <height>450</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
           <width>205</width>
-          <height>425</height>
+          <height>450</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>205</width>
-          <height>425</height>
+          <height>450</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -1065,19 +1155,19 @@ background-color:rgb(100,100,100);
           <x>230</x>
           <y>190</y>
           <width>750</width>
-          <height>425</height>
+          <height>350</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
           <width>750</width>
-          <height>425</height>
+          <height>350</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>750</width>
-          <height>425</height>
+          <height>350</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -1132,6 +1222,138 @@ background-color:rgb(100,100,100);
          </property>
         </column>
        </widget>
+       <widget class="QLabel" name="lbltotalfactura">
+        <property name="geometry">
+         <rect>
+          <x>860</x>
+          <y>622</y>
+          <width>120</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:rgb(255, 249, 198)</string>
+        </property>
+        <property name="text">
+         <string>00.00€</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblfacturacion_3">
+        <property name="geometry">
+         <rect>
+          <x>790</x>
+          <y>586</y>
+          <width>64</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>IVA</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbliva">
+        <property name="geometry">
+         <rect>
+          <x>860</x>
+          <y>587</y>
+          <width>120</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:rgb(255, 249, 198)</string>
+        </property>
+        <property name="text">
+         <string>00.00€</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblfacturacion_2">
+        <property name="geometry">
+         <rect>
+          <x>790</x>
+          <y>552</y>
+          <width>64</width>
+          <height>28</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Subtotal</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblsubtotal">
+        <property name="geometry">
+         <rect>
+          <x>860</x>
+          <y>553</y>
+          <width>120</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>120</width>
+          <height>10</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color:rgb(255, 249, 198)</string>
+        </property>
+        <property name="text">
+         <string>00.00€</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignCenter</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lblfacturacion_4">
+        <property name="geometry">
+         <rect>
+          <x>790</x>
+          <y>620</y>
+          <width>64</width>
+          <height>30</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Total Factura</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QWidget" name="panelclientes">
        <attribute name="title">
@@ -1147,7 +1369,8 @@ background-color:rgb(100,100,100);
            </sizepolicy>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">background-color: 
+rgb(255, 247, 229)</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::Box</enum>
@@ -1156,6 +1379,19 @@ background-color:rgb(100,100,100);
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_3">
+           <item row="0" column="16">
+            <widget class="QLineEdit" name="txtmovil2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
            <item row="0" column="12">
             <widget class="QLineEdit" name="txtsocial">
              <property name="minimumSize">
@@ -1202,23 +1438,6 @@ background-color:rgb(100,100,100);
              </property>
             </widget>
            </item>
-           <item row="0" column="3">
-            <widget class="QPushButton" name="btnBuscar2">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>../img/lupaper.ico</normaloff>../img/lupaper.ico</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>15</width>
-               <height>15</height>
-              </size>
-             </property>
-            </widget>
-           </item>
            <item row="0" column="5" colspan="2">
             <widget class="QLineEdit" name="txtDNI2">
              <property name="minimumSize">
@@ -1232,37 +1451,17 @@ background-color:rgb(100,100,100);
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="lbldir2">
-             <property name="text">
-              <string>Direccion: </string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="2">
-            <widget class="QLineEdit" name="txtmovil2">
-             <property name="minimumSize">
-              <size>
-               <width>0</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="1" colspan="5">
             <widget class="QLineEdit" name="txtdir2">
              <property name="minimumSize">
               <size>
-               <width>300</width>
+               <width>345</width>
                <height>20</height>
               </size>
              </property>
              <property name="maximumSize">
               <size>
-               <width>300</width>
+               <width>345</width>
                <height>20</height>
               </size>
              </property>
@@ -1300,88 +1499,12 @@ background-color:rgb(100,100,100);
              </property>
             </widget>
            </item>
-           <item row="0" column="2">
-            <widget class="QLabel" name="lblcodbd2">
-             <property name="maximumSize">
-              <size>
-               <width>120</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background:  rgb(255, 254, 196)</string>
-             </property>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lbldir2">
              <property name="text">
-              <string/>
-             </property>
-             <property name="alignment">
-              <set>Qt::AlignCenter</set>
+              <string>Direccion: </string>
              </property>
             </widget>
-           </item>
-           <item row="2" column="0">
-            <widget class="QLabel" name="lblmovil2">
-             <property name="text">
-              <string>Movil</string>
-             </property>
-            </widget>
-           </item>
-           <item row="2" column="14" colspan="4">
-            <layout class="QGridLayout" name="gridLayout_11">
-             <item row="0" column="4">
-              <spacer name="horizontalSpacer_6">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>30</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-             <item row="0" column="0">
-              <widget class="QPushButton" name="btnAlta2">
-               <property name="text">
-                <string>Alta</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="3">
-              <widget class="QPushButton" name="btnModificar2">
-               <property name="text">
-                <string>Modifica</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="5">
-              <widget class="QPushButton" name="btnBaja2">
-               <property name="text">
-                <string>Baja</string>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="2">
-              <spacer name="horizontalSpacer_7">
-               <property name="orientation">
-                <enum>Qt::Horizontal</enum>
-               </property>
-               <property name="sizeType">
-                <enum>QSizePolicy::Fixed</enum>
-               </property>
-               <property name="sizeHint" stdset="0">
-                <size>
-                 <width>30</width>
-                 <height>20</height>
-                </size>
-               </property>
-              </spacer>
-             </item>
-            </layout>
            </item>
            <item row="0" column="11">
             <widget class="QLabel" name="lblsocial">
@@ -1402,10 +1525,61 @@ background-color:rgb(100,100,100);
              </property>
             </widget>
            </item>
-           <item row="1" column="15">
-            <widget class="QLabel" name="lbllocalidad2">
+           <item row="1" column="16">
+            <widget class="QComboBox" name="cmbMuni2">
+             <property name="minimumSize">
+              <size>
+               <width>150</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>150</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:
+rgb(199, 255, 139)</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="15">
+            <widget class="QLabel" name="lblmovil2">
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>20</height>
+              </size>
+             </property>
              <property name="text">
-              <string>Localidad</string>
+              <string>Movil</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="2">
+            <widget class="QLabel" name="lblcodbd2">
+             <property name="maximumSize">
+              <size>
+               <width>120</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">background-color:rgb(183, 255, 249)</string>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
              </property>
             </widget>
            </item>
@@ -1423,21 +1597,9 @@ background-color:rgb(100,100,100);
                <height>20</height>
               </size>
              </property>
-            </widget>
-           </item>
-           <item row="1" column="16">
-            <widget class="QComboBox" name="cmbMuni2">
-             <property name="minimumSize">
-              <size>
-               <width>150</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>150</width>
-               <height>20</height>
-              </size>
+             <property name="styleSheet">
+              <string notr="true">background-color:
+rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
@@ -1445,6 +1607,87 @@ background-color:rgb(100,100,100);
             <widget class="QLabel" name="lblprovincia2">
              <property name="text">
               <string>Provincia</string>
+             </property>
+            </widget>
+           </item>
+           <item row="2" column="12" colspan="6">
+            <layout class="QGridLayout" name="gridLayout_11">
+             <item row="0" column="4">
+              <spacer name="horizontalSpacer_6">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>30</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="2">
+              <spacer name="horizontalSpacer_7">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Fixed</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>30</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item row="0" column="5">
+              <widget class="QPushButton" name="btnBaja2">
+               <property name="text">
+                <string>Baja</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QPushButton" name="btnModificar2">
+               <property name="text">
+                <string>Modifica</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="0">
+              <widget class="QPushButton" name="btnAlta2">
+               <property name="text">
+                <string>Alta</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+           <item row="0" column="3">
+            <widget class="QPushButton" name="btnBuscar2">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>../img/lupaper.ico</normaloff>../img/lupaper.ico</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>15</width>
+               <height>15</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="15">
+            <widget class="QLabel" name="lbllocalidad2">
+             <property name="text">
+              <string>Localidad</string>
              </property>
             </widget>
            </item>
@@ -1552,7 +1795,7 @@ background-color:rgb(100,100,100);
      <x>0</x>
      <y>0</y>
      <width>1024</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuArchivo">

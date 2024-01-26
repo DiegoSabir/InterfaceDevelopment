@@ -22,7 +22,7 @@
     <rect>
      <x>40</x>
      <y>30</y>
-     <width>241</width>
+     <width>201</width>
      <height>41</height>
     </rect>
    </property>
@@ -32,7 +32,7 @@
     </font>
    </property>
    <property name="text">
-    <string>¿Desea salir del aplicativo?</string>
+    <string>¿Salir de la aplicacion?</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btnSalir">
