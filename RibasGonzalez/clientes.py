@@ -1,13 +1,10 @@
+
 from PyQt6.QtGui import QPixmap
 from PyQt6 import QtWidgets, QtCore, QtGui
 from PyQt6.QtCore import Qt
-
-
 import conexion
 import var
 import eventos
-
-
 class Clientes():
     def limpiarPanel2(self=None):
         try:
@@ -17,11 +14,8 @@ class Clientes():
                 i.setText(None)
             var.ui.cmbProv2.setCurrentText('')
             var.ui.cmbMuni2.setCurrentText('')
-
         except Exception as error:
             print(str(error) + " en validar drivers")
-
-
 
     def buscarCliente(self):
         try:
@@ -32,12 +26,8 @@ class Clientes():
             var.ui.rbtTodos2.setChecked(True)
             conexion.Conexion.mostrarClientes()
             Clientes.colorearFila(codigo)
-
         except Exception as error:
             print(str(error) + " en cargarcliente clientes")
-
-
-
     def cargarCliente(self):
         try:
             Clientes.limpiarPanel2()
@@ -47,11 +37,8 @@ class Clientes():
             Clientes.auxiliar(registro)
             conexion.Conexion.mostrarClientes()
             Clientes.colorearFila(registro[0])
-
         except Exception as error:
             print(str(error) + " en cargar clientes clientes")
-
-
 
     def auxiliar(registro):
         try:
@@ -62,12 +49,8 @@ class Clientes():
                     dato.setCurrentText(str(registro[i]))
                 else:
                     dato.setText(str(registro[i]))
-
         except Exception as error:
             eventos.Eventos.error("Aviso", "No existe en la base de datos")
-
-
-
     def colorearFila(codigo):
         for fila in range(var.ui.tabClientes.rowCount()):
             if var.ui.tabClientes.item(fila, 0).text() == str(codigo):
@@ -75,8 +58,6 @@ class Clientes():
                     item = var.ui.tabClientes.item(fila, columna)
                     if item is not None:
                         item.setBackground(QtGui.QColor(255, 241, 150))
-
-
 
     def cargarTablaClientes(registros):
         try:
@@ -94,8 +75,6 @@ class Clientes():
 
         except Exception as error:
             print("error en cargarTablaclientes", error)
-
-
 
     def validarDNI2(dni):
         try:
@@ -126,10 +105,8 @@ class Clientes():
                 var.ui.txtDNI2.setText(None)
                 var.ui.txtDNI2.setFocus()
                 return False
-
         except Exception as error:
             print(str(error) + " en validar drivers")
-
 
 
     def validarMovil2(self=None):
@@ -143,12 +120,9 @@ class Clientes():
                     raise Exception
             else:
                 raise Exception
-
         except Exception as error:
             eventos.Eventos.error("Aviso", "El telefono debe ser una cadena de 9 numeros enteros")
             var.ui.txtmovil2.setText("")
-
-
 
     def altaCliente(self):
         try:
@@ -181,9 +155,6 @@ class Clientes():
 
         except Exception as error:
             print(str(error) + " en altacliente clientes")
-
-
-
     def modifCli(self):
         try:
             driver=[var.ui.lblcodbd2,var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2]
@@ -195,11 +166,8 @@ class Clientes():
             muni = var.ui.cmbMuni2.currentText()
             modifCliente.insert(5,muni)
             conexion.Conexion.modifCliente(modifCliente)
-
         except Exception as error:
             print(error, " en modifcli")
-
-
 
     def borraCli(qDate):
         try:
@@ -208,6 +176,5 @@ class Clientes():
             dni = var.ui.txtDNI2.text()
             conexion.Conexion.borrarCli(dni, str(data))
             conexion.Conexion.mostrarClientes()
-
         except Exception as error:
             eventos.Eventos.error("Aviso", "El cliente no existe o no se puede borrar")

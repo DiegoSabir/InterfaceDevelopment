@@ -1,5 +1,5 @@
 from PyQt6 import QtWidgets, QtSql, QtGui
-from datetime import date, datetime
+from datetime import date,datetime
 
 import clientes
 import conexion
@@ -8,11 +8,10 @@ import drivers
 import var
 import facturas
 
-
 class Conexion():
     def conexion(self=None):
-        var.bbdd = 'bbdd.sqlite'
-        db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
+        var.bbdd='bbdd.sqlite'
+        db=QtSql.QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName(var.bbdd)
         if not db.open():
             print('error conexion')
@@ -24,7 +23,7 @@ class Conexion():
     def cargarprov(self=None):
         try:
             var.ui.cmbProv.clear()
-            query = QtSql.QSqlQuery()
+            query=QtSql.QSqlQuery()
             query.prepare('select provincia from provincias')
             if query.exec():
                 var.ui.cmbProv.addItem('')
@@ -35,7 +34,7 @@ class Conexion():
 
     def selMuni(self=None):
         try:
-            id = 0;
+            id=0;
             var.ui.cmbMuni.clear()
             prov = var.ui.cmbProv.currentText()
             query = QtSql.QSqlQuery()
@@ -43,10 +42,10 @@ class Conexion():
             query.bindValue(':prov', prov)
             if query.exec():
                 while query.next():
-                    id = query.value(0)
+                    id=query.value(0)
             query1 = QtSql.QSqlQuery()
             query1.prepare('select municipio from municipios where idprov = :id')
-            query1.bindValue(':id', int(id))
+            query1.bindValue(':id',int(id))
             if query1.exec():
                 var.ui.cmbMuni.addItem('')
                 while query1.next():
@@ -80,18 +79,16 @@ class Conexion():
         except Exception as error:
             print(error, " en guardardri")
 
-    def mostrardriver(self=None):
+    def mostrardriver(self= None):
         try:
             registros = []
             query = QtSql.QSqlQuery()
             if var.ui.rbtTodos.isChecked():
                 query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
             if var.ui.rbtAlta.isChecked():
-                query.prepare(
-                    'select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is null')
+                query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is null')
             if var.ui.rbtBaja.isChecked():
-                query.prepare(
-                    'select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is not null')
+                query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is not null')
 
             if query.exec():
                 while query.next():
@@ -110,7 +107,7 @@ class Conexion():
 
     def oneDriver(codigo):
         try:
-            registro = []
+            registro=[]
             query = QtSql.QSqlQuery()
             query.prepare('select * from drivers where codigo=:codigo')
             query.bindValue(':codigo', int(codigo))
@@ -125,7 +122,7 @@ class Conexion():
 
     def codDri(dni):
         try:
-            registro = []
+            registro=[]
             query = QtSql.QSqlQuery()
             query.prepare('select * from drivers where dnidri=:dnidri')
             query.bindValue(':dnidri', str(dni))
@@ -168,32 +165,31 @@ class Conexion():
         try:
             query1 = QtSql.QSqlQuery()
             query1.prepare('select bajadri from drivers where '
-                           ' dnidri=:dni')
-            query1.bindValue(':dni', str(dni))
+                          ' dnidri=:dni')
+            query1.bindValue(':dni',str(dni))
             if query1.exec():
                 while query1.next():
-                    valor = query1.value(0)
+                    valor=query1.value(0)
                 query = QtSql.QSqlQuery()
                 query.prepare('update drivers set bajadri= :fechabaja where '
                               ' dnidri=:dni')
-                query.bindValue(':fechabaja', str(fecha))
-                query.bindValue(':dni', str(dni))
+                query.bindValue(':fechabaja',str(fecha))
+                query.bindValue(':dni',str(dni))
                 if query.exec():
                     Conexion.mostrardriver()
                     var.Baja.hide()
                     eventos.Eventos.mensaje("Aviso", "Conductor dado de baja")
         except Exception as error:
             print('error modifdriver', error)
-
     @staticmethod
     def selectDriverstodos():
         try:
-            registros = []
+            registros=[]
             query1 = QtSql.QSqlQuery()
             query1.prepare('select * from drivers order by apeldri')
             if query1.exec():
                 while query1.next():
-                    row = [query1.value(i) for i in range(query1.record().count())]
+                    row=[query1.value(i) for i in range(query1.record().count())]
                     registros.append(row)
             return registros
 
@@ -286,7 +282,7 @@ class Conexion():
 
     def selMuni2(self=None):
         try:
-            id = 0;
+            id=0;
             var.ui.cmbMuni2.clear()
             prov = var.ui.cmbProv2.currentText()
             query = QtSql.QSqlQuery()
@@ -294,10 +290,10 @@ class Conexion():
             query.bindValue(':prov', prov)
             if query.exec():
                 while query.next():
-                    id = query.value(0)
+                    id=query.value(0)
             query1 = QtSql.QSqlQuery()
             query1.prepare('select municipio from municipios where idprov = :id')
-            query1.bindValue(':id', int(id))
+            query1.bindValue(':id',int(id))
             if query1.exec():
                 var.ui.cmbMuni2.addItem('')
                 while query1.next():
@@ -305,11 +301,10 @@ class Conexion():
 
         except Exception as error:
             print(error, " en selMuni2")
-
     def cargarprov2(self=None):
         try:
             var.ui.cmbProv2.clear()
-            query = QtSql.QSqlQuery()
+            query=QtSql.QSqlQuery()
             query.prepare('select provincia from provincias')
             if query.exec():
                 var.ui.cmbProv2.addItem('')
@@ -407,16 +402,16 @@ class Conexion():
         try:
             query1 = QtSql.QSqlQuery()
             query1.prepare('select bajacli from clientes where '
-                           ' dnicli=:dni')
-            query1.bindValue(':dni', str(dni))
+                          ' dnicli=:dni')
+            query1.bindValue(':dni',str(dni))
             if query1.exec():
                 while query1.next():
-                    valor = query1.value(0)
+                    valor=query1.value(0)
                 query = QtSql.QSqlQuery()
                 query.prepare('update clientes set bajacli= :fechabaja where '
                               ' dnicli=:dni')
-                query.bindValue(':fechabaja', str(fecha))
-                query.bindValue(':dni', str(dni))
+                query.bindValue(':fechabaja',str(fecha))
+                query.bindValue(':dni',str(dni))
                 if query.exec():
                     Conexion.mostrarClientes()
                     var.Bajacli.hide()
@@ -440,10 +435,9 @@ class Conexion():
         except Exception as error:
 
             print('error selectDrivertodos', error)
-
     def codCli(dni):
         try:
-            registro = []
+            registro=[]
             query = QtSql.QSqlQuery()
             query.prepare('select * from clientes where dnicli=:dnicli')
             query.bindValue(':dnicli', str(dni))
@@ -455,16 +449,16 @@ class Conexion():
 
         except Exception as error:
             print('error codcli', error)
-
+    
     def cargarconductor(self=None):
         try:
             var.ui.cmbCond.clear()
-            query = QtSql.QSqlQuery()
+            query=QtSql.QSqlQuery()
             query.prepare('select codigo, apeldri from drivers where bajadri is null order by codigo')
             if query.exec():
                 var.ui.cmbCond.addItem('')
                 while query.next():
-                    var.ui.cmbCond.addItem(str(query.value(0)) + "." + str(query.value(1)))
+                    var.ui.cmbCond.addItem(str(query.value(0))+"."+str(query.value(1)))
         except Exception as error:
             print(error, " cargar cond")
 
@@ -482,18 +476,16 @@ class Conexion():
 
         except Exception as error:
             print("Error:", str(error))
-
     def altafacturacion(registro):
         try:
-            if not all(
-                    [var.ui.txtcifcli.text(), var.ui.txtfechafact.text(), var.ui.cmbCond.currentText().split('.')[0]]):
+            if not all([var.ui.txtcifcli.text(), var.ui.txtfechafact.text(), var.ui.cmbCond.currentText().split('.')[0]]):
                 eventos.Eventos.error("Aviso", "Faltan datos obligatorios")
             else:
                 dni = var.ui.txtcifcli.text()
                 if Conexion.verificarClibaja(dni):
                     query = QtSql.QSqlQuery()
                     query.prepare('insert into facturas(dnicli, fecha, driver) values(:dni, :fecha, :driver)')
-                    query.bindValue(":dni", str(registro[0]))
+                    query.bindValue(":dni",str(registro[0]))
                     query.bindValue(":fecha", str(registro[1]))
                     query.bindValue(":driver", str(registro[2]))
                     if query.exec():
@@ -507,7 +499,7 @@ class Conexion():
     @staticmethod
     def cargarfacturas():
         try:
-            registros = []
+            registros=[]
             query = QtSql.QSqlQuery()
             query.prepare('select numfac, dnicli from facturas')
             if query.exec():
@@ -518,7 +510,6 @@ class Conexion():
 
         except Exception as error:
             print(error, "cargarfacturas")
-
     def oneFactura(codigo):
         try:
             registro = []
@@ -535,7 +526,7 @@ class Conexion():
 
     def selMuni3(self=None):
         try:
-            id = 0;
+            id=0;
             var.ui.cmbMuniVentas.clear()
             prov = var.ui.cmbProbVentas.currentText()
             query = QtSql.QSqlQuery()
@@ -543,33 +534,33 @@ class Conexion():
             query.bindValue(':prov', prov)
             if query.exec():
                 while query.next():
-                    id = query.value(0)
+                    id=query.value(0)
             query1 = QtSql.QSqlQuery()
             query1.prepare('select municipio from municipios where idprov = :id')
-            query1.bindValue(':id', int(id))
+            query1.bindValue(':id',int(id))
             if query1.exec():
                 var.ui.cmbMuniVentas.addItem('')
+                Conexion.datosViaje()
                 while query1.next():
                     var.ui.cmbMuniVentas.addItem(query1.value(0))
 
         except Exception as error:
             print(error, " en selMuni2")
-
     def cargarprov3(self=None):
         try:
             var.ui.cmbProbVentas.clear()
-            query = QtSql.QSqlQuery()
+            query=QtSql.QSqlQuery()
             query.prepare('select provincia from provincias')
             if query.exec():
                 var.ui.cmbProbVentas.addItem('')
+                Conexion.datosViaje()
                 while query.next():
                     var.ui.cmbProbVentas.addItem(query.value(0))
         except Exception as error:
             print(error, " en cargarprov")
-
     def selMuni4(self=None):
         try:
-            id = 0;
+            id=0;
             var.ui.cmbMuniVentas2.clear()
             prov = var.ui.cmbProbVentas2.currentText()
             query = QtSql.QSqlQuery()
@@ -577,44 +568,130 @@ class Conexion():
             query.bindValue(':prov', prov)
             if query.exec():
                 while query.next():
-                    id = query.value(0)
+                    id=query.value(0)
             query1 = QtSql.QSqlQuery()
             query1.prepare('select municipio from municipios where idprov = :id')
-            query1.bindValue(':id', int(id))
+            query1.bindValue(':id',int(id))
             if query1.exec():
                 var.ui.cmbMuniVentas2.addItem('')
+                Conexion.datosViaje()
                 while query1.next():
                     var.ui.cmbMuniVentas2.addItem(query1.value(0))
 
         except Exception as error:
             print(error, " en selMuni2")
-
     def cargarprov4(self=None):
         try:
             var.ui.cmbProbVentas2.clear()
-            query = QtSql.QSqlQuery()
+            query=QtSql.QSqlQuery()
             query.prepare('select provincia from provincias')
             if query.exec():
                 var.ui.cmbProbVentas2.addItem('')
+                Conexion.datosViaje()
                 while query.next():
                     var.ui.cmbProbVentas2.addItem(query.value(0))
         except Exception as error:
             print(error, " en cargarprov")
 
-"""
-    def comprobarcliente(dato):
+
+    @staticmethod
+    def datosViaje():
         try:
-            query = QtSql.QSqlQuery()
-            query.prepare("select baja from clientes where dni = :dni")
-            query.bindValue(":dni", str(dato))
-            if query.exec():
-                while query.next():
-                    valor = query.value(0)
-            if valor is None:
-                return True
+            facturas.Facturas.comprobarTarifa()
+            tarifas=[0.20, 0.40, 0.80]
+            datosviaje=[var.ui.cmbProbVentas.currentText(), var.ui.cmbMuniVentas, var.ui.cmbProbVentas2.currentText(), var.ui.cmbMuniVentas2]
+            if str(datosviaje[0])== str(datosviaje[2]):
+                if str(datosviaje[1]) == str(datosviaje[3]):
+                    datosviaje.append(str(tarifas[2]))
+                    return datosviaje
+                else:
+                    datosviaje.append(str(tarifas[1]))
+                    return datosviaje
             else:
-                return False
+                datosviaje.append(str(tarifas[0]))
+                return datosviaje
 
         except Exception as error:
-            print("comprobar cliente baja", error)
-"""
+            print(error, " en datos viaje")
+
+    def viajesFactura(dato):
+        try:
+            valores = []
+            query = QtSql.QSqlQuery()
+            query.prepare("select idviaje, origen, destino, tarifa, km from viajes where factura = :dato")
+            query.bindValue(':dato', str(dato))
+            if query.exec():
+                while query.next():
+                    row = [query.value(i) for i in range(query.record().count())]
+                    valores.append(row)
+
+            facturas.Facturas.cargaTablaViajes(valores)
+        except Exception as error:
+            print("ERROR CARGAR viaje a la vista", error)
+
+
+
+    def cargarLineaViaje(registro):
+        try:
+            if any(not elemento.strip() for elemento in registro):
+                eventos.Eventos.error("Aviso", "Faltan datos del viaje o numero de factura")
+            else:
+                query = QtSql.QSqlQuery()
+                query.prepare("insert into viajes(factura, origen, destino, tarifa, km) values (:factura, :origen, :destino, :tarifa, :kilometros)")
+                query.bindValue(":factura", int(registro[5]))
+                query.bindValue(":origen", int(registro[1]))
+                query.bindValue(":destino", int(registro[2]))
+                query.bindValue(":tarifa", int(registro[3]))
+                query.bindValue(":kilometros", str(registro[4]))
+                if query.exec():
+                    eventos.Eventos.mensaje('Aviso','Viaje grabado en base de datos')
+                    facturas.Facturas.cargaTablaViajes()
+
+        except Exception as error:
+            print(error, " en cargarprov")
+
+    def guardarViaje(viaje):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare("insert into viajes (factura, origen, destino, tarifa, km) values (:factura, :origen, :destino, :tarifa, :kilometros)")
+            query.bindValue(":factura", viaje[0])
+            query.bindValue(":origen", viaje[1]+" - "+viaje[2])
+            query.bindValue(":destino", viaje[3]+" - "+viaje[4])
+            query.bindValue(":tarifa", viaje[5])
+            query.bindValue(":kilometros", viaje[6])
+            if query.exec():
+                eventos.Eventos.mensaje('Aviso',"Viaje guardado")
+            else:
+                eventos.Eventos.error('Aviso',"Error al guardar el viaje")
+        except Exception as error:
+            print(error)
+
+    def oneViajes(codigo):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare("select * from viajes where idviaje = :codigo")
+            query.bindValue(":codigo", int(codigo))
+            if query.exec():
+                while query.next():
+                    for i in range(6):
+                        registro.append(str(query.value(i)))
+            return registro
+        except Exception as error:
+            print("error en oneviaje", error)
+
+    def borrarViaje(id):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare("delete from viajes where idviaje = :id")
+            query.bindValue(":id", int(id))
+            if query.exec():
+                eventos.Eventos.mensaje('Aviso',"Viaje eliminado correctamente")
+            else:
+                eventos.Eventos.error('Aviso',"Error al borrar el viaje")
+
+        except Exception as error:
+            print(error)
+
+
+

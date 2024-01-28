@@ -1,20 +1,20 @@
-from auxiliar import *
-from datetime import  datetime
-
-
 import locale
 import os.path
+
 import xlrd
+
 import clientes
 import conexion
-import sys, zipfile, shutil
+
+locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
+import sys,zipfile,shutil
+from auxiliar import *
+from datetime import  datetime
 import xlwt
 import drivers
 import var
-
-
-locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 class Eventos():
+
     @staticmethod
     def salir (self):
         try:
@@ -23,35 +23,24 @@ class Eventos():
         except Exception as error:
             print(error, "en modulo enventos.")
 
-
-
     @staticmethod
     def abrirCalendar(self):
         try:
             var.calendar.show()
-
         except Exception as error:
             print(error, "en modulo eneventos")
-
-
 
     @staticmethod
     def cerrarAcercaDe(self):
         try:
             var.acercaDe.hide()
-
         except Exception as error:
             print(error , " en modulo eventos")
-
-
-
     def abrirAcercaDe(self):
         try:
             var.acercaDe.show()
         except Exception as error:
             print(error , " en modulo eventos")
-
-
 
     @staticmethod
     def abrirSalir(self):
@@ -60,16 +49,12 @@ class Eventos():
         except Exception as error:
             print(error , " en modulo eventos")
 
-
-
     @staticmethod
     def cerrarSalir(self):
         try:
             var.salir.hide()
         except Exception as error:
             print(error , " en modulo eventos")
-
-
 
     @staticmethod
     def acercade(self):
@@ -78,13 +63,9 @@ class Eventos():
         except Exception as error:
             print(error ," en abrir acercade")
 
-
-
     @staticmethod
     def selEstado(self):
         conexion.Conexion.mostrardriver()
-
-
 
     @staticmethod
     def resizeTabdrivers(self):
@@ -95,12 +76,8 @@ class Eventos():
                     header.setSectionResizeMode(i,QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
                 elif i==1 or i==2:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
-
         except Exception as error:
             print(error," en resizetabdrivers")
-
-
-
     @staticmethod
     def formatCajaTexto(self = None):
         try:
@@ -109,8 +86,6 @@ class Eventos():
 
         except Exception as error:
             print(error," en letracapital")
-
-
 
     @staticmethod
     def crearBackup():
@@ -128,9 +103,6 @@ class Eventos():
 
         except Exception as error:
             eventos.Eventos.error("Aviso", "Error al crear backup")
-
-
-
     def  restaurarBackup(self):
         try:
             filename = var.dlgabrir.getOpenFileName(None, 'Restaurar copia de seguridad', '', '*.zip;;All Files(*)')
@@ -144,8 +116,6 @@ class Eventos():
 
         except Exception as error:
             eventos.Eventos.error("Aviso", "Error al restaurar el backup")
-
-
 
     def exportardatosxls(self):
         try:
@@ -177,18 +147,13 @@ class Eventos():
         except Exception as error:
             eventos.Eventos.error("Aviso", "Error al exportar datos")
 
-
-
     def validarDNI(self=None):
         try:
             dni = var.ui.txtDNI.text()
             dni = dni.upper()
             drivers.Drivers.validarDNI(dni)
-
         except Exception as error:
             print(error)
-
-
 
     def importarDatosExcel(self):
         try:
@@ -229,9 +194,6 @@ class Eventos():
             mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
             mbox.setText('Error al importar datos en hoja de cálculo')
             mbox.exec()
-
-
-
     @staticmethod
     def abrirCalendarBaja():
         try:
@@ -253,12 +215,8 @@ class Eventos():
                     eventos.Eventos.error("Aviso", "Elige conductor")
             else:
                 eventos.Eventos.error("Aviso", "Conductor no dado de baja")
-
         except Exception as error:
             print(error," en modulo eventos")
-
-
-
     @staticmethod
     def resizeTabclientes(self):
         try:
@@ -268,28 +226,19 @@ class Eventos():
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
                 elif i == 1 or i == 2:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
-
         except Exception as error:
             print(error, " en resizetabdrivers")
-
-
-
     def validarDNI2(self=None):
         try:
             dni = var.ui.txtDNI2.text()
             dni = dni.upper()
             clientes.Clientes.validarDNI2(dni)
-
         except Exception as error:
             print(error)
-
-
 
     @staticmethod
     def selEstado2(self):
         conexion.Conexion.mostrarClientes()
-
-
 
     @staticmethod
     def abrirCalendarBajacli():
@@ -312,11 +261,8 @@ class Eventos():
                     eventos.Eventos.error("Aviso", "Elige un cliente")
             else:
                 eventos.Eventos.error("Aviso", "Cliente no se ha dado de baja")
-
         except Exception as error:
             print(error, " en modulo eventos abrircalendarbajacli")
-
-
 
     def exportardatosclientesxls(self):
         try:
@@ -343,9 +289,6 @@ class Eventos():
 
         except Exception as error:
             eventos.Eventos.error("Aviso", "Error al exportar datos")
-
-
-
     def importarDatosclientesExcel(self):
         try:
             filename = var.dlgabrir.getOpenFileName(None, "Importar datos", "", "*.xls;;All File(*)")
@@ -376,8 +319,8 @@ class Eventos():
                             mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
                             mbox.setText("Importacion exitosa,clientes no insertados "+str(numFallo))
                             mbox.exec()
-                conexion.Conexion.mostrarClientes()
 
+                conexion.Conexion.mostrarClientes()
         except Exception as error:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle('Aviso')
@@ -386,15 +329,11 @@ class Eventos():
             mbox.setText('Error al importar datos en hoja de cálculo')
             mbox.exec()
 
-
-
     def abrirCalendarfact(self):
         try:
             var.Altafact.show()
         except Exception as error:
             print(error, "en modulo eneventos")
-
-
 
     def error(title, text):
         mbox = QtWidgets.QMessageBox()
@@ -403,27 +342,33 @@ class Eventos():
         mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
         mbox.setText(text)
         mbox.exec()
-
-
-
     def mensaje(title, text):
         mbox = QtWidgets.QMessageBox()
         mbox.setWindowTitle(title)
         mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
-        mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+        mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
         mbox.setText(text)
         mbox.exec()
 
-
-
-    def resizeTabfacturas(self):
+    @staticmethod
+    def resizeTabfacturas():
         try:
-            header = var.ui.tabFacturas.horizontalHeader()
-            for i in range(2):
+            header = var.ui.tablaFacturas.horizontalHeader()
+            for i in range(3):
                 if i == 0:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
                 elif i == 1:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
-
         except Exception as error:
-            print(error, " en resizetabfacturas")
+            print(error, " en resize fact")
+    @staticmethod
+    def resizeTabViajes():
+        try:
+            header = var.ui.tabViajes.horizontalHeader()
+            for i in range(5):
+                if i==0 or i==3 or i==6:
+                    header.setSectionResizeMode(i,QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+                elif i==1 or i==2 :
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
+        except Exception as error:
+            print(error," en resizetabdrivers")
