@@ -1,6 +1,6 @@
 import clientes
 import facturas
-from calendarWindow import *
+from CalendarWindow import *
 from acercaWindow import *
 from salirWindow import *
 from datetime import datetime

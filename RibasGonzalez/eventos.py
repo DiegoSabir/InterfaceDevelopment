@@ -199,7 +199,7 @@ class Eventos():
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle("Dar Baja")
-            mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+            mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico"))
             mbox.setIcon(QtWidgets.QMessageBox.Icon.Question)
             mbox.setText("¿Desea darlo de baja?")
             mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
@@ -245,7 +245,7 @@ class Eventos():
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle("Dar Baja")
-            mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+            mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico"))
             mbox.setIcon(QtWidgets.QMessageBox.Icon.Question)
             mbox.setText("¿Desea darlo de baja?")
             mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
@@ -338,14 +338,14 @@ class Eventos():
     def error(title, text):
         mbox = QtWidgets.QMessageBox()
         mbox.setWindowTitle(title)
-        mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+        mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico"))
         mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
         mbox.setText(text)
         mbox.exec()
     def mensaje(title, text):
         mbox = QtWidgets.QMessageBox()
         mbox.setWindowTitle(title)
-        mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+        mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico"))
         mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
         mbox.setText(text)
         mbox.exec()
