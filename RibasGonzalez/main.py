@@ -2,16 +2,17 @@ import clientes
 import conexion
 import facturas
 import informes
+import locale
+
 from mainWindows import *
 from PyQt6.QtCore import QTimer,QSize
 from auxiliar import *
-import locale
 
+import sys, var, eventos, drivers
 
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
-import sys, var, eventos, drivers
 class Main(QtWidgets.QMainWindow):
 
     def __init__(self):
@@ -36,15 +37,21 @@ class Main(QtWidgets.QMainWindow):
         conexion.Conexion.cargarfacturas()
         var.dlgabrir = FileDialogAbrir()
 
+
+
         '''
         Eventos 
         '''
         rbtClientes = (var.ui.rbtTodos2, var.ui.rbtAlta2, var.ui.rbtBaja2)
         for i in rbtClientes:
             i.toggled.connect(eventos.Eventos.selEstado2)
+
         rbtDriver=(var.ui.rbtTodos, var.ui.rbtAlta, var.ui.rbtBaja)
         for i in rbtDriver:
             i.toggled.connect(eventos.Eventos.selEstado)
+
+
+
         '''
         Eventos Botones
         '''
@@ -63,6 +70,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btngrabar.clicked.connect(facturas.Facturas.guardarViaje)
 
 
+
         '''
         zona eventos menu bar
         '''
@@ -77,6 +85,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionCrear_informe_pdf.triggered.connect(informes.Informes.reportclientes)
         var.ui.actionCrear_informe_conductores.triggered.connect(informes.Informes.reportdrivers)
         var.ui.actionCrear_informe.triggered.connect(informes.Informes.checkboxinforme)
+
+
+
         '''
         combobox
         '''
@@ -88,6 +99,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.cmbProbVentas2.currentIndexChanged.connect(conexion.Conexion.selMuni4)
         var.ui.cmbProbVentas2.currentIndexChanged.connect(conexion.Conexion.datosViaje)
         var.ui.cmbMuniVentas2.currentIndexChanged.connect(conexion.Conexion.datosViaje)
+
+
 
         '''
         Eventos cajas texto
@@ -101,6 +114,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtDNI2.editingFinished.connect(eventos.Eventos.validarDNI2)
         var.ui.txtmovil2.editingFinished.connect(clientes.Clientes.validarMovil2)
         var.ui.txtkm.editingFinished.connect(facturas.Facturas.validarKm)
+
+
+
         '''
         Eventos tabla 
          '''
@@ -112,6 +128,9 @@ class Main(QtWidgets.QMainWindow):
         var.ui.tabClientes.clicked.connect(clientes.Clientes.cargarCliente)
         var.ui.tablaFacturas.clicked.connect(facturas.Facturas.cargarFactura)
         var.ui.tabViajes.clicked.connect(facturas.Facturas.cargarViaje)
+
+
+
         '''
         Eventos 
         '''
@@ -120,9 +139,13 @@ class Main(QtWidgets.QMainWindow):
         eventos.Eventos.resizeTabfacturas()
         eventos.Eventos.resizeTabViajes()
 
+
+
     def closeEvent(self, event):
         event.ignore()
         eventos.Eventos.abrirSalir(self)
+
+
 
     def cargarStatusbar(self):
         self.labelVersion = QtWidgets.QLabel("Version: 0.1.0", self)
@@ -134,6 +157,8 @@ class Main(QtWidgets.QMainWindow):
         self.timer.timeout.connect(self.actualizarFecha)
         self.timer.start(60000)
 
+
+
     def actualizarFecha(self):
         if hasattr(self, 'labelstatus') and self.labelstatus is not None:
             var.ui.statusbar.removeWidget(self.labelstatus)
@@ -141,6 +166,9 @@ class Main(QtWidgets.QMainWindow):
         self.labelstatus = QtWidgets.QLabel(datetime.now().strftime('%A - %d/%m/%Y'), self)
         self.labelstatus.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
         var.ui.statusbar.addPermanentWidget(self.labelstatus, 2)
+
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     app = QtWidgets.QApplication([])

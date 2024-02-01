@@ -8,7 +8,6 @@ import drivers
 import var
 import facturas
 
-
 class Conexion():
     def conexion(self=None):
         var.bbdd = 'bbdd.sqlite'
@@ -21,6 +20,8 @@ class Conexion():
             print('base datos encontrada')
             return True
 
+
+
     def cargarprov(self=None):
         try:
             var.ui.cmbProv.clear()
@@ -32,6 +33,8 @@ class Conexion():
                     var.ui.cmbProv.addItem(query.value(0))
         except Exception as error:
             print(error, " en cargarprov")
+
+
 
     def selMuni(self=None):
         try:
@@ -54,6 +57,8 @@ class Conexion():
 
         except Exception as error:
             print(error, " en selMuni")
+
+
 
     @staticmethod
     def guardardri(newDriver):
@@ -79,6 +84,8 @@ class Conexion():
 
         except Exception as error:
             print(error, " en guardardri")
+
+
 
     def mostrardriver(self=None):
         try:
@@ -108,6 +115,8 @@ class Conexion():
         except Exception as error:
             print('error mostrardricver', error)
 
+
+
     def oneDriver(codigo):
         try:
             registro = []
@@ -123,6 +132,8 @@ class Conexion():
         except Exception as error:
             print('error oneDriver', error)
 
+
+
     def codDri(dni):
         try:
             registro = []
@@ -137,6 +148,8 @@ class Conexion():
 
         except Exception as error:
             print('error codDri', error)
+
+
 
     def modifDriver(modifDriver):
         try:
@@ -164,6 +177,8 @@ class Conexion():
         except Exception as error:
             print('error modifdriver', error)
 
+
+
     def borrarDri(dni, fecha):
         try:
             query1 = QtSql.QSqlQuery()
@@ -182,8 +197,11 @@ class Conexion():
                     Conexion.mostrardriver()
                     var.Baja.hide()
                     eventos.Eventos.mensaje("Aviso", "Conductor dado de baja")
+
         except Exception as error:
             print('error modifdriver', error)
+
+
 
     @staticmethod
     def selectDriverstodos():
@@ -202,6 +220,8 @@ class Conexion():
 
             print('error selectDrivertodos', error)
 
+
+
     @staticmethod
     def verificarDri(dni):
         try:
@@ -217,6 +237,8 @@ class Conexion():
 
         except Exception as error:
             print("Error:", str(error))
+
+
 
     def volverDarAlta(dni):
         try:
@@ -247,6 +269,8 @@ class Conexion():
         except Exception as error:
             print("Error al dar alta de nuevo conductor en BD", error)
 
+
+
     def oneCliente(codigo):
         try:
             registro = []
@@ -258,8 +282,11 @@ class Conexion():
                     for i in range(8):
                         registro.append(str(query.value(i)))
             return registro
+
         except Exception as error:
             print("error en oneCliente", error)
+
+
 
     def mostrarClientes(self=None):
         try:
@@ -281,8 +308,11 @@ class Conexion():
                 clientes.Clientes.cargarTablaClientes(registros)
             else:
                 var.ui.tabClientes.setRowCount(0)
+
         except Exception as error:
             print("error en mostrarclientes", error)
+
+
 
     def selMuni2(self=None):
         try:
@@ -306,6 +336,8 @@ class Conexion():
         except Exception as error:
             print(error, " en selMuni2")
 
+
+
     def cargarprov2(self=None):
         try:
             var.ui.cmbProv2.clear()
@@ -315,8 +347,11 @@ class Conexion():
                 var.ui.cmbProv2.addItem('')
                 while query.next():
                     var.ui.cmbProv2.addItem(query.value(0))
+
         except Exception as error:
             print(error, " en cargarprov")
+
+
 
     def verificarCli(dni):
         try:
@@ -332,6 +367,8 @@ class Conexion():
 
         except Exception as error:
             print("Error:", str(error))
+
+
 
     @staticmethod
     def guardarcli(newCliente):
@@ -353,6 +390,8 @@ class Conexion():
 
         except Exception as error:
             print(error, " en guardarcli")
+
+
 
     def volverDarAlta2(dni):
         try:
@@ -382,6 +421,8 @@ class Conexion():
         except Exception as error:
             print("Error al dar alta de nuevo cliente en BD", error)
 
+
+
     def modifCliente(modifCliente):
         try:
             query = QtSql.QSqlQuery()
@@ -402,6 +443,8 @@ class Conexion():
 
         except Exception as error:
             print('error modifclienter', error)
+
+
 
     def borrarCli(dni, fecha):
         try:
@@ -441,6 +484,8 @@ class Conexion():
 
             print('error selectDrivertodos', error)
 
+
+
     def codCli(dni):
         try:
             registro = []
@@ -456,6 +501,8 @@ class Conexion():
         except Exception as error:
             print('error codcli', error)
 
+
+
     def cargarconductor(self=None):
         try:
             var.ui.cmbCond.clear()
@@ -467,6 +514,8 @@ class Conexion():
                     var.ui.cmbCond.addItem(str(query.value(0)) + "." + str(query.value(1)))
         except Exception as error:
             print(error, " cargar cond")
+
+
 
     def verificarClibaja(dni):
         try:
@@ -533,6 +582,8 @@ class Conexion():
         except Exception as error:
             print("error en onefactura", error)
 
+
+
     def selMuni3(self=None):
         try:
             id = 0;
@@ -556,6 +607,8 @@ class Conexion():
         except Exception as error:
             print(error, " en selMuni2")
 
+
+
     def cargarprov3(self=None):
         try:
             var.ui.cmbProbVentas.clear()
@@ -568,6 +621,8 @@ class Conexion():
                     var.ui.cmbProbVentas.addItem(query.value(0))
         except Exception as error:
             print(error, " en cargarprov")
+
+
 
     def selMuni4(self=None):
         try:
@@ -592,6 +647,8 @@ class Conexion():
         except Exception as error:
             print(error, " en selMuni2")
 
+
+
     def cargarprov4(self=None):
         try:
             var.ui.cmbProbVentas2.clear()
@@ -605,8 +662,20 @@ class Conexion():
         except Exception as error:
             print(error, " en cargarprov")
 
+
+
     @staticmethod
     def datosViaje():
+        """
+
+        :return: modulo que devuelve registro de un viaje
+        :rtype: bytearray
+
+        Este modulo carga los datos de los widgets del panel de gestion,
+        selecciona la tarifa en funcion del tipo de viaje
+        y devuelve un array con los datos.
+
+        """
         try:
             facturas.Facturas.comprobarTarifa()
             tarifas = [0.20, 0.40, 0.80]
@@ -678,6 +747,8 @@ class Conexion():
         except Exception as error:
             print(error)
 
+
+
     def oneViajes(codigo):
         try:
             registro = []
@@ -692,6 +763,8 @@ class Conexion():
         except Exception as error:
             print("error en oneviaje", error)
 
+
+
     def borrarViaje(id):
         try:
             query = QtSql.QSqlQuery()
@@ -704,6 +777,3 @@ class Conexion():
 
         except Exception as error:
             print(error)
-
-
-

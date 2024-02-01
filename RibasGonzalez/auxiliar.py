@@ -1,11 +1,12 @@
 import clientes
 import facturas
+import sys, var, eventos, drivers
+
 from CalendarWindow import *
 from acercaWindow import *
 from salirWindow import *
 from datetime import datetime
 
-import sys, var, eventos, drivers
 class Calendar(QtWidgets.QDialog):
     def __init__(self):
         bool=None
@@ -18,6 +19,9 @@ class Calendar(QtWidgets.QDialog):
         if var.ui.btnCalendario.clicked:
             var.calendar.calendari.setSelectedDate(QtCore.QDate(ano,mes,dia))
             var.calendar.calendari.clicked.connect(drivers.Drivers.cargaFecha)
+
+
+
 class AcercaDe(QtWidgets.QDialog):
     def __init__(self):
         super(AcercaDe, self).__init__()
@@ -25,6 +29,7 @@ class AcercaDe(QtWidgets.QDialog):
         var.acercaDe.setupUi(self)
 
         var.acercaDe.btnaceptar.clicked.connect(eventos.Eventos.cerrarAcercaDe)
+
 
 
 class Salir(QtWidgets.QDialog):
@@ -35,9 +40,15 @@ class Salir(QtWidgets.QDialog):
 
         var.salir.btnSalir.clicked.connect(eventos.Eventos.salir)
         var.salir.btnCancelar.clicked.connect(eventos.Eventos.cerrarSalir)
+
+
+
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
         super(FileDialogAbrir, self).__init__()
+
+
+
 class Baja(QtWidgets.QDialog):
     def __init__(self):
         super(Baja, self).__init__()
@@ -49,6 +60,8 @@ class Baja(QtWidgets.QDialog):
         var.Baja.calendari.setSelectedDate(QtCore.QDate(anho, mes, dia))
         var.Baja.calendari.clicked.connect(drivers.Drivers.borraDri)
 
+
+
 class Bajacli(QtWidgets.QDialog):
     def __init__(self):
         super(Bajacli, self).__init__()
@@ -59,6 +72,8 @@ class Bajacli(QtWidgets.QDialog):
         anho = datetime.now().year
         var.Bajacli.calendari.setSelectedDate(QtCore.QDate(anho, mes, dia))
         var.Bajacli.calendari.clicked.connect(clientes.Clientes.borraCli)
+
+
 
 class Altafact(QtWidgets.QDialog):
     def __init__(self):
