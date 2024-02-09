@@ -7,12 +7,16 @@ import clientes
 import conexion
 
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
+
 import sys,zipfile,shutil
+
 from auxiliar import *
 from datetime import  datetime
+
 import xlwt
 import drivers
 import var
+
 class Eventos():
 
     @staticmethod

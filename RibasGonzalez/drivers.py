@@ -1,13 +1,20 @@
 from datetime import datetime
+
 import var
 import locale, conexion
+
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
+
 from PyQt6.QtGui import QPixmap
 from PyQt6 import QtWidgets,QtCore, QtGui
-import eventos
-class Drivers():
 
+import eventos
+
+class Drivers():
     def limpiarPanel(self):
+        """
+
+        """
         try:
             listawidgets=[var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
                           var.ui.txtdir, var.ui.txtmovil, var.ui.txtsalario, var.ui.lblValidarDNI ]
@@ -18,16 +25,32 @@ class Drivers():
                 i.setChecked(False)
             var.ui.cmbProv.setCurrentText('')
             var.ui.cmbMuni.setCurrentText('')
+
         except Exception as error:
             print(str(error) + " en validar drivers")
+
+
+
     def cargaFecha(qDate):
+        """
+
+        """
         try:
             data=('{:02d}/{:02d}/{:4d}'.format(qDate.day(),qDate.month(),qDate.year()))
             var.ui.txtfecha.setText(str(data))
             var.calendar.hide()
+
         except Exception as error:
             print(str(error) + " en validar drivers")
+
+
+
     def validarDNI(dni):
+        """
+
+        :return:
+        :rtype:
+        """
         try:
             var.ui.txtDNI.setText(dni)  # Corrección aquí
             tabla = "TRWAGMYFPDXBNJZSKVHLCKE"
@@ -56,9 +79,18 @@ class Drivers():
                 var.ui.txtDNI.setText(None)
                 var.ui.txtDNI.setFocus()
                 return False
+
         except Exception as error:
             print(str(error) + " en validar drivers")
+
+
+
     def altaDriver(self):
+        """
+
+        :return:
+        :rtype:
+        """
         try:
             dni = var.ui.txtDNI.text()
             if conexion.Conexion.verificarDri(dni):
@@ -100,7 +132,13 @@ class Drivers():
 
         except Exception as error:
             print(str(error) + " en altadriver drivers")
+
+
+
     def validarMovil(self=None):
+        """
+
+        """
         try:
             movil = var.ui.txtmovil.text()
             numeros = "1234567890"
@@ -111,11 +149,17 @@ class Drivers():
                     raise Exception
             else:
                 raise Exception
+
         except Exception as error:
             eventos.Eventos.error("Aviso", "El telefono debe ser una cadena de 9 numeros enteros")
             var.ui.txtmovil.setText("")
 
+
+
     def validarSalario(self=None):
+            """
+
+            """
             try:
                 sal = var.ui.txtmovil.text()
                 numeros = "1234567890"
@@ -124,11 +168,15 @@ class Drivers():
                     var.ui.txtsalario.setText(str(locale.currency(float(var.ui.txtsalario.text()),grouping=True)))
                 else:
                     raise Exception
+
             except Exception as error:
                 eventos.Eventos.error("Aviso", "Valor de Salario Incorrecto (00000000.00)")
                 var.ui.txtsalario.setText("")
 
     def cargarTabladri(registros):
+        """
+
+        """
         try:
             index = 0
 
@@ -144,9 +192,16 @@ class Drivers():
                 var.ui.tabDrivers.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabDrivers.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 index += 1
+
         except Exception as error:
             print(str(error) + " en cargartabladri drivers")
+
+
+
     def cargarDriver(self):
+        """
+
+        """
         try:
             Drivers.limpiarPanel(self)
             row = var.ui.tabDrivers.selectedItems()
@@ -155,9 +210,16 @@ class Drivers():
             Drivers.auxiliar(registro)
             conexion.Conexion.mostrardriver()
             Drivers.colorearFila(registro[0])
+
         except Exception as error:
             print(str(error) + " en cargarDriver drivers")
+
+
+
     def auxiliar(registro):
+        """
+
+        """
         try:
             datos=[var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
                    var.ui.txtdir, var.ui.cmbProv, var.ui.cmbMuni, var.ui.txtmovil, var.ui.txtsalario]
@@ -174,10 +236,16 @@ class Drivers():
                 var.ui.chkA.setChecked(True)
             if 'D' in registro [10]:
                 var.ui.chkA.setChecked(True)
+
         except Exception as error:
             eventos.Eventos.error("Aviso", "No existe en la base de datos")
 
+
+
     def buscaDri(self):
+        """
+
+        """
         try:
             dni = var.ui.txtDNI.text()
             registro = conexion.Conexion.codDri(dni)
@@ -186,17 +254,29 @@ class Drivers():
             var.ui.rbtTodos.setChecked(True)
             conexion.Conexion.mostrardriver()
             Drivers.colorearFila(codigo)
+
         except Exception as error:
             print(error, "en busca de buscadri")
 
+
+
     def colorearFila(codigo):
+        """
+
+        """
         for fila in range(var.ui.tabDrivers.rowCount()):
             if var.ui.tabDrivers.item(fila, 0).text() == str(codigo):
                 for columna in range(var.ui.tabDrivers.columnCount()):
                     item = var.ui.tabDrivers.item(fila, columna)
                     if item is not None:
                         item.setBackground(QtGui.QColor(255, 241, 150))
+
+
+
     def modifDri(self):
+        """
+
+        """
         try:
             driver=[var.ui.lblcodbd,var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
                     var.ui.txtdir, var.ui.txtmovil, var.ui.txtsalario]
@@ -214,12 +294,16 @@ class Drivers():
                     licencias.append(i.text())
             modifDriver.append('-'.join(licencias))
             conexion.Conexion.modifDriver(modifDriver)
+
         except Exception as error:
             print(error, " en modifdri")
 
 
 
     def borraDri(qDate):
+        """
+
+        """
         try:
             data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
             var.Baja.hide()
@@ -227,5 +311,6 @@ class Drivers():
             conexion.Conexion.borrarDri(dni, str(data))
             conexion.Conexion.mostrardriver()
             conexion.Conexion.cargarconductor()
+
         except Exception as error:
             eventos.Eventos.error("Aviso", "El conductor no existe o no se puede borrar")
