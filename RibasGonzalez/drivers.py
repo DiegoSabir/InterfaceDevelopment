@@ -14,6 +14,11 @@ class Drivers():
     def limpiarPanel(self):
         """
 
+        Limpia los campos del panel de control de conductores.
+
+        Este método limpia los campos de entrada de texto, los campos de verificación de licencia
+        y los campos de lista desplegable de provincia y municipio en el panel de control de conductores.
+
         """
         try:
             listawidgets=[var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
@@ -34,6 +39,13 @@ class Drivers():
     def cargaFecha(qDate):
         """
 
+        Carga la fecha seleccionada en el campo de texto de fecha.
+
+        Este método toma la fecha seleccionada del calendario y la formatea en el formato 'dd/mm/yyyy',
+        luego la establece como texto en el campo de texto de fecha y oculta el calendario.
+
+        :param qDate: La fecha seleccionada del calendario.
+
         """
         try:
             data=('{:02d}/{:02d}/{:4d}'.format(qDate.day(),qDate.month(),qDate.year()))
@@ -48,8 +60,17 @@ class Drivers():
     def validarDNI(dni):
         """
 
-        :return:
-        :rtype:
+        Valida un número de DNI español.
+
+        Este método toma un número de DNI como entrada y verifica si es válido según el algoritmo utilizado en España.
+        Muestra una marca de verificación si el DNI es válido y una marca de error si no lo es.
+
+        :param dni: El número de DNI a validar.
+
+        :return: True si el DNI es válido, False si no lo es.
+
+        :rtype: bool
+
         """
         try:
             var.ui.txtDNI.setText(dni)  # Corrección aquí
@@ -88,8 +109,13 @@ class Drivers():
     def altaDriver(self):
         """
 
-        :return:
-        :rtype:
+        Da de alta un nuevo conductor en la base de datos o revierte la baja de un conductor existente.
+
+        Este método verifica si el DNI del conductor ya existe en la base de datos. Si el conductor ya existe y está dado de baja,
+        ofrece la opción de darlo de alta nuevamente. Si el conductor no existe o está dado de alta, verifica que se ingresen todos
+        los datos obligatorios y luego intenta guardar el nuevo conductor en la base de datos. Muestra un mensaje de éxito si el
+        conductor se agrega correctamente, o un mensaje de error si no se puede agregar.
+
         """
         try:
             dni = var.ui.txtDNI.text()
@@ -138,6 +164,11 @@ class Drivers():
     def validarMovil(self=None):
         """
 
+        Valida el número de teléfono móvil ingresado.
+
+        Este método verifica si el número de teléfono móvil ingresado es una cadena de 9 números enteros. Si no cumple con esta
+        condición, muestra un mensaje de error y limpia el campo de texto del teléfono móvil.
+
         """
         try:
             movil = var.ui.txtmovil.text()
@@ -157,24 +188,38 @@ class Drivers():
 
 
     def validarSalario(self=None):
-            """
+        """
 
-            """
-            try:
-                sal = var.ui.txtmovil.text()
-                numeros = "1234567890"
-                var.ui.txtmovil.setText(sal)# Corrección aquí
-                if len(sal) == len([n for n in sal if n in numeros]):
-                    var.ui.txtsalario.setText(str(locale.currency(float(var.ui.txtsalario.text()),grouping=True)))
-                else:
-                    raise Exception
+        Valida el salario ingresado.
 
-            except Exception as error:
-                eventos.Eventos.error("Aviso", "Valor de Salario Incorrecto (00000000.00)")
-                var.ui.txtsalario.setText("")
+        Este método verifica si el salario ingresado es una cadena que contiene solo dígitos numéricos.
+        Si cumple con esta condición, formatea el salario como una cantidad monetaria y lo muestra en el campo de texto del salario.
+        Si no cumple con esta condición, muestra un mensaje de error y limpia el campo de texto del salario.
+
+        """
+        try:
+            sal = var.ui.txtmovil.text()
+            numeros = "1234567890"
+            var.ui.txtmovil.setText(sal)# Corrección aquí
+            if len(sal) == len([n for n in sal if n in numeros]):
+                var.ui.txtsalario.setText(str(locale.currency(float(var.ui.txtsalario.text()),grouping=True)))
+            else:
+                raise Exception
+
+        except Exception as error:
+            eventos.Eventos.error("Aviso", "Valor de Salario Incorrecto (00000000.00)")
+            var.ui.txtsalario.setText("")
+
+
 
     def cargarTabladri(registros):
         """
+
+        Carga los registros de conductores en la tabla de conductores.
+
+        Este método toma una lista de registros de conductores y los muestra en la tabla de conductores de la interfaz gráfica.
+
+        :param registros: La lista de registros de conductores.
 
         """
         try:
@@ -201,6 +246,12 @@ class Drivers():
     def cargarDriver(self):
         """
 
+        Carga los detalles del conductor seleccionado en la tabla de conductores.
+
+        Este método se utiliza para cargar los detalles del conductor seleccionado en la tabla de conductores de la interfaz gráfica.
+        Limpia el panel de detalles del conductor, obtiene la fila seleccionada de la tabla, busca el registro del conductor correspondiente,
+        muestra los detalles en el panel y luego actualiza la tabla de conductores.
+
         """
         try:
             Drivers.limpiarPanel(self)
@@ -218,6 +269,13 @@ class Drivers():
 
     def auxiliar(registro):
         """
+
+        Llena el panel de detalles del conductor con la información del conductor seleccionado.
+
+        Este método se utiliza para llenar el panel de detalles del conductor con la información del conductor seleccionado en la tabla de conductores.
+        Recibe como argumento el registro del conductor seleccionado y actualiza los campos correspondientes en la interfaz gráfica.
+
+        :param registro: El registro del conductor seleccionado.
 
         """
         try:
@@ -244,6 +302,11 @@ class Drivers():
 
     def buscaDri(self):
         """
+        Busca un conductor por su DNI y muestra sus detalles en el panel correspondiente.
+
+        Este método busca un conductor en la base de datos utilizando el DNI proporcionado en el campo correspondiente.
+        Si se encuentra un conductor con el DNI proporcionado, muestra sus detalles en el panel de detalles del conductor.
+        Además, marca el botón de opción "Todos" como seleccionado en la tabla de conductores y colorea la fila del conductor encontrado.
 
         """
         try:
@@ -262,6 +325,13 @@ class Drivers():
 
     def colorearFila(codigo):
         """
+
+        Colorea la fila correspondiente a un conductor en la tabla de conductores.
+
+        Este método recorre todas las filas de la tabla de conductores y compara el código proporcionado con el código de cada fila.
+        Si encuentra una coincidencia, colorea toda la fila en amarillo claro para resaltarla visualmente.
+
+        :param codigo: El código del conductor que se desea resaltar.
 
         """
         for fila in range(var.ui.tabDrivers.rowCount()):
@@ -302,6 +372,11 @@ class Drivers():
 
     def borraDri(qDate):
         """
+
+        Modifica los datos de un conductor en la base de datos.
+
+        Este método recoge los datos ingresados en los campos de la interfaz gráfica correspondientes a un conductor y los envía a la base de datos
+        para actualizar la información del conductor. También gestiona las licencias de conducción seleccionadas.
 
         """
         try:

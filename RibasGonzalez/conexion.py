@@ -10,12 +10,27 @@ import facturas
 
 class Conexion():
     def conexion(self=None):
+        """
+
+        Establece la conexión con la base de datos SQLite.
+
+        Este método se utiliza para establecer la conexión con la base de datos SQLite especificada en la
+        variable 'bbdd'. Primero, asigna el nombre del archivo de la base de datos a la variable 'bbdd'.
+        Luego, utiliza la clase QSqlDatabase de PyQt para añadir una base de datos SQLite al sistema y
+        establecer el nombre del archivo de la base de datos. Si la conexión es exitosa, imprime un mensaje
+        indicando que la base de datos ha sido encontrada y devuelve True. Si hay algún error durante la
+        conexión, imprime un mensaje de error y devuelve False.
+
+        :return: True si la conexión es exitosa, False si hay algún error.
+
+        """
         var.bbdd = 'bbdd.sqlite'
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName(var.bbdd)
         if not db.open():
             print('error conexion')
             return False
+
         else:
             print('base datos encontrada')
             return True
@@ -23,6 +38,16 @@ class Conexion():
 
 
     def cargarprov(self=None):
+        """
+
+        Carga las provincias en un combo box de la interfaz de usuario.
+
+        Este método se utiliza para cargar las provincias disponibles en la base de datos en un combo box
+        de la interfaz de usuario. Primero, limpia cualquier elemento existente en el combo box. Luego,
+        ejecuta una consulta SQL para seleccionar todas las provincias de la tabla 'provincias' en la base
+        de datos. Por cada provincia recuperada, la añade como un elemento al combo box.
+
+        """
         try:
             var.ui.cmbProv.clear()
             query = QtSql.QSqlQuery()
@@ -31,24 +56,37 @@ class Conexion():
                 var.ui.cmbProv.addItem('')
                 while query.next():
                     var.ui.cmbProv.addItem(query.value(0))
+
         except Exception as error:
             print(error, " en cargarprov")
 
 
 
     def selMuni(self=None):
+        """
+
+        Selecciona los municipios de una provincia y los carga en el combobox correspondiente.
+
+        Este método se utiliza para seleccionar los municipios de una provincia específica y cargarlos en
+        el combobox de municipios correspondiente. Primero, limpia el combobox de municipios. Luego, obtiene
+        el nombre de la provincia seleccionada del combobox de provincias y consulta la base de datos para
+        obtener el ID de esa provincia. Después, utiliza el ID de la provincia para obtener los municipios
+        asociados a esa provincia en la base de datos y los carga en el combobox de municipios. Si ocurre
+        algún error durante el proceso, imprime un mensaje de error.
+
+        """
         try:
             id = 0;
             var.ui.cmbMuni.clear()
             prov = var.ui.cmbProv.currentText()
             query = QtSql.QSqlQuery()
-            query.prepare('select idprov from provincias where provincia = :prov')
+            query.prepare('SELECT idprov FROM provincias WHERE provincia = :prov')
             query.bindValue(':prov', prov)
             if query.exec():
                 while query.next():
                     id = query.value(0)
             query1 = QtSql.QSqlQuery()
-            query1.prepare('select municipio from municipios where idprov = :id')
+            query1.prepare('SELECT municipio FROM municipios WHERE idprov = :id')
             query1.bindValue(':id', int(id))
             if query1.exec():
                 var.ui.cmbMuni.addItem('')
@@ -62,9 +100,18 @@ class Conexion():
 
     @staticmethod
     def guardardri(newDriver):
+        """
+
+        Guarda un nuevo conductor en la base de datos.
+
+        :param newDriver: Una lista que contiene los datos del nuevo conductor.
+
+        :return: True si se guardó el conductor correctamente, False en caso contrario.
+
+        """
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('insert into drivers (dnidri, altadri, apeldri, nombredri, direcciondri, provdri, '
+            query.prepare('INSERT INTO drivers (dnidri, altadri, apeldri, nombredri, direcciondri, provdri, '
                           'munidri, movildri, salario, carnet) VALUES(:dni, :alta, :apel, :nombre, :direccion, '
                           ':provincia, :municipio, :movil, :salario, :carnet)')
             query.bindValue(':dni', str(newDriver[0]))
@@ -79,6 +126,7 @@ class Conexion():
             query.bindValue(':carnet', str(newDriver[9]))
             if query.exec():
                 return True
+
             else:
                 return False
 
@@ -88,17 +136,22 @@ class Conexion():
 
 
     def mostrardriver(self=None):
+        """
+
+        Recupera y muestra los registros de conductores según la selección del usuario en la interfaz.
+
+        :return: Una lista de registros de conductores recuperados de la base de datos.
+
+        """
         try:
             registros = []
             query = QtSql.QSqlQuery()
             if var.ui.rbtTodos.isChecked():
-                query.prepare('select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers')
+                query.prepare('SELECT codigo, apeldri, nombredri, movildri, carnet, bajadri FROM drivers')
             if var.ui.rbtAlta.isChecked():
-                query.prepare(
-                    'select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is null')
+                query.prepare('SELECT codigo, apeldri, nombredri, movildri, carnet, bajadri FROM drivers WHERE bajadri IS NULL')
             if var.ui.rbtBaja.isChecked():
-                query.prepare(
-                    'select codigo, apeldri, nombredri, movildri, carnet, bajadri from drivers where bajadri is not null')
+                query.prepare('SELECT codigo, apeldri, nombredri, movildri, carnet, bajadri FROM drivers WHERE bajadri IS NOT NULL')
 
             if query.exec():
                 while query.next():
@@ -118,10 +171,17 @@ class Conexion():
 
 
     def oneDriver(codigo):
+        """
+
+        Recupera los datos de un conductor específico según su código.
+
+        :return: Una lista con los detalles del conductor recuperado.
+
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
-            query.prepare('select * from drivers where codigo=:codigo')
+            query.prepare('SELECT * FROM drivers WHERE codigo=:codigo')
             query.bindValue(':codigo', int(codigo))
             if query.exec():
                 while query.next():
@@ -135,10 +195,17 @@ class Conexion():
 
 
     def codDri(dni):
+        """
+
+        Recupera los datos de un conductor específico según su DNI.
+
+        :return: Una lista con los datos del conductor recuperado.
+
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
-            query.prepare('select * from drivers where dnidri=:dnidri')
+            query.prepare('SELECT * FROM drivers WHERE dnidri=:dnidri')
             query.bindValue(':dnidri', str(dni))
             if query.exec():
                 while query.next():
@@ -152,6 +219,11 @@ class Conexion():
 
 
     def modifDriver(modifDriver):
+        """
+
+        Modifica los datos de un conductor en la base de datos.
+
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('update drivers set dnidri= :dni, altadri= :alta, apeldri= :apel, nombredri= :nombre, '
@@ -180,6 +252,14 @@ class Conexion():
 
 
     def borrarDri(dni, fecha):
+        """
+
+        Borra un conductor de la base de datos y registra la fecha de baja.
+
+        :param dni: El DNI del conductor que se va a dar de baja.
+        :param fecha: La fecha en la que se da de baja al conductor.
+
+        """
         try:
             query1 = QtSql.QSqlQuery()
             query1.prepare('select bajadri from drivers where '
@@ -205,6 +285,13 @@ class Conexion():
 
     @staticmethod
     def selectDriverstodos():
+        """
+
+        Selecciona todos los registros de conductores de la base de datos y los devuelve en una lista.
+
+        :return: Una lista de todos los registros de conductores de la base de datos.
+
+        """
         try:
             registros = []
             query1 = QtSql.QSqlQuery()
@@ -215,7 +302,6 @@ class Conexion():
                     registros.append(row)
             return registros
 
-
         except Exception as error:
 
             print('error selectDrivertodos', error)
@@ -224,6 +310,15 @@ class Conexion():
 
     @staticmethod
     def verificarDri(dni):
+        """
+
+        Verifica si existe un conductor en la base de datos con el DNI especificado.
+
+        :param dni: El DNI del conductor a verificar.
+
+        :return: True si el conductor existe en la base de datos, False en caso contrario.
+
+        """
         try:
             query = QtSql.QSqlQuery()
             consulta = "SELECT COUNT(*) FROM drivers WHERE dnidri = :dni"
@@ -241,10 +336,17 @@ class Conexion():
 
 
     def volverDarAlta(dni):
+        """
+
+        Vuelve a dar de alta a un conductor que ha sido dado de baja previamente en la base de datos.
+
+        :param dni: El DNI del conductor que se va a dar de alta.
+
+        """
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle("Dar Alta")
-            mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+            mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico.ico"))
             mbox.setIcon(QtWidgets.QMessageBox.Icon.Question)
             mbox.setText("El conductor está dado de baja.\n¿Desea darlo de alta de nuevo?")
             mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
@@ -272,6 +374,13 @@ class Conexion():
 
 
     def oneCliente(codigo):
+        """
+
+        Recupera los datos de un cliente específico de la base de datos.
+
+        :return: Una lista que contiene los datos del cliente recuperado.
+
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
@@ -289,6 +398,11 @@ class Conexion():
 
 
     def mostrarClientes(self=None):
+        """
+
+        Recupera y muestra los clientes en la tabla de clientes según la opción seleccionada en los botones de radio.
+
+        """
         try:
             registros = []
             query = QtSql.QSqlQuery()
@@ -315,8 +429,13 @@ class Conexion():
 
 
     def selMuni2(self=None):
+        """
+
+        Llena el combo box de municipios según la provincia seleccionada en el combo box de provincias.
+
+        """
         try:
-            id = 0;
+            id = 0
             var.ui.cmbMuni2.clear()
             prov = var.ui.cmbProv2.currentText()
             query = QtSql.QSqlQuery()
@@ -339,6 +458,11 @@ class Conexion():
 
 
     def cargarprov2(self=None):
+        """
+
+        Carga la lista de provincias en el combo box de provincias de la interfaz de usuario.
+
+        """
         try:
             var.ui.cmbProv2.clear()
             query = QtSql.QSqlQuery()
@@ -354,6 +478,15 @@ class Conexion():
 
 
     def verificarCli(dni):
+        """
+
+        Verifica si existe un cliente con el DNI proporcionado en la base de datos.
+
+        :param dni: El DNI del cliente a verificar.
+
+        :return: True si existe un cliente con el DNI proporcionado, False en caso contrario.
+
+        """
         try:
             query = QtSql.QSqlQuery()
             consulta = "SELECT COUNT(*) FROM clientes WHERE dnicli = :dni"
@@ -372,6 +505,15 @@ class Conexion():
 
     @staticmethod
     def guardarcli(newCliente):
+        """
+
+        Guarda un nuevo cliente en la base de datos.
+
+        :param newCliente: Una lista que contiene los datos del nuevo cliente
+
+        :return: True si el cliente se guarda correctamente, False si ocurre algún error.
+
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('insert into clientes (dnicli, social, direccioncli, provcli, '
@@ -394,6 +536,13 @@ class Conexion():
 
 
     def volverDarAlta2(dni):
+        """
+
+        Da de alta a un cliente que previamente fue dado de baja en la base de datos.
+
+        :param dni: El número de DNI del cliente que se va a dar de alta.
+
+        """
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle("Dar Alta")
@@ -424,6 +573,11 @@ class Conexion():
 
 
     def modifCliente(modifCliente):
+        """
+
+        Modifica los datos de un cliente en la base de datos.
+
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('update clientes set dnicli= :dni, social= :social, '
@@ -447,6 +601,14 @@ class Conexion():
 
 
     def borrarCli(dni, fecha):
+        """
+
+        Intenta marcar un cliente como dado de baja en la base de datos.
+
+        :param dni: El DNI del cliente que se marcará como dado de baja.
+        :param fecha: La fecha en la que se dará de baja al cliente.
+
+        """
         try:
             query1 = QtSql.QSqlQuery()
             query1.prepare('select bajacli from clientes where '
@@ -464,11 +626,21 @@ class Conexion():
                     Conexion.mostrarClientes()
                     var.Bajacli.hide()
                     eventos.Eventos.mensaje("Aviso", "Cliente dado de baja")
+
         except Exception as error:
             print('error borrarcvli', error)
 
+
+
     @staticmethod
     def selectClientesstodos():
+        """
+
+        Selecciona todos los clientes de la base de datos y los devuelve en una lista de registros.
+
+        :return: Una lista de registros que contiene todos los clientes de la base de datos.
+
+        """
         try:
             registros = []
             query1 = QtSql.QSqlQuery()
@@ -479,9 +651,7 @@ class Conexion():
                     registros.append(row)
             return registros
 
-
         except Exception as error:
-
             print('error selectDrivertodos', error)
 
 
@@ -504,6 +674,11 @@ class Conexion():
 
 
     def cargarconductor(self=None):
+        """
+
+        Carga los conductores activos en el combo box de conductores.
+
+        """
         try:
             var.ui.cmbCond.clear()
             query = QtSql.QSqlQuery()
@@ -512,12 +687,22 @@ class Conexion():
                 var.ui.cmbCond.addItem('')
                 while query.next():
                     var.ui.cmbCond.addItem(str(query.value(0)) + "." + str(query.value(1)))
+
         except Exception as error:
             print(error, " cargar cond")
 
 
 
     def verificarClibaja(dni):
+        """
+
+        Verifica si un cliente con el DNI especificado está activo (sin baja).
+
+        :param dni: El DNI del cliente a verificar.
+
+        :return: True si el cliente está activo (sin baja), False de lo contrario.
+
+        """
         try:
             query = QtSql.QSqlQuery()
             consulta = "SELECT COUNT(*) FROM clientes WHERE dnicli = :dni and bajacli is null"
@@ -533,6 +718,13 @@ class Conexion():
             print("Error:", str(error))
 
     def altafacturacion(registro):
+        """
+
+        Registra una nueva factura en la base de datos.
+
+        :param registro: Una lista que contiene el DNI del cliente, la fecha de la factura y el código del conductor.
+
+        """
         try:
             if not all(
                     [var.ui.txtcifcli.text(), var.ui.txtfechafact.text(), var.ui.cmbCond.currentText().split('.')[0]]):
@@ -550,11 +742,19 @@ class Conexion():
                         Conexion.cargarfacturas()
                 else:
                     eventos.Eventos.error("Aviso", "Cliente no existente o dado de baja")
+
         except Exception as error:
             print(error, " cargar cond")
 
+
+
     @staticmethod
     def cargarfacturas():
+        """
+
+        Carga las facturas almacenadas en la base de datos y las muestra en la tabla de facturas.
+
+        """
         try:
             registros = []
             query = QtSql.QSqlQuery()
@@ -568,7 +768,18 @@ class Conexion():
         except Exception as error:
             print(error, "cargarfacturas")
 
+
+
     def oneFactura(codigo):
+        """
+
+        Recupera los detalles de una factura específica según su número de factura.
+
+        :param codigo: El número de factura de la factura que se desea recuperar.
+
+        :return: Una lista que contiene los detalles de la factura.
+
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
@@ -579,12 +790,19 @@ class Conexion():
                     for i in range(4):
                         registro.append(str(query.value(i)))
             return registro
+
         except Exception as error:
             print("error en onefactura", error)
 
 
 
     def selMuni3(self=None):
+        """
+
+        Selecciona y carga los municipios correspondientes a una provincia seleccionada en el combo box de provincias
+        en la interfaz de ventas.
+
+        """
         try:
             id = 0;
             var.ui.cmbMuniVentas.clear()
@@ -610,6 +828,11 @@ class Conexion():
 
 
     def cargarprov3(self=None):
+        """
+
+        Carga las provincias en el combo box de provincias en la interfaz de ventas.
+
+        """
         try:
             var.ui.cmbProbVentas.clear()
             query = QtSql.QSqlQuery()
@@ -619,6 +842,7 @@ class Conexion():
                 Conexion.datosViaje()
                 while query.next():
                     var.ui.cmbProbVentas.addItem(query.value(0))
+
         except Exception as error:
             print(error, " en cargarprov")
 
@@ -695,7 +919,16 @@ class Conexion():
         except Exception as error:
             print(error, " en datos viaje")
 
+
+
     def viajesFactura(dato):
+        """
+
+        Carga los viajes asociados a una factura en la tabla de viajes de la interfaz de facturas.
+
+        :param dato: Número de factura.
+
+        """
         try:
             valores = []
             query = QtSql.QSqlQuery()
@@ -707,17 +940,26 @@ class Conexion():
                     valores.append(row)
 
             facturas.Facturas.cargaTablaViajes(valores)
+
         except Exception as error:
             print("ERROR CARGAR viaje a la vista", error)
 
+
+
     def cargarLineaViaje(registro):
+        """
+
+        Registra un nuevo viaje en la base de datos.
+
+        :param registro: Lista que contiene los datos del viaje: [origen, destino, tarifa, kilometros, factura].
+
+        """
         try:
             if any(not elemento.strip() for elemento in registro):
                 eventos.Eventos.error("Aviso", "Faltan datos del viaje o numero de factura")
             else:
                 query = QtSql.QSqlQuery()
-                query.prepare(
-                    "insert into viajes(factura, origen, destino, tarifa, km) values (:factura, :origen, :destino, :tarifa, :kilometros)")
+                query.prepare("insert into viajes(factura, origen, destino, tarifa, km) values (:factura, :origen, :destino, :tarifa, :kilometros)")
                 query.bindValue(":factura", int(registro[5]))
                 query.bindValue(":origen", int(registro[1]))
                 query.bindValue(":destino", int(registro[2]))
@@ -730,11 +972,19 @@ class Conexion():
         except Exception as error:
             print(error, " en cargarprov")
 
+
+
     def guardarViaje(viaje):
+        """
+
+        Guarda un nuevo viaje en la base de datos.
+
+        :param viaje: Lista que contiene los detalles del viaje en el siguiente orden: [factura, origen_ciudad, origen_provincia, destino_ciudad, destino_provincia, tarifa, kilometros].
+
+        """
         try:
             query = QtSql.QSqlQuery()
-            query.prepare(
-                "insert into viajes (factura, origen, destino, tarifa, km) values (:factura, :origen, :destino, :tarifa, :kilometros)")
+            query.prepare("insert into viajes (factura, origen, destino, tarifa, km) values (:factura, :origen, :destino, :tarifa, :kilometros)")
             query.bindValue(":factura", viaje[0])
             query.bindValue(":origen", viaje[1] + " - " + viaje[2])
             query.bindValue(":destino", viaje[3] + " - " + viaje[4])
@@ -744,12 +994,22 @@ class Conexion():
                 eventos.Eventos.mensaje('Aviso', "Viaje guardado")
             else:
                 eventos.Eventos.error('Aviso', "Error al guardar el viaje")
+
         except Exception as error:
             print(error)
 
 
 
     def oneViajes(codigo):
+        """
+
+        Devuelve los detalles de un viaje específico identificado por su código.
+
+        :param codigo: El código único del viaje que se desea obtener.
+
+        :return: Una lista que contiene los detalles del viaje, incluyendo la factura, origen, destino, tarifa, kilometros y otros detalles.
+
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
@@ -760,12 +1020,20 @@ class Conexion():
                     for i in range(6):
                         registro.append(str(query.value(i)))
             return registro
+
         except Exception as error:
             print("error en oneviaje", error)
 
 
 
     def borrarViaje(id):
+        """
+
+        Elimina un viaje de la base de datos según su ID.
+
+        :param id: El ID único del viaje que se desea eliminar.
+
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare("delete from viajes where idviaje = :id")

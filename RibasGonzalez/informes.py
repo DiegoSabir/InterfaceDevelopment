@@ -1,16 +1,26 @@
 import os, var
+
 from PyQt6 import QtSql, QtWidgets, QtGui
 from PIL import Image
 from reportlab.pdfgen import canvas
 from datetime import datetime
+
 import conexion
-
 import eventos
-
 
 class Informes:
     @staticmethod
     def reportclientes():
+        """
+
+        Genera un informe en formato PDF con el listado de clientes.
+
+        Este método genera un informe en formato PDF que contiene un listado de todos los clientes registrados en la base de datos.
+        El informe incluye información como el código del cliente, su DNI (encriptado), razón social, municipio, teléfono y fecha de baja (si existe).
+        El informe se guarda en la carpeta 'informes' con un nombre que incluye la fecha y hora de creación.
+        Después de generar el informe, se abre automáticamente para que el usuario lo visualice.
+
+        """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
@@ -64,11 +74,24 @@ class Informes:
             for file in os.listdir(rootPath):
                 if file.endswith(nombre):
                     os.startfile('%s\\%s' % (rootPath, file))
+
         except Exception as error:
             print('Error LISTADO CLIENTES :', error)
 
+
+
     @staticmethod
     def reportdrivers():
+        """
+
+        Genera un informe en formato PDF con el listado de conductores.
+
+        Este método genera un informe en formato PDF que contiene un listado de todos los conductores registrados en la base de datos.
+        El informe incluye información como el código del conductor, apellidos, nombre, teléfono, licencias y fecha de baja (si existe).
+        El informe se guarda en la carpeta 'informes' con un nombre que incluye la fecha y hora de creación.
+        Después de generar el informe, se abre automáticamente para que el usuario lo visualice.
+
+        """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
@@ -122,10 +145,23 @@ class Informes:
             for file in os.listdir(rootPath):
                 if file.endswith(nombre):
                     os.startfile('%s\\%s' % (rootPath, file))
+
         except Exception as error:
             print('Error LISTADO conductores :', error)
 
+
+
     def topInforme(titulo):
+        """
+
+        Agrega la cabecera al informe PDF.
+
+        Este método agrega la cabecera al informe PDF, incluyendo el título del informe, el logotipo de la empresa y la información de contacto.
+        La cabecera incluye el nombre de la empresa, el título del informe, la dirección, el teléfono y el correo electrónico de contacto.
+
+        :param titulo: El título del informe.
+
+        """
         try:
             ruta_logo = '.\\img\\logo.ico'
             logo = Image.open(ruta_logo)
@@ -149,10 +185,23 @@ class Informes:
                 var.report.drawString(55, 710, 'e-mail: cartesteisr@mail.com')
             else:
                 print(f'Error: No se pudo cargar la imagen en {ruta_logo}')
+
         except Exception as error:
             print('Error en cabecera informe:', error)
 
+
+
     def footInforme(titulo):
+        """
+
+        Agrega el pie de página al informe PDF.
+
+        Este método agrega el pie de página al informe PDF, incluyendo la fecha de generación del informe, el título del informe
+        y el número de página.
+
+        :param titulo: El título del informe.
+
+        """
         try:
             var.report.line(50, 50, 525, 50)
             fecha = datetime.today()
@@ -165,19 +214,43 @@ class Informes:
         except Exception as error:
             print('Error en pie informe de cualquier tipo: ', error)
 
+
+
     def encriptarDNI(dni):
+        """
+
+        Encripta parcialmente el número de DNI ocultando los primeros caracteres.
+
+        Este método encripta parcialmente el número de DNI ocultando los primeros caracteres, dejando visibles los últimos cuatro
+        dígitos.
+
+        :param dni: El número de DNI a encriptar.
+        :return: El DNI encriptado.
+
+        """
         dni = "******" + dni[6:]
         dni_lista = list(dni)
         dni_lista[8] = "*"
         dni_modificado = ''.join(dni_lista)
         return dni_modificado
 
+
+
     @staticmethod
     def checkboxinforme():
+        """
+
+        Muestra un cuadro de diálogo para que el usuario seleccione qué informes desea generar.
+
+        Este método muestra un cuadro de diálogo con opciones para generar informes de conductores y/o clientes.
+        El usuario puede marcar las casillas correspondientes y hacer clic en "Aceptar" para generar los informes seleccionados.
+        Si el usuario no selecciona ningún informe y hace clic en "Aceptar", se mostrará un mensaje de error.
+
+        """
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle("Realizar Informe")
-            mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+            mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico"))
             mbox.setText("Seleccione informe/es")
 
             conductorcheck = QtWidgets.QCheckBox("Informe de conductores")
@@ -211,8 +284,20 @@ class Informes:
         except Exception as error:
             print("Error en checkbox_informe", error)
 
+
+
     @staticmethod
     def topFactura(titulo):
+        """
+
+        Muestra la cabecera de un informe de factura.
+
+        Este método muestra la cabecera de un informe de factura, que incluye el logo de la empresa, el número de factura,
+        la fecha, la información del cliente y el título del informe.
+
+        :param titulo: El título del informe de factura.
+
+        """
         try:
             registro = conexion.Conexion.codCli(var.ui.txtcifcli.text())
             ruta_logo = '.\\img\\logo.ico'
@@ -250,11 +335,22 @@ class Informes:
                 var.report.drawString(290, 695, 'Teléfono: ' + str(registro[4]))
             else:
                 print(f'Error: No se pudo cargar la imagen en {ruta_logo}')
+
         except Exception as error:
             print('Error en cabecera informe:', error)
 
+
+
     @staticmethod
     def reportfactura():
+        """
+
+        Genera un informe de factura.
+
+        Este método genera un informe de factura en formato PDF. El informe incluye la información detallada de una factura
+        seleccionada en la interfaz gráfica.
+
+        """
         try:
             codigofactura = var.ui.lblcodfacturacion.text()
             if codigofactura == '':
@@ -271,5 +367,6 @@ class Informes:
                 for file in os.listdir(rootPath):
                     if file.endswith(nombre):
                         os.startfile('%s\\%s' % (rootPath, file))
+
         except Exception as error:
             print('Error LISTADO conductores :', error)
