@@ -346,6 +346,11 @@ class Drivers():
     def modifDri(self):
         """
 
+        Modifica los datos de un conductor.
+
+        Este método recoge los datos modificados de un conductor desde la interfaz gráfica y los pasa a la base de datos
+        para actualizar la información del conductor correspondiente.
+
         """
         try:
             driver=[var.ui.lblcodbd,var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
@@ -373,10 +378,13 @@ class Drivers():
     def borraDri(qDate):
         """
 
-        Modifica los datos de un conductor en la base de datos.
+        Elimina un conductor de la base de datos.
 
-        Este método recoge los datos ingresados en los campos de la interfaz gráfica correspondientes a un conductor y los envía a la base de datos
-        para actualizar la información del conductor. También gestiona las licencias de conducción seleccionadas.
+        Este método toma la fecha seleccionada desde la interfaz gráfica y el DNI del conductor a borrar. Luego,
+        utiliza estos datos para eliminar el conductor de la base de datos y actualizar la lista de conductores mostrada
+        en la interfaz gráfica.
+
+        :param qDate: La fecha seleccionada para el borrado del conductor.
 
         """
         try:
