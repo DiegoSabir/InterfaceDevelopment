@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../../../.designer/img/Question-mark-icon_34771.ico</normaloff>../../../../../../.designer/img/Question-mark-icon_34771.ico</iconset>
+    <normaloff>../../../../../../.designer/img/acercade.ico</normaloff>../../../../../../.designer/img/acercade.ico</iconset>
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">

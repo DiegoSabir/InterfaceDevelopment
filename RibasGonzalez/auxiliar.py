@@ -2,14 +2,19 @@ import clientes
 import facturas
 import sys, var, eventos, drivers
 
-from calendarWindow import *
+from CalendarWindow import *
 from acercaWindow import *
 from salirWindow import *
 from datetime import datetime
 
 class Calendar(QtWidgets.QDialog):
     def __init__(self):
-        bool=None
+        """
+
+        Inicializa el diálogo del calendario.
+
+        """
+        bool = None
         super(Calendar, self).__init__()
         var.calendar = Ui_calendar()
         var.calendar.setupUi(self)
@@ -24,6 +29,11 @@ class Calendar(QtWidgets.QDialog):
 
 class AcercaDe(QtWidgets.QDialog):
     def __init__(self):
+        """
+
+        Inicializa la ventana "Acerca de".
+
+        """
         super(AcercaDe, self).__init__()
         var.acercaDe = Ui_acercaWind()
         var.acercaDe.setupUi(self)
@@ -34,6 +44,11 @@ class AcercaDe(QtWidgets.QDialog):
 
 class Salir(QtWidgets.QDialog):
     def __init__(self):
+        """
+
+
+
+        """
         super(Salir, self).__init__()
         var.salir = Ui_salirwind()
         var.salir.setupUi(self)
@@ -45,12 +60,22 @@ class Salir(QtWidgets.QDialog):
 
 class FileDialogAbrir(QtWidgets.QFileDialog):
     def __init__(self):
+        """
+
+
+
+        """
         super(FileDialogAbrir, self).__init__()
 
 
 
 class Baja(QtWidgets.QDialog):
     def __init__(self):
+        """
+
+
+
+        """
         super(Baja, self).__init__()
         var.Baja = Ui_calendar()
         var.Baja.setupUi(self)
@@ -64,6 +89,11 @@ class Baja(QtWidgets.QDialog):
 
 class Bajacli(QtWidgets.QDialog):
     def __init__(self):
+        """
+
+
+
+        """
         super(Bajacli, self).__init__()
         var.Bajacli = Ui_calendar()
         var.Bajacli.setupUi(self)
@@ -77,6 +107,11 @@ class Bajacli(QtWidgets.QDialog):
 
 class Altafact(QtWidgets.QDialog):
     def __init__(self):
+        """
+
+
+
+        """
         super(Altafact, self).__init__()
         var.Altafact = Ui_calendar()
         var.Altafact.setupUi(self)

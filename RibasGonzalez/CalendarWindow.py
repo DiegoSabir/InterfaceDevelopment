@@ -15,7 +15,7 @@ class Ui_calendar(object):
         calendar.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
         calendar.resize(400, 300)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(".\\templates\\../img/calendarday_January_month_calendari_1584.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap(".\\templates\\../img/calendario.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         calendar.setWindowIcon(icon)
         self.calendari = QtWidgets.QCalendarWidget(parent=calendar)
         self.calendari.setGeometry(QtCore.QRect(0, 0, 400, 300))

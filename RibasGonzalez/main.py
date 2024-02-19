@@ -5,7 +5,7 @@ import informes
 import locale
 
 from mainWindows import *
-from PyQt6.QtCore import QTimer,QSize
+from PyQt6.QtCore import QTimer, QSize
 from auxiliar import *
 
 import sys, var, eventos, drivers
@@ -16,16 +16,32 @@ locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 class Main(QtWidgets.QMainWindow):
 
     def __init__(self):
+        """
+
+        Inicializa la ventana principal y conecta los eventos a los widgets.
+
+        Este método inicializa la ventana principal y establece las conexiones de eventos para los widgets
+        y acciones en la interfaz de usuario.
+
+        """
         super(Main, self).__init__()
+
+        # Configuración de la interfaz de usuario
         var.ui = Ui_MainWindow()
         var.ui.setupUi(self)
+
+        # Instanciación de objetos adicionales
         var.calendar = Calendar()
         var.salir = Salir()
         var.Baja = Baja()
         var.Bajacli = Bajacli()
         var.Altafact = Altafact()
         var.acercaDe = AcercaDe()
+
+        # Configuración de la barra de estado
         self.cargarStatusbar()
+
+        # Conexión a la base de datos y carga de datos iniciales
         conexion.Conexion.conexion()
         conexion.Conexion.cargarprov()
         conexion.Conexion.mostrardriver()
@@ -40,13 +56,13 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Eventos 
+        Eventos Radios Buttons
         '''
         rbtClientes = (var.ui.rbtTodos2, var.ui.rbtAlta2, var.ui.rbtBaja2)
         for i in rbtClientes:
             i.toggled.connect(eventos.Eventos.selEstado2)
 
-        rbtDriver=(var.ui.rbtTodos, var.ui.rbtAlta, var.ui.rbtBaja)
+        rbtDriver = (var.ui.rbtTodos, var.ui.rbtAlta, var.ui.rbtBaja)
         for i in rbtDriver:
             i.toggled.connect(eventos.Eventos.selEstado)
 
@@ -72,7 +88,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        zona eventos menu bar
+        Zona eventos menu bar
         '''
         var.ui.actionSalir.triggered.connect(eventos.Eventos.abrirSalir)
         var.ui.actionAcercaDe.triggered.connect(eventos.Eventos.abrirAcercaDe)
@@ -89,7 +105,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        combobox
+        Combobox
         '''
         var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.selMuni)
         var.ui.cmbProv2.currentIndexChanged.connect(conexion.Conexion.selMuni2)
@@ -142,12 +158,30 @@ class Main(QtWidgets.QMainWindow):
 
 
     def closeEvent(self, event):
+        """
+
+        Maneja el evento de cierre de la ventana principal.
+
+        Este método se llama cuando el usuario intenta cerrar la ventana principal. Ignora el evento de cierre por defecto
+        y abre una ventana de confirmación para confirmar si el usuario realmente desea salir de la aplicación.
+
+        :param event: El evento de cierre.
+
+        """
         event.ignore()
         eventos.Eventos.abrirSalir(self)
 
 
 
     def cargarStatusbar(self):
+        """
+
+        Carga la barra de estado con widgets permanentes como la versión de la aplicación y la hora actualizada.
+
+        Este método agrega un widget QLabel para mostrar la versión de la aplicación en la barra de estado. También inicia
+        un temporizador para actualizar la fecha y hora mostrada en la barra de estado cada minuto.
+
+        """
         self.labelVersion = QtWidgets.QLabel("Version: 0.1.0", self)
         self.labelVersion.setAlignment(QtCore.Qt.AlignmentFlag.AlignRight)
         self.labelVersion.setStyleSheet("margin-left: 10px;")
@@ -160,6 +194,14 @@ class Main(QtWidgets.QMainWindow):
 
 
     def actualizarFecha(self):
+        """
+
+        Actualiza la fecha y la muestra en la barra de estado.
+
+        Este método actualiza la fecha actual y la muestra en la barra de estado. Si ya existe un widget QLabel para
+        mostrar la fecha, se elimina antes de agregar el nuevo widget actualizado.
+
+        """
         if hasattr(self, 'labelstatus') and self.labelstatus is not None:
             var.ui.statusbar.removeWidget(self.labelstatus)
             self.labelstatus = None

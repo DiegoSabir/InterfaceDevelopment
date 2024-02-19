@@ -16,7 +16,7 @@ class Ui_acercaWind(object):
         acercaWind.setMinimumSize(QtCore.QSize(450, 310))
         acercaWind.setMaximumSize(QtCore.QSize(450, 310))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("img/Question-mark-icon_34771.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("img/acercade.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         acercaWind.setWindowIcon(icon)
         self.frame = QtWidgets.QFrame(parent=acercaWind)
         self.frame.setGeometry(QtCore.QRect(10, 10, 431, 251))

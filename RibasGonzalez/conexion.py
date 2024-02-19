@@ -849,6 +849,11 @@ class Conexion():
 
 
     def selMuni4(self=None):
+        """
+
+
+
+        """
         try:
             id = 0;
             var.ui.cmbMuniVentas2.clear()
@@ -874,6 +879,11 @@ class Conexion():
 
 
     def cargarprov4(self=None):
+        """
+
+
+
+        """
         try:
             var.ui.cmbProbVentas2.clear()
             query = QtSql.QSqlQuery()

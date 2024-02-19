@@ -17,7 +17,14 @@ import var
 
 class Eventos():
     @staticmethod
-    def salir (self):
+    def salir(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         try:
             sys.exit(0)
 
@@ -28,6 +35,13 @@ class Eventos():
 
     @staticmethod
     def abrirCalendar(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         try:
             var.calendar.show()
 
@@ -38,6 +52,13 @@ class Eventos():
 
     @staticmethod
     def cerrarAcercaDe(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         try:
             var.acercaDe.hide()
 
@@ -47,6 +68,11 @@ class Eventos():
 
 
     def abrirAcercaDe(self):
+        """
+
+
+
+        """
         try:
             var.acercaDe.show()
 
@@ -57,6 +83,12 @@ class Eventos():
 
     @staticmethod
     def abrirSalir(self):
+        """
+
+        :param self:
+        :type self:
+
+        """
         try:
             var.salir.show()
 
@@ -67,6 +99,13 @@ class Eventos():
 
     @staticmethod
     def cerrarSalir(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         try:
             var.salir.hide()
 
@@ -77,6 +116,13 @@ class Eventos():
 
     @staticmethod
     def acercade(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         try:
             pass
 
@@ -87,12 +133,26 @@ class Eventos():
 
     @staticmethod
     def selEstado(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         conexion.Conexion.mostrardriver()
 
 
 
     @staticmethod
     def resizeTabdrivers(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         try:
             header = var.ui.tabDrivers.horizontalHeader()
             for i in range(5):
@@ -108,6 +168,13 @@ class Eventos():
 
     @staticmethod
     def formatCajaTexto(self = None):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         try:
             var.ui.txtapellidos.setText(var.ui.txtapellidos.text().title())
             var.ui.txtnombre.setText(var.ui.txtnombre.text().title())
@@ -119,6 +186,11 @@ class Eventos():
 
     @staticmethod
     def crearBackup():
+        """
+
+
+
+        """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
@@ -137,6 +209,11 @@ class Eventos():
 
 
     def  restaurarBackup(self):
+        """
+
+
+
+        """
         try:
             filename = var.dlgabrir.getOpenFileName(None, 'Restaurar copia de seguridad', '', '*.zip;;All Files(*)')
             file = filename[0]
@@ -153,6 +230,11 @@ class Eventos():
 
 
     def exportardatosxls(self):
+        """
+
+
+
+        """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
@@ -185,6 +267,11 @@ class Eventos():
 
 
     def validarDNI(self=None):
+        """
+
+
+
+        """
         try:
             dni = var.ui.txtDNI.text()
             dni = dni.upper()
@@ -196,6 +283,11 @@ class Eventos():
 
 
     def importarDatosExcel(self):
+        """
+
+
+
+        """
         try:
             filename = var.dlgabrir.getOpenFileName(None, "Importar datos", "", "*.xls;;All File(*)")
             drivers.Drivers.limpiarPanel(self)
@@ -240,6 +332,11 @@ class Eventos():
 
     @staticmethod
     def abrirCalendarBaja():
+        """
+
+
+
+        """
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle("Dar Baja")
@@ -267,6 +364,13 @@ class Eventos():
 
     @staticmethod
     def resizeTabclientes(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         try:
             header = var.ui.tabClientes.horizontalHeader()
             for i in range(3):
@@ -281,6 +385,11 @@ class Eventos():
 
 
     def validarDNI2(self=None):
+        """
+
+
+
+        """
         try:
             dni = var.ui.txtDNI2.text()
             dni = dni.upper()
@@ -293,12 +402,24 @@ class Eventos():
 
     @staticmethod
     def selEstado2(self):
+        """
+
+
+        :param self:
+        :type self:
+
+        """
         conexion.Conexion.mostrarClientes()
 
 
 
     @staticmethod
     def abrirCalendarBajacli():
+        """
+
+
+
+        """
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle("Dar Baja")
@@ -325,6 +446,11 @@ class Eventos():
 
 
     def exportardatosclientesxls(self):
+        """
+
+
+
+        """
         try:
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
@@ -353,6 +479,11 @@ class Eventos():
 
 
     def importarDatosclientesExcel(self):
+        """
+
+
+
+        """
         try:
             filename = var.dlgabrir.getOpenFileName(None, "Importar datos", "", "*.xls;;All File(*)")
             clientes.Clientes.limpiarPanel2()
@@ -396,6 +527,11 @@ class Eventos():
 
 
     def abrirCalendarfact(self):
+        """
+
+
+
+        """
         try:
             var.Altafact.show()
 
@@ -405,6 +541,13 @@ class Eventos():
 
 
     def error(title, text):
+        """
+
+
+        :param text:
+        :type text:
+
+        """
         mbox = QtWidgets.QMessageBox()
         mbox.setWindowTitle(title)
         mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico"))
@@ -415,6 +558,13 @@ class Eventos():
 
 
     def mensaje(title, text):
+        """
+
+
+        :param text:
+        :type text:
+
+        """
         mbox = QtWidgets.QMessageBox()
         mbox.setWindowTitle(title)
         mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico"))
@@ -426,6 +576,11 @@ class Eventos():
 
     @staticmethod
     def resizeTabfacturas():
+        """
+
+
+
+        """
         try:
             header = var.ui.tablaFacturas.horizontalHeader()
             for i in range(3):
@@ -441,6 +596,11 @@ class Eventos():
 
     @staticmethod
     def resizeTabViajes():
+        """
+
+
+
+        """
         try:
             header = var.ui.tabViajes.horizontalHeader()
             for i in range(5):

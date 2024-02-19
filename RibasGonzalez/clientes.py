@@ -1,4 +1,3 @@
-
 from PyQt6.QtGui import QPixmap
 from PyQt6 import QtWidgets, QtCore, QtGui
 from PyQt6.QtCore import Qt
@@ -34,6 +33,7 @@ class Clientes():
 
     def buscarCliente(self):
         """
+
         Busca un cliente por su DNI en la base de datos y carga sus datos en la interfaz de usuario.
 
         Este método se activa al hacer clic en el botón de buscar cliente. Obtiene el DNI del campo de texto
