@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>facturas module &#8212; documentación de RibasGonzalez - v1.2.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=514cf933" />
+    
+    <script src="../_static/documentation_options.js?v=2edad0e9"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de RibasGonzalez - v1.2.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">facturas module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-facturas">
+<span id="facturas-module"></span><h1>facturas module<a class="headerlink" href="#module-facturas" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="facturas.Facturas">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">facturas.</span></span><span class="sig-name descname"><span class="pre">Facturas</span></span><a class="reference internal" href="../_modules/facturas.html#Facturas"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.altafactura">
+<span class="sig-name descname"><span class="pre">altafactura</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.altafactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.altafactura" title="Link to this definition">¶</a></dt>
+<dd><p>Procesa el alta de una nueva factura.</p>
+<p>Este método recoge los datos ingresados en la interfaz gráfica de facturación, como el CIF del cliente, la fecha
+de la factura y el conductor seleccionado, y los pasa a la función correspondiente en la capa de conexión para
+realizar el alta de la factura en la base de datos.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.auxiliar">
+<span class="sig-name descname"><span class="pre">auxiliar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.auxiliar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.auxiliar" title="Link to this definition">¶</a></dt>
+<dd><p>Llena el panel de detalles de la factura con la información de la factura seleccionada.</p>
+<p>Este método se utiliza para llenar el panel de detalles de la factura con la información de la factura
+seleccionada en la interfaz gráfica. Obtiene los detalles del conductor asociado a la factura y
+muestra estos detalles junto con los demás detalles de la factura en la interfaz gráfica.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>registro</strong> – La información de la factura seleccionada.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.borrarViaje">
+<span class="sig-name descname"><span class="pre">borrarViaje</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.borrarViaje"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.borrarViaje" title="Link to this definition">¶</a></dt>
+<dd><p>Elimina un viaje seleccionado de la base de datos y actualiza la lista de viajes asociados a una factura.</p>
+<p>Este método elimina el viaje seleccionado en la tabla de viajes y luego actualiza la lista de viajes asociados a
+una factura específica. Primero obtiene la fila seleccionada, luego obtiene el identificador único del viaje y
+procede a eliminarlo de la base de datos. Después, actualiza la lista de viajes asociados a la factura correspondiente.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.buscarClifact">
+<span class="sig-name descname"><span class="pre">buscarClifact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.buscarClifact"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.buscarClifact" title="Link to this definition">¶</a></dt>
+<dd><p>Busca y muestra información sobre un cliente en la interfaz gráfica de facturación.</p>
+<p>Este método se utiliza para buscar información sobre un cliente utilizando su número de identificación fiscal (DNI).
+Una vez encontrado, muestra la información del cliente en la interfaz gráfica de facturación y colorea la fila correspondiente en la tabla de clientes.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.cargaFechafact">
+<span class="sig-name descname"><span class="pre">cargaFechafact</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.cargaFechafact"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.cargaFechafact" title="Link to this definition">¶</a></dt>
+<dd><p>Carga la fecha seleccionada en el campo de fecha de la interfaz gráfica de facturación.</p>
+<p>Este método se utiliza para asignar la fecha seleccionada en el calendario a un campo de texto de la interfaz gráfica de facturación.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>qDate</strong> – La fecha seleccionada en el calendario.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.cargaTablaViajes">
+<span class="sig-name descname"><span class="pre">cargaTablaViajes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.cargaTablaViajes"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.cargaTablaViajes" title="Link to this definition">¶</a></dt>
+<dd><p>Carga la tabla de viajes con los valores proporcionados y calcula el subtotal, IVA y total de la factura.</p>
+<p>Este método carga la tabla de viajes con los valores proporcionados, calcula el subtotal, el IVA y el total
+de la factura y actualiza los respectivos campos de la interfaz gráfica.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>valores</strong> – Los valores de los viajes a cargar en la tabla. Cada valor debe ser una lista con los siguientes
+elementos: [id_viaje, origen, destino, tarifa, km].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.cargarFactura">
+<span class="sig-name descname"><span class="pre">cargarFactura</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.cargarFactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.cargarFactura" title="Link to this definition">¶</a></dt>
+<dd><p>Carga los detalles de una factura seleccionada en la interfaz gráfica.</p>
+<p>Este método se utiliza para cargar los detalles de una factura seleccionada en la tabla de facturas en la
+interfaz gráfica. Limpia el panel de detalles de la factura, obtiene los detalles de la factura seleccionada,
+muestra estos detalles en el panel y carga los viajes asociados con la factura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.cargarTablaFacturas">
+<span class="sig-name descname"><span class="pre">cargarTablaFacturas</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.cargarTablaFacturas"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.cargarTablaFacturas" title="Link to this definition">¶</a></dt>
+<dd><p>Carga los registros de facturas en la tabla de la interfaz gráfica.</p>
+<p>Este método toma una lista de registros de facturas y los muestra en la tabla de facturas en la interfaz gráfica,
+colocando cada registro en una fila de la tabla.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>registros</strong> – La lista de registros de facturas.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.cargarViaje">
+<span class="sig-name descname"><span class="pre">cargarViaje</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.cargarViaje"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.cargarViaje" title="Link to this definition">¶</a></dt>
+<dd><p>Carga los datos de un viaje seleccionado en los campos correspondientes del formulario.</p>
+<p>Este método obtiene los datos del viaje seleccionado en la tabla de viajes y los muestra en los campos
+correspondientes del formulario de ingreso de viajes. Primero obtiene la fila seleccionada, luego obtiene los datos
+del viaje a partir del identificador único de viaje y actualiza los campos del formulario con la información del viaje.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.colorearFila">
+<span class="sig-name descname"><span class="pre">colorearFila</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.colorearFila"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.colorearFila" title="Link to this definition">¶</a></dt>
+<dd><p>Colorea la fila correspondiente a una factura seleccionada en la tabla de facturas.</p>
+<p>Este método colorea la fila correspondiente a una factura seleccionada en la tabla de facturas
+en la interfaz gráfica. Se utiliza para resaltar visualmente la factura seleccionada.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>numfactura</strong> – El número de la factura seleccionada.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.comprobarTarifa">
+<span class="sig-name descname"><span class="pre">comprobarTarifa</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.comprobarTarifa"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.comprobarTarifa" title="Link to this definition">¶</a></dt>
+<dd><p>Comprueba y establece automáticamente el tipo de tarifa basándose en la selección de provincias y localidades.</p>
+<p>Este método comprueba la selección de provincias y localidades en los combos de origen y destino, y establece
+automáticamente el tipo de tarifa (provincial, local o nacional) en la interfaz gráfica.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.guardarViaje">
+<span class="sig-name descname"><span class="pre">guardarViaje</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.guardarViaje"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.guardarViaje" title="Link to this definition">¶</a></dt>
+<dd><p>Guarda un nuevo viaje asociado a una factura.</p>
+<p>Este método guarda un nuevo viaje asociado a una factura seleccionada. Verifica que se haya seleccionado una
+factura y que se hayan ingresado los datos obligatorios del viaje (kilómetros y localidades de origen y destino).
+Calcula la tarifa del viaje según la distancia y el tipo de viaje (local, provincial o nacional) y luego llama al
+método <cite>guardarViaje</cite> de la clase <cite>Conexion</cite> para almacenar el viaje en la base de datos. Finalmente, actualiza
+la tabla de viajes asociados a la factura.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.limpiarPanel3">
+<span class="sig-name descname"><span class="pre">limpiarPanel3</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.limpiarPanel3"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.limpiarPanel3" title="Link to this definition">¶</a></dt>
+<dd><p>Limpia los campos del panel de facturación en la interfaz gráfica.</p>
+<p>Este método se utiliza para limpiar los campos de la interfaz gráfica relacionados con la facturación, como el código de facturación,
+el CIF del cliente, la fecha de la factura y la distancia en kilómetros. También restablece los valores predeterminados de los
+menús desplegables relacionados con la provincia y el municipio de origen y destino.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="facturas.Facturas.validarKm">
+<span class="sig-name descname"><span class="pre">validarKm</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/facturas.html#Facturas.validarKm"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#facturas.Facturas.validarKm" title="Link to this definition">¶</a></dt>
+<dd><p>Valida el campo de kilómetros en la interfaz gráfica.</p>
+<p>Este método se utiliza para validar que el campo de kilómetros en la interfaz gráfica contenga solo números enteros.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Tabla de contenido</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">facturas module</a><ul>
+<li><a class="reference internal" href="#facturas.Facturas"><code class="docutils literal notranslate"><span class="pre">Facturas</span></code></a><ul>
+<li><a class="reference internal" href="#facturas.Facturas.altafactura"><code class="docutils literal notranslate"><span class="pre">Facturas.altafactura()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.auxiliar"><code class="docutils literal notranslate"><span class="pre">Facturas.auxiliar()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.borrarViaje"><code class="docutils literal notranslate"><span class="pre">Facturas.borrarViaje()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.buscarClifact"><code class="docutils literal notranslate"><span class="pre">Facturas.buscarClifact()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.cargaFechafact"><code class="docutils literal notranslate"><span class="pre">Facturas.cargaFechafact()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.cargaTablaViajes"><code class="docutils literal notranslate"><span class="pre">Facturas.cargaTablaViajes()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.cargarFactura"><code class="docutils literal notranslate"><span class="pre">Facturas.cargarFactura()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.cargarTablaFacturas"><code class="docutils literal notranslate"><span class="pre">Facturas.cargarTablaFacturas()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.cargarViaje"><code class="docutils literal notranslate"><span class="pre">Facturas.cargarViaje()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.colorearFila"><code class="docutils literal notranslate"><span class="pre">Facturas.colorearFila()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.comprobarTarifa"><code class="docutils literal notranslate"><span class="pre">Facturas.comprobarTarifa()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.guardarViaje"><code class="docutils literal notranslate"><span class="pre">Facturas.guardarViaje()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.limpiarPanel3"><code class="docutils literal notranslate"><span class="pre">Facturas.limpiarPanel3()</span></code></a></li>
+<li><a class="reference internal" href="#facturas.Facturas.validarKm"><code class="docutils literal notranslate"><span class="pre">Facturas.validarKm()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/src/facturas.rst.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de RibasGonzalez - v1.2.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">facturas module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Diego Ribas Gonzalez.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

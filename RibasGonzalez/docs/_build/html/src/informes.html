@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>informes module &#8212; documentación de RibasGonzalez - v1.2.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=514cf933" />
+    
+    <script src="../_static/documentation_options.js?v=2edad0e9"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de RibasGonzalez - v1.2.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">informes module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-informes">
+<span id="informes-module"></span><h1>informes module<a class="headerlink" href="#module-informes" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="informes.Informes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">informes.</span></span><span class="sig-name descname"><span class="pre">Informes</span></span><a class="reference internal" href="../_modules/informes.html#Informes"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="informes.Informes.checkboxinforme">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">checkboxinforme</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/informes.html#Informes.checkboxinforme"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes.checkboxinforme" title="Link to this definition">¶</a></dt>
+<dd><p>Muestra un cuadro de diálogo para que el usuario seleccione qué informes desea generar.</p>
+<p>Este método muestra un cuadro de diálogo con opciones para generar informes de conductores y/o clientes.
+El usuario puede marcar las casillas correspondientes y hacer clic en «Aceptar» para generar los informes seleccionados.
+Si el usuario no selecciona ningún informe y hace clic en «Aceptar», se mostrará un mensaje de error.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="informes.Informes.encriptarDNI">
+<span class="sig-name descname"><span class="pre">encriptarDNI</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/informes.html#Informes.encriptarDNI"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes.encriptarDNI" title="Link to this definition">¶</a></dt>
+<dd><p>Encripta parcialmente el número de DNI ocultando los primeros caracteres.</p>
+<p>Este método encripta parcialmente el número de DNI ocultando los primeros caracteres, dejando visibles los últimos cuatro
+dígitos.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dni</strong> – El número de DNI a encriptar.</p>
+</dd>
+<dt class="field-even">Devuelve<span class="colon">:</span></dt>
+<dd class="field-even"><p>El DNI encriptado.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="informes.Informes.footInforme">
+<span class="sig-name descname"><span class="pre">footInforme</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/informes.html#Informes.footInforme"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes.footInforme" title="Link to this definition">¶</a></dt>
+<dd><p>Agrega el pie de página al informe PDF.</p>
+<p>Este método agrega el pie de página al informe PDF, incluyendo la fecha de generación del informe, el título del informe
+y el número de página.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>titulo</strong> – El título del informe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="informes.Informes.reportclientes">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reportclientes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/informes.html#Informes.reportclientes"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes.reportclientes" title="Link to this definition">¶</a></dt>
+<dd><p>Genera un informe en formato PDF con el listado de clientes.</p>
+<p>Este método genera un informe en formato PDF que contiene un listado de todos los clientes registrados en la base de datos.
+El informe incluye información como el código del cliente, su DNI (encriptado), razón social, municipio, teléfono y fecha de baja (si existe).
+El informe se guarda en la carpeta “informes” con un nombre que incluye la fecha y hora de creación.
+Después de generar el informe, se abre automáticamente para que el usuario lo visualice.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="informes.Informes.reportdrivers">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reportdrivers</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/informes.html#Informes.reportdrivers"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes.reportdrivers" title="Link to this definition">¶</a></dt>
+<dd><p>Genera un informe en formato PDF con el listado de conductores.</p>
+<p>Este método genera un informe en formato PDF que contiene un listado de todos los conductores registrados en la base de datos.
+El informe incluye información como el código del conductor, apellidos, nombre, teléfono, licencias y fecha de baja (si existe).
+El informe se guarda en la carpeta “informes” con un nombre que incluye la fecha y hora de creación.
+Después de generar el informe, se abre automáticamente para que el usuario lo visualice.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="informes.Informes.reportfactura">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">reportfactura</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/informes.html#Informes.reportfactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes.reportfactura" title="Link to this definition">¶</a></dt>
+<dd><p>Genera un informe de factura.</p>
+<p>Este método genera un informe de factura en formato PDF. El informe incluye la información detallada de una factura
+seleccionada en la interfaz gráfica.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="informes.Informes.topFactura">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">topFactura</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">titulo</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/informes.html#Informes.topFactura"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes.topFactura" title="Link to this definition">¶</a></dt>
+<dd><p>Muestra la cabecera de un informe de factura.</p>
+<p>Este método muestra la cabecera de un informe de factura, que incluye el logo de la empresa, el número de factura,
+la fecha, la información del cliente y el título del informe.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>titulo</strong> – El título del informe de factura.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="informes.Informes.topInforme">
+<span class="sig-name descname"><span class="pre">topInforme</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/informes.html#Informes.topInforme"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#informes.Informes.topInforme" title="Link to this definition">¶</a></dt>
+<dd><p>Agrega la cabecera al informe PDF.</p>
+<p>Este método agrega la cabecera al informe PDF, incluyendo el título del informe, el logotipo de la empresa y la información de contacto.
+La cabecera incluye el nombre de la empresa, el título del informe, la dirección, el teléfono y el correo electrónico de contacto.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>titulo</strong> – El título del informe.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Tabla de contenido</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">informes module</a><ul>
+<li><a class="reference internal" href="#informes.Informes"><code class="docutils literal notranslate"><span class="pre">Informes</span></code></a><ul>
+<li><a class="reference internal" href="#informes.Informes.checkboxinforme"><code class="docutils literal notranslate"><span class="pre">Informes.checkboxinforme()</span></code></a></li>
+<li><a class="reference internal" href="#informes.Informes.encriptarDNI"><code class="docutils literal notranslate"><span class="pre">Informes.encriptarDNI()</span></code></a></li>
+<li><a class="reference internal" href="#informes.Informes.footInforme"><code class="docutils literal notranslate"><span class="pre">Informes.footInforme()</span></code></a></li>
+<li><a class="reference internal" href="#informes.Informes.reportclientes"><code class="docutils literal notranslate"><span class="pre">Informes.reportclientes()</span></code></a></li>
+<li><a class="reference internal" href="#informes.Informes.reportdrivers"><code class="docutils literal notranslate"><span class="pre">Informes.reportdrivers()</span></code></a></li>
+<li><a class="reference internal" href="#informes.Informes.reportfactura"><code class="docutils literal notranslate"><span class="pre">Informes.reportfactura()</span></code></a></li>
+<li><a class="reference internal" href="#informes.Informes.topFactura"><code class="docutils literal notranslate"><span class="pre">Informes.topFactura()</span></code></a></li>
+<li><a class="reference internal" href="#informes.Informes.topInforme"><code class="docutils literal notranslate"><span class="pre">Informes.topInforme()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/src/informes.rst.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de RibasGonzalez - v1.2.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">informes module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Diego Ribas Gonzalez.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>

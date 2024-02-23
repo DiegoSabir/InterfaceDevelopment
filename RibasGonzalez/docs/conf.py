@@ -10,18 +10,18 @@ import sys
 
 sys.path.insert(0, os.path.abspath('/'))
 
-project = 'a18diegorg2324'
-copyright = '2024, Diego'
-author = 'Diego'
-release = 'v1.2'
+project = 'RibasGonzalez'
+copyright = '2024, Diego Ribas Gonzalez'
+author = 'Diego Ribas Gonzalez'
+release = 'v1.2.0'
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = ['sphinx.ext.autodoc'
-              'sphinx.ext.intersphinx'
-              'sphinx.ext.ifconfig'
-              'sphinx.ext.viewcode'
+extensions = ['sphinx.ext.autodoc',
+              'sphinx.ext.intersphinx',
+              'sphinx.ext.ifconfig',
+              'sphinx.ext.viewcode',
               'sphinx.ext.githubpages']
 
 templates_path = ['_templates']

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+
+<html lang="es" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>clientes module &#8212; documentación de RibasGonzalez - v1.2.0</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/classic.css?v=514cf933" />
+    
+    <script src="../_static/documentation_options.js?v=2edad0e9"></script>
+    <script src="../_static/doctools.js?v=888ff710"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=efdbd0b9"></script>
+    
+    <link rel="index" title="Índice" href="../genindex.html" />
+    <link rel="search" title="Búsqueda" href="../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de RibasGonzalez - v1.2.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">clientes module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-clientes">
+<span id="clientes-module"></span><h1>clientes module<a class="headerlink" href="#module-clientes" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="clientes.Clientes">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">clientes.</span></span><span class="sig-name descname"><span class="pre">Clientes</span></span><a class="reference internal" href="../_modules/clientes.html#Clientes"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.altaCliente">
+<span class="sig-name descname"><span class="pre">altaCliente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.altaCliente"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.altaCliente" title="Link to this definition">¶</a></dt>
+<dd><p>Gestiona el proceso de alta de un nuevo cliente en el sistema.</p>
+<p>Verifica si el cliente ya existe en la base de datos utilizando el DNI proporcionado.
+Si el cliente ya existe, se le vuelve a dar de alta, lo que significa que se activa nuevamente
+en caso de que haya sido dado de baja anteriormente. Luego, se limpia el panel de entrada de datos
+de cliente y se actualiza la tabla de clientes mostrando los cambios.</p>
+<p>Si el cliente no existe en la base de datos, se verifican los datos obligatorios necesarios para el alta
+(DNI, razón social y número de teléfono móvil). Si alguno de estos campos falta, se muestra un mensaje de advertencia
+y se detiene el proceso de alta.</p>
+<p>Si se proporcionan todos los datos obligatorios, se recopilan los datos del cliente ingresados por el usuario y
+se preparan para ser guardados en la base de datos. Se realiza una validación adicional para asegurarse de que
+se haya seleccionado una provincia y un municipio válidos antes de guardar el cliente.</p>
+<p>Una vez que se guardan los datos del cliente en la base de datos, se muestra un mensaje indicando que el cliente
+se ha añadido correctamente, y se actualiza la lista de clientes en la interfaz gráfica.</p>
+<p>En caso de que ocurra algún error durante el proceso, se imprime un mensaje de error en la consola.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>No devuelve ningún valor explícito.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.auxiliar">
+<span class="sig-name descname"><span class="pre">auxiliar</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.auxiliar"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.auxiliar" title="Link to this definition">¶</a></dt>
+<dd><p>Llena los campos de la interfaz de usuario con los datos del registro proporcionado.</p>
+<p>Recibe un registro que contiene los datos de un cliente y actualiza los campos correspondientes
+en la interfaz de usuario con estos datos. Los campos actualizados incluyen el código, DNI,
+nombre, dirección, teléfono, provincia y municipio del cliente.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>registro</strong> – Lista que contiene los datos del cliente.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.borraCli">
+<span class="sig-name descname"><span class="pre">borraCli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.borraCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.borraCli" title="Link to this definition">¶</a></dt>
+<dd><p>Gestiona el proceso de borrado de un cliente en el sistema.</p>
+<p>Recibe como parámetro un objeto <cite>QDate</cite> que representa la fecha en la que se solicita el borrado del cliente.
+El método convierte esta fecha en un formato legible y luego oculta la ventana de confirmación de borrado.</p>
+<p>A continuación, se obtiene el DNI del cliente de la interfaz gráfica y se utiliza junto con la fecha proporcionada
+para eliminar al cliente de la base de datos, utilizando el método <cite>borrarCli</cite> de la clase <cite>Conexion</cite>.</p>
+<p>Si el cliente no existe o no se puede borrar por algún motivo, se muestra un mensaje de error al usuario.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.buscarCliente">
+<span class="sig-name descname"><span class="pre">buscarCliente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.buscarCliente"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.buscarCliente" title="Link to this definition">¶</a></dt>
+<dd><p>Busca un cliente por su DNI en la base de datos y carga sus datos en la interfaz de usuario.</p>
+<p>Este método se activa al hacer clic en el botón de buscar cliente. Obtiene el DNI del campo de texto
+correspondiente en la interfaz de usuario, busca el cliente en la base de datos utilizando el método
+“codCli” de la clase “Conexion”, carga los datos del cliente encontrado en la interfaz de usuario
+utilizando el método “auxiliar”, establece el botón de radio “Todos” como seleccionado, actualiza la
+tabla de clientes y colorea la fila correspondiente en la tabla.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.cargarCliente">
+<span class="sig-name descname"><span class="pre">cargarCliente</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.cargarCliente"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.cargarCliente" title="Link to this definition">¶</a></dt>
+<dd><p>Carga los datos de un cliente seleccionado en la tabla de clientes en la interfaz de usuario.</p>
+<p>Este método se activa cuando se selecciona una fila en la tabla de clientes. Limpia el panel de
+cliente en la interfaz de usuario, obtiene los datos del cliente seleccionado, los muestra en
+los campos correspondientes de la interfaz de usuario utilizando el método “auxiliar”, actualiza
+la tabla de clientes y colorea la fila correspondiente en la tabla.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.cargarTablaClientes">
+<span class="sig-name descname"><span class="pre">cargarTablaClientes</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.cargarTablaClientes"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.cargarTablaClientes" title="Link to this definition">¶</a></dt>
+<dd><p>Carga los registros de clientes en la tabla de la interfaz gráfica.</p>
+<p>Recibe una lista de registros de clientes y los muestra en la tabla “tabClientes” de la interfaz.
+Para cada registro en la lista, crea una nueva fila en la tabla y muestra los datos en las columnas correspondientes.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>registros</strong> – Lista de registros de clientes a mostrar en la tabla.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.colorearFila">
+<span class="sig-name descname"><span class="pre">colorearFila</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.colorearFila"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.colorearFila" title="Link to this definition">¶</a></dt>
+<dd><p>Colorea la fila correspondiente al cliente con el código especificado en la tabla de clientes.</p>
+<p>Recibe el código del cliente y busca la fila correspondiente en la tabla “tabClientes” de la interfaz.
+Si encuentra la fila, colorea todos los elementos de la fila con un color amarillo claro.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parámetros<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>codigo</strong> – Código del cliente para identificar la fila que se debe colorear.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.limpiarPanel2">
+<span class="sig-name descname"><span class="pre">limpiarPanel2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.limpiarPanel2"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.limpiarPanel2" title="Link to this definition">¶</a></dt>
+<dd><p>Limpia los campos del panel de clientes en la interfaz de usuario.</p>
+<p>Este método se utiliza para limpiar los campos del panel de clientes en la interfaz de usuario.
+Recorre una lista de widgets que forman parte del panel de clientes y establece el texto de cada
+uno de ellos en nulo. Además, restablece los valores seleccionados en los combos de provincias y
+municipios.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.modifCli">
+<span class="sig-name descname"><span class="pre">modifCli</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.modifCli"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.modifCli" title="Link to this definition">¶</a></dt>
+<dd><p>Gestiona el proceso de modificación de datos de un cliente existente en el sistema.</p>
+<p>Recolecta los datos ingresados por el usuario para realizar la modificación del cliente.
+Estos datos incluyen el código del cliente, DNI, razón social, dirección, número de teléfono móvil,
+provincia y municipio. Todos los datos son extraídos de los campos de entrada de la interfaz gráfica.</p>
+<p>Una vez recolectados los datos, se realiza la modificación del cliente en la base de datos utilizando
+el método <cite>modifCliente</cite> de la clase <cite>Conexion</cite>. Se actualizan los campos correspondientes en la base de datos
+con los nuevos valores proporcionados por el usuario.</p>
+<p>En caso de que ocurra algún error durante el proceso, se imprime un mensaje de error en la consola.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.validarDNI2">
+<span class="sig-name descname"><span class="pre">validarDNI2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.validarDNI2"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.validarDNI2" title="Link to this definition">¶</a></dt>
+<dd><p>Valida un número de documento de identidad (DNI) introducido en el campo correspondiente de la interfaz gráfica.</p>
+<p>Extrae el número de DNI ingresado en el campo de texto “txtDNI2” de la interfaz.
+Verifica que el DNI tenga exactamente 9 caracteres y que cumpla con el algoritmo de validación estándar español.
+Si el DNI es válido, muestra una marca de verificación en un QLabel asociado y devuelve True.
+Si el DNI no es válido, muestra una marca de error en el QLabel asociado, limpia el campo de texto y devuelve False.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Devuelve<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True si el DNI es válido, False si no lo es.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="clientes.Clientes.validarMovil2">
+<span class="sig-name descname"><span class="pre">validarMovil2</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="../_modules/clientes.html#Clientes.validarMovil2"><span class="viewcode-link"><span class="pre">[fuente]</span></span></a><a class="headerlink" href="#clientes.Clientes.validarMovil2" title="Link to this definition">¶</a></dt>
+<dd><p>Valida el número de teléfono introducido en el campo correspondiente de la interfaz gráfica.</p>
+<p>Extrae el número de teléfono ingresado en el campo de texto “txtmovil2” de la interfaz.
+Verifica que el número tenga exactamente 9 dígitos y que todos los caracteres sean dígitos numéricos del 0 al 9.
+Si el número no cumple con estas condiciones, muestra un mensaje de error al usuario y limpia el campo de texto.</p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="../index.html">Tabla de contenido</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">clientes module</a><ul>
+<li><a class="reference internal" href="#clientes.Clientes"><code class="docutils literal notranslate"><span class="pre">Clientes</span></code></a><ul>
+<li><a class="reference internal" href="#clientes.Clientes.altaCliente"><code class="docutils literal notranslate"><span class="pre">Clientes.altaCliente()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.auxiliar"><code class="docutils literal notranslate"><span class="pre">Clientes.auxiliar()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.borraCli"><code class="docutils literal notranslate"><span class="pre">Clientes.borraCli()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.buscarCliente"><code class="docutils literal notranslate"><span class="pre">Clientes.buscarCliente()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.cargarCliente"><code class="docutils literal notranslate"><span class="pre">Clientes.cargarCliente()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.cargarTablaClientes"><code class="docutils literal notranslate"><span class="pre">Clientes.cargarTablaClientes()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.colorearFila"><code class="docutils literal notranslate"><span class="pre">Clientes.colorearFila()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.limpiarPanel2"><code class="docutils literal notranslate"><span class="pre">Clientes.limpiarPanel2()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.modifCli"><code class="docutils literal notranslate"><span class="pre">Clientes.modifCli()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.validarDNI2"><code class="docutils literal notranslate"><span class="pre">Clientes.validarDNI2()</span></code></a></li>
+<li><a class="reference internal" href="#clientes.Clientes.validarMovil2"><code class="docutils literal notranslate"><span class="pre">Clientes.validarMovil2()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>Esta página</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/src/clientes.rst.txt"
+            rel="nofollow">Mostrar el código</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Búsqueda rápida</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Ir a" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Índice de Módulos Python"
+             >módulos</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">documentación de RibasGonzalez - v1.2.0</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">clientes module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2024, Diego Ribas Gonzalez.
+      Creado usando <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
