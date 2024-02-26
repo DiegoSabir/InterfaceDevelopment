@@ -81,9 +81,14 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnBaja2.clicked.connect(eventos.Eventos.abrirCalendarBajacli)
         var.ui.btnBuscar2.clicked.connect(clientes.Clientes.buscarCliente)
         var.ui.btnBuscar3.clicked.connect(facturas.Facturas.buscarClifact)
+        var.ui.btnBuscar3.clicked.connect(conexion.Conexion.cargarfacturasClientes)
+        var.ui.btnBuscar3.clicked.connect(facturas.Facturas.limpiarPanel3)
+        var.ui.recargar.clicked.connect(conexion.Conexion.cargarfacturas)
         var.ui.btnCalendariofact.clicked.connect(eventos.Eventos.abrirCalendarfact)
         var.ui.btnFactura.clicked.connect(facturas.Facturas.altafactura)
         var.ui.btngrabar.clicked.connect(facturas.Facturas.guardarViaje)
+        var.ui.btnrecargar.clicked.connect(facturas.Facturas.limpiarViajes)
+        var.ui.btnmodifviaje.clicked.connect(facturas.Facturas.modifViaje)
 
 
 

@@ -341,6 +341,93 @@ class Informes:
 
 
 
+    def footFactura(titulo):
+        """
+
+        Agrega el pie de página a un informe de factura.
+
+        :param titulo: El título del informe.
+
+        """
+        try:
+            var.report.line(50, 100, 525, 100)
+            var.report.setFont('Helvetica', size=11)
+            var.report.drawString(430, 85, 'Subtotal: ' + var.ui.lblsubtotal.text())
+            var.report.drawString(430, 70, 'IVA: ' + var.ui.lbliva.text())
+            var.report.drawString(430, 55, 'Total: ' + var.ui.lbltotalfactura.text())
+
+            fecha = datetime.today()
+            fecha = fecha.strftime('%d-%m-%Y %H:%M:%S')
+            var.report.setFont('Helvetica-Oblique', size=7)
+            var.report.line(50, 50, 525, 50)
+            var.report.drawString(50, 40, str(fecha))
+            var.report.drawString(250, 40, str(titulo))
+            var.report.drawString(490, 40, str('Página %s' % var.report.getPageNumber()))
+
+        except Exception as error:
+            print('Error en pie informe de cualquier tipo: ', error)
+
+
+
+    def viajesinforme(codigo):
+        """
+
+        Genera un informe de los viajes asociados a una factura.
+
+        :param codigo: El código de la factura.
+
+        """
+        try:
+            titulo = 'FACTURA'
+            Informes.topFactura(titulo)
+            Informes.footFactura(titulo)
+            items = 'CODIGO', 'ORIGEN', 'DESTINO', 'TARIFA', 'KM', 'TOTAL'
+            var.report.setFont('Helvetica-Bold', size=9)
+            var.report.drawString(55, 650, str(items[0]))
+            var.report.drawString(130, 650, str(items[1]))
+            var.report.drawString(240, 650, str(items[2]))
+            var.report.drawString(375, 650, str(items[3]))
+            var.report.drawString(435, 650, str(items[4]))
+            var.report.drawString(480, 650, str(items[5]))
+            var.report.line(50, 645, 525, 645)
+            # obtencion datos de la base de datos
+            query = QtSql.QSqlQuery()
+            query.prepare('select idviaje, origen, destino, tarifa, km from viajes where factura=:factura order by idviaje')
+            query.bindValue(':factura', str(codigo))
+            var.report.setFont('Helvetica', size=9)
+            if query.exec():
+                i = 60
+                j = 630
+                while query.next():
+                    if j <= 140:
+                        var.report.drawString(450, 120, 'Pagina siguiente...')
+                        var.report.showPage()  # crea una pagina nueva
+                        Informes.topFactura(titulo)
+                        Informes.footFactura(titulo)
+                        var.report.setFont('Helvetica-Bold', size=9)
+                        var.report.drawString(55, 650, str(items[0]))
+                        var.report.drawString(130, 650, str(items[1]))
+                        var.report.drawString(240, 650, str(items[2]))
+                        var.report.drawString(375, 650, str(items[3]))
+                        var.report.drawString(435, 650, str(items[4]))
+                        var.report.drawString(480, 650, str(items[5]))
+                        var.report.line(50, 645, 525, 645)
+                        i = 60
+                        j = 630
+                    var.report.setFont('Helvetica', size=9)
+                    var.report.drawCentredString(i+10, j, str(query.value(0)))
+                    var.report.drawString(i + 50, j, str(query.value(1)))
+                    var.report.drawString(i + 170, j, str(query.value(2)))
+                    var.report.drawString(i + 320, j, str(query.value(3))+ ' €')
+                    var.report.drawCentredString(i + 385, j, str(query.value(4)))
+                    var.report.drawCentredString(i + 435, j, str('{:.2f}'.format(round(float(query.value(4)) * float(query.value(3)), 2))) + ' €')
+                    j = j - 20
+
+        except Exception as error:
+            print('Error LISTADO conductores :', error)
+
+
+
     @staticmethod
     def reportfactura():
         """
@@ -358,10 +445,7 @@ class Informes:
             else:
                 nombre = codigofactura + '_factura.pdf'
                 var.report = canvas.Canvas('informes/' + nombre)
-                titulo = 'FACTURA'
-                Informes.topFactura(titulo)
-                Informes.footInforme(titulo)
-
+                Informes.viajesinforme(codigofactura)
                 var.report.save()
                 rootPath = '.\\informes'
                 for file in os.listdir(rootPath):

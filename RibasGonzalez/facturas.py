@@ -1,6 +1,7 @@
 import conexion
 import clientes
 import eventos
+import informes
 import var
 
 from PyQt6 import QtWidgets, QtCore, QtGui
@@ -21,6 +22,8 @@ class Facturas:
             for i in listawidgets:
                 i.setText(None)
             var.ui.cmbCond.setCurrentText('')
+            var.ui.tabViajes.clearContents()
+            var.ui.tabViajes.setRowCount(0)
             var.ui.cmbProbVentas.setCurrentText('')
             var.ui.cmbProbVentas2.setCurrentText('')
             var.ui.cmbMuniVentas.setCurrentText('')
@@ -136,6 +139,11 @@ class Facturas:
                 var.ui.tablaFacturas.setItem(index, 1, QtWidgets.QTableWidgetItem(str(registro[1])))
                 var.ui.tablaFacturas.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tablaFacturas.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                btn = QtWidgets.QPushButton()
+                btn.setFixedSize(30, 28)
+                btn.setIcon(QtGui.QIcon('./img/aviso.ico'))
+                btn.clicked.connect(informes.Informes.reportfactura)
+                var.ui.tablaFacturas.setCellWidget(index, 2, btn)
                 index += 1
 
         except Exception as error:
@@ -154,13 +162,14 @@ class Facturas:
 
         """
         try:
+            listawidgets = [var.ui.lblsubtotal, var.ui.lbliva, var.ui.lbltotalfactura]
+            for i in listawidgets:
+                i.setText(None)
             Facturas.limpiarPanel3(self)
             row = var.ui.tablaFacturas.selectedItems()
             fila = [dato.text() for dato in row]
             registro = conexion.Conexion.oneFactura(fila[0])
             Facturas.auxiliar(registro)
-            conexion.Conexion.cargarfacturas()
-            Facturas.colorearFila(registro[0])
             conexion.Conexion.viajesFactura(registro[0])
 
         except Exception as error:
@@ -256,7 +265,7 @@ class Facturas:
         """
         try:
             var.ui.tabViajes.clearContents()
-            subtotal=0.0
+            subtotal = 0.0
             index = 0
             for registro in valores:
                 var.ui.tabViajes.setRowCount(index + 1)
@@ -267,13 +276,12 @@ class Facturas:
                 var.ui.tabViajes.setItem(index, 4, QtWidgets.QTableWidgetItem(str(registro[4])))
 
                 totalViaje = round(float(registro[4]) * float(registro[3]), 2)
-                subtotal +=totalViaje
-                iva=totalViaje*0.21
-                var.ui.lblsubtotal.setText(str(round(subtotal, 2)) + " €")
-                var.ui.lbliva.setText(str(round(iva, 2)) + " €")
-                var.ui.lbltotalfactura.setText(str(round(subtotal + iva, 2)) + " €")
-                var.ui.tabViajes.setItem(index, 5, QtWidgets.QTableWidgetItem(str(totalViaje)))
-                subtotal= subtotal+totalViaje
+                subtotal = subtotal + totalViaje
+                iva = subtotal*0.21
+                var.ui.lblsubtotal.setText(str('{:.2f}'.format(round(subtotal, 2))) + " €")
+                var.ui.lbliva.setText(str('{:.2f}'.format(round(iva, 2))) + " €")
+                var.ui.lbltotalfactura.setText(str('{:.2f}'.format(round(subtotal + iva, 2))) + " €")
+                var.ui.tabViajes.setItem(index, 5, QtWidgets.QTableWidgetItem(str('{:.2f}'.format(totalViaje))))
                 var.ui.tabViajes.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabViajes.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabViajes.item(index, 2).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -378,3 +386,72 @@ class Facturas:
 
         except Exception as error:
             print(error)
+
+
+
+    def modifViaje(self):
+        """
+
+        Modifica la información de un viaje existente.
+
+        Obtiene los datos del viaje desde los campos de la interfaz y actualiza la información en la base de datos.
+
+        :raises Exception: Captura cualquier excepción que ocurra durante la ejecución del método.
+
+        """
+        try:
+            if var.ui.lblcodfacturacion.text():
+                if var.ui.txtkm.text() and str(var.ui.cmbMuniVentas.currentText()) != "" and str(
+                        var.ui.cmbMuniVentas2.currentText()) != "":
+                    tarifa = '0.80'
+                    if (var.ui.rbtLocal.isChecked()):
+                        tarifa = '0.20'
+                    elif (var.ui.rbtProvincial.isChecked()):
+                        tarifa = '0.40'
+                    row = var.ui.tabViajes.selectedItems()
+                    fila = [dato.text() for dato in row]
+                    if fila:
+                        id_viaje = fila[0]
+                    km = var.ui.txtkm.text().title()
+
+                    provincia_origen = var.ui.cmbProbVentas.currentText()
+                    localidad_origen = var.ui.cmbMuniVentas.currentText()
+                    provincia_destino = var.ui.cmbProbVentas2.currentText()
+                    localidad_destino = var.ui.cmbMuniVentas2.currentText()
+
+                    nuevo_origen = f"{provincia_origen} - {localidad_origen}"
+                    nuevo_destino = f"{provincia_destino} - {localidad_destino}"
+                    if conexion.Conexion.updateViaje(id_viaje, nuevo_origen, nuevo_destino, tarifa , km):
+                        conexion.Conexion.viajesFactura(var.ui.lblcodfacturacion.text())
+                        eventos.Eventos.mensaje("Aviso", "Viaje actualizado correctamente")
+                    else:
+                        eventos.Eventos.error("Error", "No se pudo actualizar el viaje")
+                else:
+                    eventos.Eventos.error('Aviso',"Faltan campos obligatorios")
+            else:
+                eventos.Eventos.error('Aviso',"Selecciona primero una factura")
+
+        except Exception as error:
+            print(error, " en modifViaje")
+
+
+
+    def limpiarViajes(self=None):
+        """
+
+        Limpia los widgets del panel de facturación.
+
+        Se encarga de resetear los valores de los widgets relacionados con la facturación.
+
+        """
+        try:
+            listawidgets=[var.ui.txtkm]
+            for i in listawidgets:
+                i.setText(None)
+            var.ui.cmbProbVentas.setCurrentText('')
+            var.ui.cmbProbVentas2.setCurrentText('')
+            var.ui.cmbMuniVentas.setCurrentText('')
+            var.ui.cmbMuniVentas2.setCurrentText('')
+
+        except Exception as error:
+            print(str(error) + " en limpiarpanel 3")
