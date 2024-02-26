@@ -119,12 +119,16 @@ class Clientes():
         :param codigo: Código del cliente para identificar la fila que se debe colorear.
 
         """
-        for fila in range(var.ui.tabClientes.rowCount()):
-            if var.ui.tabClientes.item(fila, 0).text() == str(codigo):
-                for columna in range(var.ui.tabClientes.columnCount()):
-                    item = var.ui.tabClientes.item(fila, columna)
-                    if item is not None:
-                        item.setBackground(QtGui.QColor(255, 241, 150))
+        try:
+            for fila in range(var.ui.tabClientes.rowCount()):
+                if var.ui.tabClientes.item(fila, 0).text() == str(codigo):
+                    for columna in range(var.ui.tabClientes.columnCount()):
+                        item = var.ui.tabClientes.item(fila, columna)
+                        if item is not None:
+                            item.setBackground(QtGui.QColor(255, 241, 150))
+
+        except Exception as error:
+            print("error en colorearFila", error)
 
 
 
@@ -316,6 +320,7 @@ class Clientes():
             muni = var.ui.cmbMuni2.currentText()
             modifCliente.insert(5,muni)
             conexion.Conexion.modifCliente(modifCliente)
+            conexion.Conexion.mostrarClientes()
 
         except Exception as error:
             print(error, " en modifcli")

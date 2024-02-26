@@ -804,7 +804,7 @@ class Conexion():
 
         """
         try:
-            id = 0;
+            id = 0
             var.ui.cmbMuniVentas.clear()
             prov = var.ui.cmbProbVentas.currentText()
             query = QtSql.QSqlQuery()
@@ -851,11 +851,13 @@ class Conexion():
     def selMuni4(self=None):
         """
 
+        Selecciona los municipios según la provincia elegida en cmbProbVentas2 que es el destino y los carga en cmbMuniVentas2 que tambien es del destino.
 
+        :param self: Parámetro opcional, puede ser nulo.
 
         """
         try:
-            id = 0;
+            id = 0
             var.ui.cmbMuniVentas2.clear()
             prov = var.ui.cmbProbVentas2.currentText()
             query = QtSql.QSqlQuery()
@@ -881,7 +883,9 @@ class Conexion():
     def cargarprov4(self=None):
         """
 
+        Carga las provincias en el combo box cmbProbVentas2 que es el de destino.
 
+        :param self: Parámetro opcional, puede ser nulo.
 
         """
         try:
@@ -893,6 +897,7 @@ class Conexion():
                 Conexion.datosViaje()
                 while query.next():
                     var.ui.cmbProbVentas2.addItem(query.value(0))
+
         except Exception as error:
             print(error, " en cargarprov")
 
@@ -1055,3 +1060,60 @@ class Conexion():
 
         except Exception as error:
             print(error)
+
+
+
+    def updateViaje(viaje_id, nuevo_origen, nuevo_destino,tarifa, km):
+        """
+
+        Actualiza un viaje en la base de datos.
+
+        :param viaje_id: ID del viaje a ser actualizado.
+        :param nuevo_origen: Nueva ubicación de origen del viaje.
+        :param nuevo_destino: Nueva ubicación de destino del viaje.
+        :param tarifa: Nueva tarifa del viaje.
+        :param km: Nuevos kilómetros del viaje.
+        :return: True si la actualización fue exitosa, False en caso contrario.
+
+        """
+
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare("update viajes set origen=:origen, destino=:destino, tarifa=:tarifa, km=:kilometros where idviaje=:id")
+            query.bindValue(":id", viaje_id)
+            query.bindValue(":origen", nuevo_origen)
+            query.bindValue(":destino", nuevo_destino)
+            query.bindValue(":tarifa", tarifa)
+            query.bindValue(":kilometros", km)
+
+            return query.exec()
+
+        except Exception as error:
+            print("Error en updateViaje:", error)
+            return False
+
+
+
+    def cargarfacturasClientes(self=None):
+        """
+
+        Carga los números de factura y DNIs de clientes desde la tabla facturas para un DNI específico.
+
+        """
+        try:
+            dni = var.ui.txtcifcli.text()
+            if var.ui.txtcifcli!="":
+                registros = []
+                query = QtSql.QSqlQuery()
+                query.prepare('select numfac, dnicli from facturas where dnicli = :dnicli')
+                query.bindValue(':dnicli', str(dni))
+                if query.exec():
+                    while query.next():
+                        row = [query.value(i) for i in range(query.record().count())]
+                        registros.append(row)
+                facturas.Facturas.cargarTablaFacturas(registros)
+            else:
+                eventos.Eventos.error("Aviso","Debe introducir un dni")
+
+        except Exception as error:
+            print(error, "cargarfacturas")

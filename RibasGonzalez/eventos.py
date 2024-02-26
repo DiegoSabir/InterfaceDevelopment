@@ -20,6 +20,7 @@ class Eventos():
     def salir(self):
         """
 
+        Cierra la aplicación.
 
         :param self:
         :type self:
@@ -37,6 +38,9 @@ class Eventos():
     def abrirCalendar(self):
         """
 
+        Abre el widget del calendario.
+
+        Muestra el widget del calendario en la interfaz.
 
         :param self:
         :type self:
@@ -54,6 +58,9 @@ class Eventos():
     def cerrarAcercaDe(self):
         """
 
+        Cierra la ventana Acerca De.
+
+        Oculta la ventana Acerca De en la interfaz.
 
         :param self:
         :type self:
@@ -70,7 +77,9 @@ class Eventos():
     def abrirAcercaDe(self):
         """
 
+        Abre la ventana Acerca De.
 
+        Muestra la ventana Acerca De en la interfaz.
 
         """
         try:
@@ -84,6 +93,10 @@ class Eventos():
     @staticmethod
     def abrirSalir(self):
         """
+
+        Abre la ventana de confirmación para salir.
+
+        Muestra la ventana de confirmación para salir en la interfaz.
 
         :param self:
         :type self:
@@ -101,6 +114,9 @@ class Eventos():
     def cerrarSalir(self):
         """
 
+        Cierra la ventana de confirmación para salir.
+
+        Oculta la ventana de confirmación para salir en la interfaz.
 
         :param self:
         :type self:
@@ -118,6 +134,9 @@ class Eventos():
     def acercade(self):
         """
 
+        Placeholder para la función Acerca De.
+
+        No se implementa actualmente.
 
         :param self:
         :type self:
@@ -127,7 +146,7 @@ class Eventos():
             pass
 
         except Exception as error:
-            print(error ," en abrir acercade")
+            print(error, " en abrir acercade")
 
 
 
@@ -135,6 +154,9 @@ class Eventos():
     def selEstado(self):
         """
 
+        Muestra los drivers en la interfaz.
+
+        Llama a la función mostrardriver de la clase Conexion para mostrar los drivers en la interfaz.
 
         :param self:
         :type self:
@@ -148,6 +170,9 @@ class Eventos():
     def resizeTabdrivers(self):
         """
 
+        Ajusta el tamaño de las columnas en la tabla de drivers.
+
+        Ajusta las columnas para que se redimensionen correctamente en la tabla de drivers.
 
         :param self:
         :type self:
@@ -156,9 +181,9 @@ class Eventos():
         try:
             header = var.ui.tabDrivers.horizontalHeader()
             for i in range(5):
-                if i==0 or i==4 or i==3:
+                if i == 0 or i == 4 or i == 3:
                     header.setSectionResizeMode(i,QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
-                elif i==1 or i==2:
+                elif i == 1 or i == 2:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
 
         except Exception as error:
@@ -170,6 +195,9 @@ class Eventos():
     def formatCajaTexto(self = None):
         """
 
+        Formatea el texto en las cajas de texto de apellidos y nombre.
+
+        Convierte el texto ingresado a formato de letra capital.
 
         :param self:
         :type self:
@@ -188,7 +216,9 @@ class Eventos():
     def crearBackup():
         """
 
+        Crea una copia de seguridad de la base de datos.
 
+        Crea un archivo zip con una copia de seguridad de la base de datos y muestra un mensaje de éxito.
 
         """
         try:
@@ -197,7 +227,7 @@ class Eventos():
             copia = str(fecha)+'_backup.zip'
             directorio, filename = var.dlgabrir.getSaveFileName(None,'Guardar copia de seguridad',copia,'.zip')
             if var.dlgabrir.accept and filename !='':
-                fichZip=zipfile.ZipFile(copia,'w')
+                fichZip = zipfile.ZipFile(copia,'w')
                 fichZip.write(var.bbdd, os.path.basename(var.bbdd),zipfile.ZIP_DEFLATED)
                 fichZip.close()
                 shutil.move(str(copia),str(directorio))
@@ -211,7 +241,10 @@ class Eventos():
     def  restaurarBackup(self):
         """
 
+        Restaura una copia de seguridad de la base de datos.
 
+        Permite al usuario seleccionar un archivo zip y restaura la base de datos desde ese archivo.
+        Muestra un mensaje de éxito o error.
 
         """
         try:
@@ -222,6 +255,9 @@ class Eventos():
                     bbdd.extractall(pwd=None)
                 bbdd.close()
                 conexion.Conexion.mostrardriver()
+                conexion.Conexion.mostrarClientes()
+                conexion.Conexion.cargarfacturas()
+                conexion.Conexion.cargarconductor()
                 eventos.Eventos.mensaje("Aviso", "Copia de seguridad restaurada")
 
         except Exception as error:
@@ -232,7 +268,9 @@ class Eventos():
     def exportardatosxls(self):
         """
 
+        Exporta los datos de conductores a un archivo xls.
 
+        Crea un archivo xls con los datos de conductores y muestra un mensaje de éxito o error.
 
         """
         try:
@@ -269,7 +307,10 @@ class Eventos():
     def validarDNI(self=None):
         """
 
+        Valida el formato de un DNI y muestra un ícono de verificación o error.
 
+        :param dni: Número de DNI a validar.
+        :type dni: str
 
         """
         try:
@@ -285,7 +326,10 @@ class Eventos():
     def importarDatosExcel(self):
         """
 
+        Importa datos desde un archivo xls a la base de datos.
 
+        Permite al usuario seleccionar un archivo xls y lo importa a la base de datos.
+        Muestra un mensaje de éxito o error.
 
         """
         try:
@@ -334,7 +378,9 @@ class Eventos():
     def abrirCalendarBaja():
         """
 
+        Abre una ventana de confirmación para dar de baja a un conductor.
 
+        Muestra una ventana de confirmación para dar de baja a un conductor.
 
         """
         try:
@@ -366,6 +412,7 @@ class Eventos():
     def resizeTabclientes(self):
         """
 
+        Ajusta el tamaño de las columnas en la tabla de clientes.
 
         :param self:
         :type self:
@@ -387,6 +434,7 @@ class Eventos():
     def validarDNI2(self=None):
         """
 
+        Valida el formato de un DNI y muestra un ícono de verificación o error.
 
 
         """
@@ -404,6 +452,7 @@ class Eventos():
     def selEstado2(self):
         """
 
+        Muestra los clientes en la interfaz.
 
         :param self:
         :type self:
@@ -417,7 +466,9 @@ class Eventos():
     def abrirCalendarBajacli():
         """
 
+        Abre una ventana de confirmación para dar de baja a un cliente.
 
+        Muestra una ventana de confirmación para dar de baja a un cliente.
 
         """
         try:
@@ -448,7 +499,9 @@ class Eventos():
     def exportardatosclientesxls(self):
         """
 
+        Exporta los datos de clientes a un archivo xls.
 
+        Crea un archivo xls con los datos de clientes y muestra un mensaje de éxito o error.
 
         """
         try:
@@ -481,7 +534,10 @@ class Eventos():
     def importarDatosclientesExcel(self):
         """
 
+        Importa datos desde un archivo xls a la base de datos de clientes.
 
+        Permite al usuario seleccionar un archivo xls y lo importa a la base de datos de clientes.
+        Muestra un mensaje de éxito o error.
 
         """
         try:
@@ -529,7 +585,9 @@ class Eventos():
     def abrirCalendarfact(self):
         """
 
+        Abre la ventana para dar de alta una factura.
 
+        Muestra la ventana para dar de alta una factura.
 
         """
         try:
@@ -560,6 +618,7 @@ class Eventos():
     def mensaje(title, text):
         """
 
+        Muestra un mensaje informativo.
 
         :param text:
         :type text:
@@ -578,7 +637,9 @@ class Eventos():
     def resizeTabfacturas():
         """
 
+        Ajusta el tamaño de las columnas en la tabla de facturas.
 
+        Ajusta las columnas para que se redimensionen correctamente en la tabla de facturas.
 
         """
         try:
@@ -598,15 +659,17 @@ class Eventos():
     def resizeTabViajes():
         """
 
+        Ajusta el tamaño de las columnas en la tabla de viajes.
 
+        Ajusta las columnas para que se redimensionen correctamente en la tabla de viajes.
 
         """
         try:
             header = var.ui.tabViajes.horizontalHeader()
             for i in range(5):
-                if i==0 or i==3 or i==6:
+                if i == 0 or i == 3 or i == 6:
                     header.setSectionResizeMode(i,QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
-                elif i==1 or i==2 :
+                elif i == 1 or i == 2:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
 
         except Exception as error:

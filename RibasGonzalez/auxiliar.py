@@ -11,7 +11,11 @@ class Calendar(QtWidgets.QDialog):
     def __init__(self):
         """
 
-        Inicializa el diálogo del calendario.
+        Inicializa la ventana de calendario.
+
+        Establece la fecha actual en el calendario al hacer clic en un botón en otra parte de la aplicación.
+
+        Conecta la señal de clic del calendario a la función cargaFecha en la clase Drivers.
 
         """
         bool = None
@@ -31,7 +35,9 @@ class AcercaDe(QtWidgets.QDialog):
     def __init__(self):
         """
 
-        Inicializa la ventana "Acerca de".
+        Inicializa la ventana "Acerca De".
+
+        Conecta el botón de aceptar a la función cerrarAcercaDe en la clase Eventos.
 
         """
         super(AcercaDe, self).__init__()
@@ -46,7 +52,9 @@ class Salir(QtWidgets.QDialog):
     def __init__(self):
         """
 
+        Inicializa la ventana de confirmación de salida.
 
+        Conecta los botones de salir y cancelar a las funciones salir y cerrarSalir en la clase Eventos, respectivamente.
 
         """
         super(Salir, self).__init__()
@@ -73,7 +81,11 @@ class Baja(QtWidgets.QDialog):
     def __init__(self):
         """
 
+        Inicializa la ventana de baja para conductores.
 
+        Establece la fecha actual en el calendario al inicializar la ventana.
+
+        Conecta la señal de clic del calendario a la función borraDri en la clase Drivers.
 
         """
         super(Baja, self).__init__()
@@ -91,7 +103,11 @@ class Bajacli(QtWidgets.QDialog):
     def __init__(self):
         """
 
+        Inicializa la ventana de baja para clientes.
 
+        Establece la fecha actual en el calendario al inicializar la ventana.
+
+        Conecta la señal de clic del calendario a la función borraCli en la clase Clientes.
 
         """
         super(Bajacli, self).__init__()
@@ -109,7 +125,11 @@ class Altafact(QtWidgets.QDialog):
     def __init__(self):
         """
 
+        Inicializa la ventana de alta de facturas.
 
+        Establece la fecha actual en el calendario al inicializar la ventana.
+
+        Conecta la señal de clic del calendario a la función cargaFechafact en la clase Facturas.
 
         """
         super(Altafact, self).__init__()
