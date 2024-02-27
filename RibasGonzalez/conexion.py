@@ -76,7 +76,7 @@ class Conexion():
 
         """
         try:
-            id = 0;
+            id = 0
             var.ui.cmbMuni.clear()
             prov = var.ui.cmbProv.currentText()
             query = QtSql.QSqlQuery()
@@ -126,7 +126,6 @@ class Conexion():
             query.bindValue(':carnet', str(newDriver[9]))
             if query.exec():
                 return True
-
             else:
                 return False
 
@@ -157,7 +156,6 @@ class Conexion():
                 while query.next():
                     row = [query.value(i) for i in range(query.record().count())]
                     registros.append(row)
-
             if registros:
                 drivers.Drivers.cargarTabladri(registros)
             else:
@@ -166,7 +164,7 @@ class Conexion():
 
 
         except Exception as error:
-            print('error mostrardricver', error)
+            print('error mostrardriver', error)
 
 
 
@@ -175,6 +173,7 @@ class Conexion():
 
         Recupera los datos de un conductor específico según su código.
 
+        :param codigo: Código único del conductor.
         :return: Una lista con los detalles del conductor recuperado.
 
         """
@@ -263,16 +262,15 @@ class Conexion():
         try:
             query1 = QtSql.QSqlQuery()
             query1.prepare('select bajadri from drivers where '
-                           ' dnidri=:dni')
-            query1.bindValue(':dni', str(dni))
+                          ' dnidri=:dni')
+            query1.bindValue(':dni',str(dni))
             if query1.exec():
                 while query1.next():
                     valor = query1.value(0)
                 query = QtSql.QSqlQuery()
-                query.prepare('update drivers set bajadri= :fechabaja where '
-                              ' dnidri=:dni')
-                query.bindValue(':fechabaja', str(fecha))
-                query.bindValue(':dni', str(dni))
+                query.prepare('update drivers set bajadri= :fechabaja where dnidri=:dni')
+                query.bindValue(':fechabaja',str(fecha))
+                query.bindValue(':dni',str(dni))
                 if query.exec():
                     Conexion.mostrardriver()
                     var.Baja.hide()
@@ -303,7 +301,6 @@ class Conexion():
             return registros
 
         except Exception as error:
-
             print('error selectDrivertodos', error)
 
 
@@ -446,7 +443,7 @@ class Conexion():
                     id = query.value(0)
             query1 = QtSql.QSqlQuery()
             query1.prepare('select municipio from municipios where idprov = :id')
-            query1.bindValue(':id', int(id))
+            query1.bindValue(':id',int(id))
             if query1.exec():
                 var.ui.cmbMuni2.addItem('')
                 while query1.next():
@@ -546,7 +543,7 @@ class Conexion():
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle("Dar Alta")
-            mbox.setWindowIcon(QtGui.QIcon("img/4043233-anime-away-face-no-nobody-spirited_113254.ico"))
+            mbox.setWindowIcon(QtGui.QIcon("img/aviso.ico"))
             mbox.setIcon(QtWidgets.QMessageBox.Icon.Question)
             mbox.setText("El cliente está dado de baja.\n¿Desea darlo de alta de nuevo?")
             mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
@@ -603,7 +600,7 @@ class Conexion():
     def borrarCli(dni, fecha):
         """
 
-        Intenta marcar un cliente como dado de baja en la base de datos.
+        Da de baja a un cliente en la base de datos.
 
         :param dni: El DNI del cliente que se marcará como dado de baja.
         :param fecha: La fecha en la que se dará de baja al cliente.
@@ -611,15 +608,13 @@ class Conexion():
         """
         try:
             query1 = QtSql.QSqlQuery()
-            query1.prepare('select bajacli from clientes where '
-                           ' dnicli=:dni')
+            query1.prepare('select bajacli from clientes where dnicli=:dni')
             query1.bindValue(':dni', str(dni))
             if query1.exec():
                 while query1.next():
                     valor = query1.value(0)
                 query = QtSql.QSqlQuery()
-                query.prepare('update clientes set bajacli= :fechabaja where '
-                              ' dnicli=:dni')
+                query.prepare('update clientes set bajacli= :fechabaja where dnicli=:dni')
                 query.bindValue(':fechabaja', str(fecha))
                 query.bindValue(':dni', str(dni))
                 if query.exec():
@@ -717,6 +712,8 @@ class Conexion():
         except Exception as error:
             print("Error:", str(error))
 
+
+
     def altafacturacion(registro):
         """
 
@@ -726,8 +723,7 @@ class Conexion():
 
         """
         try:
-            if not all(
-                    [var.ui.txtcifcli.text(), var.ui.txtfechafact.text(), var.ui.cmbCond.currentText().split('.')[0]]):
+            if not all([var.ui.txtcifcli.text(), var.ui.txtfechafact.text(), var.ui.cmbCond.currentText().split('.')[0]]):
                 eventos.Eventos.error("Aviso", "Faltan datos obligatorios")
             else:
                 dni = var.ui.txtcifcli.text()
@@ -953,7 +949,6 @@ class Conexion():
                 while query.next():
                     row = [query.value(i) for i in range(query.record().count())]
                     valores.append(row)
-
             facturas.Facturas.cargaTablaViajes(valores)
 
         except Exception as error:
@@ -1076,7 +1071,6 @@ class Conexion():
         :return: True si la actualización fue exitosa, False en caso contrario.
 
         """
-
         try:
             query = QtSql.QSqlQuery()
             query.prepare("update viajes set origen=:origen, destino=:destino, tarifa=:tarifa, km=:kilometros where idviaje=:id")
@@ -1102,7 +1096,7 @@ class Conexion():
         """
         try:
             dni = var.ui.txtcifcli.text()
-            if var.ui.txtcifcli!="":
+            if var.ui.txtcifcli != "":
                 registros = []
                 query = QtSql.QSqlQuery()
                 query.prepare('select numfac, dnicli from facturas where dnicli = :dnicli')

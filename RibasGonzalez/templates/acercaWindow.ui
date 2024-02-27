@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../../../../../../.designer/img/acercade.ico</normaloff>../../../../../../.designer/img/acercade.ico</iconset>
+    <normaloff>../img/acercade.ico</normaloff>../img/acercade.ico</iconset>
   </property>
   <widget class="QFrame" name="frame">
    <property name="geometry">
@@ -77,7 +77,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Version: 1.2</string>
+     <string>Version: 1.2.0</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -135,7 +135,25 @@
      </font>
     </property>
     <property name="text">
-     <string>21/12/1998 - Diego Ribas Gonzalez</string>
+     <string>21/12/1998 - Diego Ribas González</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>170</y>
+      <width>241</width>
+      <height>21</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>11</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Proyecto de fin de curso</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_7">

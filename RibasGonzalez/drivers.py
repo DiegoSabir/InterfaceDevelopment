@@ -6,7 +6,7 @@ import locale, conexion
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
 from PyQt6.QtGui import QPixmap
-from PyQt6 import QtWidgets,QtCore, QtGui
+from PyQt6 import QtWidgets, QtCore, QtGui
 
 import eventos
 
@@ -21,8 +21,8 @@ class Drivers():
 
         """
         try:
-            listawidgets=[var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
-                          var.ui.txtdir, var.ui.txtmovil, var.ui.txtsalario, var.ui.lblValidarDNI ]
+            listawidgets = [var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
+                          var.ui.txtdir, var.ui.txtmovil, var.ui.txtsalario, var.ui.lblValidarDNI]
             for i in listawidgets:
                 i.setText(None)
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
@@ -48,7 +48,7 @@ class Drivers():
 
         """
         try:
-            data=('{:02d}/{:02d}/{:4d}'.format(qDate.day(),qDate.month(),qDate.year()))
+            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(),qDate.month(),qDate.year()))
             var.ui.txtfecha.setText(str(data))
             var.calendar.hide()
 
@@ -78,8 +78,8 @@ class Drivers():
             digExt = "XYZ"
             reempDigExt = {"X": '0', "Y": '1', "Z": '2'}
             numeros = "1234567890"
-            imgCorrecto = QPixmap('img/tickcirclehd_106142.ico')
-            imgIncorrecto = QPixmap('img/crosscircleregular_106260.ico')
+            imgCorrecto = QPixmap('img/aceptar.ico')
+            imgIncorrecto = QPixmap('img/cancelar.ico.ico')
 
             if len(dni) == 9:
                 digControl = dni[8]
@@ -121,7 +121,6 @@ class Drivers():
             dni = var.ui.txtDNI.text()
             if conexion.Conexion.verificarDri(dni):
                 conexion.Conexion.volverDarAlta(dni)
-
                 Drivers.limpiarPanel(self)
                 conexion.Conexion.mostrardriver()
             else:
@@ -148,8 +147,8 @@ class Drivers():
                     if i.isChecked():
                         licencias.append(i.text())
                 newDriver.append('-'.join(licencias))
-                valor=conexion.Conexion.guardardri(newDriver)
-                if valor==True:
+                valor = conexion.Conexion.guardardri(newDriver)
+                if valor == True:
                     eventos.Eventos.mensaje("Aviso", "El conductor fue añadido con exito")
                     conexion.Conexion.mostrardriver()
                     conexion.Conexion.cargarconductor()
@@ -176,7 +175,7 @@ class Drivers():
             var.ui.txtmovil.setText(movil)  # Corrección aquí
             if len(movil) == 9:
                 digControl = movil[:9]
-                if len(movil) != len([n for n in movil if n in numeros])== digControl:
+                if len(movil) != len([n for n in movil if n in numeros]) == digControl:
                     raise Exception
             else:
                 raise Exception
@@ -202,7 +201,7 @@ class Drivers():
             numeros = "1234567890"
             var.ui.txtmovil.setText(sal)# Corrección aquí
             if len(sal) == len([n for n in sal if n in numeros]):
-                var.ui.txtsalario.setText(str(locale.currency(float(var.ui.txtsalario.text()),grouping=True)))
+                var.ui.txtsalario.setText(str(locale.currency(float(var.ui.txtsalario.text()), grouping=True)))
             else:
                 raise Exception
 
@@ -256,7 +255,7 @@ class Drivers():
         try:
             Drivers.limpiarPanel(self)
             row = var.ui.tabDrivers.selectedItems()
-            fila =[dato.text() for dato in row]
+            fila = [dato.text() for dato in row]
             registro = conexion.Conexion.oneDriver(fila[0])
             Drivers.auxiliar(registro)
             conexion.Conexion.mostrardriver()
@@ -279,20 +278,20 @@ class Drivers():
 
         """
         try:
-            datos=[var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
+            datos = [var.ui.lblcodbd, var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
                    var.ui.txtdir, var.ui.cmbProv, var.ui.cmbMuni, var.ui.txtmovil, var.ui.txtsalario]
-            for i,dato in enumerate(datos):
-                if i == 6 or i == 7 :
+            for i, dato in enumerate(datos):
+                if i == 6 or i == 7:
                     dato.setCurrentText(str(registro[i]))
                 else:
                     dato.setText(str(registro[i]))
-            if 'A' in registro [10]:
+            if 'A' in registro[10]:
                 var.ui.chkA.setChecked(True)
-            if 'B' in registro [10]:
+            if 'B' in registro[10]:
                 var.ui.chkA.setChecked(True)
-            if 'C' in registro [10]:
+            if 'C' in registro[10]:
                 var.ui.chkA.setChecked(True)
-            if 'D' in registro [10]:
+            if 'D' in registro[10]:
                 var.ui.chkA.setChecked(True)
 
         except Exception as error:
@@ -353,16 +352,16 @@ class Drivers():
 
         """
         try:
-            driver=[var.ui.lblcodbd,var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
+            driver = [var.ui.lblcodbd,var.ui.txtDNI, var.ui.txtfecha, var.ui.txtapellidos, var.ui.txtnombre,
                     var.ui.txtdir, var.ui.txtmovil, var.ui.txtsalario]
-            modifDriver=[]
+            modifDriver = []
             for i in driver:
                 modifDriver.append(i.text().title())
             prov = var.ui.cmbProv.currentText()
-            modifDriver.insert(6,prov)
+            modifDriver.insert(6, prov)
             muni = var.ui.cmbMuni.currentText()
-            modifDriver.insert(7,muni)
-            licencias=[]
+            modifDriver.insert(7, muni)
+            licencias = []
             chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
             for i in chklicencia:
                 if i.isChecked():

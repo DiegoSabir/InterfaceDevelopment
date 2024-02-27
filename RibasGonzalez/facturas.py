@@ -18,7 +18,7 @@ class Facturas:
 
         """
         try:
-            listawidgets=[var.ui.lblcodfacturacion, var.ui.txtcifcli, var.ui.txtfechafact, var.ui.txtkm]
+            listawidgets = [var.ui.lblcodfacturacion, var.ui.txtcifcli, var.ui.txtfechafact, var.ui.txtkm, var.ui.lblsubtotal, var.ui.lbliva, var.ui.lbltotalfactura]
             for i in listawidgets:
                 i.setText(None)
             var.ui.cmbCond.setCurrentText('')
@@ -74,7 +74,6 @@ class Facturas:
             codigo = var.ui.lblcodbd2.text()
             var.ui.rbtTodos2.setChecked(True)
             conexion.Conexion.mostrarClientes()
-            clientes.Clientes.colorearFila(codigo)
 
         except Exception as error:
             print(str(error) + " en cargarcliente clientes")
@@ -112,7 +111,7 @@ class Facturas:
 
         """
         try:
-            registro=[var.ui.txtcifcli.text(), var.ui.txtfechafact.text(), var.ui.cmbCond.currentText().split('.')[0]]
+            registro = [var.ui.txtcifcli.text(), var.ui.txtfechafact.text(), var.ui.cmbCond.currentText().split('.')[0]]
             conexion.Conexion.altafacturacion(registro)
 
         except Exception as error:
@@ -265,6 +264,7 @@ class Facturas:
         """
         try:
             var.ui.tabViajes.clearContents()
+            var.ui.tabViajes.setRowCount(0)
             subtotal = 0.0
             index = 0
             for registro in valores:
@@ -277,7 +277,7 @@ class Facturas:
 
                 totalViaje = round(float(registro[4]) * float(registro[3]), 2)
                 subtotal = subtotal + totalViaje
-                iva = subtotal*0.21
+                iva=subtotal*0.21
                 var.ui.lblsubtotal.setText(str('{:.2f}'.format(round(subtotal, 2))) + " €")
                 var.ui.lbliva.setText(str('{:.2f}'.format(round(iva, 2))) + " €")
                 var.ui.lbltotalfactura.setText(str('{:.2f}'.format(round(subtotal + iva, 2))) + " €")
@@ -401,8 +401,7 @@ class Facturas:
         """
         try:
             if var.ui.lblcodfacturacion.text():
-                if var.ui.txtkm.text() and str(var.ui.cmbMuniVentas.currentText()) != "" and str(
-                        var.ui.cmbMuniVentas2.currentText()) != "":
+                if var.ui.txtkm.text() and str(var.ui.cmbMuniVentas.currentText()) != "" and str(var.ui.cmbMuniVentas2.currentText()) != "":
                     tarifa = '0.80'
                     if (var.ui.rbtLocal.isChecked()):
                         tarifa = '0.20'
@@ -421,7 +420,7 @@ class Facturas:
 
                     nuevo_origen = f"{provincia_origen} - {localidad_origen}"
                     nuevo_destino = f"{provincia_destino} - {localidad_destino}"
-                    if conexion.Conexion.updateViaje(id_viaje, nuevo_origen, nuevo_destino, tarifa , km):
+                    if conexion.Conexion.updateViaje(id_viaje, nuevo_origen, nuevo_destino, tarifa, km):
                         conexion.Conexion.viajesFactura(var.ui.lblcodfacturacion.text())
                         eventos.Eventos.mensaje("Aviso", "Viaje actualizado correctamente")
                     else:
@@ -445,7 +444,7 @@ class Facturas:
 
         """
         try:
-            listawidgets=[var.ui.txtkm]
+            listawidgets = [var.ui.txtkm]
             for i in listawidgets:
                 i.setText(None)
             var.ui.cmbProbVentas.setCurrentText('')

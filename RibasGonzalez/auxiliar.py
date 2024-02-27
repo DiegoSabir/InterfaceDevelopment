@@ -2,7 +2,7 @@ import clientes
 import facturas
 import sys, var, eventos, drivers
 
-from CalendarWindow import *
+from calendarWindow import *
 from acercaWindow import *
 from salirWindow import *
 from datetime import datetime
@@ -18,7 +18,6 @@ class Calendar(QtWidgets.QDialog):
         Conecta la señal de clic del calendario a la función cargaFecha en la clase Drivers.
 
         """
-        bool = None
         super(Calendar, self).__init__()
         var.calendar = Ui_calendar()
         var.calendar.setupUi(self)
@@ -26,7 +25,7 @@ class Calendar(QtWidgets.QDialog):
         mes = datetime.now().month
         ano = datetime.now().year
         if var.ui.btnCalendario.clicked:
-            var.calendar.calendari.setSelectedDate(QtCore.QDate(ano,mes,dia))
+            var.calendar.calendari.setSelectedDate(QtCore.QDate(ano, mes, dia))
             var.calendar.calendari.clicked.connect(drivers.Drivers.cargaFecha)
 
 

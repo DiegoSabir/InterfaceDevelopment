@@ -9,7 +9,7 @@ locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 import sys, zipfile, shutil
 
 from auxiliar import *
-from datetime import  datetime
+from datetime import datetime
 
 import xlwt
 import drivers
@@ -187,12 +187,12 @@ class Eventos():
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
 
         except Exception as error:
-            print(error," en resizetabdrivers")
+            print(error, " en resizetabdrivers")
 
 
 
     @staticmethod
-    def formatCajaTexto(self = None):
+    def formatCajaTexto(self=None):
         """
 
         Formatea el texto en las cajas de texto de apellidos y nombre.
@@ -208,7 +208,7 @@ class Eventos():
             var.ui.txtnombre.setText(var.ui.txtnombre.text().title())
 
         except Exception as error:
-            print(error," en letracapital")
+            print(error, " en letracapital")
 
 
 
@@ -225,10 +225,10 @@ class Eventos():
             fecha = datetime.today()
             fecha = fecha.strftime('%Y_%m_%d_%H_%M_%S')
             copia = str(fecha)+'_backup.zip'
-            directorio, filename = var.dlgabrir.getSaveFileName(None,'Guardar copia de seguridad',copia,'.zip')
-            if var.dlgabrir.accept and filename !='':
+            directorio, filename = var.dlgabrir.getSaveFileName(None,'Guardar copia de seguridad', copia, '.zip')
+            if var.dlgabrir.accept and filename != '':
                 fichZip = zipfile.ZipFile(copia,'w')
-                fichZip.write(var.bbdd, os.path.basename(var.bbdd),zipfile.ZIP_DEFLATED)
+                fichZip.write(var.bbdd, os.path.basename(var.bbdd), zipfile.ZIP_DEFLATED)
                 fichZip.close()
                 shutil.move(str(copia),str(directorio))
                 eventos.Eventos.mensaje("Aviso", "Copia de seguridad creada")
@@ -238,7 +238,7 @@ class Eventos():
 
 
 
-    def  restaurarBackup(self):
+    def restaurarBackup(self):
         """
 
         Restaura una copia de seguridad de la base de datos.
@@ -359,9 +359,8 @@ class Eventos():
                             mbox.setWindowTitle('Aviso')
                             mbox.setModal(True)
                             mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                            mbox.setText("Importacion exitosa,clientes no insertados "+str(numFallo))
+                            mbox.setText("Importacion exitosa,clientes no insertados " + str(numFallo))
                             mbox.exec()
-
                 conexion.Conexion.mostrardriver()
 
         except Exception as error:
@@ -435,7 +434,6 @@ class Eventos():
         """
 
         Valida el formato de un DNI y muestra un ícono de verificación o error.
-
 
         """
         try:
@@ -601,9 +599,12 @@ class Eventos():
     def error(title, text):
         """
 
+        Muestra un mensaje de error.
 
-        :param text:
-        :type text:
+        :param title: Título del mensaje.
+        :type title: str
+        :param text: Texto del mensaje.
+        :type text: str
 
         """
         mbox = QtWidgets.QMessageBox()
@@ -620,8 +621,10 @@ class Eventos():
 
         Muestra un mensaje informativo.
 
-        :param text:
-        :type text:
+        :param title: Título del mensaje.
+        :type title: str
+        :param text: Texto del mensaje.
+        :type text: str
 
         """
         mbox = QtWidgets.QMessageBox()
@@ -673,4 +676,4 @@ class Eventos():
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
 
         except Exception as error:
-            print(error," en resizetabdrivers")
+            print(error, " en resizetabdrivers")

@@ -19,8 +19,7 @@ class Clientes():
 
         """
         try:
-            listawidgets=[var.ui.lblcodbd2, var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2,
-                          var.ui.txtmovil2, var.ui.lblValidarDNI2 ]
+            listawidgets = [var.ui.lblcodbd2, var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2, var.ui.lblValidarDNI2]
             for i in listawidgets:
                 i.setText(None)
             var.ui.cmbProv2.setCurrentText('')
@@ -95,8 +94,7 @@ class Clientes():
 
         """
         try:
-            datos = [var.ui.lblcodbd2, var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2,
-                     var.ui.cmbProv2, var.ui.cmbMuni2]
+            datos = [var.ui.lblcodbd2, var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2, var.ui.cmbProv2, var.ui.cmbMuni2]
             for i, dato in enumerate(datos):
                 if i == 5 or i == 6:
                     dato.setCurrentText(str(registro[i]))
@@ -283,9 +281,9 @@ class Clientes():
                 muni = var.ui.cmbMuni2.currentText()
                 newCliente.insert(4, muni)
                 valor=conexion.Conexion.guardarcli(newCliente)
-                if valor==True:
+                if valor == True:
                     eventos.Eventos.mensaje("Aviso", "El cliente fue añadido con exito")
-                    conexion.Conexion.mostrardriver()
+                    conexion.Conexion.mostrarClientes()
                 elif valor == False:
                     eventos.Eventos.error("Aviso", "No se ha podido dar de alta")
 
@@ -311,14 +309,14 @@ class Clientes():
 
         """
         try:
-            driver=[var.ui.lblcodbd2,var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2]
-            modifCliente=[]
+            driver = [var.ui.lblcodbd2,var.ui.txtDNI2, var.ui.txtsocial, var.ui.txtdir2, var.ui.txtmovil2]
+            modifCliente = []
             for i in driver:
                 modifCliente.append(i.text().title())
             prov = var.ui.cmbProv2.currentText()
-            modifCliente.insert(4,prov)
+            modifCliente.insert(4, prov)
             muni = var.ui.cmbMuni2.currentText()
-            modifCliente.insert(5,muni)
+            modifCliente.insert(5, muni)
             conexion.Conexion.modifCliente(modifCliente)
             conexion.Conexion.mostrarClientes()
 

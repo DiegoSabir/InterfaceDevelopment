@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file './templates/salirWindow.ui'
+# Form implementation generated from reading ui file 'salirWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.6.1
 #
@@ -14,7 +14,7 @@ class Ui_salirwind(object):
         salirwind.setObjectName("salirwind")
         salirwind.resize(287, 190)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./templates\\../img/aviso.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("img/aviso.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         salirwind.setWindowIcon(icon)
         self.label = QtWidgets.QLabel(parent=salirwind)
         self.label.setGeometry(QtCore.QRect(40, 30, 241, 41))
@@ -26,7 +26,7 @@ class Ui_salirwind(object):
         self.btnSalir.setGeometry(QtCore.QRect(40, 90, 51, 51))
         self.btnSalir.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("./templates\\../img/aceptar.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("img/aceptar.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnSalir.setIcon(icon1)
         self.btnSalir.setIconSize(QtCore.QSize(45, 45))
         self.btnSalir.setObjectName("btnSalir")
@@ -34,7 +34,7 @@ class Ui_salirwind(object):
         self.btnCancelar.setGeometry(QtCore.QRect(180, 90, 51, 51))
         self.btnCancelar.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("./templates\\../img/cancelar.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("img/cancelar.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnCancelar.setIcon(icon2)
         self.btnCancelar.setIconSize(QtCore.QSize(45, 45))
         self.btnCancelar.setObjectName("btnCancelar")

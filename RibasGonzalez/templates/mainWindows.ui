@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1024</width>
-    <height>768</height>
+    <height>801</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -49,7 +49,7 @@
        <string notr="true"/>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>2</number>
       </property>
       <widget class="QWidget" name="panelDrivers">
        <property name="sizePolicy">
@@ -77,8 +77,10 @@
            </size>
           </property>
           <property name="styleSheet">
-           <string notr="true">background-color: 
-rgb(255, 247, 229)</string>
+           <string notr="true">
+background-color: 
+rgb(255, 247, 229)
+</string>
           </property>
           <property name="frameShape">
            <enum>QFrame::Box</enum>
@@ -109,7 +111,7 @@ rgb(255, 247, 229)</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(183, 255, 249)</string>
+              <string notr="true">background:  rgb(255, 254, 196)</string>
              </property>
              <property name="text">
               <string/>
@@ -139,7 +141,7 @@ rgb(255, 247, 229)</string>
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>../img/identificacion.ico</normaloff>../img/identificacion.ico</iconset>
+               <normaloff>../img/identificacion.png</normaloff>../img/identificacion.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -418,10 +420,6 @@ rgb(255, 247, 229)</string>
                <height>20</height>
               </size>
              </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
-             </property>
             </widget>
            </item>
            <item row="2" column="14">
@@ -444,10 +442,6 @@ rgb(199, 255, 139)</string>
                <width>150</width>
                <height>20</height>
               </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
@@ -676,7 +670,8 @@ rgb(199, 255, 139)</string>
 border-top: 1px solid #ffffff;
 color:'white';
 font: 11pt &quot;Arial&quot;;
-background-color:rgb(100,100,100);
+background-color: 
+rgb(100, 100, 100)
 }
 QTableView{
 background-color: 
@@ -778,6 +773,12 @@ color:'black';
        <layout class="QGridLayout" name="gridLayout_7">
         <item row="0" column="0" colspan="4">
          <widget class="QFrame" name="frame_2">
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>161</height>
+           </size>
+          </property>
           <property name="styleSheet">
            <string notr="true">background-color: 
 rgb(255, 247, 229)</string>
@@ -836,7 +837,7 @@ rgb(255, 247, 229)</string>
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>../img/identificacion.ico</normaloff>../img/identificacion.ico</iconset>
+               <normaloff>../img/identificacion.png</normaloff>../img/identificacion.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -873,7 +874,7 @@ rgb(255, 247, 229)</string>
              </property>
             </widget>
            </item>
-           <item row="0" column="10" colspan="2">
+           <item row="0" column="10" colspan="3">
             <widget class="QComboBox" name="cmbProbVentas">
              <property name="minimumSize">
               <size>
@@ -888,12 +889,11 @@ rgb(255, 247, 229)</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
+              <string notr="true"/>
              </property>
             </widget>
            </item>
-           <item row="0" column="12" colspan="2">
+           <item row="0" column="13" colspan="3">
             <widget class="QComboBox" name="cmbMuniVentas">
              <property name="minimumSize">
               <size>
@@ -908,12 +908,11 @@ rgb(199, 255, 139)</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
+              <string notr="true"/>
              </property>
             </widget>
            </item>
-           <item row="0" column="14" colspan="2">
+           <item row="0" column="16" colspan="2">
             <spacer name="horizontalSpacer_2">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -991,8 +990,7 @@ rgb(199, 255, 139)</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
+              <string notr="true"/>
              </property>
             </widget>
            </item>
@@ -1003,7 +1001,7 @@ rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="10" colspan="2">
+           <item row="1" column="10" colspan="3">
             <widget class="QComboBox" name="cmbProbVentas2">
              <property name="minimumSize">
               <size>
@@ -1018,12 +1016,11 @@ rgb(199, 255, 139)</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
+              <string notr="true"/>
              </property>
             </widget>
            </item>
-           <item row="1" column="12" colspan="2">
+           <item row="1" column="13" colspan="3">
             <widget class="QComboBox" name="cmbMuniVentas2">
              <property name="minimumSize">
               <size>
@@ -1038,19 +1035,18 @@ rgb(199, 255, 139)</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
+              <string notr="true"/>
              </property>
             </widget>
            </item>
-           <item row="1" column="14">
+           <item row="1" column="16">
             <widget class="QLabel" name="labelClientes_2">
              <property name="text">
               <string>Km:</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="15">
+           <item row="1" column="17">
             <widget class="QLineEdit" name="txtkm">
              <property name="minimumSize">
               <size>
@@ -1063,7 +1059,7 @@ rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
-           <item row="2" column="4" rowspan="2">
+           <item row="2" column="4">
             <spacer name="verticalSpacer_3">
              <property name="orientation">
               <enum>Qt::Vertical</enum>
@@ -1076,7 +1072,7 @@ rgb(199, 255, 139)</string>
              </property>
             </spacer>
            </item>
-           <item row="2" column="10" colspan="3">
+           <item row="2" column="10" colspan="4">
             <layout class="QHBoxLayout" name="horizontalLayout_5">
              <item>
               <widget class="QLabel" name="lblTarifa">
@@ -1176,7 +1172,7 @@ rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
-           <item row="4" column="13" colspan="3">
+           <item row="4" column="12">
             <spacer name="horizontalSpacer_24">
              <property name="orientation">
               <enum>Qt::Horizontal</enum>
@@ -1189,10 +1185,67 @@ rgb(199, 255, 139)</string>
              </property>
             </spacer>
            </item>
+           <item row="4" column="13">
+            <widget class="QPushButton" name="btnmodifviaje">
+             <property name="text">
+              <string>Modificar</string>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="14">
+            <spacer name="horizontalSpacer_28">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>60</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item row="4" column="15" colspan="2">
+            <widget class="QPushButton" name="btnrecargar">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>../img/actualizar.ico</normaloff>../img/actualizar.ico</iconset>
+             </property>
+            </widget>
+           </item>
+           <item row="4" column="17">
+            <spacer name="horizontalSpacer_29">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>51</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
           </layout>
          </widget>
         </item>
-        <item row="1" column="0" rowspan="4">
+        <item row="3" column="1">
+         <spacer name="horizontalSpacer_25">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>543</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="2" column="0" rowspan="4">
          <widget class="QTableWidget" name="tablaFacturas">
           <property name="minimumSize">
            <size>
@@ -1219,7 +1272,10 @@ QTableView{
 background-color: 
 rgb(255, 247, 229)
 }
-</string>
+QTableWidget::item:selected {
+    background-color: rgb(255, 241, 150);
+color:'black';
+}</string>
           </property>
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -1240,12 +1296,146 @@ rgb(255, 247, 229)
           </column>
           <column>
            <property name="text">
-            <string>CIF Cliente</string>
+            <string>CIF cliente</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string/>
            </property>
           </column>
          </widget>
         </item>
-        <item row="1" column="1" colspan="3">
+        <item row="5" column="2">
+         <widget class="QLabel" name="lblfacturacion_4">
+          <property name="text">
+           <string>Total Factura</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="3">
+         <widget class="QLabel" name="lbltotalfactura">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(255, 249, 198)</string>
+          </property>
+          <property name="text">
+           <string>00.00€</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="1">
+         <spacer name="horizontalSpacer_27">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>543</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="4" column="3">
+         <widget class="QLabel" name="lbliva">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(255, 249, 198)</string>
+          </property>
+          <property name="text">
+           <string>00.00€</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2">
+         <widget class="QLabel" name="lblfacturacion_2">
+          <property name="text">
+           <string>Subtotal</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2">
+         <widget class="QLabel" name="lblfacturacion_3">
+          <property name="text">
+           <string>IVA</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="3">
+         <widget class="QLabel" name="lblsubtotal">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>10</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>25</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">background-color:rgb(255, 249, 198)</string>
+          </property>
+          <property name="text">
+           <string>00.00€</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="1">
+         <spacer name="horizontalSpacer_26">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>543</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="0">
+         <widget class="QPushButton" name="recargar">
+          <property name="text">
+           <string>Recargar tabla</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1" rowspan="2" colspan="3">
          <widget class="QTableWidget" name="tabViajes">
           <property name="minimumSize">
            <size>
@@ -1256,7 +1446,7 @@ rgb(255, 247, 229)
           <property name="maximumSize">
            <size>
             <width>16777215</width>
-            <height>391</height>
+            <height>16777215</height>
            </size>
           </property>
           <property name="styleSheet">
@@ -1323,141 +1513,6 @@ color:'black';
           </column>
          </widget>
         </item>
-        <item row="2" column="1">
-         <spacer name="horizontalSpacer_25">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>544</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="2" column="2">
-         <widget class="QLabel" name="lblfacturacion_2">
-          <property name="text">
-           <string>Subtotal</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="3">
-         <widget class="QLabel" name="lblsubtotal">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>10</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color:rgb(255, 249, 198)</string>
-          </property>
-          <property name="text">
-           <string>00.00€</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="1">
-         <spacer name="horizontalSpacer_26">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>544</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="3" column="2">
-         <widget class="QLabel" name="lblfacturacion_3">
-          <property name="text">
-           <string>IVA</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="3">
-         <widget class="QLabel" name="lbliva">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color:rgb(255, 249, 198)</string>
-          </property>
-          <property name="text">
-           <string>00.00€</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="1">
-         <spacer name="horizontalSpacer_27">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>544</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="4" column="2">
-         <widget class="QLabel" name="lblfacturacion_4">
-          <property name="text">
-           <string>Total Factura</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="3">
-         <widget class="QLabel" name="lbltotalfactura">
-          <property name="minimumSize">
-           <size>
-            <width>120</width>
-            <height>0</height>
-           </size>
-          </property>
-          <property name="maximumSize">
-           <size>
-            <width>16777215</width>
-            <height>25</height>
-           </size>
-          </property>
-          <property name="styleSheet">
-           <string notr="true">background-color:rgb(255, 249, 198)</string>
-          </property>
-          <property name="text">
-           <string>00.00€</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="panelclientes">
@@ -1517,7 +1572,8 @@ color:'black';
 border-top: 1px solid #ffffff;
 color:'white';
 font: 11pt &quot;Arial&quot;;
-background-color:rgb(100,100,100);
+background-color: 
+rgb(100, 100, 100)
 }
 QTableView{
 background-color: 
@@ -1593,6 +1649,13 @@ rgb(255, 247, 229)</string>
            <enum>QFrame::Raised</enum>
           </property>
           <layout class="QGridLayout" name="gridLayout_4">
+           <item row="3" column="13">
+            <widget class="QLabel" name="lbllocalidad2">
+             <property name="text">
+              <string>Localidad</string>
+             </property>
+            </widget>
+           </item>
            <item row="3" column="14" colspan="2">
             <widget class="QComboBox" name="cmbMuni2">
              <property name="minimumSize">
@@ -1606,17 +1669,6 @@ rgb(255, 247, 229)</string>
                <width>150</width>
                <height>20</height>
               </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="13">
-            <widget class="QLabel" name="lbllocalidad2">
-             <property name="text">
-              <string>Localidad</string>
              </property>
             </widget>
            </item>
@@ -1636,6 +1688,13 @@ rgb(199, 255, 139)</string>
              </property>
              <property name="text">
               <string>Razon Social</string>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="13">
+            <widget class="QLabel" name="lblmovil2">
+             <property name="text">
+              <string>Movil</string>
              </property>
             </widget>
            </item>
@@ -1677,13 +1736,6 @@ rgb(199, 255, 139)</string>
               </size>
              </property>
             </spacer>
-           </item>
-           <item row="1" column="13">
-            <widget class="QLabel" name="lblmovil2">
-             <property name="text">
-              <string>Movil</string>
-             </property>
-            </widget>
            </item>
            <item row="4" column="9">
             <spacer name="verticalSpacer_2">
@@ -1788,6 +1840,19 @@ rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
+           <item row="1" column="0">
+            <widget class="QLabel" name="lblcodigo2">
+             <property name="minimumSize">
+              <size>
+               <width>50</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Codigo</string>
+             </property>
+            </widget>
+           </item>
            <item row="1" column="1">
             <widget class="QLabel" name="lblcodbd2">
              <property name="maximumSize">
@@ -1797,7 +1862,7 @@ rgb(199, 255, 139)</string>
               </size>
              </property>
              <property name="styleSheet">
-              <string notr="true">background-color:rgb(183, 255, 249)</string>
+              <string notr="true">background:  rgb(255, 254, 196)</string>
              </property>
              <property name="text">
               <string/>
@@ -1826,52 +1891,6 @@ rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
-           <item row="1" column="0">
-            <widget class="QLabel" name="lblcodigo2">
-             <property name="minimumSize">
-              <size>
-               <width>50</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="text">
-              <string>Codigo</string>
-             </property>
-            </widget>
-           </item>
-           <item row="3" column="1" colspan="5">
-            <widget class="QLineEdit" name="txtdir2">
-             <property name="minimumSize">
-              <size>
-               <width>300</width>
-               <height>20</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>300</width>
-               <height>20</height>
-              </size>
-             </property>
-            </widget>
-           </item>
-           <item row="1" column="2">
-            <widget class="QPushButton" name="btnBuscar2">
-             <property name="text">
-              <string/>
-             </property>
-             <property name="icon">
-              <iconset>
-               <normaloff>../img/identificacion.ico</normaloff>../img/identificacion.ico</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>15</width>
-               <height>15</height>
-              </size>
-             </property>
-            </widget>
-           </item>
            <item row="1" column="4" colspan="3">
             <widget class="QLineEdit" name="txtDNI2">
              <property name="minimumSize">
@@ -1882,6 +1901,23 @@ rgb(199, 255, 139)</string>
              </property>
              <property name="alignment">
               <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item row="1" column="2">
+            <widget class="QPushButton" name="btnBuscar2">
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>../img/identificacion.png</normaloff>../img/identificacion.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>15</width>
+               <height>15</height>
+              </size>
              </property>
             </widget>
            </item>
@@ -1918,6 +1954,22 @@ rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
+           <item row="3" column="1" colspan="5">
+            <widget class="QLineEdit" name="txtdir2">
+             <property name="minimumSize">
+              <size>
+               <width>300</width>
+               <height>20</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>300</width>
+               <height>20</height>
+              </size>
+             </property>
+            </widget>
+           </item>
            <item row="3" column="0">
             <widget class="QLabel" name="lbldir2">
              <property name="text">
@@ -1938,10 +1990,6 @@ rgb(199, 255, 139)</string>
                <width>150</width>
                <height>20</height>
               </size>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">background-color:
-rgb(199, 255, 139)</string>
              </property>
             </widget>
            </item>
@@ -2051,7 +2099,7 @@ rgb(199, 255, 139)</string>
   <action name="actionAcercaDe">
    <property name="icon">
     <iconset>
-     <normaloff>../img/acercade.ico</normaloff>../img/acercade.ico</iconset>
+     <normaloff>../img/aviso.ico</normaloff>../img/aviso.ico</iconset>
    </property>
    <property name="text">
     <string>Acerca de...</string>

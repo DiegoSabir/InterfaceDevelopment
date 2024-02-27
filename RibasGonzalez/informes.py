@@ -179,10 +179,10 @@ class Informes:
 
                 var.report.setFont('Helvetica', size=9)
                 var.report.drawString(55, 770, 'CIF: A12345678')
-                var.report.drawString(55, 755, 'Avda. Galicia - 101')
+                var.report.drawString(55, 755, 'Avenida de Galicia - 101')
                 var.report.drawString(55, 740, 'Vigo - 36216 - España')
-                var.report.drawString(55, 725, 'Teléfono: 986 132 456')
-                var.report.drawString(55, 710, 'e-mail: cartesteisr@mail.com')
+                var.report.drawString(55, 725, 'Teléfono: 886 12 04 64')
+                var.report.drawString(55, 710, 'e-mail: carteis@gmail.com')
             else:
                 print(f'Error: No se pudo cargar la imagen en {ruta_logo}')
 
@@ -323,10 +323,10 @@ class Informes:
 
                 var.report.setFont('Helvetica', size=9)
                 var.report.drawString(55, 770, 'CIF: A12345678')
-                var.report.drawString(55, 755, 'Avda. Galicia - 101')
+                var.report.drawString(55, 755, 'Avenida de Galicia - 101')
                 var.report.drawString(55, 740, 'Vigo - 36216 - España')
-                var.report.drawString(55, 725, 'Teléfono: 986 132 456')
-                var.report.drawString(55, 710, 'e-mail: cartesteisr@mail.com')
+                var.report.drawString(55, 725, 'Teléfono: 886 12 04 64')
+                var.report.drawString(55, 710, 'e-mail: carteis@gmail.com')
                 var.report.setFont('Helvetica', size=8)
                 var.report.drawString(290, 755, 'CIF: ' + str(registro[1]))
                 var.report.drawString(290, 740, 'Razón Social: ' + str(registro[2]))

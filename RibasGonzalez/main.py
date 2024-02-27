@@ -2,19 +2,19 @@ import clientes
 import conexion
 import facturas
 import informes
-import locale
 
 from mainWindows import *
 from PyQt6.QtCore import QTimer, QSize
 from auxiliar import *
 
-import sys, var, eventos, drivers
+import locale
 
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
-class Main(QtWidgets.QMainWindow):
+import sys, var, eventos, drivers
 
+class Main(QtWidgets.QMainWindow):
     def __init__(self):
         """
 
