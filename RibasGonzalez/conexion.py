@@ -748,7 +748,7 @@ class Conexion():
     def cargarfacturas():
         """
 
-        Carga las facturas almacenadas en la base de datos y las muestra en la tabla de facturas.
+        Carga las facturas almacenadas y DNI's y las muestra en la tabla de facturas.
 
         """
         try:
@@ -769,7 +769,7 @@ class Conexion():
     def oneFactura(codigo):
         """
 
-        Recupera los detalles de una factura específica según su número de factura.
+        Recupera los detalles de una factura específica según el codigo proporcionado.
 
         :param codigo: El número de factura de la factura que se desea recuperar.
 
@@ -846,7 +846,8 @@ class Conexion():
     def selMuni4(self=None):
         """
 
-        Selecciona los municipios según la provincia elegida en cmbProbVentas2 que es el destino y los carga en cmbMuniVentas2 que tambien es del destino.
+        Selecciona los municipios según la provincia elegida en cmbProbVentas2 que es el destino y los carga
+        en cmbMuniVentas2 que tambien es del destino.
 
         :param self: Parámetro opcional, puede ser nulo.
 
@@ -902,12 +903,10 @@ class Conexion():
     def datosViaje():
         """
 
+        Recupera detalles de viaje basados en parámetros seleccionados y tasas de tarifas.
+
         :return: modulo que devuelve registro de un viaje
         :rtype: bytearray
-
-        Este modulo carga los datos de los widgets del panel de gestion,
-        selecciona la tarifa en funcion del tipo de viaje
-        y devuelve un array con los datos.
 
         """
         try:
@@ -934,7 +933,7 @@ class Conexion():
     def viajesFactura(dato):
         """
 
-        Carga los viajes asociados a una factura en la tabla de viajes de la interfaz de facturas.
+        Carga los viajes asociados a una factura en la tabla de viajes.
 
         :param dato: Número de factura.
 
@@ -958,7 +957,7 @@ class Conexion():
     def cargarLineaViaje(registro):
         """
 
-        Registra un nuevo viaje en la base de datos.
+        Registra un nuevo viaje en la base de datos a partir de un registro proporcionado.
 
         :param registro: Lista que contiene los datos del viaje: [origen, destino, tarifa, kilometros, factura].
 
@@ -1012,7 +1011,7 @@ class Conexion():
     def oneViajes(codigo):
         """
 
-        Devuelve los detalles de un viaje específico identificado por su código.
+        Devuelve los detalles de un viaje específico segun el codigo proporcionado.
 
         :param codigo: El código único del viaje que se desea obtener.
 
@@ -1038,7 +1037,7 @@ class Conexion():
     def borrarViaje(id):
         """
 
-        Elimina un viaje de la base de datos según su ID.
+        Elimina un viaje de la base de datos según el ID proporcionado.
 
         :param id: El ID único del viaje que se desea eliminar.
 
