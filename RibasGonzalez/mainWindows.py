@@ -769,7 +769,7 @@ class Ui_MainWindow(object):
         self.actionSalir.setObjectName("actionSalir")
         self.actionAcercaDe = QtGui.QAction(parent=MainWindow)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("img/aviso.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon5.addPixmap(QtGui.QPixmap("img/acercade.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.actionAcercaDe.setIcon(icon5)
         self.actionAcercaDe.setObjectName("actionAcercaDe")
         self.actionvarsalir = QtGui.QAction(parent=MainWindow)

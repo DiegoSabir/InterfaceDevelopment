@@ -64,7 +64,8 @@ class Facturas:
         Busca y muestra información sobre un cliente en la interfaz gráfica de facturación.
 
         Este método se utiliza para buscar información sobre un cliente utilizando su número de identificación fiscal (DNI).
-        Una vez encontrado, muestra la información del cliente en la interfaz gráfica de facturación y colorea la fila correspondiente en la tabla de clientes.
+        Una vez encontrado, muestra la información del cliente en la interfaz gráfica de facturación y colorea la fila
+        correspondiente en la tabla de clientes.
 
         """
         try:
@@ -85,7 +86,8 @@ class Facturas:
 
         Carga la fecha seleccionada en el campo de fecha de la interfaz gráfica de facturación.
 
-        Este método se utiliza para asignar la fecha seleccionada en el calendario a un campo de texto de la interfaz gráfica de facturación.
+        Este método se utiliza para asignar la fecha seleccionada en el calendario a un campo de texto de la interfaz
+        gráfica de facturación.
 
         :param qDate: La fecha seleccionada en el calendario.
 
@@ -140,7 +142,7 @@ class Facturas:
                 var.ui.tablaFacturas.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 btn = QtWidgets.QPushButton()
                 btn.setFixedSize(30, 28)
-                btn.setIcon(QtGui.QIcon('./img/aviso.ico'))
+                btn.setIcon(QtGui.QIcon('./img/basura.png'))
                 btn.clicked.connect(informes.Informes.reportfactura)
                 var.ui.tablaFacturas.setCellWidget(index, 2, btn)
                 index += 1
@@ -277,7 +279,7 @@ class Facturas:
 
                 totalViaje = round(float(registro[4]) * float(registro[3]), 2)
                 subtotal = subtotal + totalViaje
-                iva=subtotal*0.21
+                iva = subtotal * 0.21
                 var.ui.lblsubtotal.setText(str('{:.2f}'.format(round(subtotal, 2))) + " €")
                 var.ui.lbliva.setText(str('{:.2f}'.format(round(iva, 2))) + " €")
                 var.ui.lbltotalfactura.setText(str('{:.2f}'.format(round(subtotal + iva, 2))) + " €")
@@ -307,11 +309,11 @@ class Facturas:
 
         Guarda un nuevo viaje asociado a una factura.
 
-        Este método guarda un nuevo viaje asociado a una factura seleccionada. Verifica que se haya seleccionado una
-        factura y que se hayan ingresado los datos obligatorios del viaje (kilómetros y localidades de origen y destino).
+        Este método guarda un nuevo viaje asociado a una factura seleccionada.
+        Verifica que se haya seleccionado una factura y que se hayan ingresado los datos obligatorios del viaje (kilómetros y localidades de origen y destino).
         Calcula la tarifa del viaje según la distancia y el tipo de viaje (local, provincial o nacional) y luego llama al
-        método `guardarViaje` de la clase `Conexion` para almacenar el viaje en la base de datos. Finalmente, actualiza
-        la tabla de viajes asociados a la factura.
+        método `guardarViaje` de la clase `Conexion` para almacenar el viaje en la base de datos.
+        Finalmente, actualiza la tabla de viajes asociados a la factura.
 
         """
         try:
@@ -329,9 +331,9 @@ class Facturas:
                     conexion.Conexion.guardarViaje(viaje)
                     conexion.Conexion.viajesFactura(var.ui.lblcodfacturacion.text())
                 else:
-                    eventos.Eventos.error('Aviso',"Faltan campos obligatorios")
+                    eventos.Eventos.error('Aviso', "Faltan campos obligatorios")
             else:
-                eventos.Eventos.error('Aviso',"Selecciona primero una factura")
+                eventos.Eventos.error('Aviso', "Selecciona primero una factura")
 
         except Exception as error:
             print(error)

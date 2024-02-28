@@ -139,8 +139,8 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Eventos tabla 
-         '''
+        Eventos para las tabla (Limpiar / Cargar Datos) 
+        '''
         var.ui.actionvarsalir.triggered.connect(eventos.Eventos.abrirSalir)
         var.ui.actionlimpiarPanel.triggered.connect(drivers.Drivers.limpiarPanel)
         var.ui.actionlimpiarPanel.triggered.connect(clientes.Clientes.limpiarPanel2)
@@ -153,7 +153,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Eventos 
+        Eventos para ajustar del tamaño de las columnas en la tablas.
         '''
         eventos.Eventos.resizeTabdrivers(self)
         eventos.Eventos.resizeTabclientes(self)

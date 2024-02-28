@@ -14,7 +14,7 @@ class Ui_salirwind(object):
         salirwind.setObjectName("salirwind")
         salirwind.resize(287, 190)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("img/aviso.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("img/salir.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         salirwind.setWindowIcon(icon)
         self.label = QtWidgets.QLabel(parent=salirwind)
         self.label.setGeometry(QtCore.QRect(40, 30, 241, 41))

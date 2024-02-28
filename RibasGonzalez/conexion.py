@@ -795,8 +795,7 @@ class Conexion():
     def selMuni3(self=None):
         """
 
-        Selecciona y carga los municipios correspondientes a una provincia seleccionada en el combo box de provincias
-        en la interfaz de ventas.
+        Selecciona y carga los municipios correspondientes a una provincia seleccionada en el combo box de provincias.
 
         """
         try:
@@ -826,7 +825,7 @@ class Conexion():
     def cargarprov3(self=None):
         """
 
-        Carga las provincias en el combo box de provincias en la interfaz de ventas.
+        Carga las provincias en el combo box de provincias.
 
         """
         try:

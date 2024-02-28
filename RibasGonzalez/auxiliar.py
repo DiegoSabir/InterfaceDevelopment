@@ -2,7 +2,7 @@ import clientes
 import facturas
 import sys, var, eventos, drivers
 
-from CalendarWindow import *
+from calendarWindow import *
 from acercaWindow import *
 from salirWindow import *
 from datetime import datetime

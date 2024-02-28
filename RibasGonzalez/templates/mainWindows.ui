@@ -2099,7 +2099,7 @@ rgb(255, 247, 229)</string>
   <action name="actionAcercaDe">
    <property name="icon">
     <iconset>
-     <normaloff>../img/aviso.ico</normaloff>../img/aviso.ico</iconset>
+     <normaloff>../img/acercade.ico</normaloff>../img/acercade.ico</iconset>
    </property>
    <property name="text">
     <string>Acerca de...</string>
