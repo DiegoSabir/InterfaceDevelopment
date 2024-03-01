@@ -56,7 +56,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Eventos Radios Buttons
+        Eventos de los Radios Buttons
         '''
         rbtClientes = (var.ui.rbtTodos2, var.ui.rbtAlta2, var.ui.rbtBaja2)
         for i in rbtClientes:
@@ -69,7 +69,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Eventos Botones
+        Eventos de los Botones
         '''
         var.ui.btnCalendario.clicked.connect(eventos.Eventos.abrirCalendar)
         var.ui.btnAltaDriver.clicked.connect(drivers.Drivers.altaDriver)
@@ -93,7 +93,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Zona eventos menu bar
+        Eventos del Menu Bar
         '''
         var.ui.actionSalir.triggered.connect(eventos.Eventos.abrirSalir)
         var.ui.actionAcercaDe.triggered.connect(eventos.Eventos.abrirAcercaDe)
@@ -110,7 +110,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Combobox
+        Eventos del Combobox
         '''
         var.ui.cmbProv.currentIndexChanged.connect(conexion.Conexion.selMuni)
         var.ui.cmbProv2.currentIndexChanged.connect(conexion.Conexion.selMuni2)
@@ -124,7 +124,7 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Eventos cajas texto
+        Eventos de las Cajas de Texto
         '''
         var.ui.txtDNI.editingFinished.connect(eventos.Eventos.validarDNI)
         var.ui.txtsalario.editingFinished.connect(drivers.Drivers.validarSalario)

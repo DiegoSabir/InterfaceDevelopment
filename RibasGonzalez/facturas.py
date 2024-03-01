@@ -18,7 +18,8 @@ class Facturas:
 
         """
         try:
-            listawidgets = [var.ui.lblcodfacturacion, var.ui.txtcifcli, var.ui.txtfechafact, var.ui.txtkm, var.ui.lblsubtotal, var.ui.lbliva, var.ui.lbltotalfactura]
+            listawidgets = [var.ui.lblcodfacturacion, var.ui.txtcifcli, var.ui.txtfechafact, var.ui.txtkm,
+                            var.ui.lblsubtotal, var.ui.lbldescuento, var.ui.lbliva, var.ui.lbltotalfactura]
             for i in listawidgets:
                 i.setText(None)
             var.ui.cmbCond.setCurrentText('')
@@ -163,7 +164,7 @@ class Facturas:
 
         """
         try:
-            listawidgets = [var.ui.lblsubtotal, var.ui.lbliva, var.ui.lbltotalfactura]
+            listawidgets = [var.ui.lblsubtotal, var.ui.lbldescuento, var.ui.lbliva, var.ui.lbltotalfactura]
             for i in listawidgets:
                 i.setText(None)
             Facturas.limpiarPanel3(self)
@@ -268,6 +269,7 @@ class Facturas:
             var.ui.tabViajes.clearContents()
             var.ui.tabViajes.setRowCount(0)
             subtotal = 0.0
+            descuento = 0
             index = 0
             for registro in valores:
                 var.ui.tabViajes.setRowCount(index + 1)
@@ -279,6 +281,7 @@ class Facturas:
 
                 totalViaje = round(float(registro[4]) * float(registro[3]), 2)
                 subtotal = subtotal + totalViaje
+                #descuento = subtotal * / 100
                 iva = subtotal * 0.21
                 var.ui.lblsubtotal.setText(str('{:.2f}'.format(round(subtotal, 2))) + " €")
                 var.ui.lbliva.setText(str('{:.2f}'.format(round(iva, 2))) + " €")

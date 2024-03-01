@@ -353,6 +353,7 @@ class Informes:
             var.report.line(50, 100, 525, 100)
             var.report.setFont('Helvetica', size=11)
             var.report.drawString(430, 85, 'Subtotal: ' + var.ui.lblsubtotal.text())
+            var.report.drawString(430, 80, 'Descuento: ' + var.ui.lbldescuento.text())
             var.report.drawString(430, 70, 'IVA: ' + var.ui.lbliva.text())
             var.report.drawString(430, 55, 'Total: ' + var.ui.lbltotalfactura.text())
 
@@ -418,7 +419,7 @@ class Informes:
                     var.report.drawCentredString(i+10, j, str(query.value(0)))
                     var.report.drawString(i + 50, j, str(query.value(1)))
                     var.report.drawString(i + 170, j, str(query.value(2)))
-                    var.report.drawString(i + 320, j, str(query.value(3))+ ' €')
+                    var.report.drawString(i + 320, j, str(query.value(3)) + ' €')
                     var.report.drawCentredString(i + 385, j, str(query.value(4)))
                     var.report.drawCentredString(i + 435, j, str('{:.2f}'.format(round(float(query.value(4)) * float(query.value(3)), 2))) + ' €')
                     j = j - 20
