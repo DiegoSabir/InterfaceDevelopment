@@ -5,11 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f19afb76-e756-4262-8bfa-24fa0b077bc2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/auxiliar.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/var.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/connection.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/aceptar.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/acercade.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/actualizar.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/aviso.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/basura.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/calendario.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/cancelar.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/crearbackup.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/crearreport.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/excel-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/excel-min.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/identificacion.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/logo.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/restaurarbackup.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/salir.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RibasGonzalez/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalez/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CalendarWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/CalendarWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/MainWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/auxiliar.py" beforeDir="false" afterPath="$PROJECT_DIR$/auxiliar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/customer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/CalendarWindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/templates/CalendarWindow.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/MainWindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/templates/MainWindow.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -40,9 +59,15 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/a18diegorg/Documents/GitHub/InterfaceDevelopment/RibasGonzalezR/images&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.externalTools&quot;
   }
 }</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\a18diegorg\Documents\GitHub\InterfaceDevelopment\RibasGonzalezR\images" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

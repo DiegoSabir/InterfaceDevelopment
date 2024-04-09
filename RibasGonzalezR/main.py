@@ -1,10 +1,11 @@
+from MainWindow import *
+from PyQt6.QtCore import QTimer, QSize
+
 import customer
 import locale
 import sys
 import var
-
-from MainWindow import *
-from PyQt6.QtCore import QTimer, QSize
+import connection
 
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
@@ -27,3 +28,7 @@ class Main(QtWidgets.QMainWindow):
 
         # Instanciación de objetos adicionales
         var.calendar = Calendar()
+
+
+        # Conexión a la base de datos y carga de datos iniciales
+        connection.Connection.connection()

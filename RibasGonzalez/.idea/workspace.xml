@@ -5,10 +5,29 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bac2c335-7fbd-4402-b0eb-0752231d30e4" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/auxiliar.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/var.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/connection.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/aceptar.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/acercade.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/actualizar.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/aviso.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/basura.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/calendario.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/cancelar.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/crearbackup.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/crearreport.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/excel-icon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/excel-min.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/identificacion.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/logo.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/restaurarbackup.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../RibasGonzalezR/images/salir.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RibasGonzalezR/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalezR/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RibasGonzalezR/CalendarWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalezR/CalendarWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RibasGonzalezR/MainWindow.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalezR/MainWindow.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RibasGonzalezR/auxiliar.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalezR/auxiliar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RibasGonzalezR/customer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalezR/customer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RibasGonzalezR/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalezR/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../RibasGonzalezR/templates/CalendarWindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalezR/templates/CalendarWindow.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../RibasGonzalezR/templates/MainWindow.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../RibasGonzalezR/templates/MainWindow.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

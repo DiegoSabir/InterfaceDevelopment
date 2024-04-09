@@ -1,5 +1,6 @@
 import sys
 import var
+import customer
 
 from CalendarWindow import *
 from datetime import datetime
@@ -23,4 +24,4 @@ class Calendar(QtWidgets.QDialog):
         year = datetime.now().year
         if var.ui.btnCalendario.clicked:
             var.calendar.calendari.setSelectedDate(QtCore.QDate(year, month, day))
-            var.calendar.calendari.clicked.connect(customer.Customer.cargaFecha)
+            var.calendar.calendari.clicked.connect(customer.Customer.loadDate)

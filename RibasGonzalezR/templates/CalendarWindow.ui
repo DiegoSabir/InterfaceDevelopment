@@ -18,7 +18,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>../img/calendario.ico</normaloff>../img/calendario.ico</iconset>
+    <normaloff>../images/calendario.ico</normaloff>../images/calendario.ico</iconset>
   </property>
   <widget class="QCalendarWidget" name="calendari">
    <property name="geometry">
