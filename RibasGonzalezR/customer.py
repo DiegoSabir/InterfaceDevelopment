@@ -1,91 +1,147 @@
-from PyQt6.QtGui import QPixmap
-from PyQt6 import QtWidgets, QtCore, QtGui
-from PyQt6.QtCore import Qt
+from PyQt6 import QtWidgets, QtCore, QtSql
 
-import var
 import connection
+import var
+import re
+
 
 class Customer():
-    def cleanScreen(self=None):
+    @staticmethod
+    def checkEmail(email):
+        """
+        Método estático para validar un email.
+
+        :param email: El email a validar.
+        :type email: str
+
+        :return: True si el email es válido, False si no lo es.
+        :rtype: bool
+        """
         try:
-            listwidgets = [var.ui.lblId, var.ui.txtSurname, var.ui.txtName, var.ui.txtBirthdate, var.ui.txtAddress, var.ui.txtTelephone, var.ui.txtEmail]
-            for i in listwidgets:
-                i.setText(None)
+            pattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+            if re.match(pattern, email):
+                return True
+            else:
+                return False
 
         except Exception as error:
-            print(str(error) + " clearing the screen")
+            print("error en validar email ", error)
 
 
+
+    @staticmethod
     def loadDate(qDate):
         """
+        Método estático para cargar una fecha en un campo de texto.
 
-        Carga la fecha seleccionada en el campo de texto de fecha.
+        :param qDate: La fecha a cargar.
+        :type qDate: QtCore.QDate
 
-        Este método toma la fecha seleccionada del calendario y la formatea en el formato 'dd/mm/yyyy',
-        luego la establece como texto en el campo de texto de fecha y oculta el calendario.
-
-        :param qDate: La fecha seleccionada del calendario.
-
+        :return: No hay valor de retorno.
+        :rtype: None
         """
         try:
-            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(),qDate.month(),qDate.year()))
-            var.ui.txtBirthdate.setText(str(data))
+            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
+            var.ui.txtDataDriver.setText(str(data))
             var.calendar.hide()
 
         except Exception as error:
-            print(str(error) + " loading date")
+            print("error en cargar data", error)
 
 
 
-    def printRow(codigo):
-        try:
-            for fila in range(var.ui.tabCustomers.rowCount()):
-                if var.ui.tabCustomers.item(fila, 0).text() == str(codigo):
-                    for columna in range(var.ui.tabCustomers.columnCount()):
-                        item = var.ui.tabCustomers.item(fila, columna)
-                        if item is not None:
-                            item.setBackground(QtGui.QColor(255, 241, 150))
-
-        except Exception as error:
-            print("error en colorearFila", error)
-
-
-
-    def loadCustomer(self):
-        try:
-            Customer.cleanScreen()
-            row = var.ui.tabCustomers.selectedItems()
-            fila = [dato.text() for dato in row]
-            registro = connection.Connection.oneCustomer(fila[0])
-            Customer.auxiliar(registro)
-            connection.Connection.showCustomers()
-            Customers.printRow(registro[0])
-
-        except Exception as error:
-            print(str(error) + " en cargar clientes clientes")
-
-
-
-    def auxiliar(registro):
+    @staticmethod
+    def cleanInterface():
         """
+        Método estático para limpiar todos los widgets en el panel.
 
-        Llena los campos de la interfaz de usuario con los datos del registro proporcionado.
-
-        Recibe un registro que contiene los datos de un cliente y actualiza los campos correspondientes
-        en la interfaz de usuario con estos datos. Los campos actualizados incluyen el código, DNI,
-        nombre, dirección, teléfono, provincia y municipio del cliente.
-
-        :param registro: Lista que contiene los datos del cliente.
-
+        :return: No hay valor de retorno.
+        :rtype: None
         """
         try:
-            datos = [var.ui.lblId, var.ui.txtSurname, var.ui.txtName, var.ui.txtBirthdate, var.ui.txtAddress, var.ui.txtTelephone, var.ui.txtEmail]
-            for i, dato in enumerate(datos):
-                if i == 5 or i == 6:
-                    dato.setCurrentText(str(registro[i]))
+            listaWidgets = [var.ui.lblId, var.ui.txtSurname, var.ui.txtName, var.ui.txtBirthdate, var.ui.txtAddress, var.ui.txtTelephone, var.ui.txtEmail]
+            for i in listaWidgets:
+                i.clear()
+
+            chk = [var.ui.chkAll]
+            for i in chk:
+                i.setChecked(False)
+
+            #var.ui.tabViajes.setRowCount(0)
+
+            #Recargar todos los viajes
+            #conexion.Conexion.selectFactura()
+
+        except Exception as error:
+            print("error ao limpiar panel", error)
+
+
+
+    @staticmethod
+    def altaDriver():
+        """
+        Método estático para dar de alta un conductor en la base de datos.
+
+        :return: No hay valor de retorno.
+        :rtype: None
+        """
+        try:
+            if var.ui.lblId.text() != "":
+                codigo = var.ui.lblId.text()
+                if Drivers.comprobarfechabaja(codigo):
+                    if Drivers.validarDNI(var.ui.txtDNI.text()):
+                        conexion.Conexion.borrarfechabaja(codigo)
+                        Drivers.selEstado()
+                    else:
+                        mbox = QtWidgets.QMessageBox()
+                        mbox.setWindowTitle('Aviso')
+                        mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                        mbox.setText("DNI no válido")
+                        mbox.exec()
+                        var.ui.lblValidarDNI.setText('X')
+                        var.ui.lblValidarDNI.setStyleSheet('color:red;')
+                        var.ui.txtDNI.clear()
+                        var.ui.txtDNI.setFocus()
+            else:
+                if Drivers.validarDNI(var.ui.txtDNI.text()):
+                    driver = [var.ui.txtDNI,
+                              var.ui.txtDataDriver,
+                              var.ui.txtNombre,
+                              var.ui.txtApel,
+                              var.ui.txtDirDriver,
+                              var.ui.txtMovilDriver,
+                              var.ui.txtSalario]
+                    newdriver = []
+                    for i in driver:
+                        newdriver.append(i.text().title())
+
+                    prov = var.ui.cmbProv.currentText()
+                    newdriver.insert(5, prov)
+                    muni = var.ui.cmbMuni.currentText()
+                    newdriver.insert(6, muni)
+
+                    licencias = []
+                    chklicencia = [var.ui.chkA, var.ui.chkB, var.ui.chkC, var.ui.chkD]
+                    for i in chklicencia:
+                        if i.isChecked():
+                            licencias.append(i.text())
+                    newdriver.append('/'.join(licencias))
+
+                    conexion.Conexion.guardardri(newdriver)
                 else:
+                    mbox = QtWidgets.QMessageBox()
+                    mbox.setWindowTitle('Aviso')
+                    mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                    mbox.setText("DNI no válido")
+                    mbox.exec()
+                    var.ui.lblValidarDNI.setText('X')
+                    var.ui.lblValidarDNI.setStyleSheet('color:red;')
+                    var.ui.txtDNI.clear()
+                    var.ui.txtDNI.setFocus()
 
-                    dato.setText(str(registro[i]))
+            conexion.Conexion.cargardriverfac()
 
         except Exception as error:
-            eventos.Eventos.error("Aviso", "No existe en la base de datos")
+            print("Error con alta driver", error)
+
+

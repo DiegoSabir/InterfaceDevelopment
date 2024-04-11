@@ -390,7 +390,7 @@
      </property>
      <property name="icon">
       <iconset>
-       <normaloff>../images/calendario.ico</normaloff>../images/calendario.ico</iconset>
+       <normaloff>../../../../../.designer/images/calendario.ico</normaloff>../../../../../.designer/images/calendario.ico</iconset>
      </property>
     </widget>
    </widget>
@@ -435,7 +435,7 @@ color:'black';
     </property>
     <column>
      <property name="text">
-      <string>New Column</string>
+      <string>Category</string>
      </property>
     </column>
     <column>
@@ -445,12 +445,12 @@ color:'black';
     </column>
     <column>
      <property name="text">
-      <string>New Column</string>
+      <string>Address</string>
      </property>
     </column>
     <column>
      <property name="text">
-      <string>Address</string>
+      <string>Telephone</string>
      </property>
     </column>
     <column>
@@ -539,7 +539,7 @@ color:'black';
       <bool>true</bool>
      </property>
     </widget>
-    <widget class="QRadioButton" name="rbtBussiness">
+    <widget class="QRadioButton" name="rbtBusiness">
      <property name="geometry">
       <rect>
        <x>700</x>
@@ -561,7 +561,7 @@ color:'black';
       </size>
      </property>
      <property name="text">
-      <string>Bussiness</string>
+      <string>Business</string>
      </property>
     </widget>
    </widget>
@@ -592,11 +592,36 @@ color:'black';
     <property name="frameShadow">
      <enum>QFrame::Raised</enum>
     </property>
+    <widget class="QCheckBox" name="chkAll">
+     <property name="geometry">
+      <rect>
+       <x>200</x>
+       <y>10</y>
+       <width>300</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>300</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="maximumSize">
+      <size>
+       <width>300</width>
+       <height>20</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>All</string>
+     </property>
+    </widget>
     <widget class="QLabel" name="lblHistorical">
      <property name="geometry">
       <rect>
        <x>30</x>
-       <y>12</y>
+       <y>10</y>
        <width>70</width>
        <height>20</height>
       </rect>
@@ -615,50 +640,6 @@ color:'black';
      </property>
      <property name="text">
       <string>Historical:</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="chkRelease">
-     <property name="geometry">
-      <rect>
-       <x>200</x>
-       <y>12</y>
-       <width>300</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>300</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="maximumSize">
-      <size>
-       <width>300</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Released</string>
-     </property>
-    </widget>
-    <widget class="QCheckBox" name="chkLeave">
-     <property name="geometry">
-      <rect>
-       <x>700</x>
-       <y>12</y>
-       <width>300</width>
-       <height>20</height>
-      </rect>
-     </property>
-     <property name="minimumSize">
-      <size>
-       <width>300</width>
-       <height>20</height>
-      </size>
-     </property>
-     <property name="text">
-      <string>Left</string>
      </property>
     </widget>
    </widget>
