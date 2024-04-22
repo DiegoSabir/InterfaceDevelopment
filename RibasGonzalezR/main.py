@@ -1,34 +1,49 @@
-from MainWindow import *
-from PyQt6.QtCore import QTimer, QSize
-
-import customer
 import locale
 import sys
+
+import customers
+import events
 import var
 import connection
+import auxiliary
+
+from MainWindow import *
+from auxiliary import *
 
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
-        """
-
-        Inicializa la ventana principal y conecta los eventos a los widgets.
-
-        Este método inicializa la ventana principal y establece las conexiones de eventos para los widgets
-        y acciones en la interfaz de usuario.
-
-        """
         super(Main, self).__init__()
-
-        # Configuración de la interfaz de usuario
         var.ui = Ui_MainWindow()
         var.ui.setupUi(self)
-
-        # Instanciación de objetos adicionales
         var.calendar = Calendar()
+        var.exitWindow = Exit()
 
 
-        # Conexión a la base de datos y carga de datos iniciales
-        connection.Connection.connection()
+    def closeEvent(self, event):
+        mbox = QtWidgets.QMessageBox()
+        mbox.setStyleSheet("QDialog{background-color: #8294C4;} "
+                           "QLabel {color: rgb(0, 0, 0);} ")
+        mbox.setWindowTitle("Exit")
+        mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+        mbox.setText("¿Do you want to Exit?")
+
+        mbox.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Yes | QtWidgets.QMessageBox.StandardButton.No)
+        mbox.button(QtWidgets.QMessageBox.StandardButton.Yes).setText('Yes')
+        mbox.button(QtWidgets.QMessageBox.StandardButton.No).setText('No')
+
+        resultado = mbox.exec()
+
+        if resultado == QtWidgets.QMessageBox.StandardButton.Yes:
+            app.quit()
+        else:
+            event.ignore()
+
+
+if __name__ == '__main__':
+    app = QtWidgets.QApplication([])
+    window = Main()
+    window.show()
+    sys.exit(app.exec())

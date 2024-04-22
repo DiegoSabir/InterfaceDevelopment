@@ -1,4 +1,4 @@
-# Form implementation generated from reading ui file './templates/MainWindow.ui'
+# Form implementation generated from reading ui file 'MainWindow.ui'
 #
 # Created by: PyQt6 UI code generator 6.6.1
 #
@@ -21,7 +21,30 @@ class Ui_MainWindow(object):
         self.frame.setGeometry(QtCore.QRect(30, 60, 1050, 210))
         self.frame.setMinimumSize(QtCore.QSize(1050, 210))
         self.frame.setMaximumSize(QtCore.QSize(1050, 210))
-        self.frame.setStyleSheet("")
+        self.frame.setStyleSheet("QFrame {\n"
+"    background-color: #ACB1D6;\n"
+"}\n"
+"\n"
+"QLineEdit {\n"
+"    color: rgb(0,0,0);\n"
+"}\n"
+"\n"
+"QCheckBox {\n"
+"    color: rgb(0,0,0);\n"
+"}\n"
+"\n"
+"QRadioButton{\n"
+"    color: rgb(0,0,0);\n"
+"}\n"
+"\n"
+"QComboBox{\n"
+"    color: rgb(0,0,0);\n"
+"}\n"
+"\n"
+"QLabel{\n"
+"    background-color: #97A4C9;\n"
+"\n"
+"}")
         self.frame.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.frame.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame.setObjectName("frame")
@@ -100,28 +123,20 @@ class Ui_MainWindow(object):
         self.btnCalendario.setMaximumSize(QtCore.QSize(32, 23))
         self.btnCalendario.setText("")
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("./templates\\../../../../../.designer/images/calendario.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("../../../../../.designer/images/calendario.ico"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnCalendario.setIcon(icon)
         self.btnCalendario.setObjectName("btnCalendario")
         self.tabCustomers = QtWidgets.QTableWidget(parent=self.centralwidget)
         self.tabCustomers.setGeometry(QtCore.QRect(30, 330, 1050, 400))
         self.tabCustomers.setMinimumSize(QtCore.QSize(1050, 400))
         self.tabCustomers.setMaximumSize(QtCore.QSize(1050, 400))
-        self.tabCustomers.setStyleSheet("QHeaderView::section:horizontal\n"
-"{\n"
-"border-top: 1px solid #ffffff;\n"
-"color:\'white\';\n"
-"font: 11pt \"Arial\";\n"
-"background-color: \n"
-"rgb(100, 100, 100)\n"
+        self.tabCustomers.setStyleSheet("QTableWidget::item:selected {\n"
+"    background-color:  : #C59A6C;\n"
+"    color: rgb(0,0,0);\n"
 "}\n"
-"QTableView{\n"
-"background-color: \n"
-"rgb(255, 247, 229)\n"
-"}\n"
-"QTableWidget::item:selected {\n"
-"    background-color: rgb(255, 241, 150);\n"
-"color:\'black\';\n"
+"\n"
+"QTableWidget {\n"
+"    background-color: #ACB1D6;\n"
 "}")
         self.tabCustomers.setObjectName("tabCustomers")
         self.tabCustomers.setColumnCount(5)
@@ -166,19 +181,19 @@ class Ui_MainWindow(object):
         self.frame_3.setFrameShape(QtWidgets.QFrame.Shape.Box)
         self.frame_3.setFrameShadow(QtWidgets.QFrame.Shadow.Raised)
         self.frame_3.setObjectName("frame_3")
-        self.chkAll = QtWidgets.QCheckBox(parent=self.frame_3)
-        self.chkAll.setGeometry(QtCore.QRect(200, 10, 300, 20))
-        self.chkAll.setMinimumSize(QtCore.QSize(300, 20))
-        self.chkAll.setMaximumSize(QtCore.QSize(300, 20))
-        self.chkAll.setObjectName("chkAll")
         self.lblHistorical = QtWidgets.QLabel(parent=self.frame_3)
         self.lblHistorical.setGeometry(QtCore.QRect(30, 10, 70, 20))
         self.lblHistorical.setMinimumSize(QtCore.QSize(70, 20))
         self.lblHistorical.setMaximumSize(QtCore.QSize(70, 20))
         self.lblHistorical.setObjectName("lblHistorical")
+        self.rbtAll = QtWidgets.QRadioButton(parent=self.frame_3)
+        self.rbtAll.setGeometry(QtCore.QRect(200, 10, 300, 20))
+        self.rbtAll.setMinimumSize(QtCore.QSize(300, 20))
+        self.rbtAll.setMaximumSize(QtCore.QSize(300, 20))
+        self.rbtAll.setObjectName("rbtAll")
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 1120, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1120, 26))
         self.menubar.setObjectName("menubar")
         self.menuCustomers = QtWidgets.QMenu(parent=self.menubar)
         self.menuCustomers.setObjectName("menuCustomers")
@@ -214,6 +229,6 @@ class Ui_MainWindow(object):
         self.lblCategory.setText(_translate("MainWindow", "Category:"))
         self.rbtIndividual.setText(_translate("MainWindow", "Individual"))
         self.rbtBusiness.setText(_translate("MainWindow", "Business"))
-        self.chkAll.setText(_translate("MainWindow", "All"))
         self.lblHistorical.setText(_translate("MainWindow", "Historical:"))
+        self.rbtAll.setText(_translate("MainWindow", "All"))
         self.menuCustomers.setTitle(_translate("MainWindow", "Customers"))
