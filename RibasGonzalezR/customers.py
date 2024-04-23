@@ -27,7 +27,7 @@ class Customers:
     def loadDate(qDate):
         try:
             data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
-            var.ui.txtDataDriver.setText(str(data))
+            var.ui.txtBirthdate.setText(str(data))
             var.calendar.hide()
 
         except Exception as error:
@@ -78,24 +78,20 @@ class Customers:
         except Exception as error:
             print('error when checking the fire date', error)
 
+    def datosCustomer(self):
+        try:
+            newcostumer = [var.ui.txtName.text(), var.ui.txtSurname.text(), var.ui.txtAddress.text(), var.ui.txtBirthdate.text(), var.ui.txtTelephone.text(), var.ui.txtEmail.text()]
+
+            if var.ui.rbtIndividual.isChecked():
+                newcostumer.append("Particular")
+            elif var.ui.rbtBussiness.isChecked():
+                newcostumer.append("Empresa")
+            connection.Connection.saveCustomer(newcostumer)
+
+        except Exception as error:
+            print('fallo al cargar datos custormer')
 
 
-    @staticmethod
-    def customerStatus():
-        if var.ui.rbtAll.isChecked():
-            status = 0
-            connection.Connection.selectCustomers(status)
-
-        if var.ui.rbtIndividual.isChecked():
-            status = 1
-            connection.Connection.selectCustomers(status)
-
-        if var.ui.rbtBussiness.isChecked():
-            status = 2
-            connection.Connection.selectCustomers(status)
-            
-            
-    
     @staticmethod
     def loadCustomersTable(register):
         try:

@@ -20,6 +20,16 @@ class Main(QtWidgets.QMainWindow):
         var.ui.setupUi(self)
         var.calendar = Calendar()
         var.exitWindow = Exit()
+        connection.Connection.connection()
+
+        var.ui.btnEnroll.clicked.connect(customers.Customers.datosCustomer)
+
+
+        """
+        Zona de eventos de botones
+        """
+        var.ui.btnCalendar.clicked.connect(events.Events.openCalendar)
+
 
 
     def closeEvent(self, event):

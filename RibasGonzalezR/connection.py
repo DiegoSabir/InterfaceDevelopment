@@ -46,6 +46,7 @@ class Connection:
     @staticmethod
     def saveCustomer(newcustomer):
         try:
+            print(newcustomer)
             query = QtSql.QSqlQuery()
             query.prepare('insert into customer (name_customer, surname_customer, address_customer, '
                               ' date_birthday_customer, telephone_customer, email_customer, category_customer) '
@@ -70,8 +71,6 @@ class Connection:
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
                 mbox.setText("Error saving customer")
                 mbox.exec()
-
-            customers.Customers.customerStatus()
 
         except Exception as error:
             print("Error saving customer: ", error)
