@@ -580,7 +580,7 @@ QLabel{
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../images/calendario.ico</normaloff>../images/calendario.ico</iconset>
+         <normaloff>../../../../../.designer/images/calendario.ico</normaloff>../../../../../.designer/images/calendario.ico</iconset>
        </property>
        <property name="iconSize">
         <size>

@@ -27,9 +27,8 @@ class Connection:
         try:
             query = QtSql.QSqlQuery()
 
-            #COMPROBAR CONSULTA
-            query.prepare("update customers set bajadri = null where codigo = :codigo")
-            query.bindValue(':codigo', str(codigo))
+            query.prepare("update customer set firedate_customer = null where id_customer = :id")
+            query.bindValue(':id', str(codigo))
 
             if query.exec():
                 mbox = QtWidgets.QMessageBox()
@@ -84,10 +83,10 @@ class Connection:
             consulta = "select id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer from customer"
 
             if int(status) == 1:
-                consulta = consulta + " where bajadri is null"
+                consulta = consulta + " where firedate_customer is null"
 
             elif int(status) == 2:
-                consulta = consulta + " where bajadri is not null"
+                consulta = consulta + " where firedate_customer is not null"
 
             query = QtSql.QSqlQuery()
             query.prepare(consulta)

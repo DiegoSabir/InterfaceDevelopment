@@ -36,23 +36,54 @@ class Customers:
 
 
     @staticmethod
+    def loadFireDate(qDate):
+        try:
+            data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
+            codigo = var.ui.lblId.text()
+            Customers.modificarfechabaja(codigo, data)
+            var.dlgCalendarbaja.hide()
+            var.dlgModificarBajaWindow.hide()
+
+        except Exception as error:
+            print("error en cargar data", error)
+
+
+
+    @staticmethod
+    def clear():
+        try:
+            widgetList = [var.ui.lblId, var.ui.txtSurname, var.ui.txtName, var.ui.txtAddress, var.ui.txtEmail,
+                            var.ui.txtBirthdate, var.ui.txtTelephone]
+            for i in widgetList:
+                i.clear()
+
+            var.ui.chkAll.setChecked(False)
+
+        except Exception as error:
+            print("error ao limpiar panel", error)
+
+
+
+    @staticmethod
     def enrollCustomer():
         try:
             if var.ui.lblId.text() != "":
                 codigo = var.ui.lblId.text()
                 if Customers.checkFireDate(codigo):
                     connection.Connection.removeFireDate(codigo)
-                    Customers.customerStatus()
+                    Customers.selectStatus()
             else:
-                customer = [var.ui.txtSurname,
-                            var.ui.txtName,
-                            var.ui.txtBirthdate,
-                            var.ui.txtAddress,
-                            var.ui.txtTelephone,
-                            var.ui.txtEmail]
-                newcustomer = []
-                for i in customer:
-                    newcustomer.append(i.text().title())
+                newcustomer = [var.ui.txtName.text(),
+                               var.ui.txtSurname.text(),
+                               var.ui.txtAddress.text(),
+                               var.ui.txtBirthdate.text(),
+                               var.ui.txtTelephone.text(),
+                               var.ui.txtEmail.text()]
+
+                if var.ui.rbtIndividual.isChecked():
+                    newcustomer.append("Particular")
+                elif var.ui.rbtBussiness.isChecked():
+                    newcustomer.append("Empresa")
 
                 connection.Connection.saveCustomer(newcustomer)
 
@@ -60,36 +91,19 @@ class Customers:
             print("Error with enroll customer", error)
 
 
-
     @staticmethod
-    def checkFireDate(codigo):
-        try:
-            baja = True
-            query = QtSql.QSqlQuery()
-            query.prepare("select bajadri from drivers where codigo = :codigo")
-            query.bindValue(':codigo', int(codigo))
-            if query.exec():
-                while query.next():
-                    fecha = query.value(0)
-                    if fecha == "":
-                        baja = False
-            return baja
+    def selectStatus():
+        if var.ui.chkAll.isChecked():
+            status = 0
 
-        except Exception as error:
-            print('error when checking the fire date', error)
+        elif var.ui.rbtIndividual.isChecked():
+            status = 1
 
-    def datosCustomer(self):
-        try:
-            newcostumer = [var.ui.txtName.text(), var.ui.txtSurname.text(), var.ui.txtAddress.text(), var.ui.txtBirthdate.text(), var.ui.txtTelephone.text(), var.ui.txtEmail.text()]
+        elif var.ui.rbtBussiness.isChecked():
+            status = 2
 
-            if var.ui.rbtIndividual.isChecked():
-                newcostumer.append("Particular")
-            elif var.ui.rbtBussiness.isChecked():
-                newcostumer.append("Empresa")
-            connection.Connection.saveCustomer(newcostumer)
+        connection.Connection.selectCustomers(status)
 
-        except Exception as error:
-            print('fallo al cargar datos custormer')
 
 
     @staticmethod
@@ -112,3 +126,85 @@ class Customers:
 
         except Exception as error:
             print('error loading data into table', error)
+
+
+
+    @staticmethod
+    def loadCustomers():
+        try:
+            Customers.clear()
+
+            row = var.ui.tabCustomers.selectedItems()
+
+            fila = [dato.text() for dato in row]
+            registro = connection.Connection.onedriver(fila[0])
+
+            datos = [var.ui.txtName, var.ui.txtSurname, var.ui.txtAddress, var.ui.txtBirthdate, var.ui.txtTelephone, var.ui.txtEmail]
+
+            for i, dato in enumerate(datos):
+                dato.setText(str(registro[i]))
+
+        except Exception as error:
+            print('error ao cargar driver', error)
+
+
+    @staticmethod
+    def modifyCustomer():
+        try:
+            customer = [var.ui.txtName,
+                        var.ui.txtSurname,
+                        var.ui.txtAddress,
+                        var.ui.txtBirthdate,
+                        var.ui.txtTelephone,
+                        var.ui.txtEmail]
+
+            modifcustomer = []
+            for i in customer:
+                modifcustomer.append(i.text().title())
+
+            connection.Connection.comprobarModifDriver(modifcustomer)
+
+        except Exception as error:
+            print("error en modif driver en Drivers", error)
+
+
+
+    @staticmethod
+    def checkFireDate(codigo):
+        try:
+            baja = True
+            query = QtSql.QSqlQuery()
+            query.prepare("select firedate_customer from customer where id_customer = :id")
+            query.bindValue(':id', int(codigo))
+            if query.exec():
+                while query.next():
+                    fecha = query.value(0)
+                    if fecha == "":
+                        baja = False
+            return baja
+
+        except Exception as error:
+            print('error when checking the fire date', error)
+
+
+
+    @staticmethod
+    def modificarfechabaja(codigo, fecha):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare("update drivers set firedate_customer = :firedate where id_customer = :id")
+
+            query.bindValue(':id', int(codigo))
+            query.bindValue(':firedate', str(fecha))
+
+            if query.exec():
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle('Information')
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                mbox.setText("Datos modificados")
+                mbox.exec()
+
+                Customers.selectStatus()
+
+        except Exception as error:
+            print('error ao eliminar data baixa', error)

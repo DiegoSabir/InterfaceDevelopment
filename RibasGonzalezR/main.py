@@ -22,13 +22,27 @@ class Main(QtWidgets.QMainWindow):
         var.exitWindow = Exit()
         connection.Connection.connection()
 
-        var.ui.btnEnroll.clicked.connect(customers.Customers.datosCustomer)
-
 
         """
         Zona de eventos de botones
         """
         var.ui.btnCalendar.clicked.connect(events.Events.openCalendar)
+        var.ui.btnEnroll.clicked.connect(customers.Customers.enrollCustomer)
+        var.ui.btnModify.clicked.connect(customers.Customers.modifyCustomer)
+
+
+        '''
+        Zona de eventos da toolbar
+        '''
+        var.ui.actionSalir.triggered.connect(events.Events.showExit)
+        var.ui.actionlimpiarPanel.triggered.connect(customers.Customers.clear)
+
+
+        '''
+        Zona de init
+        '''
+        connection.Connection.showCustomers()
+
 
 
 
