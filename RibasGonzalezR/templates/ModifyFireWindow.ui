@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dlgModifyFireWindow</class>
+ <widget class="QDialog" name="dlgModifyFireWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>400</width>
+    <height>200</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>400</width>
+    <height>200</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QHeaderView::section:horizontal {
+    border-top: 1px solid #DEC09A;
+    color: #FFF0CF;
+    font: 11pt &quot;Arial&quot;;
+    background-color: #8294C4;
+}
+
+QWidget {
+    background-color: #8294C4;
+    color: #FFFFFF; /* White text on dark background */
+}
+
+QDialog {
+    background-color: #97A4C9;
+    color: #FFFFFF; /* White text on dark background */
+}
+
+QLabel {
+    color: #000; /* Black text on light background */
+	background-color: #97A4C9;
+}
+
+QPushButton {
+    border-style: solid;
+    border-color: #F9F0EF;
+    background-color: #DBDFEA;
+    color: #000000; /* Black text on light background */
+    border-radius: 5px;
+}
+
+QLineEdit {
+    border-radius: 5px;
+    background-color: #DCC5A0;
+    color: #000000; /* Black text on light background */
+}</string>
+  </property>
+  <widget class="QLabel" name="lblModifyFireDate">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>40</y>
+     <width>281</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>10</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="text">
+    <string>DO YOU WANT TO CHANGE THE FIRE DATE?</string>
+   </property>
+   <property name="alignment">
+    <set>Qt::AlignCenter</set>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnModifyFireDateYes">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>100</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="text">
+    <string>YES</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btnModifyFireDateNo">
+   <property name="geometry">
+    <rect>
+     <x>220</x>
+     <y>100</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="layoutDirection">
+    <enum>Qt::LeftToRight</enum>
+   </property>
+   <property name="text">
+    <string>NO</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

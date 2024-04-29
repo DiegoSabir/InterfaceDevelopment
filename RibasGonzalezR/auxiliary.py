@@ -6,6 +6,18 @@ import var
 
 from CalendarWindow import *
 from ExitWindow import *
+from ModifyFireWindow import *
+
+class Fire(QtWidgets.QDialog):
+    def __init__(self):
+        super(Fire, self).__init__()
+        var.dlgModifyFireWindow = Ui_dlgModifyFireWindow()
+        var.dlgModifyFireWindow.setupUi(self)
+
+        var.dlgModifyFireWindow.btnModifyFireDateYes.clicked.connect(events.Events.confirmModify)
+        var.dlgModifyFireWindow.btnModifyFireDateNo.clicked.connect(events.Events.cancelModify)
+
+
 
 class Calendar(QtWidgets.QDialog):
     def __init__(self):
@@ -32,3 +44,9 @@ class Exit(QtWidgets.QDialog):
 
         var.exitWindow.btnOk.clicked.connect(events.Events.confirmExit)
         var.exitWindow.btnCancel.clicked.connect(events.Events.cancelExit)
+
+
+
+class FileDialogAbrir(QtWidgets.QFileDialog):
+    def __init__(self):
+        super(FileDialogAbrir, self).__init__()

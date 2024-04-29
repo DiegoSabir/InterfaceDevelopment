@@ -20,6 +20,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.setupUi(self)
         var.calendar = Calendar()
         var.exitWindow = Exit()
+        var.dlgModifyFireWindow = Fire()
+
         connection.Connection.connection()
 
 
@@ -31,11 +33,25 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnModify.clicked.connect(customers.Customers.modifyCustomer)
 
 
+
+        '''
+        Zona de eventos dos menubars
+        '''
+
+
+
+        '''
+        Zona de caixas texto
+        '''
+        var.ui.txtSurname.editingFinished.connect(events.Events.capitalLetter)
+        var.ui.txtName.editingFinished.connect(events.Events.capitalLetter)
+
+
+
         '''
         Zona de eventos da toolbar
         '''
-        var.ui.actionSalir.triggered.connect(events.Events.showExit)
-        var.ui.actionlimpiarPanel.triggered.connect(customers.Customers.clear)
+
 
 
         '''
@@ -44,6 +60,11 @@ class Main(QtWidgets.QMainWindow):
         connection.Connection.showCustomers()
 
 
+        '''
+        Eventos de Tablas
+        '''
+        events.Events.resizeCustomerTable()
+        var.ui.tabCustomers.clicked.connect(customers.Customers.loadCustomers)
 
 
     def closeEvent(self, event):
