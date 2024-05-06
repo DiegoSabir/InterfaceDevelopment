@@ -47,6 +47,9 @@
       <height>730</height>
      </size>
     </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
       <string>Customers</string>
@@ -162,19 +165,19 @@
        <rect>
         <x>10</x>
         <y>70</y>
-        <width>500</width>
+        <width>450</width>
         <height>620</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>500</width>
+        <width>450</width>
         <height>620</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>500</width>
+        <width>450</width>
         <height>620</height>
        </size>
       </property>
@@ -443,19 +446,19 @@ QLabel{
         <rect>
          <x>130</x>
          <y>70</y>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </size>
        </property>
@@ -465,19 +468,19 @@ QLabel{
         <rect>
          <x>130</x>
          <y>170</y>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </size>
        </property>
@@ -512,19 +515,19 @@ QLabel{
         <rect>
          <x>130</x>
          <y>220</y>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>350</width>
+         <width>300</width>
          <height>25</height>
         </size>
        </property>
@@ -580,7 +583,7 @@ QLabel{
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../../../../../.designer/images/calendario.ico</normaloff>../../../../../.designer/images/calendario.ico</iconset>
+         <normaloff>../images/calendario.ico</normaloff>../images/calendario.ico</iconset>
        </property>
        <property name="iconSize">
         <size>
@@ -592,8 +595,8 @@ QLabel{
       <widget class="QPushButton" name="btnEnroll">
        <property name="geometry">
         <rect>
-         <x>50</x>
-         <y>570</y>
+         <x>170</x>
+         <y>400</y>
          <width>100</width>
          <height>25</height>
         </rect>
@@ -617,8 +620,8 @@ QLabel{
       <widget class="QPushButton" name="btnModify">
        <property name="geometry">
         <rect>
-         <x>200</x>
-         <y>570</y>
+         <x>170</x>
+         <y>450</y>
          <width>100</width>
          <height>25</height>
         </rect>
@@ -642,8 +645,8 @@ QLabel{
       <widget class="QPushButton" name="btnFire">
        <property name="geometry">
         <rect>
-         <x>350</x>
-         <y>570</y>
+         <x>170</x>
+         <y>500</y>
          <width>100</width>
          <height>25</height>
         </rect>
@@ -668,21 +671,21 @@ QLabel{
      <widget class="QFrame" name="frame_3">
       <property name="geometry">
        <rect>
-        <x>520</x>
+        <x>470</x>
         <y>70</y>
-        <width>560</width>
+        <width>610</width>
         <height>40</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>560</width>
+        <width>610</width>
         <height>40</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>560</width>
+        <width>610</width>
         <height>40</height>
        </size>
       </property>
@@ -746,21 +749,21 @@ QLabel{
      <widget class="QTableWidget" name="tabCustomers">
       <property name="geometry">
        <rect>
-        <x>520</x>
+        <x>470</x>
         <y>130</y>
-        <width>560</width>
+        <width>610</width>
         <height>560</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>560</width>
+        <width>610</width>
         <height>560</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>560</width>
+        <width>610</width>
         <height>560</height>
        </size>
       </property>
@@ -803,8 +806,386 @@ QTableWidget {
     </widget>
     <widget class="QWidget" name="tab_4">
      <attribute name="title">
-      <string>Tab 2</string>
+      <string>Products</string>
      </attribute>
+     <widget class="QTableWidget" name="tabProducts">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>250</y>
+        <width>1025</width>
+        <height>440</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>1025</width>
+        <height>440</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1025</width>
+        <height>440</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableWidget::item:selected {
+    background-color:  : #C59A6C;
+	color: rgb(0,0,0);
+}
+
+QTableWidget {
+    background-color: #ACB1D6;
+}</string>
+      </property>
+      <column>
+       <property name="text">
+        <string>Id</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Name</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Price</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Stock</string>
+       </property>
+      </column>
+     </widget>
+     <widget class="QFrame" name="frame_4">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>20</y>
+        <width>1025</width>
+        <height>200</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>1025</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1025</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
+	background-color: #ACB1D6;
+}
+
+QLineEdit {
+	color: rgb(0,0,0);
+}
+
+QCheckBox {
+	color: rgb(0,0,0);
+}
+
+QRadioButton{
+	color: rgb(0,0,0);
+}
+
+QComboBox{
+	color: rgb(0,0,0);
+}
+
+QLabel{
+	background-color: #97A4C9;
+
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="lblNamePro">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>90</y>
+         <width>70</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Name:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtNamePro">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>90</y>
+         <width>200</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>200</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>200</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnAdd">
+       <property name="geometry">
+        <rect>
+         <x>190</x>
+         <y>150</y>
+         <width>100</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnModify_2">
+       <property name="geometry">
+        <rect>
+         <x>450</x>
+         <y>150</y>
+         <width>100</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Modify</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btnRemove">
+       <property name="geometry">
+        <rect>
+         <x>700</x>
+         <y>150</y>
+         <width>100</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>100</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Remove</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblIdProduct">
+       <property name="geometry">
+        <rect>
+         <x>40</x>
+         <y>30</y>
+         <width>70</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Id:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblIdPro">
+       <property name="geometry">
+        <rect>
+         <x>140</x>
+         <y>30</y>
+         <width>120</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background:  rgb(255, 254, 196)</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblPricePro">
+       <property name="geometry">
+        <rect>
+         <x>390</x>
+         <y>90</y>
+         <width>70</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Price:</string>
+       </property>
+      </widget>
+      <widget class="QSpinBox" name="spStockPro">
+       <property name="geometry">
+        <rect>
+         <x>800</x>
+         <y>90</y>
+         <width>75</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>75</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>75</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtPricePro">
+       <property name="geometry">
+        <rect>
+         <x>500</x>
+         <y>90</y>
+         <width>150</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>25</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblStockPro">
+       <property name="geometry">
+        <rect>
+         <x>700</x>
+         <y>90</y>
+         <width>70</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>70</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>70</width>
+         <height>25</height>
+        </size>
+       </property>
+       <property name="text">
+        <string>Stock:</string>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -814,27 +1195,29 @@ QTableWidget {
      <x>0</x>
      <y>0</y>
      <width>1120</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCustomers">
     <property name="title">
-     <string>Archivo</string>
+     <string>File</string>
     </property>
+    <addaction name="actionExit"/>
    </widget>
    <widget class="QMenu" name="menuHerramientas">
     <property name="title">
-     <string>Herramientas</string>
+     <string>Tools</string>
     </property>
    </widget>
    <widget class="QMenu" name="menuInformes">
     <property name="title">
-     <string>Informes</string>
+     <string>Reports</string>
     </property>
+    <addaction name="actionCreate_Customers_Report_PDF"/>
    </widget>
    <widget class="QMenu" name="menuAyuda">
     <property name="title">
-     <string>Ayuda</string>
+     <string>Help</string>
     </property>
    </widget>
    <addaction name="menuCustomers"/>
@@ -843,6 +1226,52 @@ QTableWidget {
    <addaction name="menuAyuda"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>toolBar</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionCreate_Customers_Report_PDF"/>
+   <addaction name="separator"/>
+   <addaction name="actionclearWindow"/>
+   <addaction name="separator"/>
+   <addaction name="actionExit"/>
+  </widget>
+  <action name="actionCreate_Customers_Report_PDF">
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/crearreport.ico</normaloff>../images/crearreport.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Create Customers Report PDF</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/salir.ico</normaloff>../images/salir.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionclearWindow">
+   <property name="icon">
+    <iconset>
+     <normaloff>../images/actualizar.ico</normaloff>../images/actualizar.ico</iconset>
+   </property>
+   <property name="text">
+    <string>clearWindow</string>
+   </property>
+   <property name="toolTip">
+    <string>clearWindow</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>

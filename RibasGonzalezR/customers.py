@@ -4,26 +4,8 @@ import connection
 import var
 import re
 
+
 class Customers:
-    @staticmethod
-    def validateEmail(email):
-        try:
-            pattern = r'^[\w\.-]+@[\w\.-]+\.\w+$'
-            if re.match(pattern, email):
-                var.ui.txtEmail.setText(email)
-
-            else:
-                mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle('Warning')
-                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                mbox.setText("Invalid Email Format")
-                mbox.exec()
-
-        except Exception as error:
-            print("error en validateEmail from customers", error)
-
-
-
     @staticmethod
     def loadDate(qDate):
         try:
@@ -54,7 +36,7 @@ class Customers:
     def clear():
         try:
             widgetList = [var.ui.lblId, var.ui.txtSurname, var.ui.txtName, var.ui.txtAddress, var.ui.txtEmail,
-                            var.ui.txtBirthdate, var.ui.txtTelephone]
+                          var.ui.txtBirthdate, var.ui.txtTelephone]
             for i in widgetList:
                 i.clear()
 
@@ -71,7 +53,7 @@ class Customers:
             if var.ui.lblId.text() != "":
                 codigo = var.ui.lblId.text()
                 if Customers.checkFireDate(codigo):
-                    connection.Connection.removeFireDate(codigo)
+                    connection.Connection.addFireDate(codigo)
                     Customers.selectStatus()
             else:
                 newcustomer = [var.ui.txtName.text(),
@@ -87,24 +69,10 @@ class Customers:
                     newcustomer.append("Bussiness")
 
                 connection.Connection.saveCustomer(newcustomer)
+                connection.Connection.showCustomers()
 
         except Exception as error:
             print("Error en enrollCustomer from customers", error)
-
-
-
-    @staticmethod
-    def selectStatus():
-        if var.ui.chkAll.isChecked():
-            status = 0
-
-        elif var.ui.rbtIndividual.isChecked():
-            status = 1
-
-        elif var.ui.rbtBussiness.isChecked():
-            status = 2
-
-        connection.Connection.selectCustomers(status)
 
 
 
@@ -119,11 +87,12 @@ class Customers:
                 var.ui.tabCustomers.setItem(index, 2, QtWidgets.QTableWidgetItem(str(record[2])))
                 var.ui.tabCustomers.setItem(index, 3, QtWidgets.QTableWidgetItem(str(record[3])))
                 var.ui.tabCustomers.setItem(index, 4, QtWidgets.QTableWidgetItem(str(record[4])))
-                var.ui.tabCustomers.setItem(index, 5, QtWidgets.QTableWidgetItem(str(record[5])))
+
                 var.ui.tabCustomers.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabCustomers.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabCustomers.item(index, 2).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                var.ui.tabCustomers.item(index, 5).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 index += 1
 
         except Exception as error:
@@ -135,21 +104,28 @@ class Customers:
     def loadCustomers():
         try:
             Customers.clear()
+            selected_row = var.ui.tabCustomers.currentRow()
+            if selected_row != -1:
+                id_customer = var.ui.tabCustomers.item(selected_row, 0).text()
+                registro = connection.Connection.oneCustomer(id_customer)
+                if registro:
+                    datos = [var.ui.lblId,
+                             var.ui.txtName,
+                             var.ui.txtSurname,
+                             var.ui.txtAddress,
+                             var.ui.txtBirthdate,
+                             var.ui.txtTelephone,
+                             var.ui.txtEmail]
+                    categoria = registro[7]
 
-            row = var.ui.tabCustomers.selectedItems()
+                    if categoria == "Individual":
+                        var.ui.rbtIndividual.setChecked(True)
 
-            fila = [dato.text() for dato in row]
-            registro = connection.Connection.oneCustomer(fila[0])
+                    elif categoria == "Bussiness":
+                        var.ui.rbtBussiness.setChecked(True)
 
-            datos = [var.ui.txtName,
-                     var.ui.txtSurname,
-                     var.ui.txtAddress,
-                     var.ui.txtBirthdate,
-                     var.ui.txtTelephone,
-                     var.ui.txtEmail]
-
-            for i, dato in enumerate(datos):
-                dato.setText(str(registro[i]))
+                    for dato, value in zip(datos, registro):
+                        dato.setText(str(value))
 
         except Exception as error:
             print('error en loadCustomers from customers', error)
@@ -216,3 +192,14 @@ class Customers:
 
         except Exception as error:
             print('error en modifyFireDate from customers', error)
+
+
+
+    def fireCustomer(self):
+        try:
+            codigo = var.ui.leCodigo.text()
+            connection.Connection.addFireDate(codigo)
+            connection.Connection.showCustomers()
+
+        except Exception as error:
+            print("Error en fireCustomer from customer ", error)

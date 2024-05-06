@@ -1,5 +1,6 @@
 from PyQt6 import QtWidgets, QtSql
 
+import products
 import var
 import datetime
 import customers
@@ -54,27 +55,26 @@ class Connection:
             print("Error en saveCustomer from connection ", error)
 
 
+
     @staticmethod
     def showCustomers():
         try:
-            estado = 1
-            Connection.selectCustomers(estado)
+            Connection.selectCustomers()
 
         except Exception as error:
-            print("error ao cargar a tabla", error)
+            print("error en showCustomer from connection", error)
 
 
-
+    @staticmethod
     def oneCustomer(id):
         try:
             registro = []
             query = QtSql.QSqlQuery()
             query.prepare('select * from customer where id_customer = :id')
-
             query.bindValue(':id', int(id))
             if query.exec():
                 while query.next():
-                    for i in range(12):
+                    for i in range(8):
                         registro.append(str(query.value(i)))
             return registro
 
@@ -135,27 +135,26 @@ class Connection:
             print('error en modifyCustomer from connection', error)
 
 
-
-    def selectCustomers(status):
+    @staticmethod
+    def selectCustomers():
         try:
-            record = []
+            if var.ui.chkAll.isChecked():
+                consulta = 'select category_customer, name_customer, address_customer, telephone_customer, email_customerfrom customer WHERE firedate_customer is not null'
 
-            consulta = "select category_customer, name_customer, address_customer, telephone_customer, email_customer from customer"
+            else:
+                consulta = 'select category_customer, name_customer, address_customer, telephone_customer, email_customer from customer WHERE firedate_customer is null'
 
-            if int(status) == 1:
-                consulta = consulta + " where firedate_customer is null"
-
-            elif int(status) == 2:
-                consulta = consulta + " where firedate_customer is not null"
+            register = []
 
             query = QtSql.QSqlQuery()
             query.prepare(consulta)
-
             if query.exec():
                 while query.next():
                     row = [query.value(i) for i in range(query.record().count())]
-                    record.append(row)
-            customers.Customers.loadCustomersTable(record)
+                    register.append(row)
+            else:
+                print(query.lastError())
+            customers.Customers.loadCustomersTable(register)
 
         except Exception as error:
             print('error en selectCustomers from connection', error)
@@ -180,11 +179,13 @@ class Connection:
 
 
     @staticmethod
-    def removeFireDate(codigo):
+    def addFireDate(codigo):
         try:
+            date = datetime.date.today()
+            date = date.strftime('%d/%m/%Y')
             query = QtSql.QSqlQuery()
-
-            query.prepare("update customer set firedate_customer = null where id_customer = :id")
+            query.prepare("update customer set firedate_customer = :firedate where id_customer = :id")
+            query.bindValue(':firedate', str(date))
             query.bindValue(':id', str(codigo))
 
             if query.exec():
@@ -195,4 +196,85 @@ class Connection:
                 mbox.exec()
 
         except Exception as error:
-            print('error en removeFireDate from connection', error)
+            print('error en addFireDate from connection', error)
+
+
+
+    """
+    METODOS DE PRODUCTOS
+    """
+
+    @staticmethod
+    def saveProduct(newproduct):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('insert into product (name_product, price_product, stock_product) VALUES (:name, :price, :stock)')
+            query.bindValue(':name', str(newproduct[0]))
+            query.bindValue(':price', str(newproduct[1]))
+            query.bindValue(':stock', str(newproduct[2]))
+
+            if query.exec():
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle('Information')
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                mbox.setText("Product added")
+                mbox.exec()
+            else:
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle('Warning')
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                mbox.setText("Error saving product")
+                mbox.exec()
+
+        except Exception as error:
+            print("Error en saveProduct from connection ", error)
+
+
+
+    @staticmethod
+    def showProducts():
+        try:
+            Connection.selectProducts()
+
+        except Exception as error:
+            print("error en showProducts from connection", error)
+
+
+
+    def oneProduct(id):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from product where id_product = :id')
+
+            query.bindValue(':id', int(id))
+            if query.exec():
+                while query.next():
+                    for i in range(12):
+                        registro.append(str(query.value(i)))
+            return registro
+
+        except Exception as error:
+            print('error en oneProduct from connection', error)
+
+
+
+    @staticmethod
+    def selectProducts():
+        try:
+            consulta = 'select id_product, name_product, price_product, stock_product from product'
+
+            register = []
+
+            query = QtSql.QSqlQuery()
+            query.prepare(consulta)
+            if query.exec():
+                while query.next():
+                    row = [query.value(i) for i in range(query.record().count())]
+                    register.append(row)
+            else:
+                print(query.lastError())
+            products.Products.loadProductsTable(register)
+
+        except Exception as error:
+            print('error en selectCustomers from connection', error)

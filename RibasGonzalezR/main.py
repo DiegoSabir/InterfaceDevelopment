@@ -3,6 +3,8 @@ import sys
 
 import customers
 import events
+import products
+import reports
 import var
 import connection
 import auxiliary
@@ -31,7 +33,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnCalendar.clicked.connect(events.Events.openCalendar)
         var.ui.btnEnroll.clicked.connect(customers.Customers.enrollCustomer)
         var.ui.btnModify.clicked.connect(customers.Customers.modifyCustomer)
-
+        var.ui.btnFire.clicked.connect(customers.Customers.fireCustomer)
+        var.ui.btnAdd.clicked.connect(products.Products.addProduct)
 
 
         '''
@@ -41,17 +44,20 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
-        Zona de caixas texto
+        Zona de cajas de texto
         '''
         var.ui.txtSurname.editingFinished.connect(events.Events.capitalLetter)
         var.ui.txtName.editingFinished.connect(events.Events.capitalLetter)
-
+        var.ui.txtEmail.editingFinished.connect(events.Events.checkEmailFormat)
+        var.ui.txtPricePro.editingFinished.connect(events.Events.checkPriceFormat)
 
 
         '''
         Zona de eventos da toolbar
         '''
-
+        var.ui.actionExit.triggered.connect(events.Events.showExit)
+        var.ui.actionclearWindow.triggered.connect(customers.Customers.clear)
+        var.ui.actionCreate_Customers_Report_PDF.triggered.connect(reports.reports.reportCustomers)
 
 
         '''
@@ -64,7 +70,9 @@ class Main(QtWidgets.QMainWindow):
         Eventos de Tablas
         '''
         events.Events.resizeCustomerTable()
+        events.Events.resizeProductTable()
         var.ui.tabCustomers.clicked.connect(customers.Customers.loadCustomers)
+        var.ui.tabProducts.clicked.connect(products.Products.loadProducts)
 
 
     def closeEvent(self, event):
