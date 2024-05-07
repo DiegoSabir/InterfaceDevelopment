@@ -27,16 +27,16 @@ class reports:
             var.report.drawString(370, 675, str(items[4]))
             var.report.drawString(470, 675, str(items[5]))
             var.report.line(50, 670, 570, 670)
-            # query
+
             query = QtSql.QSqlQuery()
             if var.ui.chkAll.isChecked():
-                if var.ui.rbtBussiness.isChecked():
+                if var.ui.rbtBusiness.isChecked():
                     query.prepare('SELECT id_customer,category_customer,name_customer,telephone_customer,address_customer,email_customer from customer order by id_customer')
                 elif var.ui.rbtIndividual.isChecked():
                     query.prepare('SELECT id_customer,category_customer,name_customer,telephone_customer,address_customer,email_customer from customer order by id_customer')
 
-            else:  # cbHistorico is not checked
-                if var.ui.rbtBussiness.isChecked():
+            else:
+                if var.ui.rbtBusiness.isChecked():
                     query.prepare("SELECT id_customer,category_customer,name_customer,telephone_customer,address_customer,email_customer from customer WHERE category like 'Bussiness' order by id_customer")
                 elif var.ui.rbtIndividual.isChecked():
                     query.prepare("SELECT id_customer,category_customer,name_customer,telephone_customer,address_customer,email_customer from customer WHERE category like 'Individual' order by id_customer")
@@ -83,10 +83,9 @@ class reports:
 
     def top_report(title):
         try:
-            ruta_logo = 'images/logo.png'
+            ruta_logo = 'images/logo.ico'
             logo = Image.open(ruta_logo)
 
-            # Asegúrate de que el objeto 'logo' sea de tipo 'PngImageFile'
             if isinstance(logo, Image.Image):
                 var.report.line(50, 800, 525, 800)
                 var.report.setFont('Helvetica-Bold', size=14)
@@ -94,7 +93,6 @@ class reports:
                 var.report.drawString(240, 695, title)
                 var.report.line(50, 690, 570, 690)
 
-                # Dibuja la imagen en el informe
                 var.report.drawImage(ruta_logo, 480, 725, width=40, height=40)
 
                 var.report.setFont('Helvetica', size=9)

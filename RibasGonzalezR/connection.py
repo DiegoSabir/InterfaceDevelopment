@@ -28,12 +28,12 @@ class Connection:
         try:
             query = QtSql.QSqlQuery()
             query.prepare('insert into customer (name_customer, surname_customer, address_customer, '
-                              ' date_birthday_customer, telephone_customer, email_customer, category_customer) '
-                              ' VALUES (:name, :surname, :address, :date_birthday, :telephone, :email, :category)')
+                              ' enrolldate_customer, telephone_customer, email_customer, category_customer) '
+                              ' VALUES (:name, :surname, :address, :enrolldate, :telephone, :email, :category)')
             query.bindValue(':name', str(newcustomer[0]))
             query.bindValue(':surname', str(newcustomer[1]))
             query.bindValue(':address', str(newcustomer[2]))
-            query.bindValue(':date_birthday', str(newcustomer[3]))
+            query.bindValue(':enrolldate', str(newcustomer[3]))
             query.bindValue(':telephone', str(newcustomer[4]))
             query.bindValue(':email', str(newcustomer[5]))
             query.bindValue(':category', str(newcustomer[6]))
@@ -109,14 +109,14 @@ class Connection:
         try:
             query = QtSql.QSqlQuery()
             query.prepare('update customer set id_customer = :id, name_customer = :name ,surname_customer = :surname, address_customer = :address, '
-                          'date_birthday_customer = :date_birthday, telephone_customer = :telephone, email_customer = :email,'
+                          'enrolldate_customer = :enrolldate, telephone_customer = :telephone, email_customer = :email,'
                           'category_customer = :category where id_customer = :id')
 
             query.bindValue(':id', str(modifycustomer[0]))
             query.bindValue(':name', str(modifycustomer[1]))
             query.bindValue(':surname', str(modifycustomer[2]))
             query.bindValue(':address', str(modifycustomer[3]))
-            query.bindValue(':date_birthday', str(modifycustomer[4]))
+            query.bindValue(':enrolldate', str(modifycustomer[4]))
             query.bindValue(':telephone', str(modifycustomer[5]))
             query.bindValue(':email', str(modifycustomer[6]))
             query.bindValue(':category', str(modifycustomer[7]))

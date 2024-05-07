@@ -113,6 +113,25 @@ class Events:
         except Exception as error:
             print("error en capitalLetter from events", error)
 
+    @staticmethod
+    def blockTxtSurname():
+        try:
+            var.ui.txtSurname.setText("")
+            var.ui.txtSurname.setEnabled(False)
+
+        except Exception as error:
+            print("error en blockTxtSurname from events", error)
+
+
+
+    @staticmethod
+    def unblockTxtSurname():
+        try:
+            var.ui.txtSurname.setEnabled(True)
+
+        except Exception as error:
+            print("error en unblockTxtSurname from events", error)
+
 
 
     @staticmethod

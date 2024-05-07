@@ -10,7 +10,7 @@ class Customers:
     def loadDate(qDate):
         try:
             data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
-            var.ui.txtBirthdate.setText(str(data))
+            var.ui.txtEnrollDate.setText(str(data))
             var.calendar.hide()
 
         except Exception as error:
@@ -36,7 +36,7 @@ class Customers:
     def clear():
         try:
             widgetList = [var.ui.lblId, var.ui.txtSurname, var.ui.txtName, var.ui.txtAddress, var.ui.txtEmail,
-                          var.ui.txtBirthdate, var.ui.txtTelephone]
+                          var.ui.txtEnrollDate, var.ui.txtTelephone]
             for i in widgetList:
                 i.clear()
 
@@ -54,18 +54,17 @@ class Customers:
                 codigo = var.ui.lblId.text()
                 if Customers.checkFireDate(codigo):
                     connection.Connection.addFireDate(codigo)
-                    Customers.selectStatus()
             else:
                 newcustomer = [var.ui.txtName.text(),
                                var.ui.txtSurname.text(),
                                var.ui.txtAddress.text(),
-                               var.ui.txtBirthdate.text(),
+                               var.ui.txtEnrollDate.text(),
                                var.ui.txtTelephone.text(),
                                var.ui.txtEmail.text()]
 
                 if var.ui.rbtIndividual.isChecked():
                     newcustomer.append("Individual")
-                elif var.ui.rbtBussiness.isChecked():
+                elif var.ui.rbtBusiness.isChecked():
                     newcustomer.append("Bussiness")
 
                 connection.Connection.saveCustomer(newcustomer)
@@ -113,7 +112,7 @@ class Customers:
                              var.ui.txtName,
                              var.ui.txtSurname,
                              var.ui.txtAddress,
-                             var.ui.txtBirthdate,
+                             var.ui.txtEnrollDate,
                              var.ui.txtTelephone,
                              var.ui.txtEmail]
                     categoria = registro[7]
@@ -122,7 +121,7 @@ class Customers:
                         var.ui.rbtIndividual.setChecked(True)
 
                     elif categoria == "Bussiness":
-                        var.ui.rbtBussiness.setChecked(True)
+                        var.ui.rbtBusiness.setChecked(True)
 
                     for dato, value in zip(datos, registro):
                         dato.setText(str(value))
@@ -138,7 +137,7 @@ class Customers:
             customer = [var.ui.txtName,
                         var.ui.txtSurname,
                         var.ui.txtAddress,
-                        var.ui.txtBirthdate,
+                        var.ui.txtEnrollDate,
                         var.ui.txtTelephone,
                         var.ui.txtEmail]
 

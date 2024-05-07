@@ -313,7 +313,7 @@ QLabel{
         <string>Address:</string>
        </property>
       </widget>
-      <widget class="QLabel" name="lblBirthdate">
+      <widget class="QLabel" name="lblEnrollDate">
        <property name="geometry">
         <rect>
          <x>40</x>
@@ -335,7 +335,7 @@ QLabel{
         </size>
        </property>
        <property name="text">
-        <string>Birthdate:</string>
+        <string>Enroll Date:</string>
        </property>
       </widget>
       <widget class="QLabel" name="lblTelephone">
@@ -532,7 +532,7 @@ QLabel{
         </size>
        </property>
       </widget>
-      <widget class="QLineEdit" name="txtBirthdate">
+      <widget class="QLineEdit" name="txtEnrollDate">
        <property name="geometry">
         <rect>
          <x>130</x>

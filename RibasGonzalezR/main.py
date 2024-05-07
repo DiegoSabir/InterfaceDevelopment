@@ -50,6 +50,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.txtName.editingFinished.connect(events.Events.capitalLetter)
         var.ui.txtEmail.editingFinished.connect(events.Events.checkEmailFormat)
         var.ui.txtPricePro.editingFinished.connect(events.Events.checkPriceFormat)
+        var.ui.rbtBusiness.clicked.connect(events.Events.blockTxtSurname)
+        var.ui.rbtIndividual.clicked.connect(events.Events.unblockTxtSurname)
 
 
         '''
