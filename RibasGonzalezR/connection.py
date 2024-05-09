@@ -74,7 +74,7 @@ class Connection:
             query.bindValue(':id', int(id))
             if query.exec():
                 while query.next():
-                    for i in range(8):
+                    for i in range(9):
                         registro.append(str(query.value(i)))
             return registro
 
@@ -82,22 +82,12 @@ class Connection:
             print('error en oneCustomer from connection', error)
 
 
-
+    @staticmethod
     def checkModifyCustomer(modifycustomer):
         try:
             codigo = var.ui.lblId.text()
 
-            if customers.Customers.checkFireDate(codigo):
-                events.Events.showFireModify()
-                Connection.modifyCustomer(modifycustomer)
-
-            else:
-                Connection.modifyCustomer(modifycustomer)
-                mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle('Information')
-                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                mbox.setText("Customer data changed")
-                mbox.exec()
+            Connection.modifyCustomer(modifycustomer, codigo)
 
         except Exception as error:
             print("error en checkModifyCustomer from conexion", error)
@@ -105,24 +95,28 @@ class Connection:
 
 
     @staticmethod
-    def modifyCustomer(modifycustomer):
+    def modifyCustomer(modifycustomer, codigo):
         try:
             query = QtSql.QSqlQuery()
             query.prepare('update customer set id_customer = :id, name_customer = :name ,surname_customer = :surname, address_customer = :address, '
                           'enrolldate_customer = :enrolldate, telephone_customer = :telephone, email_customer = :email,'
                           'category_customer = :category where id_customer = :id')
 
-            query.bindValue(':id', str(modifycustomer[0]))
-            query.bindValue(':name', str(modifycustomer[1]))
-            query.bindValue(':surname', str(modifycustomer[2]))
-            query.bindValue(':address', str(modifycustomer[3]))
-            query.bindValue(':enrolldate', str(modifycustomer[4]))
-            query.bindValue(':telephone', str(modifycustomer[5]))
-            query.bindValue(':email', str(modifycustomer[6]))
-            query.bindValue(':category', str(modifycustomer[7]))
+            query.bindValue(':id', int(codigo))
+            query.bindValue(':name', str(modifycustomer[0]))
+            query.bindValue(':surname', str(modifycustomer[1]))
+            query.bindValue(':address', str(modifycustomer[2]))
+            query.bindValue(':enrolldate', str(modifycustomer[3]))
+            query.bindValue(':telephone', str(modifycustomer[4]))
+            query.bindValue(':email', str(modifycustomer[5]))
+            query.bindValue(':category', str(modifycustomer[6]))
 
             if query.exec():
-                customers.Customers.selectStatus()
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle('Aviso')
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                mbox.setText("Datos cliente modificados")
+                mbox.exec()
 
             else:
                 mbox = QtWidgets.QMessageBox()
@@ -139,10 +133,10 @@ class Connection:
     def selectCustomers():
         try:
             if var.ui.chkAll.isChecked():
-                consulta = 'select category_customer, name_customer, address_customer, telephone_customer, email_customerfrom customer WHERE firedate_customer is not null'
+                consulta = 'select id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customerfrom customer WHERE firedate_customer is not null'
 
             else:
-                consulta = 'select category_customer, name_customer, address_customer, telephone_customer, email_customer from customer WHERE firedate_customer is null'
+                consulta = 'select id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer from customer WHERE firedate_customer is null'
 
             register = []
 
@@ -219,6 +213,7 @@ class Connection:
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
                 mbox.setText("Product added")
                 mbox.exec()
+
             else:
                 mbox = QtWidgets.QMessageBox()
                 mbox.setWindowTitle('Warning')

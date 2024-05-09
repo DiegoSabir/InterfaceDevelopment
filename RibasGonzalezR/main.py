@@ -62,7 +62,7 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionCreate_Customers_Report_PDF.triggered.connect(reports.reports.reportCustomers)
 
 
-        '''
+        '''0
         Zona de init
         '''
         connection.Connection.showCustomers()

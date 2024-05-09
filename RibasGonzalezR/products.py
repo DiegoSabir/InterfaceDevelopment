@@ -27,6 +27,7 @@ class Products:
                           var.ui.spStockPro.text()]
 
             connection.Connection.saveProduct(newproduct)
+            connection.Connection.showProducts()
 
         except Exception as error:
             print("Error en addProduct from products", error)

@@ -86,12 +86,14 @@ class Customers:
                 var.ui.tabCustomers.setItem(index, 2, QtWidgets.QTableWidgetItem(str(record[2])))
                 var.ui.tabCustomers.setItem(index, 3, QtWidgets.QTableWidgetItem(str(record[3])))
                 var.ui.tabCustomers.setItem(index, 4, QtWidgets.QTableWidgetItem(str(record[4])))
+                var.ui.tabCustomers.setItem(index, 5, QtWidgets.QTableWidgetItem(str(record[5])))
 
                 var.ui.tabCustomers.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 2).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabCustomers.item(index, 5).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 index += 1
 
         except Exception as error:
@@ -103,28 +105,25 @@ class Customers:
     def loadCustomers():
         try:
             Customers.clear()
-            selected_row = var.ui.tabCustomers.currentRow()
-            if selected_row != -1:
-                id_customer = var.ui.tabCustomers.item(selected_row, 0).text()
-                registro = connection.Connection.oneCustomer(id_customer)
-                if registro:
-                    datos = [var.ui.lblId,
-                             var.ui.txtName,
-                             var.ui.txtSurname,
-                             var.ui.txtAddress,
-                             var.ui.txtEnrollDate,
-                             var.ui.txtTelephone,
-                             var.ui.txtEmail]
-                    categoria = registro[7]
+            row = var.ui.tabCustomers.selectedItems()
+            fila = [dato.text() for dato in row]
+            registro = connection.Connection.oneCustomer(fila[0])
 
-                    if categoria == "Individual":
-                        var.ui.rbtIndividual.setChecked(True)
+            datos = [var.ui.lblId,
+                     var.ui.txtName,
+                     var.ui.txtSurname,
+                     var.ui.txtAddress,
+                     var.ui.txtEnrollDate,
+                     var.ui.txtTelephone,
+                     var.ui.txtEmail]
 
-                    elif categoria == "Bussiness":
-                        var.ui.rbtBusiness.setChecked(True)
+            for i, dato in enumerate(datos):
+                dato.setText(str(registro[i]))
 
-                    for dato, value in zip(datos, registro):
-                        dato.setText(str(value))
+            if 'Individual' in registro[7]:
+                var.ui.rbtIndividual.setChecked(True)
+            if 'Bussiness' in registro[7]:
+                var.ui.rbtBusiness.setChecked(True)
 
         except Exception as error:
             print('error en loadCustomers from customers', error)
@@ -134,18 +133,19 @@ class Customers:
     @staticmethod
     def modifyCustomer():
         try:
-            customer = [var.ui.txtName,
-                        var.ui.txtSurname,
-                        var.ui.txtAddress,
-                        var.ui.txtEnrollDate,
-                        var.ui.txtTelephone,
-                        var.ui.txtEmail]
+            modifycustomer = [var.ui.txtName.text(),
+                              var.ui.txtSurname.text(),
+                              var.ui.txtAddress.text(),
+                              var.ui.txtEnrollDate.text(),
+                              var.ui.txtTelephone.text(),
+                              var.ui.txtEmail.text()]
 
-            modifcustomer = []
-            for i in customer:
-                modifcustomer.append(i.text().title())
+            if var.ui.rbtIndividual.isChecked():
+                modifycustomer.append("Individual")
+            elif var.ui.rbtBusiness.isChecked():
+                modifycustomer.append("Bussiness")
 
-            connection.Connection.checkModifyCustomer(modifcustomer)
+            connection.Connection.checkModifyCustomer(modifycustomer)
 
         except Exception as error:
             print("error en modifyCustomer from customers", error)
