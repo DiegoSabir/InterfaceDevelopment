@@ -35,6 +35,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnModify.clicked.connect(customers.Customers.modifyCustomer)
         var.ui.btnFire.clicked.connect(customers.Customers.fireCustomer)
         var.ui.btnAdd.clicked.connect(products.Products.addProduct)
+        var.ui.btnModify_2.clicked.connect(products.Products.modifyProduct)
+        var.ui.btnRemove.clicked.connect(products.Products.removeProduct)
 
 
         '''
@@ -62,10 +64,11 @@ class Main(QtWidgets.QMainWindow):
         var.ui.actionCreate_Customers_Report_PDF.triggered.connect(reports.reports.reportCustomers)
 
 
-        '''0
+        '''
         Zona de init
         '''
         connection.Connection.showCustomers()
+        connection.Connection.showProducts()
 
 
         '''

@@ -60,18 +60,45 @@ class Products:
     def loadProducts():
         try:
             Products.clear()
-            selected_row = var.ui.tabProducts.currentRow()
-            if selected_row != -1:
-                id_product = var.ui.tabProducts.item(selected_row, 0).text()
-                registro = connection.Connection.oneProduct(id_product)
-                if registro:
-                    datos = [var.ui.lblIdPro,
-                             var.ui.txtNamePro,
-                             var.ui.txtPricePro,
-                             var.ui.spStockPro]
+            row = var.ui.tabProducts.selectedItems()
+            fila = [dato.text() for dato in row]
+            registro = connection.Connection.oneProduct(fila[0])
 
-                    for dato, value in zip(datos, registro):
-                        dato.setText(str(value))
+            datos = [var.ui.lblIdPro,
+                     var.ui.txtNamePro,
+                     var.ui.txtPricePro,
+                     var.ui.spStockPro]
+
+            for i, dato in enumerate(datos):
+                if isinstance(dato, QtWidgets.QSpinBox):
+                    dato.setValue(int(registro[i]))
+                else:
+                    dato.setText(str(registro[i]))
 
         except Exception as error:
             print('error en loadProducts from products', error)
+
+
+    def modifyProduct(self):
+        try:
+            modifyproduct = [var.ui.txtNamePro.text(),
+                             var.ui.txtPricePro.text(),
+                             var.ui.spStockPro.text()]
+
+            connection.Connection.checkModifyProduct(modifyproduct)
+            connection.Connection.showProducts()
+
+        except Exception as error:
+            print('error en modifyProduct from products', error)
+
+
+
+    def removeProduct(self):
+        try:
+            codigo = var.ui.lblIdPro.text().title()
+
+            connection.Connection.removeProduct(codigo)
+            connection.Connection.showProducts()
+
+        except Exception as error:
+            print('error en removeProduct from products', error)

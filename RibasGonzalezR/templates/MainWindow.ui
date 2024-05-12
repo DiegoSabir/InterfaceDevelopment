@@ -48,7 +48,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -595,8 +595,8 @@ QLabel{
       <widget class="QPushButton" name="btnEnroll">
        <property name="geometry">
         <rect>
-         <x>170</x>
-         <y>400</y>
+         <x>40</x>
+         <y>500</y>
          <width>100</width>
          <height>25</height>
         </rect>
@@ -621,7 +621,7 @@ QLabel{
        <property name="geometry">
         <rect>
          <x>170</x>
-         <y>450</y>
+         <y>500</y>
          <width>100</width>
          <height>25</height>
         </rect>
@@ -645,7 +645,7 @@ QLabel{
       <widget class="QPushButton" name="btnFire">
        <property name="geometry">
         <rect>
-         <x>170</x>
+         <x>310</x>
          <y>500</y>
          <width>100</width>
          <height>25</height>
@@ -846,6 +846,9 @@ QTableWidget {
 QTableWidget {
     background-color: #ACB1D6;
 }</string>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
       </property>
       <column>
        <property name="text">
@@ -1203,7 +1206,7 @@ QLabel{
      <x>0</x>
      <y>0</y>
      <width>1120</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCustomers">

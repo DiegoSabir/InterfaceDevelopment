@@ -90,7 +90,7 @@ class Connection:
             Connection.modifyCustomer(modifycustomer, codigo)
 
         except Exception as error:
-            print("error en checkModifyCustomer from conexion", error)
+            print("error en checkModifyCustomer from connection", error)
 
 
 
@@ -115,14 +115,14 @@ class Connection:
                 mbox = QtWidgets.QMessageBox()
                 mbox.setWindowTitle('Aviso')
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                mbox.setText("Datos cliente modificados")
+                mbox.setText("Modified customer data")
                 mbox.exec()
 
             else:
                 mbox = QtWidgets.QMessageBox()
                 mbox.setWindowTitle('Warning')
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                mbox.setText("Error al modificar los datos del conductor")
+                mbox.setText("Error when modifying driver data")
                 mbox.exec()
 
         except Exception as error:
@@ -241,11 +241,11 @@ class Connection:
             registro = []
             query = QtSql.QSqlQuery()
             query.prepare('select * from product where id_product = :id')
-
             query.bindValue(':id', int(id))
+
             if query.exec():
                 while query.next():
-                    for i in range(12):
+                    for i in range(4):
                         registro.append(str(query.value(i)))
             return registro
 
@@ -272,4 +272,66 @@ class Connection:
             products.Products.loadProductsTable(register)
 
         except Exception as error:
-            print('error en selectCustomers from connection', error)
+            print('error en selectProducts from connection', error)
+
+
+
+    @staticmethod
+    def checkModifyProduct(modifyproduct):
+        try:
+            codigo = var.ui.lblIdPro.text()
+
+            Connection.modifyProduct(modifyproduct, codigo)
+
+        except Exception as error:
+            print("error en checkModifyProduct from connection", error)
+
+
+
+    @staticmethod
+    def modifyProduct(modifyproduct, codigo):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare('update product set id_product = :id, name_product = :name, price_product = :price, '
+                          'stock_product = :stock where id_product = :id')
+
+            query.bindValue(':id', int(codigo))
+            query.bindValue(':name', str(modifyproduct[0]))
+            query.bindValue(':price', str(modifyproduct[1]))
+            query.bindValue(':stock', int(modifyproduct[2]))
+
+            if query.exec():
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle('Information')
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                mbox.setText("Modified product data")
+                mbox.exec()
+
+            else:
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle('Warning')
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                mbox.setText("Error modifying product data")
+                mbox.exec()
+
+        except Exception as error:
+            print('error en modifyProduct from connection', error)
+
+
+
+    def removeProduct(idProduct):
+        try:
+            consulta = 'DELETE FROM producto WHERE id_producto = :id'
+            query = QtSql.QSqlQuery()
+            query.prepare(consulta)
+            query.bindValue(':id', int(idProduct))
+
+            print(idProduct)
+            if query.exec():
+                return True
+            else:
+                print(query.lastError().text())
+                return False
+
+        except Exception as error:
+            print('error en removeProduct from connection', error)
