@@ -7,7 +7,7 @@ import os
 import var
 
 
-class reports:
+class Reports:
     @staticmethod
     def reportCustomers():
         try:
@@ -16,8 +16,8 @@ class reports:
             name = date + '_customersList.pdf'
             var.report = canvas.Canvas('reports/' + name)
             title = 'Customers List'
-            reports.top_report(title)
-            reports.bot_report(title)
+            Reports.top_report(title)
+            Reports.bot_report(title)
             items = ['ID', 'Category', 'Name', 'Telephone', 'Address', 'Email']
             var.report.setFont('Helvetica-Bold', size=10)
             var.report.drawString(50, 675, str(items[0]))
@@ -29,17 +29,8 @@ class reports:
             var.report.line(50, 670, 570, 670)
 
             query = QtSql.QSqlQuery()
-            if var.ui.chkAll.isChecked():
-                if var.ui.rbtBusiness.isChecked():
-                    query.prepare('SELECT id_customer,category_customer,name_customer,telephone_customer,address_customer,email_customer from customer order by id_customer')
-                elif var.ui.rbtIndividual.isChecked():
-                    query.prepare('SELECT id_customer,category_customer,name_customer,telephone_customer,address_customer,email_customer from customer order by id_customer')
+            query.prepare('SELECT id_customer, category_customer, name_customer, telephone_customer, address_customer, email_customer FROM customer ORDER BY id_customer')
 
-            else:
-                if var.ui.rbtBusiness.isChecked():
-                    query.prepare("SELECT id_customer,category_customer,name_customer,telephone_customer,address_customer,email_customer from customer WHERE category like 'Bussiness' order by id_customer")
-                elif var.ui.rbtIndividual.isChecked():
-                    query.prepare("SELECT id_customer,category_customer,name_customer,telephone_customer,address_customer,email_customer from customer WHERE category like 'Individual' order by id_customer")
 
             if query.exec():
                 i = 55
@@ -48,8 +39,8 @@ class reports:
                     if j <= 80:
                         var.report.drawString(450, 90, 'Next Page')
                         var.report.showPage()  # Crear una pagina nueva
-                        reports.top_report(title)
-                        reports.bot_report(title)
+                        Reports.top_report(title)
+                        Reports.bot_report(title)
                         var.report.drawString(50, 675, str(items[0]))
                         var.report.drawString(100, 675, str(items[1]))
                         var.report.drawString(165, 675, str(items[2]))
@@ -66,18 +57,73 @@ class reports:
                     var.report.drawString(i + 195, j, str(query.value(3)))
                     var.report.drawString(i + 320, j, str(query.value(4)))
                     var.report.drawString(i + 420, j, str(query.value(5)))
-                    j = j-25
+                    j = j - 25
+            else:
+                print("Query Error:", query.lastError().text())
+
+            var.report.save()
+            rootPath = '.\\reports'
+            for file in os.listdir(rootPath):
+                if file.endswith(name):
+                    os.startfile('%s\\%s' % (rootPath, file))
+
+        except Exception as error:
+            print("Error en reportCustomers from reports: ", error)
+
+    @staticmethod
+    def reportProducts():
+        try:
+            date = datetime.today()
+            date = date.strftime('%Y_%m_%d_%H_%M_%S')
+            name = date + '_productsList.pdf'
+            var.report = canvas.Canvas('reports/' + name)
+            title = 'Products List'
+            Reports.top_report(title)
+            Reports.bot_report(title)
+            items = ['ID', 'Name', 'Price', 'Stock']  # Campos de la tabla de productos
+            var.report.setFont('Helvetica-Bold', size=10)
+            var.report.drawString(50, 675, str(items[0]))
+            var.report.drawString(150, 675, str(items[1]))  # Ajusta la coordenada x para el segundo título
+            var.report.drawString(350, 675, str(items[2]))  # Ajusta la coordenada x para el tercer título
+            var.report.drawString(450, 675, str(items[3]))  # Ajusta la coordenada x para el cuarto título
+            var.report.line(50, 670, 400, 670)  # Ajusta la posición final de la línea de acuerdo a la cantidad de campos
+
+            # Consulta SQL para obtener los productos
+            query = QtSql.QSqlQuery()
+            query.prepare('SELECT id_product, name_product, price_product, stock_product FROM product')
+            if query.exec():
+                i = 55
+                j = 655
+                while query.next():
+                    if j <= 80:
+                        var.report.drawString(450, 90, 'Next Page')
+                        var.report.showPage()  # Crear una página nueva
+                        Reports.top_report(title)
+                        Reports.bot_report(title)
+                        var.report.drawString(50, 675, str(items[0]))
+                        var.report.drawString(100, 675, str(items[1]))
+                        var.report.drawString(200, 675, str(items[2]))
+                        var.report.drawString(280, 675, str(items[3]))
+                        var.report.line(50, 625, 350, 670)
+                        i = 55
+                        j = 655
+                    var.report.setFont('Helvetica', size=9)
+                    var.report.drawString(i, j, str(query.value(0)))
+                    var.report.drawString(i + 50, j, str(query.value(1)))
+                    var.report.drawString(i + 300, j, str(query.value(2)))
+                    var.report.drawString(i + 400, j, str(query.value(3)))
+                    j = j - 25
             else:
                 print(query.lastError())
 
             var.report.save()
-            rootPath='.\\reports'
+            rootPath = '.\\reports'
             for file in os.listdir(rootPath):
                 if file.endswith(name):
-                    os.startfile('%s\\%s' % (rootPath,file))
+                    os.startfile('%s\\%s' % (rootPath, file))
 
         except Exception as error:
-            print("error en reportCustomers from reports: ", error)
+            print("error en reportProducts from reports: ", error)
 
 
 
@@ -112,7 +158,7 @@ class reports:
 
     def bot_report(title):
         try:
-            var.report.line(50,50,570,50)
+            var.report.line(50, 50, 570, 50)
             date = datetime.today()
             date = date.strftime('%d-%m-%Y %H:%M:%S')
             var.report.setFont('Helvetica-Oblique', size=7)

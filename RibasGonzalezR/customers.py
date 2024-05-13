@@ -187,8 +187,6 @@ class Customers:
                 mbox.setText("Modified Data")
                 mbox.exec()
 
-                Customers.selectStatus()
-
         except Exception as error:
             print('error en modifyFireDate from customers', error)
 
@@ -196,9 +194,16 @@ class Customers:
 
     def fireCustomer(self):
         try:
-            codigo = var.ui.leCodigo.text()
-            connection.Connection.addFireDate(codigo)
+            codigo = var.ui.lblId.text()
+            if connection.Connection.clienteEstaDadoDeBaja(codigo):
+                print("El cliente ya está dado de baja.")
+                return
+
+            else:
+                connection.Connection.addFireDate(codigo)
             connection.Connection.showCustomers()
 
         except Exception as error:
             print("Error en fireCustomer from customer ", error)
+
+

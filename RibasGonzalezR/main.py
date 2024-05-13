@@ -15,6 +15,7 @@ from auxiliary import *
 locale.setlocale(locale.LC_TIME, 'es_ES.UTF-8')
 locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
+
 class Main(QtWidgets.QMainWindow):
     def __init__(self):
         super(Main, self).__init__()
@@ -40,6 +41,12 @@ class Main(QtWidgets.QMainWindow):
 
 
         '''
+        Zona de eventos de check box
+        '''
+        var.ui.chkAll.stateChanged.connect(connection.Connection.showCustomers)
+
+
+        '''
         Zona de eventos dos menubars
         '''
 
@@ -61,7 +68,8 @@ class Main(QtWidgets.QMainWindow):
         '''
         var.ui.actionExit.triggered.connect(events.Events.showExit)
         var.ui.actionclearWindow.triggered.connect(customers.Customers.clear)
-        var.ui.actionCreate_Customers_Report_PDF.triggered.connect(reports.reports.reportCustomers)
+        var.ui.actionCreate_Customers_Report_PDF.triggered.connect(reports.Reports.reportCustomers)
+        var.ui.actionCreate_Products_Report_PDF.triggered.connect(reports.Reports.reportProducts)
 
 
         '''

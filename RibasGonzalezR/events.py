@@ -159,13 +159,14 @@ class Events:
     def checkPriceFormat():
         try:
             price = var.ui.txtPricePro.text()
+            price = price.replace('€', '').strip()
+            price = price.replace(',', '.')
             var.ui.txtPricePro.setText(price)
             priceNumber = float(price)
 
-            if priceNumber >= 0.00:
-                var.ui.txtPricePro.setText(str(locale.currency(float(var.ui.txtPricePro.text()))))
+            # var.ui.txtPricePro.setText(str(locale.currency(float(var.ui.txtPricePro.text()))))
 
-            else:
+            if priceNumber < 0.00:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Warning')
                 msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)

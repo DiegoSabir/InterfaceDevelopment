@@ -129,11 +129,12 @@ class Connection:
             print('error en modifyCustomer from connection', error)
 
 
+
     @staticmethod
     def selectCustomers():
         try:
             if var.ui.chkAll.isChecked():
-                consulta = 'select id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customerfrom customer WHERE firedate_customer is not null'
+                consulta = 'select id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer from customer'
 
             else:
                 consulta = 'select id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer from customer WHERE firedate_customer is null'
@@ -152,6 +153,7 @@ class Connection:
 
         except Exception as error:
             print('error en selectCustomers from connection', error)
+
 
 
     @staticmethod
@@ -186,11 +188,29 @@ class Connection:
                 mbox = QtWidgets.QMessageBox()
                 mbox.setWindowTitle('Information')
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
-                mbox.setText("Customer enrolled")
+                mbox.setText("Customer fired")
                 mbox.exec()
 
         except Exception as error:
             print('error en addFireDate from connection', error)
+
+
+
+    @staticmethod
+    def clienteEstaDadoDeBaja(codigo):
+        try:
+            consulta = "SELECT COUNT(*) FROM customer WHERE id_customer = ? AND firedate_customer IS NOT NULL"
+            query = QtSql.QSqlQuery()
+            query.prepare(consulta)
+            query.addBindValue(codigo)
+            if query.exec() and query.next():
+                return query.value(0) > 0  # If count > 0, client is marked as inactive
+            else:
+                return False  # Assuming no result means the client is not marked as inactive
+
+        except Exception as error:
+            print("error en clienteEstaDadoDeBaja from connection", error)
+            return False
 
 
 
@@ -291,6 +311,9 @@ class Connection:
     @staticmethod
     def modifyProduct(modifyproduct, codigo):
         try:
+            # Obtener el stock actual del producto seleccionado
+            current_stock = var.ui.spStockPro.value()
+
             query = QtSql.QSqlQuery()
             query.prepare('update product set id_product = :id, name_product = :name, price_product = :price, '
                           'stock_product = :stock where id_product = :id')
@@ -298,7 +321,11 @@ class Connection:
             query.bindValue(':id', int(codigo))
             query.bindValue(':name', str(modifyproduct[0]))
             query.bindValue(':price', str(modifyproduct[1]))
-            query.bindValue(':stock', int(modifyproduct[2]))
+            #query.bindValue(':stock', int(modifyproduct[2]))
+
+            # Calcular el nuevo stock utilizando la diferencia entre el stock actual y el stock modificado
+            new_stock = int(modifyproduct[2]) + (current_stock - int(modifyproduct[2]))
+            query.bindValue(':stock', new_stock)
 
             if query.exec():
                 mbox = QtWidgets.QMessageBox()
@@ -321,12 +348,11 @@ class Connection:
 
     def removeProduct(idProduct):
         try:
-            consulta = 'DELETE FROM producto WHERE id_producto = :id'
+            consulta = 'DELETE FROM product WHERE id_product = :id'
             query = QtSql.QSqlQuery()
             query.prepare(consulta)
             query.bindValue(':id', int(idProduct))
 
-            print(idProduct)
             if query.exec():
                 return True
             else:

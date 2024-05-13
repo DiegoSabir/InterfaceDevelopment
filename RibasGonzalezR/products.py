@@ -98,6 +98,7 @@ class Products:
             codigo = var.ui.lblIdPro.text().title()
 
             connection.Connection.removeProduct(codigo)
+            Products.clear()
             connection.Connection.showProducts()
 
         except Exception as error:
