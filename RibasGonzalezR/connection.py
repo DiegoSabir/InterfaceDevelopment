@@ -215,7 +215,11 @@ class Connection:
 
 
     """
-    METODOS DE PRODUCTOS
+    --------------------------------------------------------------------------------------------------------------------
+    
+    PRODUCTS METHODS
+    
+    --------------------------------------------------------------------------------------------------------------------
     """
 
     @staticmethod
@@ -361,3 +365,110 @@ class Connection:
 
         except Exception as error:
             print('error en removeProduct from connection', error)
+
+
+
+    """
+    --------------------------------------------------------------------------------------------------------------------
+
+    INVOICE METHODS
+
+    --------------------------------------------------------------------------------------------------------------------
+    """
+    def altaFacturacion(registro):
+        try:
+            print(registro)
+            query = QtSql.QSqlQuery()
+            query.prepare("insert into facturas (dnicli, fecha, driver) "
+                              "values (:dniCli, :fechaFact, :codDri)")
+            query.bindValue(":dniCli", str(registro[0]))
+            query.bindValue(":fechaFact", str(registro[1]))
+            query.bindValue(":codDri", str(registro[2]))
+            if query.exec():
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle("Aviso")
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
+                mbox.setText("Factura creada correctamente.")
+                mbox.exec()
+                #Conexion.selectFactura()
+            else:
+                print("Error al crear factura: " + query.lastError().text())
+                mbox = QtWidgets.QMessageBox()
+                mbox.setWindowTitle("Aviso")
+                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                mbox.setText("La factura no se pudo crear.")
+                mbox.exec()
+
+        except Exception as error:
+            print("Error en alta facturacion", error)
+
+
+
+    @staticmethod
+    def getSurnameByCode(code : str):
+        try:
+            query = QtSql.QSqlQuery()
+            query.prepare("select apeldri from drivers where codigo = :codigo")
+            query.bindValue(":codigo", int(code))
+
+            if query.exec():
+                while query.next():
+                    return query.value(0)
+            else:
+                print(query.lastError())
+
+        except Exception as error:
+            print("error en getSurnameByCode ", error)
+
+
+
+    def oneInvoice(id):
+        try:
+
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from facturas where numfac = :id')
+
+            query.bindValue(':id', int(id))
+            if query.exec():
+                while query.next():
+                    for i in range(4):
+                        registro.append(str(query.value(i)))
+                return registro
+
+            else:
+                print("error en query onefac ", query.lastError())
+
+        except Exception as error:
+            print('error en fichero conexion dato de 1 factura ', error)
+
+
+
+    @staticmethod
+    def selectFactura():
+        """
+        Método estático para seleccionar todas las facturas.
+
+        :return: No hay valor de retorno.
+        :rtype: None
+        """
+        try:
+
+            registro = []
+
+            consulta = "select numfac, dnicli, fecha, driver from facturas"
+
+            query = QtSql.QSqlQuery()
+            query.prepare(consulta)
+
+            if query.exec():
+                while query.next():
+                    row = [query.value(i) for i in range(query.record().count())]
+                    registro.append(row)
+            else:
+                print(query.lastError())
+
+            facturas.Facturas.cargartablafac(registro)
+
+        except Exception as error:
+            print("error en selectfacturas ", error)

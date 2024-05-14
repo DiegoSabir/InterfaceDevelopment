@@ -7,6 +7,7 @@ import var
 
 from customers import Customers
 
+
 class Invoices:
     @staticmethod
     def burcaclifac():
@@ -23,7 +24,7 @@ class Invoices:
         try:
             data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
             var.ui.txtDateInvoice.setText(str(data))
-            var.calendarFacturacion.hide()
+            var.calendarInvoice.hide()
 
         except Exception as error:
             print("error en cargarFecha from invoices", error)
@@ -32,11 +33,8 @@ class Invoices:
 
     @staticmethod
     def abrirCalendar():
-        """
-        Método estático para mostrar el calendario de facturación.
-        """
         try:
-            var.calendarFacturacion.show()
+            var.calendarInvoice.show()
 
         except Exception as error:
             print("error en abrirCalendar from invoices", error)
@@ -45,9 +43,6 @@ class Invoices:
 
     @staticmethod
     def cargarfacturas():
-        """
-        Método estático para cargar las facturas en la interfaz gráfica.
-        """
         try:
             row = var.ui.tabInvoices.selectedItems()
             fila = [dato.text() for dato in row]

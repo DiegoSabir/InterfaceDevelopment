@@ -5,4 +5,5 @@ global dlgModifyFireWindow
 global customer
 global bbdd
 global report
+global calendarInvoice
 version = "0.0.1"

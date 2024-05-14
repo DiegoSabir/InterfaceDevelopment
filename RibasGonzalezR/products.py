@@ -42,11 +42,11 @@ class Products:
                 var.ui.tabProducts.setRowCount(index + 1)
                 var.ui.tabProducts.setItem(index, 0, QtWidgets.QTableWidgetItem(str(record[0])))
                 var.ui.tabProducts.setItem(index, 1, QtWidgets.QTableWidgetItem(str(record[1])))
-                var.ui.tabProducts.setItem(index, 2, QtWidgets.QTableWidgetItem(str(record[2])))
+                var.ui.tabProducts.setItem(index, 2, QtWidgets.QTableWidgetItem(str(record[2]) + ' € '))
                 var.ui.tabProducts.setItem(index, 3, QtWidgets.QTableWidgetItem(str(record[3])))
 
                 var.ui.tabProducts.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
-                var.ui.tabProducts.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabProducts.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignLeft)
                 var.ui.tabProducts.item(index, 2).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabProducts.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 index += 1

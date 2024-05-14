@@ -2,11 +2,13 @@ from datetime import datetime
 
 import customers
 import events
+import invoices
 import var
 
 from CalendarWindow import *
 from ExitWindow import *
 from ModifyFireWindow import *
+
 
 class Fire(QtWidgets.QDialog):
     def __init__(self):
@@ -16,7 +18,6 @@ class Fire(QtWidgets.QDialog):
 
         var.dlgModifyFireWindow.btnModifyFireDateYes.clicked.connect(events.Events.confirmModify)
         var.dlgModifyFireWindow.btnModifyFireDateNo.clicked.connect(events.Events.cancelModify)
-
 
 
 class Calendar(QtWidgets.QDialog):
@@ -31,6 +32,17 @@ class Calendar(QtWidgets.QDialog):
         var.calendar.calendari.clicked.connect(customers.Customers.loadDate)
 
 
+class CalendarInvoice(QtWidgets.QDialog):
+    def __init__(self):
+        super(CalendarInvoice, self).__init__()
+        var.calendarInvoice = Ui_calendar()
+        var.calendarInvoice.setupUi(self)
+        day = datetime.now().day
+        month = datetime.now().month
+        year = datetime.now().year
+        var.calendarInvoice.calendari.setSelectedDate((QtCore.QDate(year, month, day)))
+        var.calendarInvoice.calendari.clicked.connect(invoices.Invoices.cargarFecha)
+
 
 class Exit(QtWidgets.QDialog):
     def __init__(self):
@@ -44,7 +56,6 @@ class Exit(QtWidgets.QDialog):
 
         var.exitWindow.btnOk.clicked.connect(events.Events.confirmExit)
         var.exitWindow.btnCancel.clicked.connect(events.Events.cancelExit)
-
 
 
 class FileDialogAbrir(QtWidgets.QFileDialog):

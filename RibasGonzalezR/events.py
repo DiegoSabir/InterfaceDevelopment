@@ -188,10 +188,53 @@ class Events:
         try:
             header = var.ui.tabProducts.horizontalHeader()
             for i in range(var.ui.tabProducts.columnCount()):
-                if i == 0 or i == 4 or i == 3:
+                if i == 0:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
-                elif i == 1 or i == 2:
+
+                else:
                     header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
 
         except Exception as error:
             print("error en resizeProductTable from events", error)
+
+
+
+    @staticmethod
+    def comprobarAltaFac():
+        try:
+            if not conexion.Conexion.existeDni(var.ui.txtCifCli.text()):
+                if conexion.Conexion.comprobarclientebaja(var.ui.txtCifCli.text()):
+                    msg = QtWidgets.QMessageBox()
+                    msg.setWindowTitle('Aviso')
+                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                    msg.setWindowIcon(QtGui.QIcon("./img/logo.ico"))
+                    msg.setText('El cliente esta dado de baja')
+                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                    msg.exec()
+                    return False
+
+                else:
+                    msg = QtWidgets.QMessageBox()
+                    msg.setWindowTitle('Aviso')
+                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                    msg.setWindowIcon(QtGui.QIcon("./img/logo.ico"))
+                    msg.setText('El cliente no existe')
+                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                    msg.exec()
+                    return False
+
+            elif var.ui.txtAltaFactura.text().strip() == "" or var.ui.txtCifCli.text().strip() == "" or var.ui.cbbConductorFactura.currentText().strip() == "":
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Aviso')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setText('Faltan datos por cubrir')
+                msg.exec()
+                return False
+
+            else:
+                return True
+
+        except Exception as error:
+            print('Error al comprobar alta fac', error)
