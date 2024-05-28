@@ -41,7 +41,7 @@ class CalendarInvoice(QtWidgets.QDialog):
         month = datetime.now().month
         year = datetime.now().year
         var.calendarInvoice.calendari.setSelectedDate((QtCore.QDate(year, month, day)))
-        var.calendarInvoice.calendari.clicked.connect(invoices.Invoices.cargarFecha)
+        var.calendarInvoice.calendari.clicked.connect(invoices.Invoices.load_date)
 
 
 class Exit(QtWidgets.QDialog):
