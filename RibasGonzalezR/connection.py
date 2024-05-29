@@ -1,5 +1,6 @@
 from PyQt6 import QtWidgets, QtSql
 
+import invoices
 import products
 import var
 import datetime
@@ -375,32 +376,31 @@ class Connection:
 
     --------------------------------------------------------------------------------------------------------------------
     """
-    def altaFacturacion(registro):
+    def enroll_invoice(registro):
         try:
             print(registro)
             query = QtSql.QSqlQuery()
-            query.prepare("insert into facturas (dnicli, fecha, driver) "
-                              "values (:dniCli, :fechaFact, :codDri)")
-            query.bindValue(":dniCli", str(registro[0]))
-            query.bindValue(":fechaFact", str(registro[1]))
-            query.bindValue(":codDri", str(registro[2]))
+            query.prepare("INSERT INTO invoices (id_customer_invoice, date_invoice) VALUES (:id_customer, :date)")
+            query.bindValue(":id_customer", str(registro[0]))
+            query.bindValue(":date", str(registro[1]))
+
             if query.exec():
                 mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle("Aviso")
+                mbox.setWindowTitle("Information")
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
                 mbox.setText("Factura creada correctamente.")
                 mbox.exec()
                 #Conexion.selectFactura()
+
             else:
-                print("Error al crear factura: " + query.lastError().text())
                 mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle("Aviso")
+                mbox.setWindowTitle("Warning")
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
                 mbox.setText("La factura no se pudo crear.")
                 mbox.exec()
 
         except Exception as error:
-            print("Error en alta facturacion", error)
+            print("error en enroll_invoice from connection", error)
 
 
 
@@ -445,7 +445,7 @@ class Connection:
 
 
     @staticmethod
-    def selectFactura():
+    def select_invoice():
         """
         Método estático para seleccionar todas las facturas.
 
@@ -456,7 +456,7 @@ class Connection:
 
             registro = []
 
-            consulta = "select numfac, dnicli, fecha, driver from facturas"
+            consulta = "select id_invoice, id_customer_invoice, date_invoice from invoice"
 
             query = QtSql.QSqlQuery()
             query.prepare(consulta)
@@ -468,7 +468,7 @@ class Connection:
             else:
                 print(query.lastError())
 
-            facturas.Facturas.cargartablafac(registro)
+            invoices.Invoices.load_invoice_table(registro)
 
         except Exception as error:
-            print("error en selectfacturas ", error)
+            print("error en select_invoice from connection", error)

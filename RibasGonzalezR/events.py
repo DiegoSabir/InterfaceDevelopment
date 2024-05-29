@@ -200,41 +200,31 @@ class Events:
 
 
     @staticmethod
-    def comprobarAltaFac():
+    def check_enroll_invoicing():
         try:
-            if not conexion.Conexion.existeDni(var.ui.txtCifCli.text()):
-                if conexion.Conexion.comprobarclientebaja(var.ui.txtCifCli.text()):
-                    msg = QtWidgets.QMessageBox()
-                    msg.setWindowTitle('Aviso')
-                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                    msg.setWindowIcon(QtGui.QIcon("./img/logo.ico"))
-                    msg.setText('El cliente esta dado de baja')
-                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
-                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
-                    msg.exec()
-                    return False
-
-                else:
-                    msg = QtWidgets.QMessageBox()
-                    msg.setWindowTitle('Aviso')
-                    msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                    msg.setWindowIcon(QtGui.QIcon("./img/logo.ico"))
-                    msg.setText('El cliente no existe')
-                    msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
-                    msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
-                    msg.exec()
-                    return False
-
-            elif var.ui.txtAltaFactura.text().strip() == "" or var.ui.txtCifCli.text().strip() == "" or var.ui.cbbConductorFactura.currentText().strip() == "":
+            if connection.Connection.comprobarclientebaja(var.ui.txtCifCli.text()):
                 msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('Aviso')
+                msg.setWindowTitle('Warning')
                 msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                msg.setText('Faltan datos por cubrir')
+                msg.setWindowIcon(QtGui.QIcon("./images/aviso.ico"))
+                msg.setText('El cliente esta dado de baja')
+                msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
                 msg.exec()
                 return False
 
             else:
-                return True
+                msg = QtWidgets.QMessageBox()
+                msg.setWindowTitle('Warning')
+                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
+                msg.setWindowIcon(QtGui.QIcon("./images/aviso.ico"))
+                msg.setText('El cliente no existe')
+                msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
+                msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                msg.exec()
+                return False
+
+
 
         except Exception as error:
             print('Error al comprobar alta fac', error)

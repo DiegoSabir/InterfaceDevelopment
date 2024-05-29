@@ -10,12 +10,16 @@ from customers import Customers
 
 class Invoices:
     @staticmethod
-    def burcaclifac():
+    def clear():
         try:
-            pass
+            widgetList = [var.ui.txtIdInvoice, var.ui.cmbIdCustomer, var.ui.txtDateInvoice]
+            for i in widgetList:
+                i.clear()
+
+            var.ui.chkAll.setChecked(False)
 
         except Exception as error:
-            print("error en burcaclifac from invoices", error)
+            print("error en clear from invoices", error)
 
 
 
@@ -27,7 +31,7 @@ class Invoices:
             var.calendarInvoice.hide()
 
         except Exception as error:
-            print("error en cargarFecha from invoices", error)
+            print("error en load_date from invoices", error)
 
 
 
@@ -37,7 +41,7 @@ class Invoices:
             var.calendarInvoice.show()
 
         except Exception as error:
-            print("error en abrirCalendar from invoices", error)
+            print("error en open_calendar from invoices", error)
 
 
 
@@ -52,24 +56,20 @@ class Invoices:
                      var.ui.cmbIdCustomer,
                      var.ui.txtDateInvoice]
 
-            Customers.clear()
+            Invoices.clear()
 
             for i, dato in enumerate(datos):
-                if i == 3:
-                    apel = connection.Connection.getSurnameByCode(registro[3])
-                    dato.setCurrentText(f"{registro[3]} {apel}")
-                else:
-                    dato.setText(str(registro[i]))
+                dato.setText(str(registro[i]))
 
-            Invoices.loadTabSales()
+            Invoices.load_tab_sales()
 
         except Exception as error:
-            print("error en cargarfacturas from invoices", error)
+            print("error en load_invoices from invoices", error)
 
 
 
     @classmethod
-    def cargartablafac(cls, registros):
+    def load_invoice_table(cls, registros):
         try:
             index = 0
             for registro in registros:
@@ -81,19 +81,19 @@ class Invoices:
                 index += 1
 
         except Exception as error:
-            print("error en cargartablafac from invoices", error)
+            print("error en load_invoice_table from invoices", error)
 
 
 
     @staticmethod
-    def guardarFac():
+    def save_invoice():
         try:
-            customer = var.ui.cbbConductorFactura.currentText()
+            customer = var.ui.cmbIdCustomer.currentText()
             codeCustomer = customer.split(" ")[0]
-            registro = [var.ui.txtCifCli.text(), var.ui.txtAltaFactura.text(), codeCustomer]
-            if events.Events.comprobarAltaFac():
-                connection.Connection.altaFacturacion(registro)
-                connection.Connection.selectFactura()
+            register = [var.ui.txtDateInvoice.text(), codeCustomer]
+            if events.Events.check_enroll_invoicing():
+                connection.Connection.enroll_invoice(register)
+                connection.Connection.select_invoice()
 
         except Exception as error:
             print('Error en guardarFac from invoices', error)
@@ -106,7 +106,6 @@ class Invoices:
         Método estático para guardar un viaje.
         """
         try:
-
             if(var.ui.txtKm.text().strip() == "" or var.ui.cmbMuniOrigen.currentText().strip() == "" or var.ui.cmbMuniDestino.currentText().strip() == "" or var.ui.lblNumFactura.text().strip() == ""):
 
                 mbox = QtWidgets.QMessageBox()
@@ -117,7 +116,7 @@ class Invoices:
 
             else:
 
-                tarifa = Facturas.cargartarifa()
+                tarifa = Invoices.cargartarifa()
                 registro = [var.ui.lblNumFactura.text(), var.ui.cmbMuniOrigen.currentText(), var.ui.cmbMuniDestino.currentText(), tarifa, var.ui.txtKm.text()]
 
                 query = QtSql.QSqlQuery()
@@ -135,7 +134,7 @@ class Invoices:
                     mbox.setText("Viaxe gardado con exito.")
                     mbox.exec()
 
-                    facturas.Facturas.cargartabviajes()
+                    Invoices.load_tab_sales()
 
                 else:
                     print(query.lastError())
@@ -173,7 +172,7 @@ class Invoices:
 
 
     @staticmethod
-    def cargartabviajes():
+    def load_tab_sales():
         """
         Método estático para cargar los viajes en la tabla.
         """
@@ -192,15 +191,14 @@ class Invoices:
                     row = [query.value(i) for i in range(query.record().count())]
                     registro.append(row)
 
-            facturas.Facturas.subiratablaviajes(registro)
+            Invoices.import_tab_sales(registro)
 
         except Exception as error:
             print("error en cargartabviajes ", error)
 
 
 
-    def subiratablaviajes(registros):
-
+    def import_tab_sales(registros):
         try:
             index = 0
             subtotal = 0
@@ -217,11 +215,11 @@ class Invoices:
 
                 botondel = QtWidgets.QPushButton()
                 botondel.setFixedSize(40, 28)
-                botondel.setIcon(QtGui.QIcon('img/basura.ico'))
+                botondel.setIcon(QtGui.QIcon('imagesg/basura.png'))
                 var.ui.tabViajes.horizontalHeader().setSectionResizeMode(6, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
                 var.ui.tabViajes.setColumnWidth(6, 50)
                 var.ui.tabViajes.setCellWidget(index, 6, botondel)
-                botondel.clicked.connect(conexion.Conexion.borrarviaje)
+                botondel.clicked.connect(connection.Connection.borrarviaje)
 
                 index += 1
             var.ui.txtSubtotal.setText(str(subtotal))
@@ -230,194 +228,3 @@ class Invoices:
 
         except Exception as error:
             print('error cargar dato en tabla', error)
-
-
-
-    @staticmethod
-    def cargarrbtn():
-        """
-        Método estático para cargar los botones según las opciones seleccionadas.
-        """
-        if var.ui.cmbMuniOrigen.currentText() != "" and var.ui.cmbMuniDestino.currentText() != "":
-
-            if var.ui.cmbMuniOrigen.currentText() == var.ui.cmbMuniDestino.currentText():
-
-                var.ui.rbtnLocal.setChecked(True)
-
-            elif var.ui.cmbProvOrigen.currentText() == var.ui.cmbProvDestino.currentText():
-
-                var.ui.rbtnProvincial.setChecked(True)
-
-            else:
-                var.ui.rbtnNacional.setChecked(True)
-
-
-
-    @staticmethod
-    def cargarViajes():
-        """
-        Método estático para cargar los viajes seleccionados en la interfaz gráfica.
-        """
-        try:
-
-            row = var.ui.tabViajes.selectedItems()
-
-            fila = [dato.text() for dato in row]
-            registro = conexion.Conexion.oneviaje(fila[0])
-
-            datos = [var.ui.cmbProvOrigen, var.ui.cmbMuniOrigen, var.ui.cmbProvDestino, var.ui.cmbMuniDestino,
-                     var.ui.txtKm]
-
-            muniOrg = registro[2]
-            muniDest = registro[3]
-
-            provOrg = facturas.Facturas.getProvByMuni(muniOrg)
-            provDest = facturas.Facturas.getProvByMuni(muniDest)
-
-            datos[0].setCurrentText(provOrg)
-            datos[1].setCurrentText(muniOrg)
-            datos[2].setCurrentText(provDest)
-            datos[3].setCurrentText(muniDest)
-            datos[4].setText(registro[5])
-
-        except Exception as error:
-            print("error ao cargar viaxe seleccionado ", error)
-
-
-
-    def getProvByMuni(muni : str):
-        """
-        Retorna una provincia segun idprov del municipio pasado como argumento
-
-        :param muni:
-        :type str:
-        :return prov:
-        :rtype str:
-        """
-        try:
-
-            query = QtSql.QSqlQuery()
-            query.prepare('select provincia from provincias where idprov = (select idprov from municipios where municipio = :mun)')
-            query.bindValue(':mun', str(muni))
-
-            if query.exec():
-                query.next()
-                return query.value(0)
-
-            else:
-                print(query.lastError())
-
-        except Exception as error:
-            print('error en getProvByMuni ', error)
-
-
-
-    @staticmethod
-    def buscaclifac():
-        """
-        Muestra solo las facturas de un cliente
-        """
-        try:
-            dni = str(var.ui.txtCifCli.text())
-            dni = dni.upper()
-            drivers.Drivers.limpiarPanel()
-            var.ui.txtCifCli.setText(dni)
-            registros = conexion.Conexion.viajesCliente(dni)
-            if len(registros) == 0:
-                msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('Aviso')
-                msg.setWindowIcon(QtGui.QIcon("./img/logo.ico"))
-                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                msg.setText('No se encontró ningún empleado')
-                msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
-                msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
-                msg.exec()
-            else:
-                Facturas.cargartablafac(registros)
-        except Exception as error:
-            print("buscaclifac: ", error)
-
-
-
-    @staticmethod
-    def modifviaje():
-        """
-
-        Actualiza la información del registro de un viaje
-
-        :return:
-        :rtype:
-        """
-        try:
-
-            registro = []
-            registro = var.ui.tabViajes.selectedItems()
-            index = registro[0].text()
-            print(index)
-
-            if var.ui.cmbMuniOrigen.currentText().strip() == "" or var.ui.cmbProvOrigen.currentText().strip() == "" or var.ui.cmbMuniDestino.currentText().strip() == "" or var.ui.txtKm.text().strip() == "" or registro == [] :
-
-                mbox = QtWidgets.QMessageBox()
-                mbox.setWindowTitle('Aviso')
-                mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                mbox.setText("Non se pode modificar\nxa que faltan datos")
-                mbox.exec()
-
-            else:
-
-                query = QtSql.QSqlQuery()
-                query.prepare("update viajes set origen = :origen, destino = :destino, km = :km, tarifa = :tarifa where idviaje = :id")
-                query.bindValue(':origen', var.ui.cmbMuniOrigen.currentText())
-                query.bindValue(':destino', var.ui.cmbMuniDestino.currentText())
-                query.bindValue(':km', var.ui.txtKm.text())
-                query.bindValue(':tarifa', Facturas.cargartarifa())
-                query.bindValue(':id', index)
-
-                if query.exec():
-
-                    mbox = QtWidgets.QMessageBox()
-                    mbox.setWindowTitle('Aviso')
-                    mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                    mbox.setText("Viaxe modificada!")
-                    mbox.exec()
-
-                    Facturas.cargartabviajes()
-
-                else:
-
-                    print(query.lastError().text())
-
-                    mbox = QtWidgets.QMessageBox()
-                    mbox.setWindowTitle('Aviso')
-                    mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                    mbox.setText("Non se pode modificar\npor un erro:\n")
-                    mbox.exec()
-
-        except Exception as error:
-            print("Error en modifviaje ", error)
-
-
-
-    @staticmethod
-    def borrarFactura():
-        try:
-            query = QtSql.QSqlQuery()
-            query.prepare('delete from facturas where numfac = :idfac')
-            query.bindValue(':idfac', int(var.ui.lblNumFactura.text()))
-
-            if eventos.Eventos.pedirConfirmacion("¿Quieres eliminar la factura?"):
-
-                if query.exec():
-                    query.next()
-
-                    eventos.Eventos.invocarMesageBox("Factura eliminada")
-                else:
-                    eventos.Eventos.invocarMesageBox("Error al eliminar la factura")
-                    print(query.lastError().text())
-
-            conexion.Conexion.selectFactura()
-            drivers.Drivers.limpiarPanel()
-            var.ui.tabViajes.setRowCount(0)
-
-        except Exception as error:
-            print('Error al borrar factura')
