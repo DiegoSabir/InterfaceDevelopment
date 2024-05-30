@@ -90,6 +90,16 @@ class Events:
 
 
     @staticmethod
+    def open_calendar_invoice():
+        try:
+            var.calendarInvoice.show()
+
+        except Exception as error:
+            print("error en open_calendar_invoice from events", error)
+
+
+
+    @staticmethod
     def resizeCustomerTable():
         try:
             header = var.ui.tabCustomers.horizontalHeader()
@@ -112,6 +122,7 @@ class Events:
 
         except Exception as error:
             print("error en capitalLetter from events", error)
+
 
     @staticmethod
     def blockTxtSurname():
@@ -196,6 +207,21 @@ class Events:
 
         except Exception as error:
             print("error en resizeProductTable from events", error)
+
+
+
+    @classmethod
+    def resize_invoice_tab(cls):
+        """
+        Redimensiona la tabla de facturas.
+        """
+        try:
+            header = var.ui.tabInvoices.horizontalHeader()
+            for i in range(var.ui.tabInvoices.columnCount()):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
+
+        except Exception as error:
+            print("error en resize_invoice_tab from events", error)
 
 
 

@@ -3,6 +3,7 @@ import sys
 
 import customers
 import events
+import invoices
 import products
 import reports
 import var
@@ -38,6 +39,8 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnAdd.clicked.connect(products.Products.addProduct)
         var.ui.btnModify_2.clicked.connect(products.Products.modifyProduct)
         var.ui.btnRemove.clicked.connect(products.Products.removeProduct)
+        var.ui.cmbIdCustomer.currentIndexChanged.connect(connection.Connection.select_customer_id)
+        var.ui.btnCalendarInvoice.clicked.connect(events.Events.open_calendar_invoice)
 
 
         '''
@@ -77,6 +80,7 @@ class Main(QtWidgets.QMainWindow):
         '''
         connection.Connection.showCustomers()
         connection.Connection.showProducts()
+        connection.Connection.show_invoices()
 
 
         '''
@@ -84,8 +88,10 @@ class Main(QtWidgets.QMainWindow):
         '''
         events.Events.resizeCustomerTable()
         events.Events.resizeProductTable()
+        events.Events.resize_invoice_tab()
         var.ui.tabCustomers.clicked.connect(customers.Customers.loadCustomers)
         var.ui.tabProducts.clicked.connect(products.Products.loadProducts)
+        var.ui.tabInvoices.clicked.connect(invoices.Invoices.load_invoices)
 
 
     def closeEvent(self, event):

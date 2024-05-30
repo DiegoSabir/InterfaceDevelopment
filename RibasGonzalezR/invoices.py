@@ -5,8 +5,6 @@ import customers
 import events
 import var
 
-from customers import Customers
-
 
 class Invoices:
     @staticmethod

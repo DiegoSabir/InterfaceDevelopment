@@ -424,7 +424,6 @@ class Connection:
 
     def oneInvoice(id):
         try:
-
             registro = []
             query = QtSql.QSqlQuery()
             query.prepare('select * from facturas where numfac = :id')
@@ -445,13 +444,17 @@ class Connection:
 
 
     @staticmethod
-    def select_invoice():
-        """
-        Método estático para seleccionar todas las facturas.
+    def show_invoices():
+        try:
+            Connection.select_invoice()
 
-        :return: No hay valor de retorno.
-        :rtype: None
-        """
+        except Exception as error:
+            print("error en show_invoices from connection", error)
+
+
+
+    @staticmethod
+    def select_invoice():
         try:
 
             registro = []
@@ -472,3 +475,20 @@ class Connection:
 
         except Exception as error:
             print("error en select_invoice from connection", error)
+
+
+
+    def select_customer_id(self=None):
+        try:
+            var.ui.cmbIdCustomer.clear()
+            query = QtSql.QSqlQuery()
+            query.prepare("SELECT id_customer, name_customer FROM customer WHERE fire_date_customer IS NULL ORDER BY id_customer")
+            if query.exec():
+                var.ui.cmbIdCustomer.addItem('')
+                while query.next():
+                    var.ui.cmbIdCustomer.addItem(f'{query.value(0)}. {query.value(1)}')
+            else:
+                raise Exception("Query execution failed")
+
+        except Exception as error:
+            print("error en select_customer_id from connection", error)
