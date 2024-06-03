@@ -226,31 +226,18 @@ class Events:
 
 
     @staticmethod
-    def check_enroll_invoicing():
+    def check_enroll_invoice():
         try:
-            if connection.Connection.comprobarclientebaja(var.ui.txtCifCli.text()):
+            if var.ui.cmbIdCustomer.currentText().strip() == "" or var.ui.txtDateInvoice.text().strip() == "":
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Warning')
                 msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                msg.setWindowIcon(QtGui.QIcon("./images/aviso.ico"))
-                msg.setText('El cliente esta dado de baja')
-                msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
-                msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
+                msg.setText('Missing data')
                 msg.exec()
                 return False
 
             else:
-                msg = QtWidgets.QMessageBox()
-                msg.setWindowTitle('Warning')
-                msg.setIcon(QtWidgets.QMessageBox.Icon.Warning)
-                msg.setWindowIcon(QtGui.QIcon("./images/aviso.ico"))
-                msg.setText('El cliente no existe')
-                msg.setStandardButtons(QtWidgets.QMessageBox.StandardButton.Ok)
-                msg.button(QtWidgets.QMessageBox.StandardButton.Ok).setText('Aceptar')
-                msg.exec()
-                return False
-
-
+                return True
 
         except Exception as error:
-            print('Error al comprobar alta fac', error)
+            print('error en check_enroll_invoice from events', error)

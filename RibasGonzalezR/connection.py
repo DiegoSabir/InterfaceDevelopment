@@ -378,10 +378,9 @@ class Connection:
     """
     def enroll_invoice(registro):
         try:
-            print(registro)
             query = QtSql.QSqlQuery()
-            query.prepare("INSERT INTO invoices (id_customer_invoice, date_invoice) VALUES (:id_customer, :date)")
-            query.bindValue(":id_customer", str(registro[0]))
+            query.prepare("insert into invoice (customer_invoice, date_invoice) values (:customer, :date)")
+            query.bindValue(":customer", str(registro[0]))
             query.bindValue(":date", str(registro[1]))
 
             if query.exec():
@@ -390,9 +389,9 @@ class Connection:
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Information)
                 mbox.setText("Factura creada correctamente.")
                 mbox.exec()
-                #Conexion.selectFactura()
 
             else:
+                print("Error al crear factura: " + query.lastError().text())
                 mbox = QtWidgets.QMessageBox()
                 mbox.setWindowTitle("Warning")
                 mbox.setIcon(QtWidgets.QMessageBox.Icon.Warning)
@@ -400,16 +399,16 @@ class Connection:
                 mbox.exec()
 
         except Exception as error:
-            print("error en enroll_invoice from connection", error)
+            print("error en load_customers from connection", error)
 
 
 
     @staticmethod
-    def getSurnameByCode(code : str):
+    def get_name_by_code(code: str):
         try:
             query = QtSql.QSqlQuery()
-            query.prepare("select apeldri from drivers where codigo = :codigo")
-            query.bindValue(":codigo", int(code))
+            query.prepare("select name_customer from customer where id_customer = :id")
+            query.bindValue(":id", int(code))
 
             if query.exec():
                 while query.next():
@@ -418,48 +417,16 @@ class Connection:
                 print(query.lastError())
 
         except Exception as error:
-            print("error en getSurnameByCode ", error)
-
-
-
-    def oneInvoice(id):
-        try:
-            registro = []
-            query = QtSql.QSqlQuery()
-            query.prepare('select * from facturas where numfac = :id')
-
-            query.bindValue(':id', int(id))
-            if query.exec():
-                while query.next():
-                    for i in range(4):
-                        registro.append(str(query.value(i)))
-                return registro
-
-            else:
-                print("error en query onefac ", query.lastError())
-
-        except Exception as error:
-            print('error en fichero conexion dato de 1 factura ', error)
-
-
-
-    @staticmethod
-    def show_invoices():
-        try:
-            Connection.select_invoice()
-
-        except Exception as error:
-            print("error en show_invoices from connection", error)
+            print("error en get_name_by_code from connection", error)
 
 
 
     @staticmethod
     def select_invoice():
         try:
-
             registro = []
 
-            consulta = "select id_invoice, id_customer_invoice, date_invoice from invoice"
+            consulta = "select id_invoice, customer_invoice, date_invoice from invoice"
 
             query = QtSql.QSqlQuery()
             query.prepare(consulta)
@@ -471,24 +438,46 @@ class Connection:
             else:
                 print(query.lastError())
 
-            invoices.Invoices.load_invoice_table(registro)
+            invoices.Invoices.load_tab_invoices(registro)
 
         except Exception as error:
             print("error en select_invoice from connection", error)
 
 
 
-    def select_customer_id(self=None):
+    @staticmethod
+    def load_customers(self=None):
         try:
             var.ui.cmbIdCustomer.clear()
             query = QtSql.QSqlQuery()
-            query.prepare("SELECT id_customer, name_customer FROM customer WHERE fire_date_customer IS NULL ORDER BY id_customer")
+            query.prepare('select name_customer from customer where firedate_customer is null')
+
             if query.exec():
-                var.ui.cmbIdCustomer.addItem('')
+                var.ui.cmbIdCustomer.addItem("")
+
                 while query.next():
-                    var.ui.cmbIdCustomer.addItem(f'{query.value(0)}. {query.value(1)}')
-            else:
-                raise Exception("Query execution failed")
+                    var.ui.cmbIdCustomer.addItem(query.value(0))
 
         except Exception as error:
-            print("error en select_customer_id from connection", error)
+            print("error en load_customers from connection", error)
+
+
+
+    def one_invoice(id):
+        try:
+            registro = []
+            query = QtSql.QSqlQuery()
+            query.prepare('select * from invoice where id_invoice = :id')
+
+            query.bindValue(':id', int(id))
+            if query.exec():
+                while query.next():
+                    for i in range(3):
+                        registro.append(str(query.value(i)))
+                return registro
+
+            else:
+                print("error en query one_invoice ", query.lastError())
+
+        except Exception as error:
+            print('error en one_invoice from connection', error)
