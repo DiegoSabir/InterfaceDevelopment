@@ -66,6 +66,7 @@ class Connection:
             print("error en show_customers from connection", error)
 
 
+
     @staticmethod
     def one_customer(id):
         try:
@@ -81,6 +82,7 @@ class Connection:
 
         except Exception as error:
             print('error en one_customer from connection', error)
+
 
 
     @staticmethod
@@ -134,11 +136,20 @@ class Connection:
     @staticmethod
     def select_customers():
         try:
-            if var.ui.chkAll.isChecked():
-                consulta = 'SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer'
+            consulta = ''
+            if var.ui.rbtIndividual.isChecked():
+                if var.ui.chkAll.isChecked():
+                    consulta = 'SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE category_customer IS "Individual"'
 
-            else:
-                consulta = 'SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE firedate_customer is NULL'
+                else:
+                    consulta = 'SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE firedate_customer IS NULL AND category_customer IS "Individual"'
+
+            elif var.ui.rbtBusiness.isChecked():
+                if var.ui.chkAll.isChecked():
+                    consulta = 'SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE category_customer IS "Bussiness"'
+
+                else:
+                    consulta = 'SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE firedate_customer IS NULL AND category_customer IS "Bussiness"'
 
             register = []
 

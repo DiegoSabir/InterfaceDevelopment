@@ -14,7 +14,7 @@ class Customers:
             var.calendar.hide()
 
         except Exception as error:
-            print("error en loadDate from customers", error)
+            print("error en load_date from customers", error)
 
 
 
@@ -28,7 +28,7 @@ class Customers:
             var.dlgModifyFireWindow.hide()
 
         except Exception as error:
-            print("error en loadFireDate from customers", error)
+            print("error en load_fire_date from customers", error)
 
 
 
@@ -71,7 +71,7 @@ class Customers:
                 connection.Connection.show_customers()
 
         except Exception as error:
-            print("Error en enrollCustomer from customers", error)
+            print("Error en enroll_customer from customers", error)
 
 
 
@@ -99,7 +99,7 @@ class Customers:
                 index += 1
 
         except Exception as error:
-            print('error en loadCustomersTable from customers', error)
+            print('error en load_customers_table from customers', error)
 
 
 
@@ -128,7 +128,7 @@ class Customers:
                 var.ui.rbtBusiness.setChecked(True)
 
         except Exception as error:
-            print('error en loadCustomers from customers', error)
+            print('error en load_customers from customers', error)
 
 
 
@@ -169,7 +169,7 @@ class Customers:
             return baja
 
         except Exception as error:
-            print('error en checkFireDate from customers', error)
+            print('error en check_fire_date from customers', error)
 
 
 
@@ -190,7 +190,7 @@ class Customers:
                 mbox.exec()
 
         except Exception as error:
-            print('error en modifyFireDate from customers', error)
+            print('error en modify_fire_date from customers', error)
 
 
 
@@ -206,6 +206,4 @@ class Customers:
             connection.Connection.show_customers()
 
         except Exception as error:
-            print("Error en fireCustomer from customer ", error)
-
-
+            print("Error en fire_customer from customer ", error)

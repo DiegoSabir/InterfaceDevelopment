@@ -160,7 +160,6 @@ class Invoices:
                 var.ui.txtIVA.setText(str('{:.2f}'.format(round(iva, 2))) + " €")
                 var.ui.txtTotal.setText(str('{:.2f}'.format(round(subtotal + iva, 2))) + " €")
 
-
         except Exception as error:
             print("error en load_sale_tab from invoices: ", error)
 

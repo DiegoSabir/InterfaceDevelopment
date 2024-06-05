@@ -51,10 +51,20 @@ class Main(QtWidgets.QMainWindow):
         var.ui.btnModifySale.clicked.connect(invoices.Invoices.modify_sale)
 
 
+
+        '''
+        Zona de eventos de radio buttons
+        '''
+        var.ui.rbtIndividual.toggled.connect(connection.Connection.select_customers)
+        var.ui.rbtBusiness.toggled.connect(connection.Connection.select_customers)
+
+
+
         '''
         Zona de eventos de check box
         '''
         var.ui.chkAll.stateChanged.connect(connection.Connection.show_customers)
+
 
 
         '''
