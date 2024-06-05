@@ -6,7 +6,7 @@ import var
 
 class Products:
     @staticmethod
-    def clear():
+    def clear_products():
         try:
             widgetList = [var.ui.lblIdPro, var.ui.txtNamePro, var.ui.txtPricePro, var.ui.spStockPro]
             for i in widgetList:
@@ -20,14 +20,14 @@ class Products:
 
 
     @staticmethod
-    def addProduct():
+    def add_product():
         try:
             newproduct = [var.ui.txtNamePro.text(),
                           var.ui.txtPricePro.text(),
                           var.ui.spStockPro.text()]
 
-            connection.Connection.saveProduct(newproduct)
-            connection.Connection.showProducts()
+            connection.Connection.save_product(newproduct)
+            connection.Connection.show_products()
 
         except Exception as error:
             print("Error en addProduct from products", error)
@@ -35,7 +35,7 @@ class Products:
 
 
     @staticmethod
-    def loadProductsTable(register):
+    def load_products_table(register):
         try:
             index = 0
             for record in register:
@@ -57,12 +57,12 @@ class Products:
 
 
     @staticmethod
-    def loadProducts():
+    def load_products():
         try:
-            Products.clear()
+            Products.clear_products()
             row = var.ui.tabProducts.selectedItems()
             fila = [dato.text() for dato in row]
-            registro = connection.Connection.oneProduct(fila[0])
+            registro = connection.Connection.one_product(fila[0])
 
             datos = [var.ui.lblIdPro,
                      var.ui.txtNamePro,
@@ -79,27 +79,28 @@ class Products:
             print('error en loadProducts from products', error)
 
 
-    def modifyProduct(self):
+
+    def modify_product(self):
         try:
             modifyproduct = [var.ui.txtNamePro.text(),
                              var.ui.txtPricePro.text(),
                              var.ui.spStockPro.text()]
 
-            connection.Connection.checkModifyProduct(modifyproduct)
-            connection.Connection.showProducts()
+            connection.Connection.check_modify_product(modifyproduct)
+            connection.Connection.show_products()
 
         except Exception as error:
             print('error en modifyProduct from products', error)
 
 
 
-    def removeProduct(self):
+    def remove_product(self):
         try:
             codigo = var.ui.lblIdPro.text().title()
 
-            connection.Connection.removeProduct(codigo)
-            Products.clear()
-            connection.Connection.showProducts()
+            connection.Connection.remove_product(codigo)
+            Products.clear_products()
+            connection.Connection.show_products()
 
         except Exception as error:
             print('error en removeProduct from products', error)

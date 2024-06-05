@@ -3,6 +3,9 @@ import shutil
 import xlrd
 import xlwt
 import connection
+import customers
+import invoices
+import products
 import var
 import sys
 import re
@@ -17,7 +20,7 @@ locale.setlocale(locale.LC_MONETARY, 'es_ES.UTF-8')
 
 
 class Events:
-    def showExit(self):
+    def show_exit(self):
         try:
             var.exitWindow.show()
 
@@ -26,7 +29,7 @@ class Events:
 
 
 
-    def confirmExit(self):
+    def confirm_exit(self):
         try:
             sys.exit()
 
@@ -35,7 +38,7 @@ class Events:
 
 
 
-    def cancelExit(self):
+    def cancel_exit(self):
         try:
             var.exitWindow.hide()
 
@@ -45,7 +48,7 @@ class Events:
 
 
     @staticmethod
-    def showFireModify():
+    def show_fire_modify():
         try:
             var.dlgModifyFireWindow.show()
 
@@ -55,7 +58,7 @@ class Events:
 
 
     @staticmethod
-    def confirmModify():
+    def confirm_modify():
         try:
             var.calendar.show()
 
@@ -65,7 +68,7 @@ class Events:
 
 
     @staticmethod
-    def cancelModify():
+    def cancel_modify():
         try:
             mbox = QtWidgets.QMessageBox()
             mbox.setWindowTitle('Information')
@@ -80,7 +83,7 @@ class Events:
 
 
     @staticmethod
-    def openCalendar():
+    def open_calendar():
         try:
             var.calendar.show()
 
@@ -175,8 +178,6 @@ class Events:
             var.ui.txtPricePro.setText(price)
             priceNumber = float(price)
 
-            # var.ui.txtPricePro.setText(str(locale.currency(float(var.ui.txtPricePro.text()))))
-
             if priceNumber < 0.00:
                 msg = QtWidgets.QMessageBox()
                 msg.setWindowTitle('Warning')
@@ -212,9 +213,6 @@ class Events:
 
     @classmethod
     def resize_invoice_tab(cls):
-        """
-        Redimensiona la tabla de facturas.
-        """
         try:
             header = var.ui.tabInvoices.horizontalHeader()
             for i in range(var.ui.tabInvoices.columnCount()):
@@ -241,3 +239,27 @@ class Events:
 
         except Exception as error:
             print('error en check_enroll_invoice from events', error)
+
+
+
+    @staticmethod
+    def resize_sale_tab():
+        try:
+            header = var.ui.tabSale.horizontalHeader()
+            for i in range(var.ui.tabSale.columnCount()):
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
+
+        except Exception as error:
+            print("error en resize_sell_tab from events", error)
+
+
+    @staticmethod
+    def clear_all():
+        try:
+            customers.Customers.clear()
+            products.Products.clear_products()
+            invoices.Invoices.clear_invoices()
+            invoices.Invoices.clear_sale()
+
+        except Exception as error:
+            print("error en clear_all from events", error)

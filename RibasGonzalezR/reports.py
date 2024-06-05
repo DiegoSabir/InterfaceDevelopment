@@ -9,7 +9,7 @@ import var
 
 class Reports:
     @staticmethod
-    def reportCustomers():
+    def report_customers():
         try:
             date = datetime.today()
             date = date.strftime('%Y_%m_%d_%H_%M_%S')
@@ -70,8 +70,10 @@ class Reports:
         except Exception as error:
             print("Error en reportCustomers from reports: ", error)
 
+
+
     @staticmethod
-    def reportProducts():
+    def report_products():
         try:
             date = datetime.today()
             date = date.strftime('%Y_%m_%d_%H_%M_%S')

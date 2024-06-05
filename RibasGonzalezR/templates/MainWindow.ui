@@ -48,7 +48,7 @@
      </size>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
@@ -850,6 +850,11 @@ QTableWidget {
       <column>
        <property name="text">
         <string>Email</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Fire Date</string>
        </property>
       </column>
      </widget>
@@ -1671,7 +1676,7 @@ QRadioButton{
        <widget class="QLabel" name="lblIdSale">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>30</x>
           <y>10</y>
           <width>70</width>
           <height>25</height>
@@ -1702,8 +1707,8 @@ QRadioButton{
        <widget class="QLabel" name="lblIdProductSale">
         <property name="geometry">
          <rect>
-          <x>200</x>
-          <y>10</y>
+          <x>30</x>
+          <y>70</y>
           <width>70</width>
           <height>25</height>
          </rect>
@@ -1733,7 +1738,7 @@ QRadioButton{
        <widget class="QLabel" name="lblQuantity">
         <property name="geometry">
          <rect>
-          <x>200</x>
+          <x>240</x>
           <y>70</y>
           <width>70</width>
           <height>25</height>
@@ -1761,37 +1766,6 @@ QRadioButton{
          <string>Quantity:</string>
         </property>
        </widget>
-       <widget class="QLabel" name="lblTarifa">
-        <property name="geometry">
-         <rect>
-          <x>20</x>
-          <y>70</y>
-          <width>70</width>
-          <height>25</height>
-         </rect>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>70</width>
-          <height>25</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>70</width>
-          <height>25</height>
-         </size>
-        </property>
-        <property name="font">
-         <font>
-          <weight>75</weight>
-          <bold>true</bold>
-         </font>
-        </property>
-        <property name="text">
-         <string>Invoice Id:</string>
-        </property>
-       </widget>
        <widget class="QPushButton" name="btnSaveSale">
         <property name="geometry">
          <rect>
@@ -1817,7 +1791,7 @@ QRadioButton{
          <string>Save</string>
         </property>
        </widget>
-       <widget class="QPushButton" name="btnModificarViaje">
+       <widget class="QPushButton" name="btnModifySale">
         <property name="geometry">
          <rect>
           <x>220</x>
@@ -1845,7 +1819,7 @@ QRadioButton{
        <widget class="QLabel" name="txtIdSale">
         <property name="geometry">
          <rect>
-          <x>20</x>
+          <x>30</x>
           <y>40</y>
           <width>120</width>
           <height>25</height>
@@ -1882,8 +1856,8 @@ QRadioButton{
        <widget class="QComboBox" name="cmbIdProductSale">
         <property name="geometry">
          <rect>
-          <x>200</x>
-          <y>40</y>
+          <x>30</x>
+          <y>100</y>
           <width>150</width>
           <height>25</height>
          </rect>
@@ -1901,11 +1875,33 @@ QRadioButton{
          </size>
         </property>
        </widget>
+       <widget class="QSpinBox" name="spQuantitySale">
+        <property name="geometry">
+         <rect>
+          <x>240</x>
+          <y>100</y>
+          <width>75</width>
+          <height>25</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>75</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>75</width>
+          <height>25</height>
+         </size>
+        </property>
+       </widget>
        <widget class="QLabel" name="txtIdInvoiceSale">
         <property name="geometry">
          <rect>
-          <x>20</x>
-          <y>100</y>
+          <x>210</x>
+          <y>40</y>
           <width>120</width>
           <height>25</height>
          </rect>
@@ -1938,26 +1934,35 @@ QRadioButton{
          <set>Qt::AlignCenter</set>
         </property>
        </widget>
-       <widget class="QSpinBox" name="spQuantitySale">
+       <widget class="QLabel" name="lblIdInvoiceSale">
         <property name="geometry">
          <rect>
-          <x>200</x>
-          <y>100</y>
-          <width>75</width>
+          <x>210</x>
+          <y>10</y>
+          <width>70</width>
           <height>25</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>75</width>
+          <width>70</width>
           <height>25</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>75</width>
+          <width>70</width>
           <height>25</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+        <property name="text">
+         <string>Invoice Id:</string>
         </property>
        </widget>
       </widget>
@@ -2271,7 +2276,7 @@ QTableWidget {
       </column>
       <column>
        <property name="text">
-        <string>Name Product</string>
+        <string>Product</string>
        </property>
       </column>
       <column>
@@ -2282,6 +2287,16 @@ QTableWidget {
       <column>
        <property name="text">
         <string>Quantity</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Price</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Total</string>
        </property>
       </column>
      </widget>
@@ -2855,12 +2870,12 @@ QTableWidget {
       </column>
       <column>
        <property name="text">
-        <string>Date Invoice</string>
+        <string>Customer</string>
        </property>
       </column>
       <column>
        <property name="text">
-        <string>Id Customer</string>
+        <string>Date Invoice</string>
        </property>
       </column>
      </widget>
@@ -2877,7 +2892,7 @@ QTableWidget {
      <x>0</x>
      <y>0</y>
      <width>1120</width>
-     <height>21</height>
+     <height>26</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCustomers">

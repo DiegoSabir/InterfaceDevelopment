@@ -16,8 +16,8 @@ class Fire(QtWidgets.QDialog):
         var.dlgModifyFireWindow = Ui_dlgModifyFireWindow()
         var.dlgModifyFireWindow.setupUi(self)
 
-        var.dlgModifyFireWindow.btnModifyFireDateYes.clicked.connect(events.Events.confirmModify)
-        var.dlgModifyFireWindow.btnModifyFireDateNo.clicked.connect(events.Events.cancelModify)
+        var.dlgModifyFireWindow.btnModifyFireDateYes.clicked.connect(events.Events.confirm_modify)
+        var.dlgModifyFireWindow.btnModifyFireDateNo.clicked.connect(events.Events.cancel_modify)
 
 
 
@@ -30,7 +30,7 @@ class Calendar(QtWidgets.QDialog):
         month = datetime.now().month
         year = datetime.now().year
         var.calendar.calendari.setSelectedDate((QtCore.QDate(year, month, day)))
-        var.calendar.calendari.clicked.connect(customers.Customers.loadDate)
+        var.calendar.calendari.clicked.connect(customers.Customers.load_date)
 
 
 
@@ -57,8 +57,8 @@ class Exit(QtWidgets.QDialog):
             Zona de Eventos de botones de dlgSalir
         '''
 
-        var.exitWindow.btnOk.clicked.connect(events.Events.confirmExit)
-        var.exitWindow.btnCancel.clicked.connect(events.Events.cancelExit)
+        var.exitWindow.btnOk.clicked.connect(events.Events.confirm_exit)
+        var.exitWindow.btnCancel.clicked.connect(events.Events.cancel_exit)
 
 
 

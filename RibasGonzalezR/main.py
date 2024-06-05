@@ -29,28 +29,32 @@ class Main(QtWidgets.QMainWindow):
         var.calendarInvoice = CalendarInvoice()
 
         connection.Connection.connection()
-        connection.Connection.load_customers()
-        connection.Connection.select_invoice()
+
+        connection.Connection.load_customer()
+        connection.Connection.load_product()
+        connection.Connection.load_invoice()
 
 
         """
         Zona de eventos de botones
         """
-        var.ui.btnCalendar.clicked.connect(events.Events.openCalendar)
-        var.ui.btnEnroll.clicked.connect(customers.Customers.enrollCustomer)
-        var.ui.btnModify.clicked.connect(customers.Customers.modifyCustomer)
-        var.ui.btnFire.clicked.connect(customers.Customers.fireCustomer)
-        var.ui.btnAdd.clicked.connect(products.Products.addProduct)
-        var.ui.btnModify_2.clicked.connect(products.Products.modifyProduct)
-        var.ui.btnRemove.clicked.connect(products.Products.removeProduct)
+        var.ui.btnCalendar.clicked.connect(events.Events.open_calendar)
+        var.ui.btnEnroll.clicked.connect(customers.Customers.enroll_customer)
+        var.ui.btnModify.clicked.connect(customers.Customers.modify_customer)
+        var.ui.btnFire.clicked.connect(customers.Customers.fire_customer)
+        var.ui.btnAdd.clicked.connect(products.Products.add_product)
+        var.ui.btnModify_2.clicked.connect(products.Products.modify_product)
+        var.ui.btnRemove.clicked.connect(products.Products.remove_product)
         var.ui.btnCalendarInvoice.clicked.connect(invoices.Invoices.open_calendar)
-        var.ui.btnInvoice.clicked.connect(invoices.Invoices.save_invoice)
+        var.ui.btnInvoice.clicked.connect(invoices.Invoices.enroll_invoice)
+        var.ui.btnSaveSale.clicked.connect(invoices.Invoices.enroll_sale)
+        var.ui.btnModifySale.clicked.connect(invoices.Invoices.modify_sale)
 
 
         '''
         Zona de eventos de check box
         '''
-        var.ui.chkAll.stateChanged.connect(connection.Connection.showCustomers)
+        var.ui.chkAll.stateChanged.connect(connection.Connection.show_customers)
 
 
         '''
@@ -73,17 +77,17 @@ class Main(QtWidgets.QMainWindow):
         '''
         Zona de eventos da toolbar
         '''
-        var.ui.actionExit.triggered.connect(events.Events.showExit)
-        var.ui.actionclearWindow.triggered.connect(customers.Customers.clear)
-        var.ui.actionCreate_Customers_Report_PDF.triggered.connect(reports.Reports.reportCustomers)
-        var.ui.actionCreate_Products_Report_PDF.triggered.connect(reports.Reports.reportProducts)
+        var.ui.actionExit.triggered.connect(events.Events.show_exit)
+        var.ui.actionclearWindow.triggered.connect(events.Events.clear_all)
+        var.ui.actionCreate_Customers_Report_PDF.triggered.connect(reports.Reports.report_customers)
+        var.ui.actionCreate_Products_Report_PDF.triggered.connect(reports.Reports.report_products)
 
 
         '''
         Zona de init
         '''
-        connection.Connection.showCustomers()
-        connection.Connection.showProducts()
+        connection.Connection.show_customers()
+        connection.Connection.show_products()
 
 
 
@@ -93,10 +97,12 @@ class Main(QtWidgets.QMainWindow):
         events.Events.resizeCustomerTable()
         events.Events.resizeProductTable()
         events.Events.resize_invoice_tab()
-        var.ui.tabCustomers.clicked.connect(customers.Customers.loadCustomers)
-        var.ui.tabProducts.clicked.connect(products.Products.loadProducts)
-        var.ui.tabInvoices.clicked.connect(invoices.Invoices.load_invoices)
+        events.Events.resize_sale_tab()
 
+        var.ui.tabCustomers.clicked.connect(customers.Customers.load_customers)
+        var.ui.tabProducts.clicked.connect(products.Products.load_products)
+        var.ui.tabInvoices.clicked.connect(invoices.Invoices.load_invoice)
+        var.ui.tabSale.clicked.connect(invoices.Invoices.load_sale)
 
 
     def closeEvent(self, event):

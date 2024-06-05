@@ -7,7 +7,7 @@ import re
 
 class Customers:
     @staticmethod
-    def loadDate(qDate):
+    def load_date(qDate):
         try:
             data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
             var.ui.txtEnrollDate.setText(str(data))
@@ -19,11 +19,11 @@ class Customers:
 
 
     @staticmethod
-    def loadFireDate(qDate):
+    def load_fire_date(qDate):
         try:
             data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
             codigo = var.ui.lblId.text()
-            Customers.modifyFireDate(codigo, data)
+            Customers.modify_fire_date(codigo, data)
             var.calendar.hide()
             var.dlgModifyFireWindow.hide()
 
@@ -48,12 +48,12 @@ class Customers:
 
 
     @staticmethod
-    def enrollCustomer():
+    def enroll_customer():
         try:
             if var.ui.lblId.text() != "":
                 codigo = var.ui.lblId.text()
-                if Customers.checkFireDate(codigo):
-                    connection.Connection.addFireDate(codigo)
+                if Customers.check_fire_date(codigo):
+                    connection.Connection.add_fire_date(codigo)
             else:
                 newcustomer = [var.ui.txtName.text(),
                                var.ui.txtSurname.text(),
@@ -67,8 +67,8 @@ class Customers:
                 elif var.ui.rbtBusiness.isChecked():
                     newcustomer.append("Bussiness")
 
-                connection.Connection.saveCustomer(newcustomer)
-                connection.Connection.showCustomers()
+                connection.Connection.save_customer(newcustomer)
+                connection.Connection.show_customers()
 
         except Exception as error:
             print("Error en enrollCustomer from customers", error)
@@ -76,7 +76,7 @@ class Customers:
 
 
     @staticmethod
-    def loadCustomersTable(register):
+    def load_customers_table(register):
         try:
             index = 0
             for record in register:
@@ -87,6 +87,7 @@ class Customers:
                 var.ui.tabCustomers.setItem(index, 3, QtWidgets.QTableWidgetItem(str(record[3])))
                 var.ui.tabCustomers.setItem(index, 4, QtWidgets.QTableWidgetItem(str(record[4])))
                 var.ui.tabCustomers.setItem(index, 5, QtWidgets.QTableWidgetItem(str(record[5])))
+                var.ui.tabCustomers.setItem(index, 6, QtWidgets.QTableWidgetItem(str(record[6])))
 
                 var.ui.tabCustomers.item(index, 0).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 1).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -94,6 +95,7 @@ class Customers:
                 var.ui.tabCustomers.item(index, 3).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 4).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 var.ui.tabCustomers.item(index, 5).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+                var.ui.tabCustomers.item(index, 6).setTextAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
                 index += 1
 
         except Exception as error:
@@ -102,12 +104,12 @@ class Customers:
 
 
     @staticmethod
-    def loadCustomers():
+    def load_customers():
         try:
             Customers.clear()
             row = var.ui.tabCustomers.selectedItems()
             fila = [dato.text() for dato in row]
-            registro = connection.Connection.oneCustomer(fila[0])
+            registro = connection.Connection.one_customer(fila[0])
 
             datos = [var.ui.lblId,
                      var.ui.txtName,
@@ -131,7 +133,7 @@ class Customers:
 
 
     @staticmethod
-    def modifyCustomer():
+    def modify_customer():
         try:
             modifycustomer = [var.ui.txtName.text(),
                               var.ui.txtSurname.text(),
@@ -145,7 +147,7 @@ class Customers:
             elif var.ui.rbtBusiness.isChecked():
                 modifycustomer.append("Bussiness")
 
-            connection.Connection.checkModifyCustomer(modifycustomer)
+            connection.Connection.check_modify_customer(modifycustomer)
 
         except Exception as error:
             print("error en modifyCustomer from customers", error)
@@ -153,7 +155,7 @@ class Customers:
 
 
     @staticmethod
-    def checkFireDate(codigo):
+    def check_fire_date(codigo):
         try:
             baja = True
             query = QtSql.QSqlQuery()
@@ -172,7 +174,7 @@ class Customers:
 
 
     @staticmethod
-    def modifyFireDate(codigo, fecha):
+    def modify_fire_date(codigo, fecha):
         try:
             query = QtSql.QSqlQuery()
             query.prepare("update customer set firedate_customer = :firedate where id_customer = :id")
@@ -192,16 +194,16 @@ class Customers:
 
 
 
-    def fireCustomer(self):
+    def fire_customer(self):
         try:
             codigo = var.ui.lblId.text()
-            if connection.Connection.clienteEstaDadoDeBaja(codigo):
+            if connection.Connection.fire_customer(codigo):
                 print("El cliente ya está dado de baja.")
                 return
 
             else:
-                connection.Connection.addFireDate(codigo)
-            connection.Connection.showCustomers()
+                connection.Connection.add_fire_date(codigo)
+            connection.Connection.show_customers()
 
         except Exception as error:
             print("Error en fireCustomer from customer ", error)
