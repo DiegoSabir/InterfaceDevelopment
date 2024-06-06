@@ -193,7 +193,7 @@ class Connection:
             date = datetime.date.today()
             date = date.strftime('%d/%m/%Y')
             query = QtSql.QSqlQuery()
-            query.prepare("UPDATE customer set firedate_customer = :firedate WHERE id_customer = :id")
+            query.prepare("UPDATE customer SET firedate_customer = :firedate WHERE id_customer = :id")
             query.bindValue(':firedate', str(date))
             query.bindValue(':id', str(codigo))
 
@@ -395,6 +395,7 @@ class Connection:
             query.prepare('SELECT id_customer, name_customer FROM customer ORDER BY id_customer')
             if query.exec():
                 var.ui.cmbIdCustomer.addItem('')
+
                 while query.next():
                     var.ui.cmbIdCustomer.addItem(f"{query.value(0)}. {query.value(1)}")
             else:
@@ -438,6 +439,7 @@ class Connection:
                 while query.next():
                     row = [query.value(i) for i in range(query.record().count())]
                     registros.append(row)
+
             invoices.Invoices.load_invoice_tab(registros)
 
         except Exception as error:

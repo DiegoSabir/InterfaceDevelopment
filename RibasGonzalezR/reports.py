@@ -22,22 +22,34 @@ class Reports:
             var.report.setFont('Helvetica-Bold', size=10)
             var.report.drawString(50, 675, str(items[0]))
             var.report.drawString(100, 675, str(items[1]))
-            var.report.drawString(165, 675, str(items[2]))
-            var.report.drawString(250, 675, str(items[3]))
+            var.report.drawString(205, 675, str(items[2]))
+            var.report.drawString(300, 675, str(items[3]))
             var.report.drawString(370, 675, str(items[4]))
             var.report.drawString(470, 675, str(items[5]))
             var.report.line(50, 670, 570, 670)
 
             query = QtSql.QSqlQuery()
-            query.prepare('SELECT id_customer, category_customer, name_customer, telephone_customer, address_customer, email_customer FROM customer ORDER BY id_customer')
+            if var.ui.rbtIndividual.isChecked():
+                if var.ui.chkAll.isChecked():
+                    query.prepare('SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE category_customer IS "Individual"')
 
+                else:
+                    query.prepare('SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE firedate_customer IS NULL AND category_customer IS "Individual"')
+
+            elif var.ui.rbtBusiness.isChecked():
+                if var.ui.chkAll.isChecked():
+                    query.prepare('SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE category_customer IS "Bussiness"')
+
+                else:
+                    query.prepare('SELECT id_customer, category_customer, name_customer, address_customer, telephone_customer, email_customer, firedate_customer FROM customer WHERE firedate_customer IS NULL AND category_customer IS "Bussiness"')
+
+            #query.prepare('SELECT id_customer, category_customer, name_customer, telephone_customer, address_customer, email_customer FROM customer ORDER BY id_customer')
 
             if query.exec():
                 i = 55
                 j = 655
                 while query.next():
                     if j <= 80:
-                        var.report.drawString(450, 90, 'Next Page')
                         var.report.showPage()  # Crear una pagina nueva
                         Reports.top_report(title)
                         Reports.bot_report(title)
@@ -47,11 +59,11 @@ class Reports:
                         var.report.drawString(280, 675, str(items[3]))
                         var.report.drawString(380, 675, str(items[4]))
                         var.report.drawString(460, 675, str(items[5]))
-                        var.report.line(50, 625, 570, 670)
+                        var.report.line(50, 670, 570, 670)
                         i = 55
                         j = 655
                     var.report.setFont('Helvetica', size=9)
-                    var.report.drawString(i + 15, j, str(query.value(0)))
+                    var.report.drawString(i, j, str(query.value(0)))
                     var.report.drawString(i + 50, j, str(query.value(1)))
                     var.report.drawString(i + 115, j, str(query.value(2)))
                     var.report.drawString(i + 195, j, str(query.value(3)))
@@ -88,7 +100,7 @@ class Reports:
             var.report.drawString(150, 675, str(items[1]))  # Ajusta la coordenada x para el segundo título
             var.report.drawString(350, 675, str(items[2]))  # Ajusta la coordenada x para el tercer título
             var.report.drawString(450, 675, str(items[3]))  # Ajusta la coordenada x para el cuarto título
-            var.report.line(50, 670, 400, 670)  # Ajusta la posición final de la línea de acuerdo a la cantidad de campos
+            var.report.line(50, 670, 570, 670)  # Ajusta la posición final de la línea de acuerdo a la cantidad de campos
 
             # Consulta SQL para obtener los productos
             query = QtSql.QSqlQuery()
@@ -98,7 +110,6 @@ class Reports:
                 j = 655
                 while query.next():
                     if j <= 80:
-                        var.report.drawString(450, 90, 'Next Page')
                         var.report.showPage()  # Crear una página nueva
                         Reports.top_report(title)
                         Reports.bot_report(title)
@@ -106,7 +117,7 @@ class Reports:
                         var.report.drawString(100, 675, str(items[1]))
                         var.report.drawString(200, 675, str(items[2]))
                         var.report.drawString(280, 675, str(items[3]))
-                        var.report.line(50, 625, 350, 670)
+                        var.report.line(50, 670, 570, 670)
                         i = 55
                         j = 655
                     var.report.setFont('Helvetica', size=9)
@@ -129,13 +140,87 @@ class Reports:
 
 
 
+    @staticmethod
+    def reportFacturas():
+        try:
+            if var.ui.leCodigoFactura2.text() is str(""):
+                print("Select an invoice")
+
+            else:
+                # Generate file name
+                fecha = datetime.today().strftime('%Y_%m_%d_%H_%M_%S')
+                nombre = f"{fecha}_invoiceList.pdf"
+                var.report = canvas.Canvas(f'reports/{nombre}')
+                title = 'Invoice List'
+
+                Reports.top_report(title)
+                Reports.bot_report(title)
+
+                # Column titles
+                items = ['IdSale', 'IdInvoice', 'Product', 'Quantity', 'Price', 'Total']
+                var.report.setFont('Helvetica-Bold', size=10)
+                var.report.drawString(50, 635, str(items[0]))
+                var.report.drawString(100, 635, str(items[1]))
+                var.report.drawString(275, 635, str(items[2]))
+                var.report.drawString(400, 635, str(items[3]))
+                var.report.drawString(470, 635, str(items[4]))
+                var.report.drawString(520, 635, str(items[5]))
+                var.report.line(50, 630, 570, 630)
+                print(252)
+                # Database query
+                query = QtSql.QSqlQuery()
+
+                query.prepare("SELECT sale.id_sale, sale.id_invoice_sale, product.name_product, sale.quantity_sale, sale.price_sale, (sale.quantity_sale * sale.price_sale) AS total FROM sale INNER JOIN product ON sale.id_product_sale = product.id_product WHERE id_invoice_sale = :dato")
+                query.bindValue(":dato", var.ui.leCodigoFactura.text())  # You need to provide the value for :dato
+
+                if query.exec():
+
+                    i = 55
+                    j = 615
+                    while query.next():
+                        if j <= 80:
+                            var.report.drawString(450, 70, 'Pagina Siguiente')
+                            var.report.showPage()  # Crear una pagina nueva
+                            Reports.top_report(title)
+                            Reports.bot_report(title)
+
+                            var.report.drawString(50, 615, str(items[0]))
+                            var.report.drawString(100, 615, str(items[1]))
+                            var.report.drawString(275, 615, str(items[2]))
+                            var.report.drawString(400, 615, str(items[3]))
+                            var.report.drawString(470, 615, str(items[4]))
+                            var.report.drawString(520, 615, str(items[5]))
+                            var.report.line(50, 625, 570, 670)
+                            i = 55
+                            j = 615
+                        var.report.setFont('Helvetica', size=9)
+                        var.report.drawString(i + 15, j, str(query.value(0)))
+                        var.report.drawString(i + 50, j, str(query.value(1)))
+                        var.report.drawString(i + 115, j, str(query.value(2)))
+                        var.report.drawString(i + 355, j, str(query.value(3)))
+                        var.report.drawString(i + 420, j, str(query.value(4)))
+                        var.report.drawString(i + 465, j, str(query.value(5)))
+                        j = j - 25
+                else:
+                    print(query.lastError().text())
+
+                var.report.save()
+                rootPath = './informesFacturas'
+                for file in os.listdir(rootPath):
+                    if file.endswith(nombre):
+                        os.startfile(os.path.join(rootPath, file))
+        except Exception as error:
+            print("Error informesFacturas: ", error)
+
+
+
     def top_report(title):
         try:
             ruta_logo = 'images/logo.ico'
             logo = Image.open(ruta_logo)
 
             if isinstance(logo, Image.Image):
-                var.report.line(50, 800, 525, 800)
+                var.report.line(50, 800, 570, 800)
                 var.report.setFont('Helvetica-Bold', size=14)
                 var.report.drawString(55, 785, 'LibreriaTeis')
                 var.report.drawString(240, 695, title)

@@ -31,6 +31,7 @@ class Main(QtWidgets.QMainWindow):
         connection.Connection.connection()
 
         connection.Connection.load_customer()
+
         connection.Connection.load_product()
         connection.Connection.load_invoice()
 

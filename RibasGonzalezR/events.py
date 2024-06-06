@@ -247,7 +247,10 @@ class Events:
         try:
             header = var.ui.tabSale.horizontalHeader()
             for i in range(var.ui.tabSale.columnCount()):
-                header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
+                if i == 0 or i == 1 or i == 2:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.ResizeToContents)
+                else:
+                    header.setSectionResizeMode(i, QtWidgets.QHeaderView.ResizeMode.Stretch)
 
         except Exception as error:
             print("error en resize_sell_tab from events", error)

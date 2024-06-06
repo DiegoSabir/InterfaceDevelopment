@@ -12,11 +12,11 @@ class Invoices:
     @staticmethod
     def clear_invoices():
         try:
-            widgetList = [var.ui.txtIdInvoice, var.ui.cmbIdCustomer, var.ui.txtDateInvoice]
+            widgetList = [var.ui.txtIdInvoice, var.ui.txtDateInvoice]
+
+            var.ui.cmbIdCustomer.setCurrentIndex(0)
             for i in widgetList:
                 i.clear()
-
-            var.ui.chkAll.setChecked(False)
 
         except Exception as error:
             print("error en clear_invoices from invoices", error)
@@ -99,15 +99,7 @@ class Invoices:
                             dato.setText(str(value))
 
                         elif isinstance(dato, QComboBox):
-                            # Busca el índice del valor en el QComboBox y lo selecciona
-                            index = dato.findText(value, QtCore.Qt.MatchFlag.MatchFixedString)
-                            if index >= 0:
-                                dato.setCurrentIndex(index)
-
-                            else:
-                                # Si no se encuentra, se puede agregar el valor y seleccionarlo
-                                dato.addItem(value)
-                                dato.setCurrentIndex(dato.count() - 1)
+                            dato.setCurrentIndex(int(value))
 
                 invoice = var.ui.txtIdInvoice.text()
                 var.ui.txtIdInvoiceSale.setText(invoice)
@@ -140,8 +132,6 @@ class Invoices:
         except Exception as error:
             print("error en enroll_sale from invoices: ", error)
 
-
-
     def load_sale_tab(registros):
         try:
             subtotal = 0.0
@@ -150,15 +140,18 @@ class Invoices:
             for index, registro in enumerate(registros):
                 for col_index, value in enumerate(registro):
                     item = QTableWidgetItem(str(value))
-                    item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
+                    if col_index == 2:
+                        item.setTextAlignment(Qt.AlignmentFlag.AlignLeft)
+                    else:
+                        item.setTextAlignment(Qt.AlignmentFlag.AlignCenter)
                     var.ui.tabSale.setItem(index, col_index, item)
 
                 total = round(float(registro[4]) * float(registro[3]), 2)
-                subtotal = subtotal + total
+                subtotal += total
                 iva = subtotal * 0.21
-                var.ui.txtSubtotal.setText(str('{:.2f}'.format(round(subtotal, 2))) + " €")
-                var.ui.txtIVA.setText(str('{:.2f}'.format(round(iva, 2))) + " €")
-                var.ui.txtTotal.setText(str('{:.2f}'.format(round(subtotal + iva, 2))) + " €")
+                var.ui.txtSubtotal.setText(f'{subtotal:.2f} €')
+                var.ui.txtIVA.setText(f'{iva:.2f} €')
+                var.ui.txtTotal.setText(f'{subtotal + iva:.2f} €')
 
         except Exception as error:
             print("error en load_sale_tab from invoices: ", error)
@@ -176,18 +169,17 @@ class Invoices:
                 sale = var.ui.tabSale.item(selected_row, 0).text()
                 registro = connection.Connection.one_sale(sale)
 
-                if registro:
-                    datos = [var.ui.txtIdSale, var.ui.txtIdInvoiceSale, var.ui.cmbIdProductSale, var.ui.spQuantitySale]
+                datos = [var.ui.txtIdSale, var.ui.txtIdInvoiceSale, var.ui.cmbIdProductSale, var.ui.spQuantitySale]
 
-                    for dato, value in zip(datos, registro):
-                        if isinstance(dato, QLineEdit):
-                            dato.setText(str(value))
+                for i, dato in enumerate(datos):
+                    if i == 0 or i == 1:
+                        dato.setText(str(registro[i]))
 
-                        elif isinstance(dato, QComboBox):
-                            dato.setCurrentIndex(int(value))
+                    if i == 2:
+                        dato.setCurrentIndex(int(registro[i]))
 
-                        elif isinstance(dato, QSpinBox):
-                            dato.setValue(int(value))
+                    if i == 3:
+                        dato.setValue(int(registro[i]))
 
         except Exception as error:
             print("error en load_sale from invoices: ", error)
@@ -204,8 +196,7 @@ class Invoices:
             datos = [sale, idProdu, quantity]
 
             connection.Connection.modify_sale(datos)
-
-            Invoices.load_sale()
+            connection.Connection.load_sale(sale)
 
         except Exception as error:
             print("error en modify_sale from invoices", error)
@@ -223,4 +214,4 @@ class Invoices:
                 i.setText("")
 
         except Exception as error:
-            print(error)
+            print("error en clear_sale from invoices", error)
