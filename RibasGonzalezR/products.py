@@ -127,6 +127,7 @@ class Products:
         :return: None
         """
         try:
+            #title(): Convierte la primera letra de cada palabra a mayúscula,
             codigo = var.ui.lblIdPro.text().title()
 
             connection.Connection.remove_product(codigo)
