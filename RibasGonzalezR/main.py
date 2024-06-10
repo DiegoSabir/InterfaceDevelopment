@@ -35,9 +35,9 @@ class Main(QtWidgets.QMainWindow):
         connection.Connection.load_invoice()
 
 
-        """
+        '''
         Zona de eventos de botones
-        """
+        '''
         var.ui.btnCalendar.clicked.connect(events.Events.open_calendar)
         var.ui.btnEnroll.clicked.connect(customers.Customers.enroll_customer)
         var.ui.btnModify.clicked.connect(customers.Customers.modify_customer)
