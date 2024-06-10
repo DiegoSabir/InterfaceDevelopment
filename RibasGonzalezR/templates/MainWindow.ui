@@ -6,21 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1120</width>
-    <height>800</height>
+    <width>1440</width>
+    <height>900</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>1120</width>
-    <height>800</height>
+    <width>1440</width>
+    <height>900</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>1120</width>
-    <height>800</height>
+    <width>1440</width>
+    <height>900</height>
    </size>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>10</pointsize>
+   </font>
   </property>
   <property name="windowTitle">
    <string>LibreriaTeis</string>
@@ -31,21 +36,26 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>1100</width>
-      <height>730</height>
+      <width>1414</width>
+      <height>821</height>
      </rect>
     </property>
     <property name="minimumSize">
      <size>
-      <width>1100</width>
-      <height>730</height>
+      <width>1414</width>
+      <height>821</height>
      </size>
     </property>
     <property name="maximumSize">
      <size>
-      <width>1100</width>
-      <height>730</height>
+      <width>1414</width>
+      <height>821</height>
      </size>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>10</pointsize>
+     </font>
     </property>
     <property name="currentIndex">
      <number>2</number>
@@ -59,21 +69,26 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>1070</width>
-        <height>40</height>
+        <width>1376</width>
+        <height>45</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>1070</width>
-        <height>40</height>
+        <width>1376</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>1070</width>
-        <height>40</height>
+        <width>1376</width>
+        <height>45</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="frameShape">
        <enum>QFrame::Box</enum>
@@ -165,21 +180,26 @@
        <rect>
         <x>10</x>
         <y>70</y>
-        <width>450</width>
-        <height>620</height>
+        <width>579</width>
+        <height>698</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>450</width>
-        <height>620</height>
+        <width>579</width>
+        <height>698</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>450</width>
-        <height>620</height>
+        <width>579</width>
+        <height>698</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QFrame {
@@ -216,26 +236,27 @@ QLabel{
       <widget class="QLabel" name="lblIdCustomer">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>20</y>
-         <width>70</width>
-         <height>25</height>
+         <x>60</x>
+         <y>50</y>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -247,26 +268,27 @@ QLabel{
       <widget class="QLabel" name="lblName">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>120</y>
-         <width>70</width>
-         <height>25</height>
+         <x>60</x>
+         <y>200</y>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -278,26 +300,27 @@ QLabel{
       <widget class="QLabel" name="lblSurname">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>70</y>
-         <width>70</width>
-         <height>25</height>
+         <x>60</x>
+         <y>120</y>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -309,26 +332,27 @@ QLabel{
       <widget class="QLabel" name="lblAddress">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>170</y>
-         <width>70</width>
-         <height>25</height>
+         <x>60</x>
+         <y>290</y>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -340,26 +364,27 @@ QLabel{
       <widget class="QLabel" name="lblEnrollDate">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>270</y>
-         <width>80</width>
-         <height>25</height>
+         <x>60</x>
+         <y>470</y>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>80</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>80</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -371,26 +396,27 @@ QLabel{
       <widget class="QLabel" name="lblTelephone">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>320</y>
-         <width>70</width>
-         <height>25</height>
+         <x>60</x>
+         <y>550</y>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -402,26 +428,27 @@ QLabel{
       <widget class="QLabel" name="lblEmail">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>220</y>
-         <width>70</width>
-         <height>25</height>
+         <x>60</x>
+         <y>380</y>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -433,23 +460,28 @@ QLabel{
       <widget class="QLabel" name="lblId">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>20</y>
-         <width>120</width>
-         <height>25</height>
+         <x>150</x>
+         <y>50</y>
+         <width>154</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>120</width>
-         <height>25</height>
+         <width>154</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>120</width>
-         <height>25</height>
+         <width>154</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">background:  rgb(255, 254, 196)</string>
@@ -464,38 +496,38 @@ QLabel{
       <widget class="QLineEdit" name="txtName">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>120</y>
-         <width>200</width>
-         <height>25</height>
+         <x>150</x>
+         <y>200</y>
+         <width>250</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>200</width>
-         <height>25</height>
+         <width>250</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>200</width>
-         <height>25</height>
+         <width>250</width>
+         <height>28</height>
         </size>
        </property>
       </widget>
       <widget class="QLineEdit" name="txtSurname">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>70</y>
-         <width>300</width>
-         <height>25</height>
+         <x>150</x>
+         <y>120</y>
+         <width>386</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>300</width>
-         <height>25</height>
+         <width>386</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -503,21 +535,26 @@ QLabel{
          <width>300</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
       </widget>
       <widget class="QLineEdit" name="txtAddress">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>170</y>
-         <width>300</width>
-         <height>25</height>
+         <x>150</x>
+         <y>290</y>
+         <width>386</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>300</width>
-         <height>25</height>
+         <width>386</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
@@ -525,28 +562,38 @@ QLabel{
          <width>300</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
       </widget>
       <widget class="QLineEdit" name="txtTelephone">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>320</y>
+         <x>150</x>
+         <y>550</y>
          <width>150</width>
-         <height>25</height>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>150</width>
-         <height>25</height>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>150</width>
-         <height>25</height>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -555,45 +602,55 @@ QLabel{
       <widget class="QLineEdit" name="txtEmail">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>220</y>
+         <x>150</x>
+         <y>380</y>
          <width>300</width>
-         <height>25</height>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>300</width>
-         <height>25</height>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>300</width>
-         <height>25</height>
+         <width>386</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
       </widget>
       <widget class="QLineEdit" name="txtEnrollDate">
        <property name="geometry">
         <rect>
-         <x>130</x>
-         <y>270</y>
+         <x>150</x>
+         <y>470</y>
          <width>150</width>
-         <height>25</height>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>150</width>
-         <height>25</height>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>150</width>
-         <height>25</height>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -602,22 +659,22 @@ QLabel{
       <widget class="QPushButton" name="btnCalendar">
        <property name="geometry">
         <rect>
-         <x>280</x>
-         <y>270</y>
+         <x>300</x>
+         <y>470</y>
          <width>30</width>
-         <height>25</height>
+         <height>30</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>30</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>30</width>
-         <height>25</height>
+         <height>30</height>
         </size>
        </property>
        <property name="text">
@@ -637,23 +694,30 @@ QLabel{
       <widget class="QPushButton" name="btnEnroll">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>500</y>
-         <width>100</width>
-         <height>25</height>
+         <x>60</x>
+         <y>650</y>
+         <width>129</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>Enroll</string>
@@ -662,23 +726,30 @@ QLabel{
       <widget class="QPushButton" name="btnModify">
        <property name="geometry">
         <rect>
-         <x>170</x>
-         <y>500</y>
-         <width>100</width>
-         <height>25</height>
+         <x>230</x>
+         <y>650</y>
+         <width>129</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>Modify</string>
@@ -687,23 +758,30 @@ QLabel{
       <widget class="QPushButton" name="btnFire">
        <property name="geometry">
         <rect>
-         <x>310</x>
-         <y>500</y>
-         <width>100</width>
-         <height>25</height>
+         <x>400</x>
+         <y>650</y>
+         <width>129</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>Fire</string>
@@ -713,23 +791,28 @@ QLabel{
      <widget class="QFrame" name="frame_3">
       <property name="geometry">
        <rect>
-        <x>470</x>
+        <x>600</x>
         <y>70</y>
-        <width>610</width>
-        <height>40</height>
+        <width>784</width>
+        <height>45</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>610</width>
-        <height>40</height>
+        <width>784</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>610</width>
-        <height>40</height>
+        <width>784</width>
+        <height>45</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="frameShape">
        <enum>QFrame::Box</enum>
@@ -765,7 +848,7 @@ QLabel{
       <widget class="QCheckBox" name="chkAll">
        <property name="geometry">
         <rect>
-         <x>100</x>
+         <x>130</x>
          <y>10</y>
          <width>300</width>
          <height>25</height>
@@ -791,23 +874,28 @@ QLabel{
      <widget class="QTableWidget" name="tabCustomers">
       <property name="geometry">
        <rect>
-        <x>470</x>
+        <x>600</x>
         <y>130</y>
-        <width>610</width>
-        <height>560</height>
+        <width>784</width>
+        <height>630</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>610</width>
-        <height>560</height>
+        <width>784</width>
+        <height>630</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>610</width>
-        <height>560</height>
+        <width>784</width>
+        <height>630</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QTableWidget::item:selected {
@@ -869,23 +957,28 @@ QTableWidget {
      <widget class="QTableWidget" name="tabProducts">
       <property name="geometry">
        <rect>
-        <x>40</x>
-        <y>250</y>
-        <width>1025</width>
-        <height>440</height>
+        <x>10</x>
+        <y>230</y>
+        <width>1376</width>
+        <height>500</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>1025</width>
-        <height>440</height>
+        <width>1376</width>
+        <height>500</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>1025</width>
-        <height>440</height>
+        <width>1376</width>
+        <height>500</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QTableWidget::item:selected {
@@ -930,23 +1023,28 @@ QTableWidget {
      <widget class="QFrame" name="frame_4">
       <property name="geometry">
        <rect>
-        <x>40</x>
+        <x>10</x>
         <y>20</y>
-        <width>1025</width>
+        <width>1376</width>
         <height>200</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>1025</width>
+        <width>1376</width>
         <height>200</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>1025</width>
+        <width>1376</width>
         <height>200</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QFrame {
@@ -983,26 +1081,27 @@ QLabel{
       <widget class="QLabel" name="lblNamePro">
        <property name="geometry">
         <rect>
-         <x>560</x>
+         <x>820</x>
          <y>30</y>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -1014,45 +1113,57 @@ QLabel{
       <widget class="QLineEdit" name="txtNamePro">
        <property name="geometry">
         <rect>
-         <x>610</x>
+         <x>910</x>
          <y>30</y>
-         <width>200</width>
-         <height>25</height>
+         <width>250</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>200</width>
-         <height>25</height>
+         <width>250</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>200</width>
-         <height>25</height>
+         <width>250</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
       </widget>
       <widget class="QPushButton" name="btnAdd">
        <property name="geometry">
         <rect>
-         <x>300</x>
+         <x>510</x>
          <y>150</y>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>Add</string>
@@ -1061,23 +1172,30 @@ QLabel{
       <widget class="QPushButton" name="btnModify_2">
        <property name="geometry">
         <rect>
-         <x>450</x>
+         <x>660</x>
          <y>150</y>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>Modify</string>
@@ -1086,23 +1204,30 @@ QLabel{
       <widget class="QPushButton" name="btnRemove">
        <property name="geometry">
         <rect>
-         <x>600</x>
+         <x>810</x>
          <y>150</y>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>129</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>Remove</string>
@@ -1111,26 +1236,27 @@ QLabel{
       <widget class="QLabel" name="lblIdProduct">
        <property name="geometry">
         <rect>
-         <x>260</x>
+         <x>370</x>
          <y>30</y>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -1142,23 +1268,28 @@ QLabel{
       <widget class="QLabel" name="lblIdPro">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>460</x>
          <y>30</y>
-         <width>120</width>
-         <height>25</height>
+         <width>154</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>120</width>
-         <height>25</height>
+         <width>154</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>120</width>
-         <height>25</height>
+         <width>154</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">background:  rgb(255, 254, 196)</string>
@@ -1173,26 +1304,27 @@ QLabel{
       <widget class="QLabel" name="lblPricePro">
        <property name="geometry">
         <rect>
-         <x>260</x>
+         <x>370</x>
          <y>90</y>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -1204,23 +1336,28 @@ QLabel{
       <widget class="QSpinBox" name="spStockPro">
        <property name="geometry">
         <rect>
-         <x>610</x>
+         <x>910</x>
          <y>90</y>
-         <width>75</width>
-         <height>25</height>
+         <width>100</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>75</width>
-         <height>25</height>
+         <width>100</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>75</width>
-         <height>25</height>
+         <width>100</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -1229,26 +1366,27 @@ QLabel{
       <widget class="QLabel" name="lblStockPro">
        <property name="geometry">
         <rect>
-         <x>560</x>
+         <x>820</x>
          <y>90</y>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>50</width>
-         <height>25</height>
+         <width>90</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -1260,23 +1398,28 @@ QLabel{
       <widget class="QLineEdit" name="txtPricePro">
        <property name="geometry">
         <rect>
-         <x>310</x>
+         <x>460</x>
          <y>90</y>
-         <width>100</width>
-         <height>25</height>
+         <width>150</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>150</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>25</height>
+         <width>150</width>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="alignment">
         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
@@ -1285,7 +1428,7 @@ QLabel{
       <widget class="QLabel" name="lblCurrency">
        <property name="geometry">
         <rect>
-         <x>410</x>
+         <x>610</x>
          <y>90</y>
          <width>25</width>
          <height>25</height>
@@ -1302,6 +1445,13 @@ QLabel{
          <width>25</width>
          <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
        </property>
        <property name="text">
         <string>€</string>
@@ -1318,8 +1468,8 @@ QLabel{
        <rect>
         <x>10</x>
         <y>20</y>
-        <width>425</width>
-        <height>550</height>
+        <width>546</width>
+        <height>618</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -1330,14 +1480,14 @@ QLabel{
       </property>
       <property name="minimumSize">
        <size>
-        <width>425</width>
-        <height>550</height>
+        <width>546</width>
+        <height>618</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>425</width>
-        <height>550</height>
+        <width>546</width>
+        <height>618</height>
        </size>
       </property>
       <property name="styleSheet">
@@ -1370,11 +1520,28 @@ QComboBox{
       <widget class="QFrame" name="panelFacturacionGeneral">
        <property name="geometry">
         <rect>
-         <x>40</x>
-         <y>20</y>
-         <width>331</width>
-         <height>191</height>
+         <x>60</x>
+         <y>30</y>
+         <width>426</width>
+         <height>214</height>
         </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>426</width>
+         <height>214</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>426</width>
+         <height>214</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">QFrame{
@@ -1391,48 +1558,54 @@ QComboBox{
        <widget class="QLineEdit" name="txtDateInvoice">
         <property name="geometry">
          <rect>
-          <x>110</x>
-          <y>100</y>
-          <width>100</width>
-          <height>25</height>
+          <x>140</x>
+          <y>120</y>
+          <width>150</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>100</width>
-          <height>25</height>
+          <width>150</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
-          <height>25</height>
+          <width>150</width>
+          <height>28</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
        </widget>
        <widget class="QLabel" name="lblIdInvoice">
         <property name="geometry">
          <rect>
-          <x>30</x>
+          <x>20</x>
           <y>20</y>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1444,10 +1617,10 @@ QComboBox{
        <widget class="QLabel" name="txtIdInvoice">
         <property name="geometry">
          <rect>
-          <x>110</x>
+          <x>140</x>
           <y>20</y>
-          <width>120</width>
-          <height>25</height>
+          <width>150</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -1458,15 +1631,20 @@ QComboBox{
         </property>
         <property name="minimumSize">
          <size>
-          <width>120</width>
-          <height>25</height>
+          <width>150</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
-          <height>25</height>
+          <width>150</width>
+          <height>28</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <property name="styleSheet">
          <string notr="true">background-color: rgb(247, 255, 158);</string>
@@ -1481,26 +1659,27 @@ QComboBox{
        <widget class="QLabel" name="lblDateInvoice">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>100</y>
-          <width>70</width>
-          <height>25</height>
+          <x>20</x>
+          <y>120</y>
+          <width>113</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>113</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>113</width>
+          <height>28</height>
          </size>
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1512,26 +1691,27 @@ QComboBox{
        <widget class="QLabel" name="lblCustomerInvoice">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>60</y>
-          <width>70</width>
-          <height>25</height>
+          <x>20</x>
+          <y>70</y>
+          <width>110</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1543,23 +1723,30 @@ QComboBox{
        <widget class="QPushButton" name="btnInvoice">
         <property name="geometry">
          <rect>
-          <x>110</x>
-          <y>150</y>
-          <width>100</width>
-          <height>25</height>
+          <x>150</x>
+          <y>170</y>
+          <width>129</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>100</width>
-          <height>25</height>
+          <width>129</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
-          <height>25</height>
+          <width>129</width>
+          <height>28</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="text">
          <string>Invoice</string>
@@ -1568,23 +1755,28 @@ QComboBox{
        <widget class="QPushButton" name="btnCalendarInvoice">
         <property name="geometry">
          <rect>
-          <x>240</x>
-          <y>100</y>
+          <x>290</x>
+          <y>120</y>
           <width>30</width>
-          <height>25</height>
+          <height>30</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
           <width>30</width>
-          <height>25</height>
+          <height>30</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
           <width>30</width>
-          <height>25</height>
+          <height>30</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <property name="text">
          <string/>
@@ -1603,45 +1795,50 @@ QComboBox{
        <widget class="QComboBox" name="cmbIdCustomer">
         <property name="geometry">
          <rect>
-          <x>110</x>
-          <y>60</y>
-          <width>150</width>
-          <height>25</height>
+          <x>140</x>
+          <y>70</y>
+          <width>175</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>150</width>
-          <height>25</height>
+          <width>175</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>150</width>
-          <height>25</height>
+          <width>175</width>
+          <height>28</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
        </widget>
       </widget>
       <widget class="QFrame" name="panelFacturacionGeneral_2">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>250</y>
-         <width>375</width>
-         <height>190</height>
+         <x>30</x>
+         <y>340</y>
+         <width>486</width>
+         <height>213</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>375</width>
-         <height>190</height>
+         <width>486</width>
+         <height>213</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>375</width>
-         <height>190</height>
+         <width>486</width>
+         <height>213</height>
         </size>
        </property>
        <property name="styleSheet">
@@ -1663,26 +1860,27 @@ QRadioButton{
        <widget class="QLabel" name="lblIdSale">
         <property name="geometry">
          <rect>
-          <x>30</x>
+          <x>40</x>
           <y>10</y>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1694,26 +1892,27 @@ QRadioButton{
        <widget class="QLabel" name="lblIdProductSale">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>70</y>
-          <width>70</width>
-          <height>25</height>
+          <x>40</x>
+          <y>80</y>
+          <width>110</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1725,26 +1924,27 @@ QRadioButton{
        <widget class="QLabel" name="lblQuantity">
         <property name="geometry">
          <rect>
-          <x>240</x>
-          <y>70</y>
-          <width>70</width>
-          <height>25</height>
+          <x>310</x>
+          <y>80</y>
+          <width>110</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>70</width>
-          <height>25</height>
+          <width>110</width>
+          <height>28</height>
          </size>
         </property>
         <property name="font">
          <font>
+          <pointsize>10</pointsize>
           <weight>75</weight>
           <bold>true</bold>
          </font>
@@ -1756,23 +1956,30 @@ QRadioButton{
        <widget class="QPushButton" name="btnSaveSale">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>150</y>
-          <width>100</width>
-          <height>25</height>
+          <x>50</x>
+          <y>160</y>
+          <width>129</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>100</width>
-          <height>25</height>
+          <width>129</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
-          <height>25</height>
+          <width>129</width>
+          <height>28</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="text">
          <string>Save</string>
@@ -1781,23 +1988,30 @@ QRadioButton{
        <widget class="QPushButton" name="btnModifySale">
         <property name="geometry">
          <rect>
-          <x>220</x>
-          <y>150</y>
-          <width>100</width>
-          <height>25</height>
+          <x>290</x>
+          <y>160</y>
+          <width>129</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>100</width>
-          <height>25</height>
+          <width>129</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>100</width>
-          <height>25</height>
+          <width>129</width>
+          <height>28</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
         </property>
         <property name="text">
          <string>Modify</string>
@@ -1806,10 +2020,10 @@ QRadioButton{
        <widget class="QLabel" name="txtIdSale">
         <property name="geometry">
          <rect>
-          <x>30</x>
+          <x>40</x>
           <y>40</y>
-          <width>120</width>
-          <height>25</height>
+          <width>150</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="sizePolicy">
@@ -1820,14 +2034,14 @@ QRadioButton{
         </property>
         <property name="minimumSize">
          <size>
-          <width>120</width>
-          <height>25</height>
+          <width>150</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>120</width>
-          <height>25</height>
+          <width>150</width>
+          <height>28</height>
          </size>
         </property>
         <property name="styleSheet">
@@ -1843,45 +2057,55 @@ QRadioButton{
        <widget class="QComboBox" name="cmbIdProductSale">
         <property name="geometry">
          <rect>
-          <x>30</x>
-          <y>100</y>
-          <width>150</width>
-          <height>25</height>
+          <x>40</x>
+          <y>110</y>
+          <width>175</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>150</width>
-          <height>25</height>
+          <width>175</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>150</width>
-          <height>25</height>
+          <width>175</width>
+          <height>28</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
        </widget>
        <widget class="QSpinBox" name="spQuantitySale">
         <property name="geometry">
          <rect>
-          <x>240</x>
-          <y>100</y>
-          <width>75</width>
-          <height>25</height>
+          <x>310</x>
+          <y>110</y>
+          <width>100</width>
+          <height>28</height>
          </rect>
         </property>
         <property name="minimumSize">
          <size>
-          <width>75</width>
-          <height>25</height>
+          <width>100</width>
+          <height>28</height>
          </size>
         </property>
         <property name="maximumSize">
          <size>
-          <width>75</width>
-          <height>25</height>
+          <width>100</width>
+          <height>28</height>
          </size>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>10</pointsize>
+         </font>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -1892,10 +2116,10 @@ QRadioButton{
      <widget class="QTableWidget" name="tabSale">
       <property name="geometry">
        <rect>
-        <x>470</x>
-        <y>270</y>
-        <width>600</width>
-        <height>300</height>
+        <x>580</x>
+        <y>310</y>
+        <width>810</width>
+        <height>337</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -1906,14 +2130,14 @@ QRadioButton{
       </property>
       <property name="minimumSize">
        <size>
-        <width>600</width>
-        <height>300</height>
+        <width>810</width>
+        <height>337</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>600</width>
-        <height>300</height>
+        <width>771</width>
+        <height>337</height>
        </size>
       </property>
       <property name="palette">
@@ -2168,6 +2392,11 @@ QRadioButton{
          </colorrole>
         </disabled>
        </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QTableWidget::item:selected {
@@ -2225,23 +2454,28 @@ QTableWidget {
      <widget class="QFrame" name="frame_6">
       <property name="geometry">
        <rect>
-        <x>870</x>
-        <y>570</y>
-        <width>200</width>
-        <height>100</height>
+        <x>1130</x>
+        <y>647</y>
+        <width>257</width>
+        <height>112</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>200</width>
-        <height>100</height>
+        <width>257</width>
+        <height>112</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>200</width>
-        <height>100</height>
+        <width>257</width>
+        <height>112</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>9</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QFrame {
@@ -2278,27 +2512,27 @@ QLabel{
       <widget class="QLabel" name="lblSubtotal">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>50</x>
          <y>10</y>
-         <width>51</width>
-         <height>20</height>
+         <width>70</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>20</height>
+         <width>70</width>
+         <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
-         <height>20</height>
+         <width>70</width>
+         <height>25</height>
         </size>
        </property>
        <property name="font">
         <font>
-         <pointsize>7</pointsize>
+         <pointsize>9</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -2313,27 +2547,27 @@ QLabel{
       <widget class="QLabel" name="lbIVA">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>40</y>
-         <width>51</width>
-         <height>20</height>
+         <x>50</x>
+         <y>45</y>
+         <width>70</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>20</height>
+         <width>70</width>
+         <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
-         <height>20</height>
+         <width>70</width>
+         <height>25</height>
         </size>
        </property>
        <property name="font">
         <font>
-         <pointsize>7</pointsize>
+         <pointsize>9</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -2348,27 +2582,27 @@ QLabel{
       <widget class="QLabel" name="lblTotal">
        <property name="geometry">
         <rect>
-         <x>10</x>
-         <y>70</y>
-         <width>51</width>
-         <height>20</height>
+         <x>50</x>
+         <y>80</y>
+         <width>70</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>0</width>
-         <height>20</height>
+         <width>70</width>
+         <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
-         <height>20</height>
+         <width>70</width>
+         <height>25</height>
         </size>
        </property>
        <property name="font">
         <font>
-         <pointsize>7</pointsize>
+         <pointsize>9</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -2383,10 +2617,10 @@ QLabel{
       <widget class="QLabel" name="txtSubtotal">
        <property name="geometry">
         <rect>
-         <x>60</x>
+         <x>120</x>
          <y>10</y>
-         <width>100</width>
-         <height>20</height>
+         <width>125</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -2397,15 +2631,20 @@ QLabel{
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>20</height>
+         <width>125</width>
+         <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>16777215</width>
-         <height>20</height>
+         <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(247, 255, 158);</string>
@@ -2420,10 +2659,10 @@ QLabel{
       <widget class="QLabel" name="txtIVA">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>40</y>
-         <width>100</width>
-         <height>20</height>
+         <x>120</x>
+         <y>45</y>
+         <width>125</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -2434,15 +2673,20 @@ QLabel{
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>20</height>
+         <width>125</width>
+         <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>16777215</width>
-         <height>20</height>
+         <width>125</width>
+         <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(247, 255, 158);</string>
@@ -2457,10 +2701,10 @@ QLabel{
       <widget class="QLabel" name="txtTotal">
        <property name="geometry">
         <rect>
-         <x>60</x>
-         <y>70</y>
-         <width>100</width>
-         <height>20</height>
+         <x>120</x>
+         <y>80</y>
+         <width>125</width>
+         <height>25</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -2471,15 +2715,20 @@ QLabel{
        </property>
        <property name="minimumSize">
         <size>
-         <width>100</width>
-         <height>20</height>
+         <width>125</width>
+         <height>25</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>100</width>
-         <height>20</height>
+         <width>125</width>
+         <height>25</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>9</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(247, 255, 158);</string>
@@ -2495,10 +2744,10 @@ QLabel{
      <widget class="QTableWidget" name="tabInvoices">
       <property name="geometry">
        <rect>
-        <x>470</x>
+        <x>580</x>
         <y>20</y>
-        <width>600</width>
-        <height>190</height>
+        <width>810</width>
+        <height>213</height>
        </rect>
       </property>
       <property name="sizePolicy">
@@ -2509,14 +2758,14 @@ QLabel{
       </property>
       <property name="minimumSize">
        <size>
-        <width>600</width>
-        <height>190</height>
+        <width>810</width>
+        <height>213</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>600</width>
-        <height>190</height>
+        <width>771</width>
+        <height>213</height>
        </size>
       </property>
       <property name="palette">
@@ -2772,6 +3021,11 @@ QLabel{
         </disabled>
        </palette>
       </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
       <property name="styleSheet">
        <string notr="true">QTableWidget::item:selected {
     background-color:  : #C59A6C;
@@ -2813,23 +3067,28 @@ QTableWidget {
      <widget class="QFrame" name="panelFacturacionGeneral_3">
       <property name="geometry">
        <rect>
-        <x>650</x>
-        <y>220</y>
-        <width>250</width>
-        <height>40</height>
+        <x>870</x>
+        <y>250</y>
+        <width>313</width>
+        <height>45</height>
        </rect>
       </property>
       <property name="minimumSize">
        <size>
-        <width>250</width>
-        <height>40</height>
+        <width>313</width>
+        <height>45</height>
        </size>
       </property>
       <property name="maximumSize">
        <size>
-        <width>250</width>
-        <height>40</height>
+        <width>313</width>
+        <height>45</height>
        </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
       </property>
       <property name="styleSheet">
        <string notr="true">QFrame{
@@ -2850,26 +3109,27 @@ QRadioButton{
       <widget class="QLabel" name="lblIdInvoiceSale">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>30</x>
          <y>10</y>
-         <width>70</width>
-         <height>25</height>
+         <width>100</width>
+         <height>28</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>100</width>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>70</width>
-         <height>25</height>
+         <width>100</width>
+         <height>28</height>
         </size>
        </property>
        <property name="font">
         <font>
+         <pointsize>10</pointsize>
          <weight>75</weight>
          <bold>true</bold>
         </font>
@@ -2881,10 +3141,10 @@ QRadioButton{
       <widget class="QLabel" name="txtIdInvoiceSale">
        <property name="geometry">
         <rect>
-         <x>100</x>
+         <x>130</x>
          <y>10</y>
          <width>120</width>
-         <height>25</height>
+         <height>28</height>
         </rect>
        </property>
        <property name="sizePolicy">
@@ -2896,14 +3156,19 @@ QRadioButton{
        <property name="minimumSize">
         <size>
          <width>120</width>
-         <height>25</height>
+         <height>28</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
          <width>120</width>
-         <height>25</height>
+         <height>28</height>
         </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="styleSheet">
         <string notr="true">background-color: rgb(247, 255, 158);</string>
@@ -2922,6 +3187,555 @@ QRadioButton{
      <zorder>tabInvoices</zorder>
      <zorder>panelFacturacionGeneral_3</zorder>
     </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Page</string>
+     </attribute>
+     <widget class="QFrame" name="frame_7">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>20</y>
+        <width>1376</width>
+        <height>200</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>1376</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>1376</width>
+        <height>200</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QFrame {
+	background-color: #ACB1D6;
+}
+
+QLineEdit {
+	color: rgb(0,0,0);
+}
+
+QCheckBox {
+	color: rgb(0,0,0);
+}
+
+QRadioButton{
+	color: rgb(0,0,0);
+}
+
+QComboBox{
+	color: rgb(0,0,0);
+}
+
+QLabel{
+	background-color: #97A4C9;
+
+}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QPushButton" name="btnEjemplo">
+       <property name="geometry">
+        <rect>
+         <x>510</x>
+         <y>150</y>
+         <width>129</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>129</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>129</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Add</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblIdEjemplo">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>30</y>
+         <width>90</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Id:</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="txtIdEjemplo">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>30</y>
+         <width>154</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>154</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>154</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background:  rgb(255, 254, 196)</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lblEjemplo">
+       <property name="geometry">
+        <rect>
+         <x>370</x>
+         <y>90</y>
+         <width>90</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>90</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>90</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
+       <property name="text">
+        <string>Price:</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="txtEjemplo">
+       <property name="geometry">
+        <rect>
+         <x>460</x>
+         <y>90</y>
+         <width>150</width>
+         <height>28</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>150</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>150</width>
+         <height>28</height>
+        </size>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QTableWidget" name="tabEjemplo">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>250</y>
+        <width>810</width>
+        <height>213</height>
+       </rect>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>810</width>
+        <height>213</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>771</width>
+        <height>213</height>
+       </size>
+      </property>
+      <property name="palette">
+       <palette>
+        <active>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>234</green>
+            <blue>210</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="HighlightedText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>219</red>
+            <green>223</green>
+            <blue>234</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </active>
+        <inactive>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>255</red>
+            <green>234</green>
+            <blue>210</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="HighlightedText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>219</red>
+            <green>223</green>
+            <blue>234</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </inactive>
+        <disabled>
+         <colorrole role="WindowText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Button">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Text">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="ButtonText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>34</red>
+            <green>34</green>
+            <blue>34</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Base">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Window">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>172</red>
+            <green>177</green>
+            <blue>214</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="Highlight">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>120</green>
+            <blue>215</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="HighlightedText">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>0</red>
+            <green>0</green>
+            <blue>0</blue>
+           </color>
+          </brush>
+         </colorrole>
+         <colorrole role="AlternateBase">
+          <brush brushstyle="SolidPattern">
+           <color alpha="255">
+            <red>219</red>
+            <green>223</green>
+            <blue>234</blue>
+           </color>
+          </brush>
+         </colorrole>
+        </disabled>
+       </palette>
+      </property>
+      <property name="font">
+       <font>
+        <pointsize>10</pointsize>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTableWidget::item:selected {
+    background-color:  : #C59A6C;
+	color: rgb(0,0,0);
+}
+
+QTableWidget {
+    background-color: #ACB1D6;
+}</string>
+      </property>
+      <property name="editTriggers">
+       <set>QAbstractItemView::NoEditTriggers</set>
+      </property>
+      <property name="alternatingRowColors">
+       <bool>true</bool>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectRows</enum>
+      </property>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Id Invoice</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Customer</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Date Invoice</string>
+       </property>
+      </column>
+     </widget>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -2929,8 +3743,8 @@ QRadioButton{
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1120</width>
-     <height>21</height>
+     <width>1440</width>
+     <height>29</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuCustomers">
@@ -2939,17 +3753,13 @@ QRadioButton{
     </property>
     <addaction name="actionExit"/>
    </widget>
-   <widget class="QMenu" name="menuHerramientas">
-    <property name="title">
-     <string>Tools</string>
-    </property>
-   </widget>
    <widget class="QMenu" name="menuInformes">
     <property name="title">
      <string>Reports</string>
     </property>
     <addaction name="actionCreate_Customers_Report_PDF"/>
     <addaction name="actionCreate_Products_Report_PDF"/>
+    <addaction name="actionCreate_Invoice_Report_PDF"/>
    </widget>
    <widget class="QMenu" name="menuAyuda">
     <property name="title">
@@ -2957,7 +3767,6 @@ QRadioButton{
     </property>
    </widget>
    <addaction name="menuCustomers"/>
-   <addaction name="menuHerramientas"/>
    <addaction name="menuInformes"/>
    <addaction name="menuAyuda"/>
   </widget>
@@ -3015,6 +3824,11 @@ QRadioButton{
    </property>
    <property name="text">
     <string>Create Products Report PDF</string>
+   </property>
+  </action>
+  <action name="actionCreate_Invoice_Report_PDF">
+   <property name="text">
+    <string>Create Invoice Report PDF</string>
    </property>
   </action>
  </widget>

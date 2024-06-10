@@ -11,6 +11,12 @@ import events
 class Connection:
     @staticmethod
     def connection(self=None):
+        """
+        Establece la conexión con la base de datos SQLite.
+
+        :param self: Parámetro opcional.
+        :return: True si la conexión es exitosa, False en caso contrario.
+        """
         var.bbdd = 'bbdd.sqlite'
         db = QtSql.QSqlDatabase.addDatabase('QSQLITE')
         db.setDatabaseName(var.bbdd)
@@ -26,6 +32,12 @@ class Connection:
 
     @staticmethod
     def save_customer(newcustomer):
+        """
+        Guarda un nuevo cliente en la base de datos.
+
+        :param newcustomer: Lista con los datos del nuevo cliente.
+        :return: None
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('INSERT INTO customer (name_customer, surname_customer, address_customer, '
@@ -59,6 +71,11 @@ class Connection:
 
     @staticmethod
     def show_customers():
+        """
+        Muestra todos los clientes en la interfaz de usuario.
+
+        :return: None
+        """
         try:
             Connection.select_customers()
 
@@ -69,6 +86,12 @@ class Connection:
 
     @staticmethod
     def one_customer(id):
+        """
+        Obtiene los datos de un cliente específico por su ID.
+
+        :param id: ID del cliente.
+        :return: Lista con los datos del cliente.
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
@@ -87,6 +110,12 @@ class Connection:
 
     @staticmethod
     def check_modify_customer(modifycustomer):
+        """
+        Verifica y modifica los datos de un cliente.
+
+        :param modifycustomer: Lista con los datos del cliente modificados.
+        :return: None
+        """
         try:
             codigo = var.ui.lblId.text()
 
@@ -99,9 +128,16 @@ class Connection:
 
     @staticmethod
     def modify_customer(modifycustomer, codigo):
+        """
+        Modifica los datos de un cliente en la base de datos.
+
+        :param modifycustomer: Lista con los datos del cliente modificados.
+        :param codigo: ID del cliente.
+        :return: None
+        """
         try:
             query = QtSql.QSqlQuery()
-            query.prepare('UPDATE customer set id_customer = :id, name_customer = :name ,surname_customer = :surname, address_customer = :address, '
+            query.prepare('UPDATE customer SET id_customer = :id, name_customer = :name ,surname_customer = :surname, address_customer = :address, '
                           'enrolldate_customer = :enrolldate, telephone_customer = :telephone, email_customer = :email,'
                           'category_customer = :category where id_customer = :id')
 
@@ -135,6 +171,11 @@ class Connection:
 
     @staticmethod
     def select_customers():
+        """
+        Selecciona y carga los datos de los clientes en la tabla de la interfaz de usuario.
+
+        :return: None
+        """
         try:
             consulta = ''
             if var.ui.rbtIndividual.isChecked():
@@ -171,6 +212,11 @@ class Connection:
 
     @staticmethod
     def select_all_customers():
+        """
+        Selecciona todos los clientes de la base de datos ordenados por apellido.
+
+        :return: Lista de registros de clientes.
+        """
         try:
             registros = []
 
@@ -189,6 +235,12 @@ class Connection:
 
     @staticmethod
     def add_fire_date(codigo):
+        """
+        Añade la fecha de baja a un cliente en la base de datos.
+
+        :param codigo: ID del cliente.
+        :return: None
+        """
         try:
             date = datetime.date.today()
             date = date.strftime('%d/%m/%Y')
@@ -210,7 +262,13 @@ class Connection:
 
 
     @staticmethod
-    def fire_customer(codigo):
+    def check_fire_customer(codigo):
+        """
+        Verifica si un cliente está dado de baja.
+
+        :param codigo: ID del cliente.
+        :return: True si el cliente está dado de baja, False en caso contrario.
+        """
         try:
             consulta = "SELECT COUNT(*) FROM customer WHERE id_customer = ? AND firedate_customer IS NOT NULL"
             query = QtSql.QSqlQuery()
@@ -223,7 +281,7 @@ class Connection:
                 return False  # Assuming no result means the client is not marked as inactive
 
         except Exception as error:
-            print("error en cliente_esta_dado_de_baja from connection", error)
+            print("error en check_fire_customer from connection", error)
             return False
 
 
@@ -238,6 +296,12 @@ class Connection:
 
     @staticmethod
     def save_product(newproduct):
+        """
+        Guarda un nuevo producto en la base de datos.
+
+        :param newproduct: Lista con los datos del nuevo producto.
+        :return: None
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('INSERT INTO product (name_product, price_product, stock_product) VALUES (:name, :price, :stock)')
@@ -266,6 +330,11 @@ class Connection:
 
     @staticmethod
     def show_products():
+        """
+        Muestra todos los productos en la interfaz de usuario.
+
+        :return: None
+        """
         try:
             Connection.select_products()
 
@@ -275,6 +344,12 @@ class Connection:
 
 
     def one_product(id):
+        """
+        Obtiene los datos de un producto específico por su ID.
+
+        :param id: ID del producto.
+        :return: Lista con los datos del producto.
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
@@ -294,6 +369,11 @@ class Connection:
 
     @staticmethod
     def select_products():
+        """
+        Selecciona y carga los datos de los productos en la tabla de la interfaz de usuario.
+
+        :return: None
+        """
         try:
             consulta = 'SELECT id_product, name_product, price_product, stock_product FROM product'
 
@@ -316,6 +396,12 @@ class Connection:
 
     @staticmethod
     def check_modify_product(modifyproduct):
+        """
+        Verifica y modifica los datos de un producto.
+
+        :param modifyproduct: Lista con los datos del producto modificados.
+        :return: None
+        """
         try:
             codigo = var.ui.lblIdPro.text()
 
@@ -328,18 +414,24 @@ class Connection:
 
     @staticmethod
     def modify_product(modifyproduct, codigo):
+        """
+        Modifica los datos de un producto en la base de datos.
+
+        :param modifyproduct: Lista con los datos del producto modificados.
+        :param codigo: ID del producto.
+        :return: None
+        """
         try:
             # Obtener el stock actual del producto seleccionado
             current_stock = var.ui.spStockPro.value()
 
             query = QtSql.QSqlQuery()
-            query.prepare('UPDATE product set id_product = :id, name_product = :name, price_product = :price, '
+            query.prepare('UPDATE product SET id_product = :id, name_product = :name, price_product = :price, '
                           'stock_product = :stock WHERE id_product = :id')
 
             query.bindValue(':id', int(codigo))
             query.bindValue(':name', str(modifyproduct[0]))
             query.bindValue(':price', str(modifyproduct[1]))
-            #query.bindValue(':stock', int(modifyproduct[2]))
 
             new_stock = int(modifyproduct[2]) + (current_stock - int(modifyproduct[2]))
             query.bindValue(':stock', new_stock)
@@ -364,6 +456,12 @@ class Connection:
 
 
     def remove_product(idProduct):
+        """
+        Elimina un producto de la base de datos por su ID.
+
+        :param idProduct: ID del producto.
+        :return: True si la eliminación es exitosa, False en caso contrario.
+        """
         try:
             consulta = 'DELETE FROM product WHERE id_product = :id'
             query = QtSql.QSqlQuery()
@@ -389,6 +487,12 @@ class Connection:
     --------------------------------------------------------------------------------------------------------------------
     """
     def load_customer(self=None):
+        """
+        Carga los clientes en el comboBox de la interfaz de usuario para selección.
+
+        :param self: Parámetro opcional.
+        :return: None
+        """
         try:
             var.ui.cmbIdCustomer.clear()
             query = QtSql.QSqlQuery()
@@ -407,6 +511,12 @@ class Connection:
 
 
     def save_invoice(registro):
+        """
+        Guarda una nueva factura en la base de datos.
+
+        :param registro: Lista con los datos de la factura.
+        :return: None
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('INSERT INTO invoice (customer_invoice, date_invoice) VALUES (:customer, :date)')
@@ -431,6 +541,11 @@ class Connection:
 
     @staticmethod
     def load_invoice():
+        """
+        Carga las facturas en la tabla de la interfaz de usuario.
+
+        :return: None
+        """
         try:
             registros = []
             query = QtSql.QSqlQuery()
@@ -449,6 +564,12 @@ class Connection:
 
     @staticmethod
     def one_invoice(id):
+        """
+        Obtiene los datos de una factura específica por su ID.
+
+        :param id: ID de la factura.
+        :return: Lista con los datos de la factura.
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
@@ -466,6 +587,12 @@ class Connection:
 
 
     def load_product(self=None):
+        """
+        Carga los productos en el comboBox de la interfaz de usuario para selección.
+
+        :param self: Parámetro opcional.
+        :return: None
+        """
         try:
             var.ui.cmbIdProductSale.clear()
             query = QtSql.QSqlQuery()
@@ -483,6 +610,12 @@ class Connection:
 
 
     def save_sale(registro):
+        """
+        Guarda una nueva venta en la base de datos.
+
+        :param registro: Lista con los datos de la venta.
+        :return: None
+        """
         try:
             idProducto = registro[1]
             precio = Connection.get_price(idProducto)
@@ -515,6 +648,12 @@ class Connection:
 
 
     def get_price(idProducto):
+        """
+        Obtiene el precio de un producto específico por su ID.
+
+        :param idProducto: ID del producto.
+        :return: Precio del producto.
+        """
         try:
             query = QtSql.QSqlQuery()
             query.prepare('SELECT price_product FROM product WHERE id_product = :id')
@@ -532,6 +671,12 @@ class Connection:
 
     @staticmethod
     def load_sale(dato):
+        """
+        Carga las ventas relacionadas con una factura específica en la tabla de la interfaz de usuario.
+
+        :param dato: ID de la factura.
+        :return: None
+        """
         try:
             registros = []
             query = QtSql.QSqlQuery()
@@ -542,14 +687,22 @@ class Connection:
                 while query.next():
                     row = [query.value(i) for i in range(query.record().count())]
                     registros.append(row)
+
             invoices.Invoices.load_sale_tab(registros)
 
         except Exception as error:
             print("error en load_sale from connection:", error)
 
 
+
     @staticmethod
     def one_sale(id):
+        """
+        Obtiene los datos de una venta específica por su ID.
+
+        :param id: ID de la venta.
+        :return: Lista con los datos de la venta.
+        """
         try:
             registro = []
             query = QtSql.QSqlQuery()
@@ -568,6 +721,12 @@ class Connection:
 
 
     def modify_sale(sale):
+        """
+        Modifica los datos de una venta en la base de datos.
+
+        :param sale: Lista con los datos de la venta modificada.
+        :return: True si la modificación es exitosa, False en caso contrario.
+        """
         try:
             consulta = ('UPDATE sale SET id_product_sale = :id_product, quantity_sale = :quantity WHERE id_sale = :id')
 

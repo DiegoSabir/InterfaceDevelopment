@@ -11,6 +11,11 @@ import var
 class Invoices:
     @staticmethod
     def clear_invoices():
+        """
+        Limpia los campos de información de la factura en la interfaz de usuario.
+
+        :return: None
+        """
         try:
             widgetList = [var.ui.txtIdInvoice, var.ui.txtDateInvoice]
 
@@ -25,6 +30,12 @@ class Invoices:
 
     @staticmethod
     def load_date(qDate):
+        """
+        Carga una fecha seleccionada en el campo de fecha de la factura y oculta el calendario.
+
+        :param qDate: Objeto QDate que representa la fecha a cargar.
+        :return: None
+        """
         try:
             data = ('{:02d}/{:02d}/{:4d}'.format(qDate.day(), qDate.month(), qDate.year()))
             var.ui.txtDateInvoice.setText(str(data))
@@ -37,6 +48,11 @@ class Invoices:
 
     @staticmethod
     def open_calendar():
+        """
+        Muestra el calendario para seleccionar una fecha.
+
+        :return: None
+        """
         try:
             var.calendarInvoice.show()
 
@@ -46,6 +62,11 @@ class Invoices:
 
 
     def enroll_invoice(self):
+        """
+        Registra una nueva factura en la base de datos.
+
+        :return: None
+        """
         try:
             date = var.ui.txtDateInvoice.text().strip()
             customer = var.ui.cmbIdCustomer.currentText().strip()
@@ -58,8 +79,8 @@ class Invoices:
                 mbox.exec()
 
             else:
-                codCli = customer.split(" ")[0]
-                registro = [codCli, date]
+                codigoCustomer = customer.split(" ")[0]
+                registro = [codigoCustomer, date]
                 connection.Connection.save_invoice(registro)
 
         except Exception as error:
@@ -68,6 +89,12 @@ class Invoices:
 
 
     def load_invoice_tab(registros):
+        """
+        Carga los datos de las facturas en la tabla de la interfaz de usuario.
+
+        :param registros: Lista de registros de facturas a cargar.
+        :return: None
+        """
         try:
             var.ui.tabInvoices.setRowCount(len(registros))
             for index, registro in enumerate(registros):
@@ -83,6 +110,11 @@ class Invoices:
 
     @staticmethod
     def load_invoice():
+        """
+        Carga los datos de la factura seleccionada en los campos de información de la interfaz de usuario.
+
+        :return: None
+        """
         try:
             Invoices.clear_invoices()
             selected_row = var.ui.tabInvoices.currentRow()
@@ -112,6 +144,11 @@ class Invoices:
 
     @staticmethod
     def enroll_sale():
+        """
+        Registra una nueva venta en la base de datos.
+
+        :return: None
+        """
         try:
             invoice = var.ui.txtIdInvoiceSale.text().strip()
             product = var.ui.cmbIdProductSale.currentText().strip()
@@ -132,7 +169,15 @@ class Invoices:
         except Exception as error:
             print("error en enroll_sale from invoices: ", error)
 
+
+
     def load_sale_tab(registros):
+        """
+        Carga los datos de las ventas en la tabla de la interfaz de usuario y calcula el subtotal, IVA y total.
+
+        :param registros: Lista de registros de ventas a cargar.
+        :return: None
+        """
         try:
             subtotal = 0.0
             var.ui.tabSale.setRowCount(len(registros))
@@ -160,6 +205,11 @@ class Invoices:
 
     @staticmethod
     def load_sale():
+        """
+        Carga los datos de la venta seleccionada en los campos de información de la interfaz de usuario.
+
+        :return: None
+        """
         try:
             Invoices.clear_sale()
 
@@ -187,6 +237,11 @@ class Invoices:
 
 
     def modify_sale(self):
+        """
+        Modifica los datos de una venta en la base de datos.
+
+        :return: None
+        """
         try:
             sale = var.ui.txtIdSale.text().strip()
             product = var.ui.cmbIdProductSale.currentText().strip()
@@ -205,6 +260,11 @@ class Invoices:
 
     @staticmethod
     def clear_sale():
+        """
+        Limpia los campos de información de la venta en la interfaz de usuario.
+
+        :return: None
+        """
         try:
             sale = [var.ui.txtIdSale, var.ui.txtIdInvoiceSale]
             var.ui.cmbIdProductSale.setCurrentIndex(0)

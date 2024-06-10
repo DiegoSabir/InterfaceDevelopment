@@ -7,6 +7,11 @@ import var
 class Products:
     @staticmethod
     def clear_products():
+        """
+        Limpia los campos de información del producto en la interfaz de usuario.
+
+        :return: None
+        """
         try:
             widgetList = [var.ui.lblIdPro, var.ui.txtNamePro, var.ui.txtPricePro, var.ui.spStockPro]
             for i in widgetList:
@@ -15,12 +20,17 @@ class Products:
             var.ui.chkAll.setChecked(False)
 
         except Exception as error:
-            print("error en clear from products", error)
+            print("error en clear_products from products", error)
 
 
 
     @staticmethod
     def add_product():
+        """
+        Añade un nuevo producto a la base de datos y actualiza la tabla de productos en la interfaz de usuario.
+
+        :return: None
+        """
         try:
             newproduct = [var.ui.txtNamePro.text(),
                           var.ui.txtPricePro.text(),
@@ -30,12 +40,18 @@ class Products:
             connection.Connection.show_products()
 
         except Exception as error:
-            print("Error en addProduct from products", error)
+            print("Error en add_product from products", error)
 
 
 
     @staticmethod
     def load_products_table(register):
+        """
+        Carga los datos de los productos en la tabla de la interfaz de usuario.
+
+        :param register: Lista de registros de productos a cargar.
+        :return: None
+        """
         try:
             index = 0
             for record in register:
@@ -52,12 +68,17 @@ class Products:
                 index += 1
 
         except Exception as error:
-            print('error en loadProductsTable from products', error)
+            print('error en load_products_table from products', error)
 
 
 
     @staticmethod
     def load_products():
+        """
+        Carga los datos del producto seleccionado en los campos de información de la interfaz de usuario.
+
+        :return: None
+        """
         try:
             Products.clear_products()
             row = var.ui.tabProducts.selectedItems()
@@ -76,11 +97,16 @@ class Products:
                     dato.setText(str(registro[i]))
 
         except Exception as error:
-            print('error en loadProducts from products', error)
+            print('error en load_products from products', error)
 
 
 
     def modify_product(self):
+        """
+        Modifica los datos del producto en la base de datos con la información actual de la interfaz de usuario.
+
+        :return: None
+        """
         try:
             modifyproduct = [var.ui.txtNamePro.text(),
                              var.ui.txtPricePro.text(),
@@ -90,11 +116,16 @@ class Products:
             connection.Connection.show_products()
 
         except Exception as error:
-            print('error en modifyProduct from products', error)
+            print('error en modify_product from products', error)
 
 
 
     def remove_product(self):
+        """
+        Elimina un producto de la base de datos y actualiza la tabla de productos en la interfaz de usuario.
+
+        :return: None
+        """
         try:
             codigo = var.ui.lblIdPro.text().title()
 
@@ -103,4 +134,4 @@ class Products:
             connection.Connection.show_products()
 
         except Exception as error:
-            print('error en removeProduct from products', error)
+            print('error en remove_product from products', error)
