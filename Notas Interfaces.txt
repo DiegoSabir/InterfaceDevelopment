@@ -1,0 +1,73 @@
+############################################################  CLIENTES  ##################################################################
+--Proceso para crear un cliente
+				Connection.save_customer()  
+Customers.enroll_customer() --> 
+				Connection.show_customers() --> Connection.select_customers() --> Customers.load_customers_table
+
+
+--Proceso para rellenar de datos tras pulsar un elemento de la tabla
+
+Customers.laod_customers()
+
+
+--Proceso para modificar un cliente
+
+Customers.modify_customer() --> Connection.check_modify_customer() --> Connection.modify_customer()
+
+
+--Proceso para dar de baja
+				Connection.check_fire_customer() --> Regresa
+ 
+Customers.fire_customer() -->	Connection.add_fire_date() --> Regresa con una fecha añadida
+
+				Connection.show_customers() --> Connection.select_customers() --> Customers.load_customers_table
+
+
+
+#############################################################  PRODUCTOS  #################################################################
+--Proceso para crear un producto
+				Connection.save_product()  
+Products.add_product() --> 
+				Connection.show_products() --> Connection.select_products() --> Products.load_products_table
+
+
+--Proceso para rellenar de datos tras pulsar un elemento de la tabla
+
+Products.laod_products()
+
+
+--Proceso para modificar un producto
+				Connection.check_modify_customer() --> Connection.modify_product()
+Products.modify_product() -->   
+				Connection.show_products() --> Connection.select_products() --> Products.load_products_table(register)
+
+
+--Proceso para eliminar un producto
+
+				Connection.remove_product()
+ 
+Products.remove_product() -->	Products.clear_products()
+
+				Connection.show_products() --> Connection.select_products() --> Products.load_products_table(register)
+
+
+
+###########################################################  FACTURA/VENTA  ###############################################################
+--Proceso para crear una factura / venta
+
+Invoices.enroll_invoice() --> Connection.save_invoice() --> Connection.load_invoice() --> Invoices.load_invoice_tab()
+
+Invoices.enroll_sale() --> Connection.save_sale() --> Connection.load_sale() --> Invoices.load_sale_tab()
+
+
+--Proceso para rellenar de datos tras pulsar un elemento de la tabla
+
+Invoices.load_invoice() --> Connection.load_sale() --> Invoices.load_sale_tab()
+
+Invoices.load_sale() --> Connection.one_sale() ---> DEVUELVE DATOS
+
+
+--Proceso para modificar una venta
+				Connection.modify_sale() --> Connection.modify_product()
+Invoices.modify_sale() -->   
+				Connection.load_sale() --> Invoices.load_sale_tab()

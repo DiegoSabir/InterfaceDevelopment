@@ -177,6 +177,7 @@ class Events:
             print("error en capital_letter from events", error)
 
 
+
     @staticmethod
     def block_txt_surname():
         """
